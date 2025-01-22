@@ -37,6 +37,7 @@ else()
             ${PROJECT_SOURCES}
             Widgets/MainWindow.h Widgets/MainWindow.cpp
             Exchange/Client.h Exchange/Client.cpp
+            Widgets/SensorsTable/ListOfLimits.h Widgets/SensorsTable/ListOfLimits.cpp
 
         )
     endif()

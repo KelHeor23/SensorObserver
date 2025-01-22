@@ -1,9 +1,15 @@
 #include "MainWindow.h"
 
-#include "../Exchange/Client.h"
-
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow{parent}
+    : QMainWindow{parent},
+    hBoxLayout(new QHBoxLayout),
+    listOfLimits(new ListOfLimits),
+    client(new Client(this))
 {
-    Client client;
+    QWidget *centralWidget = new QWidget; // Создаем центральный виджет
+    setCentralWidget(centralWidget); // Устанавливаем центральный виджет
+
+    centralWidget->setLayout(hBoxLayout); // Применяем компоновку к центральному виджету
+
+    hBoxLayout->addWidget(listOfLimits);
 }

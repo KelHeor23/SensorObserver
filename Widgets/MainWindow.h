@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 
 #include "SensorsTable/ListOfLimits.h"
+#include "SensorsTable/DisplayingSensors.h"
 #include "../Exchange/Client.h"
 
 class MainWindow : public QMainWindow
@@ -18,6 +19,10 @@ signals:
 private:
     QHBoxLayout *hBoxLayout;
     ListOfLimits *listOfLimits;
+    DisplayingSensors *sensorsEngine_1;
+    DisplayingSensors *sensorsEngine_2;
+    DisplayingSensors *sensorsEngine_3;
+    DisplayingSensors *sensorsEngine_4;
     Client *client;
 };
 

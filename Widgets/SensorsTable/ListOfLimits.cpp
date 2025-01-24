@@ -2,7 +2,9 @@
 
 #include "QHBoxLayout"
 
-ListOfLimits::ListOfLimits(QWidget *parent) : QWidget(parent)
+ListOfLimits::ListOfLimits(QWidget *parent)
+    : QWidget(parent),
+    mainLayout(new QVBoxLayout)
 {
     mainLayout = new QVBoxLayout;
     setLayout(mainLayout);

@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QPushButton>
 
+#include "VibrationDirection.h"
+
 class DisplayingSensors : public QWidget
 {
     Q_OBJECT
@@ -17,6 +19,7 @@ public slots:
 
 private:
     QVBoxLayout *mainLayout;
+    VibrationDirection *vibrationDirection;
 };
 
 #endif // DISPLAYINGSENSORS_H

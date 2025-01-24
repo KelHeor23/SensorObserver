@@ -2,9 +2,12 @@
 
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
-    mainLayout(new QVBoxLayout)
+    mainLayout(new QVBoxLayout(this)),
+    vibrationDirection(new VibrationDirection(this))
 {
     setLayout(mainLayout);
+    mainLayout->addWidget(vibrationDirection);
+    vibrationDirection->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     // Добавление кнопки для добавления виджетов
     QPushButton *button = new QPushButton("Добавить виджеты");
@@ -14,8 +17,10 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
 
 void DisplayingSensors::addWidgets()
 {
-    QHBoxLayout *row = new QHBoxLayout(this);;
-    row->addWidget(new QLabel("Значение"));
+    QHBoxLayout *row = new QHBoxLayout(this);
+    QLabel *label = new QLabel("Значение", this);
+    label->setStyleSheet("background-color: yellow;");
+    row->addWidget(label);
 
     mainLayout->insertLayout(mainLayout->count() - 1, row);
 }

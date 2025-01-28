@@ -5,10 +5,10 @@ MainWindow::MainWindow(QWidget *parent)
     engineSensors(new EngineSensors),
     hBoxLayout(new QHBoxLayout(this)),
     listOfLimits(new ListOfLimits(*engineSensors, this)),
-    sensorsEngine_1(new DisplayingSensors(this)),
-    sensorsEngine_2(new DisplayingSensors(this)),
-    sensorsEngine_3(new DisplayingSensors(this)),
-    sensorsEngine_4(new DisplayingSensors(this)),
+    sensorsEngine_1(new DisplayingSensors(*engineSensors, this)),
+    sensorsEngine_2(new DisplayingSensors(*engineSensors, this)),
+    sensorsEngine_3(new DisplayingSensors(*engineSensors, this)),
+    sensorsEngine_4(new DisplayingSensors(*engineSensors, this)),
     client(new Client(this))
 {
     QWidget *centralWidget = new QWidget((this)); // Создаем центральный виджет

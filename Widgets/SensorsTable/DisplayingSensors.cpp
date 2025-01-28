@@ -1,9 +1,9 @@
 #include "DisplayingSensors.h"
 
-DisplayingSensors::DisplayingSensors(QWidget *parent)
+DisplayingSensors::DisplayingSensors(EngineSensors &sensors, QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
-    vibrationDirection(new VibrationDirection(this))
+    vibrationDirection(new VibrationDirection(sensors, this))
 {
     setLayout(mainLayout);
     mainLayout->addWidget(vibrationDirection);

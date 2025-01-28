@@ -40,7 +40,7 @@ else()
             Widgets/SensorsTable/ListOfLimits.h Widgets/SensorsTable/ListOfLimits.cpp
             Widgets/SensorsTable/DisplayingSensors.h Widgets/SensorsTable/DisplayingSensors.cpp
             Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
-            Exchange/Protocols/EngineSensors.h Exchange/Protocols/EngineSensors.cpp
+            Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
             Exchange/Protocols/Sensors.h
 
         )

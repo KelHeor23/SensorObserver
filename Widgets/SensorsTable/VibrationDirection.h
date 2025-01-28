@@ -6,9 +6,11 @@
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
 
+#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
+
 class VibrationDirection : public QGraphicsView {
 public:
-    VibrationDirection(QWidget *parent = nullptr);
+    VibrationDirection(EngineSensors &sensors, QWidget *parent = nullptr);
 };
 
 #endif // VIBRATIONDIRECTION_H

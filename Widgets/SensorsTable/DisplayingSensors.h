@@ -7,12 +7,13 @@
 #include <QPushButton>
 
 #include "VibrationDirection.h"
+#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
 
 class DisplayingSensors : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DisplayingSensors(QWidget *parent = nullptr);
+    explicit DisplayingSensors(EngineSensors &sensors, QWidget *parent = nullptr);
 
 public slots:
     void addWidgets();

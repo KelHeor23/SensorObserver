@@ -7,7 +7,7 @@
 #include <QTextEdit>
 #include <QPushButton>
 
-#include "../../Exchange/Protocols/EngineSensors.h"
+#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
 
 class ListOfLimits : public QWidget
 {

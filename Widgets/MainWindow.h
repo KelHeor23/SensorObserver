@@ -17,13 +17,14 @@ public:
 signals:
 
 private:
+    EngineSensors *engineSensors;
     QHBoxLayout *hBoxLayout;
     ListOfLimits *listOfLimits;
     DisplayingSensors *sensorsEngine_1;
     DisplayingSensors *sensorsEngine_2;
     DisplayingSensors *sensorsEngine_3;
     DisplayingSensors *sensorsEngine_4;
-    Client *client;
+    Client *client;    
 };
 
 #endif // MAINWINDOW_H

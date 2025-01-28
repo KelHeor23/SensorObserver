@@ -7,14 +7,16 @@
 #include <QTextEdit>
 #include <QPushButton>
 
+#include "../../Exchange/Protocols/EngineSensors.h"
+
 class ListOfLimits : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ListOfLimits(QWidget *parent = nullptr);
+    explicit ListOfLimits(EngineSensors &sensors, QWidget *parent = nullptr);
 
 public slots:
-    void addWidgets();
+    void addWidgets(EngineSensors::NodeSensor &name, int i);
 
 private:
     QVBoxLayout *mainLayout;

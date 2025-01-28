@@ -2,8 +2,9 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
+    engineSensors(new EngineSensors),
     hBoxLayout(new QHBoxLayout(this)),
-    listOfLimits(new ListOfLimits(this)),
+    listOfLimits(new ListOfLimits(*engineSensors, this)),
     sensorsEngine_1(new DisplayingSensors(this)),
     sensorsEngine_2(new DisplayingSensors(this)),
     sensorsEngine_3(new DisplayingSensors(this)),

@@ -1,12 +1,12 @@
 #include "ListOfLimits.h"
 
 #include "QHBoxLayout"
+#include "qdebug.h"
 
-ListOfLimits::ListOfLimits(QWidget *parent)
+ListOfLimits::ListOfLimits(EngineSensors &sensors, QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout)
 {
-    mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
     QHBoxLayout *headerLayout = new QHBoxLayout(this);
@@ -16,18 +16,55 @@ ListOfLimits::ListOfLimits(QWidget *parent)
 
     mainLayout->addLayout(headerLayout);
 
-    // Добавление кнопки для добавления виджетов
-    QPushButton *button = new QPushButton("Добавить виджеты");
-    connect(button, &QPushButton::clicked, this, &ListOfLimits::addWidgets);
-    mainLayout->addWidget(button);
+    for (int i = 0; i < sensors.sensorsData.size(); i++){
+        addWidgets(sensors.sensorsData[i], i);
+    }
+    mainLayout->addStretch();
 }
 
-void ListOfLimits::addWidgets()
+void ListOfLimits::addWidgets(EngineSensors::NodeSensor &node, int i)
 {
-    QHBoxLayout *row = new QHBoxLayout(this);;
-    row->addWidget(new QLabel("Имя"));
-    row->addWidget(new QTextEdit());
-    row->addWidget(new QTextEdit());
+    QHBoxLayout *row = new QHBoxLayout(this);
+    QLabel *name = new QLabel(node.name);
+    name->setMinimumWidth(150);
 
-    mainLayout->insertLayout(mainLayout->count() - 1, row);
+    QTextEdit *min = new QTextEdit("0", this);
+    if (!min) {
+        // Обработка ошибки выделения памяти
+        return;
+    }
+    min->setMaximumHeight(30);
+
+    QTextEdit *max = new QTextEdit("0", this);
+    if (!max) {
+        delete min; // Удалить min, чтобы избежать утечки памяти
+        return;
+    }
+    max->setMaximumHeight(30);
+
+    connect(min, &QTextEdit::textChanged, this, [this, i, &node, min]() {
+        bool ok;
+        int value = min->toPlainText().toInt(&ok);
+        if (ok)
+            node.min = value;
+        else
+            // Обработка ошибки преобразования
+            qDebug() << "Ошибка преобразования min";
+    });
+
+    connect(max, &QTextEdit::textChanged, this, [this, i, &node, max]() {
+        bool ok;
+        int value = max->toPlainText().toInt(&ok);
+        if (ok)
+            node.max = value;
+        else
+            // Обработка ошибки преобразования
+            qDebug() << "Ошибка преобразования max";
+    });
+
+    row->addWidget(name);
+    row->addWidget(min);
+    row->addWidget(max);
+
+    mainLayout->addLayout(row);
 }

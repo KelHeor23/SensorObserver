@@ -14,13 +14,17 @@ class EngineSensors: public Sensors
         uint16_t    runoutAngle;        // Угол биения относительно метки на двигателе (0-359), градусы
         uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
 
-        void parseEngineSensorsData(const uint8_t* data);
+        void parseEngineSensorsData(std::string_view data);
     };
 
 public:
     EngineSensors();
 
     std::vector<NodeSensor> sensorsData;
+
+    void setData(std::string_view data);
+private:
+    EngineSensorsData engineSensorsData;
 };
 
 

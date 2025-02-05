@@ -7,8 +7,14 @@ EngineSensors::EngineSensors() {
     sensorsData.push_back(NodeSensor{"Амплитуда биения", 0, 0});
 }
 
-void EngineSensors::EngineSensorsData::parseEngineSensorsData(const uint8_t *data)
+void EngineSensors::setData(std::string_view data)
 {
+    engineSensorsData.parseEngineSensorsData(data);
+}
+
+void EngineSensors::EngineSensorsData::parseEngineSensorsData(std::string_view data)
+{
+    /*
     size_t offset = 0;
     memcpy(&this->canID, data + offset, offset);
     offset += sizeof(this->canID);
@@ -19,4 +25,11 @@ void EngineSensors::EngineSensorsData::parseEngineSensorsData(const uint8_t *dat
     memcpy(&this->runoutAngle, data + offset, sizeof(this->runoutAngle));
     offset += sizeof(this->runoutAngle);
     memcpy(&this->runoutAmplitude, data + offset, sizeof(this->runoutAmplitude));
+    */
+
+    if (data.size() < sizeof(EngineSensorsData)) {
+        throw std::runtime_error("Insufficient data size");
+    }
+
+    memcpy(this, data.data(), sizeof(EngineSensorsData));
 }

@@ -13,14 +13,17 @@ class DisplayingSensors : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DisplayingSensors(EngineSensors &sensors, QWidget *parent = nullptr);
+    explicit DisplayingSensors(QWidget *parent = nullptr);
+
+    void setEngineSensorsData(std::string_view data);
 
 public slots:
     void addWidgets();
 
-private:
+private:    
     QVBoxLayout *mainLayout;
-    VibrationDirection *vibrationDirection;
+    EngineSensors *sensors;
+    VibrationDirection *vibrationDirection;    
 };
 
 #endif // DISPLAYINGSENSORS_H

@@ -1,9 +1,10 @@
 #include "DisplayingSensors.h"
 
-DisplayingSensors::DisplayingSensors(EngineSensors &sensors, QWidget *parent)
+DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
-    vibrationDirection(new VibrationDirection(sensors, this))
+    sensors(new EngineSensors()),
+    vibrationDirection(new VibrationDirection(*sensors, this))
 {
     setLayout(mainLayout);
     mainLayout->addWidget(vibrationDirection);
@@ -13,6 +14,11 @@ DisplayingSensors::DisplayingSensors(EngineSensors &sensors, QWidget *parent)
     QPushButton *button = new QPushButton("Добавить виджеты");
     connect(button, &QPushButton::clicked, this, &DisplayingSensors::addWidgets);
     mainLayout->addWidget(button);
+}
+
+void DisplayingSensors::setEngineSensorsData(std::string_view data)
+{
+    sensors->setData(data);
 }
 
 void DisplayingSensors::addWidgets()

@@ -4,7 +4,7 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
     sensors(new EngineSensors::EngineSensors),
-    vibrationDirection(new VibrationDirection(*sensors, this))
+    vibrationDirection(new VibrationDirection(this))
 {
     setLayout(mainLayout);
     mainLayout->addWidget(vibrationDirection);
@@ -31,6 +31,8 @@ void DisplayingSensors::setEngineSensorsData(std::string_view data)
 
     sensorsData["Амплитуда биения"]->setText(QString::number(sensors->getSensorsData().runoutAmplitude));
     checkRangeValues(sensorsData["Амплитуда биения"], sensors->getSensorsData().runoutAmplitude, sensors->getSensorsDataLimits()->sensorsDataLimits[3]);
+
+    vibrationDirection->update(sensors->getSensorsData().runoutAmplitude / 1000, sensors->getSensorsData().runoutAngle);
 }
 
 void DisplayingSensors::setSensorsDataLimits(EngineSensors::Limits *newSensorsDataLimits)

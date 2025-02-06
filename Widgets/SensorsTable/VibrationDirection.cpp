@@ -1,10 +1,12 @@
 #include "VibrationDirection.h"
+#include <cmath>
 
-VibrationDirection::VibrationDirection(EngineSensors::EngineSensors &sensors, QWidget *parent)
-    : QGraphicsView(parent)
+VibrationDirection::VibrationDirection(QWidget *parent)
+    : QGraphicsView(parent),
+    scene(new QGraphicsScene(this))
 {
     // Создаем сцену
-    QGraphicsScene *scene = new QGraphicsScene(this);
+    scene = new QGraphicsScene(this);
     setScene(scene);
 
     // Устанавливаем область сцены
@@ -17,3 +19,24 @@ VibrationDirection::VibrationDirection(EngineSensors::EngineSensors &sensors, QW
     // Устанавливаем фон
     setBackgroundBrush(Qt::white);
 }
+
+void VibrationDirection::update(int len, int degree)
+{
+    if (circle) {
+        scene->removeItem(circle);
+        delete circle;
+        circle = nullptr;
+    }
+
+    // Преобразование угла из градусов в радианы
+    double angleRadians = degree * M_PI / 180.0;
+
+    // Расчет координат
+    int x = len * std::cos(angleRadians);
+    int y = len * std::sin(angleRadians);
+
+    circle = new QGraphicsEllipseItem(x, y, 10, 10);
+
+    scene->addItem(circle);
+}
+

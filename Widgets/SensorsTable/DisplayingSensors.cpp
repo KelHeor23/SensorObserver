@@ -3,7 +3,7 @@
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
-    sensors(new EngineSensors()),
+    sensors(new EngineSensors::EngineSensors),
     vibrationDirection(new VibrationDirection(*sensors, this))
 {
     setLayout(mainLayout);
@@ -14,11 +14,16 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     QPushButton *button = new QPushButton("Добавить виджеты");
     connect(button, &QPushButton::clicked, this, &DisplayingSensors::addWidgets);
     mainLayout->addWidget(button);
+
+    /*for (int i = 0; i < sensors->sensorsData.size(); i++){
+        addWidgets(sensors->sensorsData[i], i);
+    }
+    mainLayout->addStretch();*/
 }
 
 void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
-    sensors->setData(data);
+    //sensors->setData(data);
 }
 
 void DisplayingSensors::addWidgets()

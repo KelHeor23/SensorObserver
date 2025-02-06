@@ -3,7 +3,7 @@
 #include "QHBoxLayout"
 #include "qdebug.h"
 
-ListOfLimits::ListOfLimits(EngineSensors &sensors, QWidget *parent)
+ListOfLimits::ListOfLimits(EngineSensors::Limits &limits, QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout)
 {
@@ -16,16 +16,16 @@ ListOfLimits::ListOfLimits(EngineSensors &sensors, QWidget *parent)
 
     mainLayout->addLayout(headerLayout);
 
-    for (int i = 0; i < sensors.sensorsData.size(); i++){
-        addWidgets(sensors.sensorsData[i], i);
+    for (int i = 0; i < limits.sensorsDataLimits.size(); i++){
+        addWidgets(limits.sensorsDataLimits[i], i);
     }
     mainLayout->addStretch();
 }
 
-void ListOfLimits::addWidgets(EngineSensors::NodeSensor &node, int i)
+void ListOfLimits::addWidgets(SensorLimits &node, int i)
 {
     QHBoxLayout *row = new QHBoxLayout(this);
-    QLabel *name = new QLabel(node.name);
+    QLabel *name = new QLabel(node.name.name);
     name->setMinimumWidth(150);
 
     QTextEdit *min = new QTextEdit("0", this);

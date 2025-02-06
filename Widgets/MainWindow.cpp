@@ -2,9 +2,9 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-    engineSensors(new EngineSensors),
+    engineSensorsLimits(new EngineSensors::Limits),
     hBoxLayout(new QHBoxLayout(this)),
-    listOfLimits(new ListOfLimits(*engineSensors, this)),
+    listOfLimits(new ListOfLimits(*engineSensorsLimits, this)),
     sensorsEngine_1(new DisplayingSensors(this)),
     sensorsEngine_2(new DisplayingSensors(this)),
     sensorsEngine_3(new DisplayingSensors(this)),
@@ -35,7 +35,7 @@ void MainWindow::fillSensorsEngines()
 
     EngineSensorsData data;
 
-    data.canID = rand() % 1000000000 + 1;
+    data.canID = 1;
     data.speed = rand() % (65536);
     data.temperature = static_cast<int8_t>(rand() % (256) - 128);
     data.runoutAngle = rand() % (360);
@@ -45,7 +45,7 @@ void MainWindow::fillSensorsEngines()
 
     sensorsEngine_1->setEngineSensorsData(str);
 
-    data.canID = rand() % 1000000000 + 1;
+    data.canID = 2;
     data.speed = rand() % (65536);
     data.temperature = static_cast<int8_t>(rand() % (256) - 128);
     data.runoutAngle = rand() % (360);
@@ -55,7 +55,7 @@ void MainWindow::fillSensorsEngines()
 
     sensorsEngine_2->setEngineSensorsData(str);
 
-    data.canID = rand() % 1000000000 + 1;
+    data.canID = 3;
     data.speed = rand() % (65536);
     data.temperature = static_cast<int8_t>(rand() % (256) - 128);
     data.runoutAngle = rand() % (360);
@@ -65,7 +65,7 @@ void MainWindow::fillSensorsEngines()
 
     sensorsEngine_3->setEngineSensorsData(str);
 
-    data.canID = rand() % 1000000000 + 1;
+    data.canID = 4;
     data.speed = rand() % (65536);
     data.temperature = static_cast<int8_t>(rand() % (256) - 128);
     data.runoutAngle = rand() % (360);

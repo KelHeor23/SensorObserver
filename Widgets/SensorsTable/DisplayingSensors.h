@@ -22,7 +22,7 @@ public slots:
 
 private:    
     QVBoxLayout *mainLayout;
-    EngineSensors *sensors;
+    EngineSensors::EngineSensors *sensors;
     VibrationDirection *vibrationDirection;    
 };
 

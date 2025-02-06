@@ -1,22 +1,35 @@
 #include "EngineSensors.h"
 
-EngineSensors::EngineSensors() {
-    sensorsData.push_back(NodeSensor{"Обороты", 0, 0});
-    sensorsData.push_back(NodeSensor{"Температура", 0, 0});
-    sensorsData.push_back(NodeSensor{"Угол биения", 0, 0});
-    sensorsData.push_back(NodeSensor{"Амплитуда биения", 0, 0});
-}
-
-void EngineSensors::setData(std::string_view data)
+EngineSensors::Limits::Limits()
 {
-    engineSensorsData.parseEngineSensorsData(data);
+    for (auto it : SensorsList)
+        sensorsDataLimits.push_back(SensorLimits{it, 0, 0});
 }
 
-void EngineSensors::EngineSensorsData::parseEngineSensorsData(std::string_view data)
+EngineSensors::EngineSensors::EngineSensors()
+{
+
+}
+/*
+void EngineSensors::EngineSensors::setData(std::string_view data)
+{
+}
+
+void EngineSensors::EngineSensors::setSensorsDataLimits(const std::vector<NodeSensorsLimits> &newSensorsDataLimits)
+{
+    sensorsDataLimits = newSensorsDataLimits;
+}
+
+void EngineSensors::EngineSensors::EngineSensorsData::parseEngineSensorsData(std::string_view data)
 {
     if (data.size() < sizeof(EngineSensorsData)) {
         throw std::runtime_error("Insufficient data size");
     }
 
     memcpy(this, data.data(), sizeof(EngineSensorsData));
+}*/
+
+void EngineSensors::EngineSensors::setSensorsDataLimits(std::vector<SensorLimits> *newSensorsDataLimits)
+{
+    sensorsDataLimits = newSensorsDataLimits;
 }

@@ -1,7 +1,6 @@
 #include "VibrationDirection.h"
 
-
-VibrationDirection::VibrationDirection(EngineSensors &sensors, QWidget *parent)
+VibrationDirection::VibrationDirection(EngineSensors::EngineSensors &sensors, QWidget *parent)
     : QGraphicsView(parent)
 {
     // Создаем сцену

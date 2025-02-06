@@ -13,10 +13,10 @@ class ListOfLimits : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ListOfLimits(EngineSensors &sensors, QWidget *parent = nullptr);
+    explicit ListOfLimits(EngineSensors::Limits &limits, QWidget *parent = nullptr);
 
 public slots:
-    void addWidgets(EngineSensors::NodeSensor &name, int i);
+    void addWidgets(SensorLimits &name, int i);
 
 private:
     QVBoxLayout *mainLayout;

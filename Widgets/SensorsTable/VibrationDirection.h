@@ -10,7 +10,7 @@
 
 class VibrationDirection : public QGraphicsView {
 public:
-    VibrationDirection(EngineSensors &sensors, QWidget *parent = nullptr);
+    VibrationDirection(EngineSensors::EngineSensors &sensors, QWidget *parent = nullptr);
 };
 
 #endif // VIBRATIONDIRECTION_H

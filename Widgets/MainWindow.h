@@ -18,7 +18,8 @@ public:
 signals:
 
 private:
-    EngineSensors *engineSensors;
+    EngineSensors::Limits *engineSensorsLimits;
+
     QHBoxLayout *hBoxLayout;
     ListOfLimits *listOfLimits;
     DisplayingSensors *sensorsEngine_1;

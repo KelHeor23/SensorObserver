@@ -21,6 +21,15 @@ MainWindow::MainWindow(QWidget *parent)
     hBoxLayout->addWidget(sensorsEngine_2);
     hBoxLayout->addWidget(sensorsEngine_3);
     hBoxLayout->addWidget(sensorsEngine_4);
+
+    sensorsEngine_1->setSensorsDataLimits(engineSensorsLimits);
+    sensorsEngine_2->setSensorsDataLimits(engineSensorsLimits);
+    sensorsEngine_3->setSensorsDataLimits(engineSensorsLimits);
+    sensorsEngine_4->setSensorsDataLimits(engineSensorsLimits);
+
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::fillSensorsEngines);
+    timer->start(1000); // Запускаем таймер на интервал 5 секунд
 }
 
 void MainWindow::fillSensorsEngines()

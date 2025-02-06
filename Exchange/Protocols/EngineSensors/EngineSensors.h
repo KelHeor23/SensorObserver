@@ -1,6 +1,7 @@
 #ifndef ENGINESENSORS_H
 #define ENGINESENSORS_H
 
+#include <map>
 #include <vector>
 
 #include "../Sensors.h"
@@ -24,7 +25,7 @@ public:
 
 class EngineSensors
 {
-    /*struct EngineSensorsData {
+    struct EngineSensorsData {
         uint32_t    canID;
         uint16_t    speed;              // Обороты двигателя (0 - 65535), обор/м
         int8_t      temperature;        // Температура двигателя (-128 ... +127), градусы/10
@@ -32,18 +33,21 @@ class EngineSensors
         uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
 
         void parseEngineSensorsData(std::string_view data);
-    };*/
+    };
 
 public:
     EngineSensors();
 
     void setData(std::string_view data);
 
-    void setSensorsDataLimits(std::vector<SensorLimits> *newSensorsDataLimits);
+    EngineSensorsData getSensorsData() const;
+
+    Limits *getSensorsDataLimits() const;
+    void setSensorsDataLimits(Limits *newSensorsDataLimits);
 
 private:
-
-    std::vector<SensorLimits> *sensorsDataLimits;
+    Limits *sensorsDataLimits;
+    EngineSensorsData sensorsData;
 };
 };
 

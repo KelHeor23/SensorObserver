@@ -26,7 +26,9 @@ private:
     DisplayingSensors *sensorsEngine_2;
     DisplayingSensors *sensorsEngine_3;
     DisplayingSensors *sensorsEngine_4;
-    Client *client;    
+    Client *client;
+
+    QTimer *timer; // тестовая
 };
 
 #endif // MAINWINDOW_H

@@ -7,9 +7,12 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     vibrationDirection(new VibrationDirection(this))
 {
     setLayout(mainLayout);
+
+    // Сначала добавляем vibrationDirection
     mainLayout->addWidget(vibrationDirection);
     vibrationDirection->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
+    // Затем добавляем остальные виджеты сенсоров
     for (auto &it : sensors->getSensorsDataLimits()->sensorsDataLimits)
         addWidgets(it.name.name);
 
@@ -51,7 +54,7 @@ void DisplayingSensors::addWidgets(QString &name)
 
     row->addWidget(labelName);
     row->addWidget(labelVal);
-    mainLayout->insertLayout(mainLayout->count() - 1, row);
+    mainLayout->insertLayout(mainLayout->count(), row);
 }
 
 void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)

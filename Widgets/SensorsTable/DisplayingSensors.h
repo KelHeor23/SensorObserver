@@ -19,14 +19,14 @@ public:
     void setSensorsDataLimits(EngineSensors::Limits *newSensorsDataLimits);
 
 public slots:
-    void addWidgets(QString &);
+    void addWidgets(std::string_view);
     void checkRangeValues(QLabel *, int val, SensorLimits lim);
 
 private:    
     QVBoxLayout *mainLayout;
     EngineSensors::EngineSensors *sensors;
     VibrationDirection *vibrationDirection;
-    QMap<QString, QLabel *> sensorsData;
+    QMap<QString, QLabel *> sensorsDataLabels;
 };
 
 #endif // DISPLAYINGSENSORS_H

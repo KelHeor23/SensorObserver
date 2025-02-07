@@ -13,13 +13,14 @@ class ListOfLimits : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ListOfLimits(EngineSensors::Limits &limits, QWidget *parent = nullptr);
+    explicit ListOfLimits(EngineSensors::Limits *limits, QWidget *parent = nullptr);
 
 public slots:
-    void addWidgets(SensorLimits &name, int i);
+    void addWidgets(std::string_view);
 
 private:
     QVBoxLayout *mainLayout;
+    EngineSensors::Limits *limits;
 };
 
 #endif // LISTOFLIMITS_H

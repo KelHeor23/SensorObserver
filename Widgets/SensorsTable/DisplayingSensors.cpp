@@ -13,9 +13,9 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     vibrationDirection->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     // Затем добавляем остальные виджеты сенсоров
-    /*for (auto &it : sensors->getSensorsDataLimits()->sensorsDataLimits)
-        addWidgets(it.name.name);
-*/
+    for (auto &it : EngineSensors::orderedNames)
+        addWidgets(it);
+
     mainLayout->addStretch();
 }
 
@@ -23,19 +23,19 @@ void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
     sensors->setData(data);
 
-    /*sensorsData["Обороты"]->setText(QString::number(sensors->getSensorsData().speed));
-    checkRangeValues(sensorsData["Обороты"], sensors->getSensorsData().speed, sensors->getSensorsDataLimits()->sensorsDataLimits[0]);
+    sensorsDataLabels["Обороты"]->setText(QString::number(sensors->getSensorsData()["Обороты"]));
+    checkRangeValues(sensorsDataLabels["Обороты"], sensors->getSensorsData()["Обороты"], sensors->getSensorsDataLimits()->sensorsDataLimits["Обороты"]);
 
-    sensorsData["Температура"]->setText(QString::number(sensors->getSensorsData().temperature));
-    checkRangeValues(sensorsData["Температура"], sensors->getSensorsData().temperature, sensors->getSensorsDataLimits()->sensorsDataLimits[1]);
+    sensorsDataLabels["Температура"]->setText(QString::number(sensors->getSensorsData()["Температура"]));
+    checkRangeValues(sensorsDataLabels["Температура"], sensors->getSensorsData()["Температура"], sensors->getSensorsDataLimits()->sensorsDataLimits["Температура"]);
 
-    sensorsData["Угол биения"]->setText(QString::number(sensors->getSensorsData().runoutAngle));
-    checkRangeValues(sensorsData["Угол биения"], sensors->getSensorsData().runoutAngle, sensors->getSensorsDataLimits()->sensorsDataLimits[2]);
+    sensorsDataLabels["Угол биения"]->setText(QString::number(sensors->getSensorsData()["Угол биения"]));
+    checkRangeValues(sensorsDataLabels["Угол биения"], sensors->getSensorsData()["Угол биения"], sensors->getSensorsDataLimits()->sensorsDataLimits["Угол биения"]);
 
-    sensorsData["Амплитуда биения"]->setText(QString::number(sensors->getSensorsData().runoutAmplitude));
-    checkRangeValues(sensorsData["Амплитуда биения"], sensors->getSensorsData().runoutAmplitude, sensors->getSensorsDataLimits()->sensorsDataLimits[3]);
+    sensorsDataLabels["Амплитуда биения"]->setText(QString::number(sensors->getSensorsData()["Амплитуда биения"]));
+    checkRangeValues(sensorsDataLabels["Амплитуда биения"], sensors->getSensorsData()["Амплитуда биения"], sensors->getSensorsDataLimits()->sensorsDataLimits["Амплитуда биения"]);
 
-    vibrationDirection->update(sensors->getSensorsData().runoutAmplitude / 1000, sensors->getSensorsData().runoutAngle);*/
+    vibrationDirection->update(sensors->getSensorsData()["Амплитуда биения"] / 1000, sensors->getSensorsData()["Угол биения"]);
 }
 
 void DisplayingSensors::setSensorsDataLimits(EngineSensors::Limits *newSensorsDataLimits)
@@ -43,13 +43,13 @@ void DisplayingSensors::setSensorsDataLimits(EngineSensors::Limits *newSensorsDa
     sensors->setSensorsDataLimits(newSensorsDataLimits);
 }
 
-void DisplayingSensors::addWidgets(QString &name)
+void DisplayingSensors::addWidgets(std::string_view name)
 {
     QHBoxLayout *row = new QHBoxLayout(this);
     QLabel *labelVal = new QLabel("Значение", this);
-    sensorsData.insert(name, labelVal);
+    sensorsDataLabels.insert(name.data(), labelVal);
     labelVal->setMaximumHeight(30);
-    QLabel *labelName = new QLabel(name, this);
+    QLabel *labelName = new QLabel(name.data(), this);
     labelVal->setMaximumHeight(30);
 
     row->addWidget(labelName);

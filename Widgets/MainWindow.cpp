@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
     engineSensorsLimits(new EngineSensors::Limits),
     hBoxLayout(new QHBoxLayout(this)),
-    listOfLimits(new ListOfLimits(*engineSensorsLimits, this)),
+    listOfLimits(new ListOfLimits(engineSensorsLimits, this)),
     sensorsEngine_1(new DisplayingSensors(this)),
     sensorsEngine_2(new DisplayingSensors(this)),
     sensorsEngine_3(new DisplayingSensors(this)),
@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::fillSensorsEngines()
 {
+    #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
         uint32_t    canID;
         uint16_t    speed;            // Обороты двигателя (0 - 65535), обор/м
@@ -41,6 +42,7 @@ void MainWindow::fillSensorsEngines()
         uint16_t    runoutAngle;        // Угол биения относительно метки на двигателе (0-359), градусы
         uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
     };
+    #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
     EngineSensorsData data;
 

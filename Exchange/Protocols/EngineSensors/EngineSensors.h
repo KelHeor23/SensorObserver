@@ -19,6 +19,7 @@ public:
 
     std::unordered_map<std::string, SensorLimits> sensorsDataLimits;
 };
+
 class EngineSensors
 {
     #pragma pack(push, 1) // Отключаем выравнивание
@@ -37,6 +38,10 @@ public:
     void setData(std::string_view data);
 
     void setSensorsDataLimits(Limits *newSensorsDataLimits);
+
+    std::unordered_map<std::string, int> getSensorsData() const;
+
+    Limits *getSensorsDataLimits() const;
 
 private:
     Limits *sensorsDataLimits;

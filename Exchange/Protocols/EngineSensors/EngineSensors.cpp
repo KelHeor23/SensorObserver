@@ -13,32 +13,25 @@ void EngineSensors::setData(std::string_view data)
 
     const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
 
-
-
-    size_t offset = 0;
-
-    uint32_t    canID_temp; // Пока никак не используется
-    memcpy(&canID_temp, it + offset, sizeof(EngineSensorsData::canID));
-    offset += sizeof(EngineSensorsData::canID);
-
-    memcpy(&sensorsData["Обороты"], it + offset, sizeof(EngineSensorsData::speed));
-    offset += sizeof(EngineSensorsData::speed);
-
-    memcpy(&sensorsData["Температура"], it + offset, sizeof(EngineSensorsData::temperature));
-    offset += sizeof(EngineSensorsData::temperature);
-
-    memcpy(&sensorsData["Угол биения"], it + offset, sizeof(EngineSensorsData::runoutAngle));
-    offset += sizeof(EngineSensorsData::runoutAngle);
-
-    memcpy(&sensorsData["Амплитуда биения"], it + offset, sizeof(EngineSensorsData::runoutAmplitude));
-    offset += sizeof(EngineSensorsData::runoutAmplitude);
-
-    //memcpy(this, data.data(), sizeof(EngineSensorsData));
+    sensorsData["Обороты"]          = static_cast<int>(receivedData->speed);
+    sensorsData["Температура"]      = static_cast<int>(receivedData->temperature);
+    sensorsData["Угол биения"]      = static_cast<int>(receivedData->runoutAngle);
+    sensorsData["Амплитуда биения"] = static_cast<int>(receivedData->runoutAmplitude);
 }
 
 void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
 {
     sensorsDataLimits = newSensorsDataLimits;
+}
+
+std::unordered_map<std::string, int> EngineSensors::getSensorsData() const
+{
+    return sensorsData;
+}
+
+Limits *EngineSensors::getSensorsDataLimits() const
+{
+    return sensorsDataLimits;
 }
 
 Limits::Limits()

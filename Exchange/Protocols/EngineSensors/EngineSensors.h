@@ -1,7 +1,6 @@
 #ifndef ENGINESENSORS_H
 #define ENGINESENSORS_H
 
-#include <map>
 #include <vector>
 
 #include "../Sensors.h"
@@ -25,6 +24,7 @@ public:
 
 class EngineSensors
 {
+    #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
         uint32_t    canID;
         uint16_t    speed;              // Обороты двигателя (0 - 65535), обор/м
@@ -34,6 +34,7 @@ class EngineSensors
 
         void parseEngineSensorsData(std::string_view data);
     };
+    #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
 public:
     EngineSensors();

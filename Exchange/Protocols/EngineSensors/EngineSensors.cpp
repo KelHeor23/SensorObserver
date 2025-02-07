@@ -36,8 +36,6 @@ Limits *EngineSensors::getSensorsDataLimits() const
 
 Limits::Limits()
 {
-    for (auto &it : orderedNames)
-        sensorsDataLimits.insert({it, SensorLimits{0,0}});
 }
 
 }

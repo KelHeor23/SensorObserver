@@ -43,7 +43,7 @@ void ListOfLimits::addWidgets(std::string_view nameSensor)
     }
     max->setMaximumHeight(30);
 
-    SensorLimits node = limits->sensorsDataLimits[nameSensor.data()];
+    SensorLimits &node = limits->sensorsDataLimits[nameSensor.data()];
 
     connect(min, &QTextEdit::textChanged, this, [this, &node, min]() {
         bool ok;

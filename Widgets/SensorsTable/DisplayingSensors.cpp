@@ -13,9 +13,9 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     vibrationDirection->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     // Затем добавляем остальные виджеты сенсоров
-    for (auto &it : sensors->getSensorsDataLimits()->sensorsDataLimits)
+    /*for (auto &it : sensors->getSensorsDataLimits()->sensorsDataLimits)
         addWidgets(it.name.name);
-
+*/
     mainLayout->addStretch();
 }
 
@@ -23,7 +23,7 @@ void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
     sensors->setData(data);
 
-    sensorsData["Обороты"]->setText(QString::number(sensors->getSensorsData().speed));
+    /*sensorsData["Обороты"]->setText(QString::number(sensors->getSensorsData().speed));
     checkRangeValues(sensorsData["Обороты"], sensors->getSensorsData().speed, sensors->getSensorsDataLimits()->sensorsDataLimits[0]);
 
     sensorsData["Температура"]->setText(QString::number(sensors->getSensorsData().temperature));
@@ -35,7 +35,7 @@ void DisplayingSensors::setEngineSensorsData(std::string_view data)
     sensorsData["Амплитуда биения"]->setText(QString::number(sensors->getSensorsData().runoutAmplitude));
     checkRangeValues(sensorsData["Амплитуда биения"], sensors->getSensorsData().runoutAmplitude, sensors->getSensorsDataLimits()->sensorsDataLimits[3]);
 
-    vibrationDirection->update(sensors->getSensorsData().runoutAmplitude / 1000, sensors->getSensorsData().runoutAngle);
+    vibrationDirection->update(sensors->getSensorsData().runoutAmplitude / 1000, sensors->getSensorsData().runoutAngle);*/
 }
 
 void DisplayingSensors::setSensorsDataLimits(EngineSensors::Limits *newSensorsDataLimits)

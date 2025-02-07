@@ -16,15 +16,15 @@ ListOfLimits::ListOfLimits(EngineSensors::Limits &limits, QWidget *parent)
 
     mainLayout->addLayout(headerLayout);
 
-    for (int i = 0; i < limits.sensorsDataLimits.size(); i++){
+    /*for (int i = 0; i < limits.sensorsDataLimits.size(); i++){
         addWidgets(limits.sensorsDataLimits[i], i);
-    }
+    }*/
     mainLayout->addStretch();
 }
 
 void ListOfLimits::addWidgets(SensorLimits &node, int i)
 {
-    QHBoxLayout *row = new QHBoxLayout(this);
+    /*QHBoxLayout *row = new QHBoxLayout(this);
     QLabel *name = new QLabel(node.name.name);
     name->setMinimumWidth(150);
 
@@ -66,5 +66,5 @@ void ListOfLimits::addWidgets(SensorLimits &node, int i)
     row->addWidget(min);
     row->addWidget(max);
 
-    mainLayout->addLayout(row);
+    mainLayout->addLayout(row);*/
 }

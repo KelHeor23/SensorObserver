@@ -2,28 +2,38 @@
 
 namespace EngineSensors {
 
-Limits::Limits()
-{
-    for (auto it : SensorsList)
-        sensorsDataLimits.push_back(SensorLimits{it, 0, 0});
-}
 EngineSensors::EngineSensors(){
-    sensorsDataLimits = new Limits;
 }
 
 void EngineSensors::setData(std::string_view data)
 {
-    sensorsData.parseEngineSensorsData(data);
-}
+    if (data.size() < sizeof(EngineSensorsData)) {
+        throw std::runtime_error("Insufficient data size");
+    }
 
-EngineSensors::EngineSensorsData EngineSensors::getSensorsData() const
-{
-    return sensorsData;
-}
+    const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
 
-Limits *EngineSensors::getSensorsDataLimits() const
-{
-    return sensorsDataLimits;
+
+
+    size_t offset = 0;
+
+    uint32_t    canID_temp; // Пока никак не используется
+    memcpy(&canID_temp, it + offset, sizeof(EngineSensorsData::canID));
+    offset += sizeof(EngineSensorsData::canID);
+
+    memcpy(&sensorsData["Обороты"], it + offset, sizeof(EngineSensorsData::speed));
+    offset += sizeof(EngineSensorsData::speed);
+
+    memcpy(&sensorsData["Температура"], it + offset, sizeof(EngineSensorsData::temperature));
+    offset += sizeof(EngineSensorsData::temperature);
+
+    memcpy(&sensorsData["Угол биения"], it + offset, sizeof(EngineSensorsData::runoutAngle));
+    offset += sizeof(EngineSensorsData::runoutAngle);
+
+    memcpy(&sensorsData["Амплитуда биения"], it + offset, sizeof(EngineSensorsData::runoutAmplitude));
+    offset += sizeof(EngineSensorsData::runoutAmplitude);
+
+    //memcpy(this, data.data(), sizeof(EngineSensorsData));
 }
 
 void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
@@ -31,13 +41,10 @@ void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
     sensorsDataLimits = newSensorsDataLimits;
 }
 
-void EngineSensors::EngineSensorsData::parseEngineSensorsData(std::string_view data)
+Limits::Limits()
 {
-    if (data.size() < sizeof(EngineSensorsData)) {
-        throw std::runtime_error("Insufficient data size");
-    }
-
-    memcpy(this, data.data(), sizeof(EngineSensorsData));
+    for (auto &it : orderedNames)
+        sensorsDataLimits.insert({it, SensorLimits{0,0}});
 }
 
 }

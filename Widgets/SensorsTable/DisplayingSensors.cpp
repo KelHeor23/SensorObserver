@@ -23,17 +23,10 @@ void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
     sensors->setData(data);
 
-    sensorsDataLabels["Обороты"]->setText(QString::number(sensors->getSensorsData()["Обороты"]));
-    checkRangeValues(sensorsDataLabels["Обороты"], sensors->getSensorsData()["Обороты"], sensors->getSensorsDataLimits()->sensorsDataLimits["Обороты"]);
-
-    sensorsDataLabels["Температура"]->setText(QString::number(sensors->getSensorsData()["Температура"]));
-    checkRangeValues(sensorsDataLabels["Температура"], sensors->getSensorsData()["Температура"], sensors->getSensorsDataLimits()->sensorsDataLimits["Температура"]);
-
-    sensorsDataLabels["Угол биения"]->setText(QString::number(sensors->getSensorsData()["Угол биения"]));
-    checkRangeValues(sensorsDataLabels["Угол биения"], sensors->getSensorsData()["Угол биения"], sensors->getSensorsDataLimits()->sensorsDataLimits["Угол биения"]);
-
-    sensorsDataLabels["Амплитуда биения"]->setText(QString::number(sensors->getSensorsData()["Амплитуда биения"]));
-    checkRangeValues(sensorsDataLabels["Амплитуда биения"], sensors->getSensorsData()["Амплитуда биения"], sensors->getSensorsDataLimits()->sensorsDataLimits["Амплитуда биения"]);
+    for (auto &it : EngineSensors::orderedNames) {
+        sensorsDataLabels[it.data()]->setText(QString::number(sensors->getSensorsData()[it.data()]));
+        checkRangeValues(sensorsDataLabels[it.data()], sensors->getSensorsData()[it.data()], sensors->getSensorsDataLimits()->sensorsDataLimits[it.data()]);
+    }
 
     vibrationDirection->update(sensors->getSensorsData()["Амплитуда биения"] / 1000, sensors->getSensorsData()["Угол биения"]);
 }

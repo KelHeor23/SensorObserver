@@ -3,9 +3,10 @@
 #include "QHBoxLayout"
 #include "qdebug.h"
 
-ListOfLimits::ListOfLimits(EngineSensors::Limits &limits, QWidget *parent)
+ListOfLimits::ListOfLimits(EngineSensors::Limits *lim, QWidget *parent)
     : QWidget(parent),
-    mainLayout(new QVBoxLayout)
+    mainLayout(new QVBoxLayout),
+    limits{lim}
 {
     setLayout(mainLayout);
 
@@ -16,16 +17,16 @@ ListOfLimits::ListOfLimits(EngineSensors::Limits &limits, QWidget *parent)
 
     mainLayout->addLayout(headerLayout);
 
-    for (int i = 0; i < limits.sensorsDataLimits.size(); i++){
-        addWidgets(limits.sensorsDataLimits[i], i);
-    }
+    for (auto &it : EngineSensors::orderedNames)
+        addWidgets(it);
+
     mainLayout->addStretch();
 }
 
-void ListOfLimits::addWidgets(SensorLimits &node, int i)
+void ListOfLimits::addWidgets(std::string_view nameSensor)
 {
     QHBoxLayout *row = new QHBoxLayout(this);
-    QLabel *name = new QLabel(node.name.name);
+    QLabel *name = new QLabel(nameSensor.data());
     name->setMinimumWidth(150);
 
     QTextEdit *min = new QTextEdit("0", this);
@@ -42,7 +43,9 @@ void ListOfLimits::addWidgets(SensorLimits &node, int i)
     }
     max->setMaximumHeight(30);
 
-    connect(min, &QTextEdit::textChanged, this, [this, i, &node, min]() {
+    SensorLimits &node = limits->sensorsDataLimits[nameSensor.data()];
+
+    connect(min, &QTextEdit::textChanged, this, [this, &node, min]() {
         bool ok;
         int value = min->toPlainText().toInt(&ok);
         if (ok)
@@ -52,7 +55,7 @@ void ListOfLimits::addWidgets(SensorLimits &node, int i)
             qDebug() << "Ошибка преобразования min";
     });
 
-    connect(max, &QTextEdit::textChanged, this, [this, i, &node, max]() {
+    connect(max, &QTextEdit::textChanged, this, [this, &node, max]() {
         bool ok;
         int value = max->toPlainText().toInt(&ok);
         if (ok)

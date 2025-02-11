@@ -2,21 +2,29 @@
 
 namespace EngineSensors {
 
-Limits::Limits()
-{
-    for (auto it : SensorsList)
-        sensorsDataLimits.push_back(SensorLimits{it, 0, 0});
-}
 EngineSensors::EngineSensors(){
-    sensorsDataLimits = new Limits;
 }
 
 void EngineSensors::setData(std::string_view data)
 {
-    sensorsData.parseEngineSensorsData(data);
+    if (data.size() < sizeof(EngineSensorsData)) {
+        throw std::runtime_error("Insufficient data size");
+    }
+
+    const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
+
+    sensorsData["Обороты"]          = static_cast<int>(receivedData->speed);
+    sensorsData["Температура"]      = static_cast<int>(receivedData->temperature);
+    sensorsData["Угол биения"]      = static_cast<int>(receivedData->runoutAngle);
+    sensorsData["Амплитуда биения"] = static_cast<int>(receivedData->runoutAmplitude);
 }
 
-EngineSensors::EngineSensorsData EngineSensors::getSensorsData() const
+void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
+{
+    sensorsDataLimits = newSensorsDataLimits;
+}
+
+std::unordered_map<std::string, int> EngineSensors::getSensorsData() const
 {
     return sensorsData;
 }
@@ -26,18 +34,8 @@ Limits *EngineSensors::getSensorsDataLimits() const
     return sensorsDataLimits;
 }
 
-void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
+Limits::Limits()
 {
-    sensorsDataLimits = newSensorsDataLimits;
-}
-
-void EngineSensors::EngineSensorsData::parseEngineSensorsData(std::string_view data)
-{
-    if (data.size() < sizeof(EngineSensorsData)) {
-        throw std::runtime_error("Insufficient data size");
-    }
-
-    memcpy(this, data.data(), sizeof(EngineSensorsData));
 }
 
 }

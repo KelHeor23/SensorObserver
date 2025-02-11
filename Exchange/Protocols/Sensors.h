@@ -3,9 +3,11 @@
 
 #include <QString>
 
+using SensorName = std::string;
+
 struct NameSensor {
     size_t orderNum;
-    QString name;
+    SensorName name;
 };
 
 struct SensorLimits {

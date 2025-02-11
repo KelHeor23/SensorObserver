@@ -8,7 +8,9 @@
 
 namespace EngineSensors {
 
-std::vector<std::string> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+namespace {
+    std::vector<SensorName> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+};
 
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
@@ -24,7 +26,7 @@ class Limits {
 public:
     Limits();
 
-    std::unordered_map<std::string, SensorLimits> sensorsDataLimits;
+    std::unordered_map<SensorName, SensorLimits> sensorsDataLimits;
 };
 
 class EngineSensors
@@ -36,13 +38,13 @@ public:
 
     void setSensorsDataLimits(Limits *newSensorsDataLimits);
 
-    std::unordered_map<std::string, int> getSensorsData() const;
+    std::unordered_map<SensorName, int> getSensorsData() const;
 
     Limits *getSensorsDataLimits() const;
 
 private:
     Limits *sensorsDataLimits;
-    std::unordered_map<std::string, int> sensorsData;
+    std::unordered_map<SensorName, int> sensorsData;
 };
 };
 

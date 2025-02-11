@@ -2,7 +2,17 @@
 #define VOLTAGEREGULATORS_H
 
 #include <cstdint>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+#include "../Sensors.h"
+
 namespace VoltageRegulators {
+
+namespace {
+    std::vector<SensorName> orderedNames = {"Входное напряжене", "ток (ампер)", "Управляющий ШИМ", "Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
+};
 
 #pragma pack(push, 1) // Отключаем выравнивание
 struct VoltageRegulatorsData{
@@ -17,10 +27,18 @@ struct VoltageRegulatorsData{
 };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
+
+
 class VoltageRegulators
 {
 public:
     VoltageRegulators();
+
+    void setData(std::string_view data);
+
+private:
+    std::unordered_map<SensorName, SensorLimits> sensorsDataLimits;
+    std::unordered_map<SensorName, double> sensorsData;
 };
 
 };

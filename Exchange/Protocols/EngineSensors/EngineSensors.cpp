@@ -24,7 +24,7 @@ void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
     sensorsDataLimits = newSensorsDataLimits;
 }
 
-std::unordered_map<std::string, int> EngineSensors::getSensorsData() const
+std::unordered_map<SensorName, int> EngineSensors::getSensorsData() const
 {
     return sensorsData;
 }

@@ -8,9 +8,7 @@
 
 namespace EngineSensors {
 
-namespace {
-    std::vector<std::string> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
-};
+std::vector<std::string> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
 
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {

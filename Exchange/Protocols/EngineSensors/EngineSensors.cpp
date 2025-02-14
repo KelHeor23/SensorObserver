@@ -19,23 +19,9 @@ void EngineSensors::setData(std::string_view data)
     sensorsData["Амплитуда биения"] = static_cast<int>(receivedData->runoutAmplitude);
 }
 
-void EngineSensors::setSensorsDataLimits(Limits *newSensorsDataLimits)
-{
-    sensorsDataLimits = newSensorsDataLimits;
-}
-
 std::unordered_map<SensorName, int> EngineSensors::getSensorsData() const
 {
     return sensorsData;
-}
-
-Limits *EngineSensors::getSensorsDataLimits() const
-{
-    return sensorsDataLimits;
-}
-
-Limits::Limits()
-{
 }
 
 }

@@ -3,7 +3,7 @@
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
-    sensors(new EngineSensors::EngineSensors),
+    sensorsEngine(new EngineSensors::EngineSensors),
     vibrationDirection(new VibrationDirection(this))
 {
     setLayout(mainLayout);
@@ -21,19 +21,14 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
 
 void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
-    sensors->setData(data);
+    sensorsEngine->setData(data);
 
     for (auto &it : EngineSensors::orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(sensors->getSensorsData()[it.data()]));
-        checkRangeValues(sensorsDataLabels[it.data()], sensors->getSensorsData()[it.data()], sensors->getSensorsDataLimits()->sensorsDataLimits[it.data()]);
+        sensorsDataLabels[it.data()]->setText(QString::number(sensorsEngine->getSensorsData()[it.data()]));
+        checkRangeValues(sensorsDataLabels[it.data()], sensorsEngine->getSensorsData()[it.data()], (*sensorsDataLimits)[it.data()]);
     }
 
-    vibrationDirection->update(sensors->getSensorsData()["Амплитуда биения"] / 1000, sensors->getSensorsData()["Угол биения"]);
-}
-
-void DisplayingSensors::setSensorsDataLimits(EngineSensors::Limits *newSensorsDataLimits)
-{
-    sensors->setSensorsDataLimits(newSensorsDataLimits);
+    vibrationDirection->update(sensorsEngine->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine->getSensorsData()["Угол биения"]);
 }
 
 void DisplayingSensors::addWidgets(std::string_view name)
@@ -56,4 +51,9 @@ void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)
         lbl->setStyleSheet("QLabel { color: red; }");
     else
         lbl->setStyleSheet("background: transparent;");
+}
+
+void DisplayingSensors::setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits)
+{
+    sensorsDataLimits = newSensorsDataLimits;
 }

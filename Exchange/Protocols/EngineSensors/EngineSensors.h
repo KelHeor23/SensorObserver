@@ -7,11 +7,9 @@
 #include "../Sensors.h"
 
 namespace EngineSensors {
-
 namespace {
     std::vector<SensorName> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
 };
-
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
         uint32_t    canID;              // 0x1FF1200-0x1FF1207 (Младший бит - номер двигателя)
@@ -22,13 +20,6 @@ namespace {
     };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
-class Limits {
-public:
-    Limits();
-
-    std::unordered_map<SensorName, SensorLimits> sensorsDataLimits;
-};
-
 class EngineSensors
 {
 public:
@@ -36,14 +27,11 @@ public:
 
     void setData(std::string_view data);
 
-    void setSensorsDataLimits(Limits *newSensorsDataLimits);
-
     std::unordered_map<SensorName, int> getSensorsData() const;
 
-    Limits *getSensorsDataLimits() const;
+
 
 private:
-    Limits *sensorsDataLimits;
     std::unordered_map<SensorName, int> sensorsData;
 };
 };

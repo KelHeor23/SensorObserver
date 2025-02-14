@@ -2,9 +2,8 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-    engineSensorsLimits(new EngineSensors::Limits),
     hBoxLayout(new QHBoxLayout(this)),
-    listOfLimits(new ListOfLimits(engineSensorsLimits, this)),
+    listOfLimits(new ListOfLimits(this)),
     sensorsEngine_1(new DisplayingSensors(this)),
     sensorsEngine_2(new DisplayingSensors(this)),
     sensorsEngine_3(new DisplayingSensors(this)),
@@ -22,10 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
     hBoxLayout->addWidget(sensorsEngine_3);
     hBoxLayout->addWidget(sensorsEngine_4);
 
-    sensorsEngine_1->setSensorsDataLimits(engineSensorsLimits);
-    sensorsEngine_2->setSensorsDataLimits(engineSensorsLimits);
-    sensorsEngine_3->setSensorsDataLimits(engineSensorsLimits);
-    sensorsEngine_4->setSensorsDataLimits(engineSensorsLimits);
+    listOfLimits->addNewLimits(EngineSensors::orderedNames);
+    listOfLimits->addNewLimits(VoltageRegulators::orderedNames);
+
+    sensorsEngine_1->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+    sensorsEngine_2->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+    sensorsEngine_3->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+    sensorsEngine_4->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::fillSensorsEngines);

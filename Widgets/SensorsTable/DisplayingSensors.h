@@ -18,7 +18,9 @@ public:
     explicit DisplayingSensors(QWidget *parent = nullptr);
 
     void setEngineSensorsData(std::string_view data);
+    void setVoltageRegulatorsSensorsData(std::string_view data);
     void setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits);
+    void addNewDataLabels(std::vector<SensorName> &list);
 
 public slots:
     void addWidgets(std::string_view);
@@ -26,7 +28,8 @@ public slots:
 
 private:    
     QVBoxLayout *mainLayout;
-    EngineSensors::EngineSensors *sensorsEngine;
+    EngineSensors::EngineSensors *engineSensors;
+    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;
     VibrationDirection *vibrationDirection;
     QMap<QString, QLabel *> sensorsDataLabels;
 

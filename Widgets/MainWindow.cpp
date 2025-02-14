@@ -24,6 +24,15 @@ MainWindow::MainWindow(QWidget *parent)
     listOfLimits->addNewLimits(EngineSensors::orderedNames);
     listOfLimits->addNewLimits(VoltageRegulators::orderedNames);
 
+    sensorsEngine_1->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_1->addNewDataLabels(VoltageRegulators::orderedNames);
+    sensorsEngine_2->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_2->addNewDataLabels(VoltageRegulators::orderedNames);
+    sensorsEngine_3->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_3->addNewDataLabels(VoltageRegulators::orderedNames);
+    sensorsEngine_4->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_4->addNewDataLabels(VoltageRegulators::orderedNames);
+
     sensorsEngine_1->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
     sensorsEngine_2->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
     sensorsEngine_3->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
@@ -77,4 +86,19 @@ void MainWindow::fillSensorsEngines()
     str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
 
     sensorsEngine_4->setEngineSensorsData(str);
+
+    VoltageRegulators::VoltageRegulatorsData dataVolt;
+
+    dataVolt.inputVoltageHP = 0xFF;     // Входное напряжение (0-4095), старшая часть, вольт
+    dataVolt.inputVoltageLP = 0x00000001;     // Входное напряжение младшая часть, последние 4 бита - Входное напряжение (0-9), сотни мили-вольт
+    dataVolt.electricCurrent = 100;    // Ток (0 - 255), ампер
+    dataVolt.controlPWM = 101;         // Управляющий ШИМ, (0-2000), микро-секунды
+    dataVolt.averageVoltageA = 1;    // Среднее напряжение на фазе A (0-255), вольты/10
+    dataVolt.averageVoltageB = 1;    // Среднее напряжение на фазе B (0-255), вольты/10
+    dataVolt.averageVoltageC = 1;    // Среднее напряжение на фазе C (0-255), вольты/10
+
+    str = std::string(reinterpret_cast<char *> (&dataVolt), sizeof(dataVolt));
+
+    sensorsEngine_1->setVoltageRegulatorsSensorsData(str);
+
 }

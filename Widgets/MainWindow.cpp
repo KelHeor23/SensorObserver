@@ -2,9 +2,8 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-    engineSensorsLimits(new EngineSensors::Limits),
     hBoxLayout(new QHBoxLayout(this)),
-    listOfLimits(new ListOfLimits(engineSensorsLimits, this)),
+    listOfLimits(new ListOfLimits(this)),
     sensorsEngine_1(new DisplayingSensors(this)),
     sensorsEngine_2(new DisplayingSensors(this)),
     sensorsEngine_3(new DisplayingSensors(this)),
@@ -22,10 +21,22 @@ MainWindow::MainWindow(QWidget *parent)
     hBoxLayout->addWidget(sensorsEngine_3);
     hBoxLayout->addWidget(sensorsEngine_4);
 
-    sensorsEngine_1->setSensorsDataLimits(engineSensorsLimits);
-    sensorsEngine_2->setSensorsDataLimits(engineSensorsLimits);
-    sensorsEngine_3->setSensorsDataLimits(engineSensorsLimits);
-    sensorsEngine_4->setSensorsDataLimits(engineSensorsLimits);
+    listOfLimits->addNewLimits(EngineSensors::orderedNames);
+    listOfLimits->addNewLimits(VoltageRegulators::orderedNames);
+
+    sensorsEngine_1->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_1->addNewDataLabels(VoltageRegulators::orderedNames);
+    sensorsEngine_2->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_2->addNewDataLabels(VoltageRegulators::orderedNames);
+    sensorsEngine_3->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_3->addNewDataLabels(VoltageRegulators::orderedNames);
+    sensorsEngine_4->addNewDataLabels(EngineSensors::orderedNames);
+    sensorsEngine_4->addNewDataLabels(VoltageRegulators::orderedNames);
+
+    sensorsEngine_1->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+    sensorsEngine_2->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+    sensorsEngine_3->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+    sensorsEngine_4->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::fillSensorsEngines);
@@ -34,17 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::fillSensorsEngines()
 {
-    #pragma pack(push, 1) // Отключаем выравнивание
-    struct EngineSensorsData {
-        uint32_t    canID;
-        uint16_t    speed;            // Обороты двигателя (0 - 65535), обор/м
-        int8_t      temperature;        // Температура двигателя (-128 ... +127), градусы/10
-        uint16_t    runoutAngle;        // Угол биения относительно метки на двигателе (0-359), градусы
-        uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
-    };
-    #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
-
-    EngineSensorsData data;
+    EngineSensors::EngineSensorsData data;
 
     data.canID = 1;
     data.speed = rand() % (65536);
@@ -85,4 +86,19 @@ void MainWindow::fillSensorsEngines()
     str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
 
     sensorsEngine_4->setEngineSensorsData(str);
+
+    VoltageRegulators::VoltageRegulatorsData dataVolt;
+
+    dataVolt.inputVoltageHP = 0xFF;     // Входное напряжение (0-4095), старшая часть, вольт
+    dataVolt.inputVoltageLP = 0x00000001;     // Входное напряжение младшая часть, последние 4 бита - Входное напряжение (0-9), сотни мили-вольт
+    dataVolt.electricCurrent = 100;    // Ток (0 - 255), ампер
+    dataVolt.controlPWM = 101;         // Управляющий ШИМ, (0-2000), микро-секунды
+    dataVolt.averageVoltageA = 1;    // Среднее напряжение на фазе A (0-255), вольты/10
+    dataVolt.averageVoltageB = 1;    // Среднее напряжение на фазе B (0-255), вольты/10
+    dataVolt.averageVoltageC = 1;    // Среднее напряжение на фазе C (0-255), вольты/10
+
+    str = std::string(reinterpret_cast<char *> (&dataVolt), sizeof(dataVolt));
+
+    sensorsEngine_1->setVoltageRegulatorsSensorsData(str);
+
 }

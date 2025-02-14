@@ -3,7 +3,8 @@
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
-    sensors(new EngineSensors::EngineSensors),
+    engineSensors(new EngineSensors::EngineSensors),
+    voltageRegulatorsSensors(new VoltageRegulators::VoltageRegulators),
     vibrationDirection(new VibrationDirection(this))
 {
     setLayout(mainLayout);
@@ -12,28 +13,29 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     mainLayout->addWidget(vibrationDirection);
     vibrationDirection->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-    // Затем добавляем остальные виджеты сенсоров
-    for (auto &it : EngineSensors::orderedNames)
-        addWidgets(it);
-
     mainLayout->addStretch();
 }
 
 void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
-    sensors->setData(data);
+    engineSensors->setData(data);
 
     for (auto &it : EngineSensors::orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(sensors->getSensorsData()[it.data()]));
-        checkRangeValues(sensorsDataLabels[it.data()], sensors->getSensorsData()[it.data()], sensors->getSensorsDataLimits()->sensorsDataLimits[it.data()]);
+        sensorsDataLabels[it.data()]->setText(QString::number(engineSensors->getSensorsData()[it.data()]));
+        checkRangeValues(sensorsDataLabels[it.data()], engineSensors->getSensorsData()[it.data()], (*sensorsDataLimits)[it.data()]);
     }
 
-    vibrationDirection->update(sensors->getSensorsData()["Амплитуда биения"] / 1000, sensors->getSensorsData()["Угол биения"]);
+    vibrationDirection->update(engineSensors->getSensorsData()["Амплитуда биения"] / 1000, engineSensors->getSensorsData()["Угол биения"]);
 }
 
-void DisplayingSensors::setSensorsDataLimits(EngineSensors::Limits *newSensorsDataLimits)
+void DisplayingSensors::setVoltageRegulatorsSensorsData(std::string_view data)
 {
-    sensors->setSensorsDataLimits(newSensorsDataLimits);
+    voltageRegulatorsSensors->setData(data);
+
+    for (auto &it : VoltageRegulators::orderedNames) {
+        sensorsDataLabels[it.data()]->setText(QString::number(voltageRegulatorsSensors->getSensorsData()[it.data()], 'f', 1));
+        checkRangeValues(sensorsDataLabels[it.data()], voltageRegulatorsSensors->getSensorsData()[it.data()], (*sensorsDataLimits)[it.data()]);
+    }
 }
 
 void DisplayingSensors::addWidgets(std::string_view name)
@@ -47,7 +49,8 @@ void DisplayingSensors::addWidgets(std::string_view name)
 
     row->addWidget(labelName);
     row->addWidget(labelVal);
-    mainLayout->insertLayout(mainLayout->count(), row);
+
+    mainLayout->insertLayout(mainLayout->count() - 1, row);
 }
 
 void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)
@@ -56,4 +59,15 @@ void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)
         lbl->setStyleSheet("QLabel { color: red; }");
     else
         lbl->setStyleSheet("background: transparent;");
+}
+
+void DisplayingSensors::setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits)
+{
+    sensorsDataLimits = newSensorsDataLimits;
+}
+
+void DisplayingSensors::addNewDataLabels(std::vector<SensorName> &list)
+{
+    for (auto &it : list)
+        addWidgets(it);
 }

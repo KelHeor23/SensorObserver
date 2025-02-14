@@ -3,11 +3,12 @@
 #include "QHBoxLayout"
 #include "qdebug.h"
 
-ListOfLimits::ListOfLimits(EngineSensors::Limits *lim, QWidget *parent)
+ListOfLimits::ListOfLimits(QWidget *parent)
     : QWidget(parent),
-    mainLayout(new QVBoxLayout),
-    limits{lim}
+    mainLayout(new QVBoxLayout)
 {
+    sensorsDataLimits = std::make_shared<HashLimits>();
+
     setLayout(mainLayout);
 
     QHBoxLayout *headerLayout = new QHBoxLayout(this);
@@ -17,13 +18,10 @@ ListOfLimits::ListOfLimits(EngineSensors::Limits *lim, QWidget *parent)
 
     mainLayout->addLayout(headerLayout);
 
-    for (auto &it : EngineSensors::orderedNames)
-        addWidgets(it);
-
     mainLayout->addStretch();
 }
 
-void ListOfLimits::addWidgets(std::string_view nameSensor)
+void ListOfLimits::addWidget(std::string_view nameSensor)
 {
     QHBoxLayout *row = new QHBoxLayout(this);
     QLabel *name = new QLabel(nameSensor.data());
@@ -43,7 +41,7 @@ void ListOfLimits::addWidgets(std::string_view nameSensor)
     }
     max->setMaximumHeight(30);
 
-    SensorLimits &node = limits->sensorsDataLimits[nameSensor.data()];
+    SensorLimits &node = (*sensorsDataLimits)[nameSensor.data()];
 
     connect(min, &QTextEdit::textChanged, this, [this, &node, min]() {
         bool ok;
@@ -69,5 +67,16 @@ void ListOfLimits::addWidgets(std::string_view nameSensor)
     row->addWidget(min);
     row->addWidget(max);
 
-    mainLayout->addLayout(row);
+    mainLayout->insertLayout(mainLayout->count() - 1, row);
+}
+
+void ListOfLimits::addNewLimits(std::vector<SensorName> &list)
+{
+    for (auto &it : list)
+        addWidget(it);
+}
+
+std::shared_ptr<HashLimits> ListOfLimits::getSensorsDataLimits() const
+{
+    return sensorsDataLimits;
 }

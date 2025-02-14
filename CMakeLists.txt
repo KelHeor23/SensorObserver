@@ -42,6 +42,7 @@ else()
             Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
             Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
             Exchange/Protocols/Sensors.h
+            Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
 
         )
     endif()

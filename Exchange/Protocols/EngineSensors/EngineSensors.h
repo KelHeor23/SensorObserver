@@ -7,22 +7,10 @@
 #include "../Sensors.h"
 
 namespace EngineSensors {
-
 namespace {
-    std::vector<std::string> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+    std::vector<SensorName> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
 };
-
-
-class Limits {
-public:
-    Limits();
-
-    std::unordered_map<std::string, SensorLimits> sensorsDataLimits;
-};
-
-class EngineSensors
-{
-    #pragma pack(push, 1) // Отключаем выравнивание
+#pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
         uint32_t    canID;              // 0x1FF1200-0x1FF1207 (Младший бит - номер двигателя)
         uint16_t    speed;              // Обороты двигателя (0 - 65535), обор/м
@@ -30,22 +18,21 @@ class EngineSensors
         uint16_t    runoutAngle;        // Угол биения относительно метки на двигателе (0-359), градусы
         uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
     };
-    #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
+#pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
+class EngineSensors
+{
 public:
     EngineSensors();
 
     void setData(std::string_view data);
 
-    void setSensorsDataLimits(Limits *newSensorsDataLimits);
+    std::unordered_map<SensorName, int> getSensorsData() const;
 
-    std::unordered_map<std::string, int> getSensorsData() const;
 
-    Limits *getSensorsDataLimits() const;
 
 private:
-    Limits *sensorsDataLimits;
-    std::unordered_map<std::string, int> sensorsData;
+    std::unordered_map<SensorName, int> sensorsData;
 };
 };
 

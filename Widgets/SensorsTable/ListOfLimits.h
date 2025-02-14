@@ -7,20 +7,27 @@
 #include <QTextEdit>
 #include <QPushButton>
 
-#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
+#include "../../Exchange/Protocols/Sensors.h"
+
+using HashLimits = std::unordered_map<SensorName, SensorLimits>;
 
 class ListOfLimits : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ListOfLimits(EngineSensors::Limits *limits, QWidget *parent = nullptr);
+    explicit ListOfLimits(QWidget *parent = nullptr);
+
+    std::shared_ptr<HashLimits> getSensorsDataLimits() const;
 
 public slots:
-    void addWidgets(std::string_view);
+    void addWidget(std::string_view);
+
+    void addNewLimits(std::vector<SensorName> &list);
 
 private:
     QVBoxLayout *mainLayout;
-    EngineSensors::Limits *limits;
+
+    std::shared_ptr<HashLimits> sensorsDataLimits;
 };
 
 #endif // LISTOFLIMITS_H

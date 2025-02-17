@@ -58,6 +58,11 @@ void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)
         lbl->setStyleSheet("background: transparent;");
 }
 
+EngineSensors::EngineSensors *DisplayingSensors::getEngineSensors() const
+{
+    return engineSensors;
+}
+
 void DisplayingSensors::setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits)
 {
     sensorsDataLimits = newSensorsDataLimits;

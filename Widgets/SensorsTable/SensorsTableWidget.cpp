@@ -101,6 +101,46 @@ void SensorsTableWidget::fillSensorsEngines()
 
     sensorsEngine_4->setEngineSensorsData(str);
 
+    data.canID = 2;
+    data.speed = rand() % (65536);
+    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
+    data.runoutAngle = rand() % (360);
+    data.runoutAmplitude = rand() % (65536);
+
+    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
+
+    sensorsEngine_5->setEngineSensorsData(str);
+
+    data.canID = 2;
+    data.speed = rand() % (65536);
+    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
+    data.runoutAngle = rand() % (360);
+    data.runoutAmplitude = rand() % (65536);
+
+    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
+
+    sensorsEngine_6->setEngineSensorsData(str);
+
+    data.canID = 2;
+    data.speed = rand() % (65536);
+    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
+    data.runoutAngle = rand() % (360);
+    data.runoutAmplitude = rand() % (65536);
+
+    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
+
+    sensorsEngine_7->setEngineSensorsData(str);
+
+    data.canID = 2;
+    data.speed = rand() % (65536);
+    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
+    data.runoutAngle = rand() % (360);
+    data.runoutAmplitude = rand() % (65536);
+
+    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
+
+    sensorsEngine_8->setEngineSensorsData(str);
+
     VoltageRegulators::VoltageRegulatorsData dataVolt;
 
     dataVolt.inputVoltageHP = 0xFF;     // Входное напряжение (0-4095), старшая часть, вольт
@@ -114,6 +154,11 @@ void SensorsTableWidget::fillSensorsEngines()
     str = std::string(reinterpret_cast<char *> (&dataVolt), sizeof(dataVolt));
 
     sensorsEngine_1->setVoltageRegulatorsSensorsData(str);
+
+    vibrationDirection_1->update(sensorsEngine_1->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_1->getEngineSensors()->getSensorsData()["Угол биения"]);
+    vibrationDirection_2->update(sensorsEngine_3->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_3->getEngineSensors()->getSensorsData()["Угол биения"]);
+    vibrationDirection_3->update(sensorsEngine_5->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_5->getEngineSensors()->getSensorsData()["Угол биения"]);
+    vibrationDirection_4->update(sensorsEngine_7->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_7->getEngineSensors()->getSensorsData()["Угол биения"]);
 }
 
 void SensorsTableWidget::limitsVisual()

@@ -21,6 +21,8 @@ public:
     void setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits);
     void addNewDataLabels(std::vector<SensorName> &list);
 
+    EngineSensors::EngineSensors *getEngineSensors() const;
+
 public slots:
     void addWidgets(std::string_view);
     void checkRangeValues(QLabel *, int val, SensorLimits lim);

@@ -7,7 +7,6 @@
 #include <QPushButton>
 
 #include "ListOfLimits.h"
-#include "VibrationDirection.h"
 #include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
 #include "../../Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
 
@@ -22,6 +21,8 @@ public:
     void setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits);
     void addNewDataLabels(std::vector<SensorName> &list);
 
+    EngineSensors::EngineSensors *getEngineSensors() const;
+
 public slots:
     void addWidgets(std::string_view);
     void checkRangeValues(QLabel *, int val, SensorLimits lim);
@@ -29,8 +30,7 @@ public slots:
 private:    
     QVBoxLayout *mainLayout;
     EngineSensors::EngineSensors *engineSensors;
-    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;
-    VibrationDirection *vibrationDirection;
+    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;    
     QMap<QString, QLabel *> sensorsDataLabels;
 
     std::shared_ptr<HashLimits> sensorsDataLimits;

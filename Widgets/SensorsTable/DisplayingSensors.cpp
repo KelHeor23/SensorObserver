@@ -7,7 +7,6 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     voltageRegulatorsSensors(new VoltageRegulators::VoltageRegulators)
 {
     setLayout(mainLayout);
-    mainLayout->setContentsMargins(0, 10, 0, 50);
     mainLayout->addStretch();
 }
 
@@ -52,10 +51,22 @@ void DisplayingSensors::addWidgets(std::string_view name)
 
 void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)
 {
-    if (lim.min < lim.max && (val < lim.min || val > lim.max))
-        lbl->setStyleSheet("QLabel { color: red; }");
-    else
-        lbl->setStyleSheet("background: transparent;");
+    QPalette palette = lbl->palette();
+    if (lim.min < lim.max) {
+        double threshold = 0.15 * (lim.max - lim.min);
+        if (val < lim.min || val > lim.max)
+            palette.setColor(QPalette::Window, Qt::red);
+            //lbl->setStyleSheet("background-color:: red; }");
+        else if (val <= lim.min + threshold || val >= lim.max - threshold) {
+            //lbl->setStyleSheet("background-color:: yellow; }");
+            palette.setColor(QPalette::Window, Qt::yellow);
+        }
+        else
+            palette.setColor(QPalette::Window, Qt::transparent);
+            //lbl->setStyleSheet("background: transparent;");
+    }
+    lbl->setPalette(palette);
+    lbl->setAutoFillBackground(true); // Включаем перерисовку фона
 }
 
 EngineSensors::EngineSensors *DisplayingSensors::getEngineSensors() const

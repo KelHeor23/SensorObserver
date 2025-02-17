@@ -7,7 +7,6 @@
 #include <QPushButton>
 
 #include "ListOfLimits.h"
-#include "VibrationDirection.h"
 #include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
 #include "../../Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
 
@@ -29,8 +28,7 @@ public slots:
 private:    
     QVBoxLayout *mainLayout;
     EngineSensors::EngineSensors *engineSensors;
-    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;
-    VibrationDirection *vibrationDirection;
+    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;    
     QMap<QString, QLabel *> sensorsDataLabels;
 
     std::shared_ptr<HashLimits> sensorsDataLimits;

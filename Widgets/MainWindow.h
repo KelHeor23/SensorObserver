@@ -4,9 +4,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QHBoxLayout>
 
-#include "SensorsTable/ListOfLimits.h"
-#include "SensorsTable/DisplayingSensors.h"
-#include "../Exchange/Client.h"
+#include "SensorsTable/SensorsTableWidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -14,19 +12,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
 
-    void fillSensorsEngines();
-signals:
-
 private:
-    QHBoxLayout *hBoxLayout;
-    ListOfLimits *listOfLimits;
-    DisplayingSensors *sensorsEngine_1;
-    DisplayingSensors *sensorsEngine_2;
-    DisplayingSensors *sensorsEngine_3;
-    DisplayingSensors *sensorsEngine_4;
-    Client *client;
-
-    QTimer *timer; // тестовая
+    SensorsTableWidget *sensorsTableWdg;
 };
 
 #endif // MAINWINDOW_H

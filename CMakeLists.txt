@@ -43,6 +43,7 @@ else()
             Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
             Exchange/Protocols/Sensors.h
             Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
+            Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
 
         )
     endif()

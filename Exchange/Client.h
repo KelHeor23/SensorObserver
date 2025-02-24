@@ -19,6 +19,9 @@ public slots:
     void disconnected();
     void readData();
 
+signals:
+    void engineSensorsDataSent(const QByteArray& data);
+
 private:
     QTcpSocket *socket;
     QTimer *reconnectTimer;

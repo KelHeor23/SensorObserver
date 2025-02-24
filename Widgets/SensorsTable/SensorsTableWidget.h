@@ -19,7 +19,8 @@ private:
     void limitsVisual();
     void engineSensorsVisual();
 
-signals:
+public slots:
+    void readEngineSensorsData(const QByteArray& data);
 
 private:
     QHBoxLayout *mainHBoxLt;

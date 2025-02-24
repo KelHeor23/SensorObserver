@@ -44,6 +44,8 @@ else()
             Exchange/Protocols/Sensors.h
             Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
             Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
+            Common/Common.h
+
 
         )
     endif()

@@ -1,4 +1,8 @@
 #include "SensorsTableWidget.h"
+#include <iostream>
+#include <ostream>
+
+#include "../../Common/Common.h"
 
 SensorsTableWidget::SensorsTableWidget(QWidget *parent)
     : QWidget{parent},
@@ -55,92 +59,12 @@ SensorsTableWidget::SensorsTableWidget(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &SensorsTableWidget::fillSensorsEngines);
     timer->start(1000); // Запускаем таймер на интервал 5 секунд
+
+    connect(client, SIGNAL(engineSensorsDataSent(QByteArray)), this, SLOT(readEngineSensorsData(QByteArray)));
 }
 
 void SensorsTableWidget::fillSensorsEngines()
 {
-    EngineSensors::EngineSensorsData data;
-
-    data.canID = 1;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    std::string str(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_1->setEngineSensorsData(str);
-
-    data.canID = 2;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_2->setEngineSensorsData(str);
-
-    data.canID = 3;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_3->setEngineSensorsData(str);
-
-    data.canID = 4;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_4->setEngineSensorsData(str);
-
-    data.canID = 2;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_5->setEngineSensorsData(str);
-
-    data.canID = 2;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_6->setEngineSensorsData(str);
-
-    data.canID = 2;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_7->setEngineSensorsData(str);
-
-    data.canID = 2;
-    data.speed = rand() % (65536);
-    data.temperature = static_cast<int8_t>(rand() % (256) - 128);
-    data.runoutAngle = rand() % (360);
-    data.runoutAmplitude = rand() % (65536);
-
-    str = std::string(reinterpret_cast<char *> (&data), sizeof(data));
-
-    sensorsEngine_8->setEngineSensorsData(str);
-
     VoltageRegulators::VoltageRegulatorsData dataVolt;
 
     dataVolt.inputVoltageHP = 0xFF;     // Входное напряжение (0-4095), старшая часть, вольт
@@ -151,7 +75,7 @@ void SensorsTableWidget::fillSensorsEngines()
     dataVolt.averageVoltageB = 1;    // Среднее напряжение на фазе B (0-255), вольты/10
     dataVolt.averageVoltageC = 1;    // Среднее напряжение на фазе C (0-255), вольты/10
 
-    str = std::string(reinterpret_cast<char *> (&dataVolt), sizeof(dataVolt));
+    std::string str = std::string(reinterpret_cast<char *> (&dataVolt), sizeof(dataVolt));
 
     sensorsEngine_1->setVoltageRegulatorsSensorsData(str);
 
@@ -220,4 +144,41 @@ void SensorsTableWidget::engineSensorsVisual()
     engineSensorsHBLt->addWidget(sensorsEngine_8);
     engineVBoxLt_4->addLayout(engineSensorsHBLt);
     mainHBoxLt->addLayout(engineVBoxLt_4);
+}
+
+void SensorsTableWidget::readEngineSensorsData(const QByteArray& message)
+{
+
+    if (message.length() < 4) {
+        // Обработка ошибки: данных недостаточно
+        std::cerr << "Error: Not enough data." << std::endl;
+        return;
+    }
+
+    int chunkSize = 11;
+
+    for (int i = 0; i < message.size(); i += chunkSize) {
+        int end = std::min(i + chunkSize, message.size()); // Не выходим за пределы массива
+        QByteArray chunk = message.mid(i, end - i); // Вырезаем кусок
+
+        uint32_t value = (static_cast<uint32_t>(chunk[0]) << 24) |
+                         (static_cast<uint32_t>(chunk[1]) << 16) |
+                         (static_cast<uint32_t>(chunk[2]) << 8) |
+                         static_cast<uint32_t>(chunk[3]);
+
+        value = swapEndianness(value);
+
+        std::string_view sv(chunk.constData() , chunk.size());
+
+        switch (value) {
+        case 0: sensorsEngine_1->setEngineSensorsData(sv); break;
+        case 1: sensorsEngine_2->setEngineSensorsData(sv); break;
+        case 2: sensorsEngine_3->setEngineSensorsData(sv); break;
+        case 3: sensorsEngine_4->setEngineSensorsData(sv); break;
+        case 4: sensorsEngine_5->setEngineSensorsData(sv); break;
+        case 5: sensorsEngine_6->setEngineSensorsData(sv); break;
+        case 6: sensorsEngine_7->setEngineSensorsData(sv); break;
+        case 7: sensorsEngine_8->setEngineSensorsData(sv); break;
+        };
+    }
 }

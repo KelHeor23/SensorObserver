@@ -55,4 +55,6 @@ void Client::readData()
     QByteArray data = socket->readAll();
     buffer.append(data); // Записать данные в буфер
     qDebug() << "Received data: " << data;
+
+    emit engineSensorsDataSent(data);
 }

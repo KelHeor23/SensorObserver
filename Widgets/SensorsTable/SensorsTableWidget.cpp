@@ -150,6 +150,22 @@ void SensorsTableWidget::readEngineSensorsMsg(int num, const QByteArray &data)
     };
 }
 
+void SensorsTableWidget::readVoltageRegulatorsMsg(int num, const QByteArray &data)
+{
+    std::string_view sv(data.constData() , data.size());
+
+    switch (num) {
+    case 0: sensorsEngine_1->setVoltageRegulatorsSensorsData(sv); break;
+    case 1: sensorsEngine_2->setVoltageRegulatorsSensorsData(sv); break;
+    case 2: sensorsEngine_3->setVoltageRegulatorsSensorsData(sv); break;
+    case 3: sensorsEngine_4->setVoltageRegulatorsSensorsData(sv); break;
+    case 4: sensorsEngine_5->setVoltageRegulatorsSensorsData(sv); break;
+    case 5: sensorsEngine_6->setVoltageRegulatorsSensorsData(sv); break;
+    case 6: sensorsEngine_7->setVoltageRegulatorsSensorsData(sv); break;
+    case 7: sensorsEngine_8->setVoltageRegulatorsSensorsData(sv); break;
+    };
+}
+
 void SensorsTableWidget::parseMsg(const QByteArray& message)
 {
     if (message.length() < 4) {
@@ -174,6 +190,7 @@ void SensorsTableWidget::parseMsg(const QByteArray& message)
             it += sizeof(EngineSensors::EngineSensorsData);
             break;
         case Protocol_numbers::VOLTAGE_REGULATORS:
+            readVoltageRegulatorsMsg(value & 0b111, message.mid(it, sizeof(VoltageRegulators::VoltageRegulatorsData)));
             it += sizeof(VoltageRegulators::VoltageRegulatorsData);
             break;
         default:

@@ -18,6 +18,7 @@ private:
     void limitsVisual();
     void engineSensorsVisual();
     void readEngineSensorsMsg(int num, const QByteArray& data);
+    void readVoltageRegulatorsMsg(int num, const QByteArray& data);
 
 public slots:
     void parseMsg(const QByteArray& data);

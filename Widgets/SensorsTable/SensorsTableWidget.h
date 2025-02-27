@@ -17,8 +17,8 @@ public:
 private:
     void limitsVisual();
     void engineSensorsVisual();
-    void readEngineSensorsMsg(int num, const QByteArray& data);
-    void readVoltageRegulatorsMsg(int num, const QByteArray& data);
+    void readEngineSensorsMsg(uint8_t num, const QByteArray& data);
+    void readVoltageRegulatorsMsg(uint8_t num, const QByteArray& data);
 
 public slots:
     void parseMsg(const QByteArray& data);
@@ -26,19 +26,9 @@ public slots:
 private:
     QHBoxLayout *mainHBoxLt;
     ListOfLimits *listOfLimits;
-    VibrationDirection *vibrationDirection_1;
-    VibrationDirection *vibrationDirection_2;
-    VibrationDirection *vibrationDirection_3;
-    VibrationDirection *vibrationDirection_4;
 
-    DisplayingSensors *sensorsEngine_1;
-    DisplayingSensors *sensorsEngine_2;
-    DisplayingSensors *sensorsEngine_3;
-    DisplayingSensors *sensorsEngine_4;
-    DisplayingSensors *sensorsEngine_5;
-    DisplayingSensors *sensorsEngine_6;
-    DisplayingSensors *sensorsEngine_7;
-    DisplayingSensors *sensorsEngine_8;
+    QVector<VibrationDirection *> vibrationDirections;
+    QVector<DisplayingSensors *> displayngSensors;
 
     Client *client;
 };

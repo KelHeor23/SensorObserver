@@ -14,13 +14,13 @@ class SensorsTableWidget : public QWidget
 public:
     explicit SensorsTableWidget(QWidget *parent = nullptr);
 
-    void fillSensorsEngines();
 private:
     void limitsVisual();
     void engineSensorsVisual();
+    void readEngineSensorsMsg(int num, const QByteArray& data);
 
 public slots:
-    void readEngineSensorsData(const QByteArray& data);
+    void parseMsg(const QByteArray& data);
 
 private:
     QHBoxLayout *mainHBoxLt;
@@ -40,8 +40,6 @@ private:
     DisplayingSensors *sensorsEngine_8;
 
     Client *client;
-
-    QTimer *timer; // тестовая
 };
 
 #endif // SENSORSTABLEWIDGET_H

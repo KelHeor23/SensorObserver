@@ -3,6 +3,8 @@
 #include <ostream>
 
 #include "../../Common/Common.h"
+#include "../../Exchange/Protocols/Constants.h"
+#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
 
 SensorsTableWidget::SensorsTableWidget(QWidget *parent)
     : QWidget{parent},
@@ -56,33 +58,7 @@ SensorsTableWidget::SensorsTableWidget(QWidget *parent)
     sensorsEngine_7->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
     sensorsEngine_8->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
 
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &SensorsTableWidget::fillSensorsEngines);
-    timer->start(1000); // Запускаем таймер на интервал 5 секунд
-
-    connect(client, SIGNAL(engineSensorsDataSent(QByteArray)), this, SLOT(readEngineSensorsData(QByteArray)));
-}
-
-void SensorsTableWidget::fillSensorsEngines()
-{
-    VoltageRegulators::VoltageRegulatorsData dataVolt;
-
-    dataVolt.inputVoltageHP = 0xFF;     // Входное напряжение (0-4095), старшая часть, вольт
-    dataVolt.inputVoltageLP = 0x00000001;     // Входное напряжение младшая часть, последние 4 бита - Входное напряжение (0-9), сотни мили-вольт
-    dataVolt.electricCurrent = 100;    // Ток (0 - 255), ампер
-    dataVolt.controlPWM = 101;         // Управляющий ШИМ, (0-2000), микро-секунды
-    dataVolt.averageVoltageA = 1;    // Среднее напряжение на фазе A (0-255), вольты/10
-    dataVolt.averageVoltageB = 1;    // Среднее напряжение на фазе B (0-255), вольты/10
-    dataVolt.averageVoltageC = 1;    // Среднее напряжение на фазе C (0-255), вольты/10
-
-    std::string str = std::string(reinterpret_cast<char *> (&dataVolt), sizeof(dataVolt));
-
-    sensorsEngine_1->setVoltageRegulatorsSensorsData(str);
-
-    vibrationDirection_1->update(sensorsEngine_1->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_1->getEngineSensors()->getSensorsData()["Угол биения"]);
-    vibrationDirection_2->update(sensorsEngine_3->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_3->getEngineSensors()->getSensorsData()["Угол биения"]);
-    vibrationDirection_3->update(sensorsEngine_5->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_5->getEngineSensors()->getSensorsData()["Угол биения"]);
-    vibrationDirection_4->update(sensorsEngine_7->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_7->getEngineSensors()->getSensorsData()["Угол биения"]);
+    connect(client, SIGNAL(engineSensorsDataSent(QByteArray)), this, SLOT(parseMsg(QByteArray)));
 }
 
 void SensorsTableWidget::limitsVisual()
@@ -146,39 +122,63 @@ void SensorsTableWidget::engineSensorsVisual()
     mainHBoxLt->addLayout(engineVBoxLt_4);
 }
 
-void SensorsTableWidget::readEngineSensorsData(const QByteArray& message)
+void SensorsTableWidget::readEngineSensorsMsg(int num, const QByteArray &data)
 {
+    std::string_view sv(data.constData() , data.size());
 
+    switch (num) {
+    case 0:
+        sensorsEngine_1->setEngineSensorsData(sv);
+        vibrationDirection_1->update(sensorsEngine_1->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_1->getEngineSensors()->getSensorsData()["Угол биения"]);
+        break;
+    case 1: sensorsEngine_2->setEngineSensorsData(sv); break;
+    case 2:
+        sensorsEngine_3->setEngineSensorsData(sv);
+        vibrationDirection_2->update(sensorsEngine_3->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_3->getEngineSensors()->getSensorsData()["Угол биения"]);
+        break;
+    case 3: sensorsEngine_4->setEngineSensorsData(sv); break;
+    case 4:
+        sensorsEngine_5->setEngineSensorsData(sv);
+        vibrationDirection_3->update(sensorsEngine_5->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_5->getEngineSensors()->getSensorsData()["Угол биения"]);
+        break;
+    case 5: sensorsEngine_6->setEngineSensorsData(sv); break;
+    case 6:
+        sensorsEngine_7->setEngineSensorsData(sv);
+        vibrationDirection_4->update(sensorsEngine_7->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, sensorsEngine_7->getEngineSensors()->getSensorsData()["Угол биения"]);
+        break;
+    case 7: sensorsEngine_8->setEngineSensorsData(sv); break;
+    };
+}
+
+void SensorsTableWidget::parseMsg(const QByteArray& message)
+{
     if (message.length() < 4) {
         // Обработка ошибки: данных недостаточно
         std::cerr << "Error: Not enough data." << std::endl;
         return;
     }
 
-    int chunkSize = 11;
-
-    for (int i = 0; i < message.size(); i += chunkSize) {
-        int end = std::min(i + chunkSize, message.size()); // Не выходим за пределы массива
-        QByteArray chunk = message.mid(i, end - i); // Вырезаем кусок
-
-        uint32_t value = (static_cast<uint32_t>(chunk[0]) << 24) |
-                         (static_cast<uint32_t>(chunk[1]) << 16) |
-                         (static_cast<uint32_t>(chunk[2]) << 8) |
-                         static_cast<uint32_t>(chunk[3]);
+    int it = 0;
+    while (it + 4 < message.size()) { // первые четыре байта в каждом сообщении зарезервивона по дидентефикатор
+        // Считываем первые 4 байта
+        uint32_t value = (static_cast<uint32_t>(static_cast<unsigned char>(message[0])) << 24 |
+                         static_cast<uint32_t>(static_cast<unsigned char>(message[1])) << 16 |
+                         static_cast<uint32_t>(static_cast<unsigned char>(message[2])) << 8  |
+                         static_cast<uint32_t>(static_cast<unsigned char>(message[3])));
 
         value = swapEndianness(value);
 
-        std::string_view sv(chunk.constData() , chunk.size());
-
-        switch (value) {
-        case 0: sensorsEngine_1->setEngineSensorsData(sv); break;
-        case 1: sensorsEngine_2->setEngineSensorsData(sv); break;
-        case 2: sensorsEngine_3->setEngineSensorsData(sv); break;
-        case 3: sensorsEngine_4->setEngineSensorsData(sv); break;
-        case 4: sensorsEngine_5->setEngineSensorsData(sv); break;
-        case 5: sensorsEngine_6->setEngineSensorsData(sv); break;
-        case 6: sensorsEngine_7->setEngineSensorsData(sv); break;
-        case 7: sensorsEngine_8->setEngineSensorsData(sv); break;
+        switch (value & ~0b111) {
+        case Protocol_numbers::ENGINE_SENSORS:
+            readEngineSensorsMsg(value & 0b111, message.mid(it, sizeof(EngineSensors::EngineSensorsData)));
+            it += sizeof(EngineSensors::EngineSensorsData);
+            break;
+        case Protocol_numbers::VOLTAGE_REGULATORS:
+            it += sizeof(VoltageRegulators::VoltageRegulatorsData);
+            break;
+        default:
+            qDebug() << "Ошибка чтения пакета данных";
+            return;
         };
     }
 }

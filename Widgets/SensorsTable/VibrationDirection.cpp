@@ -32,8 +32,8 @@ void VibrationDirection::update(int len, int degree)
     double angleRadians = degree * M_PI / 180.0;
 
     // Расчет координат
-    int x = len * std::cos(angleRadians);
-    int y = len * std::sin(angleRadians);
+    int x = len * std::cos(angleRadians) - 5;
+    int y = len * std::sin(angleRadians) - 5;
 
     circle = new QGraphicsEllipseItem(x, y, 10, 10);
 

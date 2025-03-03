@@ -81,8 +81,8 @@ void SensorsTableWidget::readEngineSensorsMsg(uint8_t num, const QByteArray &dat
 
     displayngSensors[num]->setEngineSensorsData(sv);
 
-    if (num % 2 == 1) {
-        vibrationDirections[(num + 1) / 2]->update(displayngSensors[num]->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, displayngSensors[num]->getEngineSensors()->getSensorsData()["Угол биения"]);
+    if (num % 2 == 0) {
+        vibrationDirections[num / 2]->update(displayngSensors[num]->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, displayngSensors[num]->getEngineSensors()->getSensorsData()["Угол биения"]);
     }
 }
 

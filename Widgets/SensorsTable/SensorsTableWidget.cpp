@@ -10,6 +10,7 @@ SensorsTableWidget::SensorsTableWidget(QWidget *parent)
     : QWidget{parent},
     mainHBoxLt(new QHBoxLayout(this)),
     listOfLimits(new ListOfLimits(this)),
+    placeholderWidget(new QWidget(this)),
     client(new Client(this))
 {
     setLayout(mainHBoxLt);
@@ -36,9 +37,6 @@ SensorsTableWidget::SensorsTableWidget(QWidget *parent)
 
 void SensorsTableWidget::limitsVisual()
 {
-    // Создаем пустой виджет:
-    QWidget *placeholderWidget = new QWidget(this);
-
     QVBoxLayout *limitsVBox = new QVBoxLayout(this);
     limitsVBox->addWidget(placeholderWidget);
     limitsVBox->addWidget(listOfLimits);
@@ -135,4 +133,10 @@ void SensorsTableWidget::parseMsg(const QByteArray& message)
             return;
         };
     }
+}
+
+void SensorsTableWidget::toggleLimitsVisibility()
+{
+    placeholderWidget->setVisible(!placeholderWidget->isVisible());
+    listOfLimits->setVisible(!listOfLimits->isVisible());
 }

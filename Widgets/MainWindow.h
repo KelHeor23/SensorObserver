@@ -13,6 +13,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
 private:
+    void close();
+    void openListOfLimits();
+
+private:
     SensorsTableWidget *sensorsTableWdg;
 };
 

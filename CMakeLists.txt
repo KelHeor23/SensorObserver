@@ -46,6 +46,7 @@ else()
             Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
             Common/Common.h
             Exchange/Protocols/Constants.h
+            Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
 
 
         )

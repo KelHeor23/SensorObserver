@@ -52,6 +52,7 @@ else()
             Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
             Exchange/Protocols/Base.h
             Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
+            Exchange/Protocols/Frames.h Exchange/Protocols/Frames.cpp
         )
     endif()
 endif()

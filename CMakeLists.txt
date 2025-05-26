@@ -50,11 +50,13 @@ else()
             Exchange/Protocols/EscSensors/Frames.h
             Exchange/Protocols/EscSensors/EscSensors.h Exchange/Protocols/EscSensors/EscSensors.cpp
             Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
+            Exchange/Protocols/Base.h
         )
     endif()
 endif()
 
 target_link_libraries(SensorObserver PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
+target_include_directories(SensorObserver PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

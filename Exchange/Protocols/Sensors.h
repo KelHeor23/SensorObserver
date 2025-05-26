@@ -5,11 +5,6 @@
 
 using SensorName = std::string;
 
-struct NameSensor {
-    size_t orderNum;
-    SensorName name;
-};
-
 struct SensorLimits {
     int min = 0;
     int max = 0;

@@ -9,6 +9,7 @@
 #include "ListOfLimits.h"
 #include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
 #include "../../Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
+#include "../../Exchange/Protocols/EscSensors/EscSensors.h"
 
 class DisplayingSensors : public QWidget
 {
@@ -19,6 +20,7 @@ public:
     void setEngineSensorsData(std::string_view data);
     void setVoltageRegulatorsSensorsData(std::string_view data);
     void setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits);
+    void setEscSensors(uint16_t frame_id, std::string_view data);
     void addNewDataLabels(std::vector<SensorName> &list);
 
     EngineSensors::EngineSensors *getEngineSensors() const;
@@ -30,7 +32,8 @@ public slots:
 private:    
     QVBoxLayout *mainLayout;
     EngineSensors::EngineSensors *engineSensors;
-    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;    
+    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;
+    EscSensors::EscSensors *escSensors;
     QMap<QString, QLabel *> sensorsDataLabels;
 
     std::shared_ptr<HashLimits> sensorsDataLimits;

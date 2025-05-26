@@ -4,7 +4,8 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent),
     mainLayout(new QVBoxLayout(this)),
     engineSensors(new EngineSensors::EngineSensors),
-    voltageRegulatorsSensors(new VoltageRegulators::VoltageRegulators)
+    voltageRegulatorsSensors(new VoltageRegulators::VoltageRegulators),
+    escSensors(new EscSensors::EscSensors)
 {
     setLayout(mainLayout);
     mainLayout->addStretch();
@@ -77,6 +78,16 @@ EngineSensors::EngineSensors *DisplayingSensors::getEngineSensors() const
 void DisplayingSensors::setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits)
 {
     sensorsDataLimits = newSensorsDataLimits;
+}
+
+void DisplayingSensors::setEscSensors(uint16_t frame_id, std::string_view data)
+{
+    escSensors->setData(frame_id, data);
+
+    for (auto &it : EscSensors::orderedNames) {
+        sensorsDataLabels[it.data()]->setText(QString::number(escSensors->getSensorsData()[it.data()], 'f', 1));
+        checkRangeValues(sensorsDataLabels[it.data()], escSensors->getSensorsData()[it.data()], (*sensorsDataLimits)[it.data()]);
+    }
 }
 
 void DisplayingSensors::addNewDataLabels(std::vector<SensorName> &list)

@@ -1,5 +1,7 @@
 #include "Client.h"
 
+#include <QHostAddress>
+
 Client::Client(QObject *parent): QObject(parent)
 {
     socket = new QTcpSocket(this);
@@ -28,7 +30,7 @@ void Client::connectToServer()
         reconnectTimer->stop(); // Остановить таймер перед новой попыткой
     }
 
-    socket->connectToHost("localhost", 8001); // Замените на адрес и порт вашего сервера
+    socket->connectToHost(QHostAddress("192.168.1.102"), 8002); // Замените на адрес и порт вашего сервера
     if (socket->waitForConnected(1000)) {
         qDebug() << "Connected to server";
         reconnectTimer->stop(); // Остановить таймер, если подключение успешно

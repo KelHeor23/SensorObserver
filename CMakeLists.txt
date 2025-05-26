@@ -47,8 +47,8 @@ else()
             Common/Common.h
             Exchange/Protocols/Constants.h
             Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
-
-
+            Exchange/Protocols/EscSensors/Frames.h
+            Exchange/Protocols/EscSensors/EscSensors.h Exchange/Protocols/EscSensors/EscSensors.cpp
         )
     endif()
 endif()

@@ -49,6 +49,7 @@ else()
             Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
             Exchange/Protocols/EscSensors/Frames.h
             Exchange/Protocols/EscSensors/EscSensors.h Exchange/Protocols/EscSensors/EscSensors.cpp
+            Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
         )
     endif()
 endif()

@@ -5,7 +5,8 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-    sensorsTableWdg(new SensorsTableWidget(this))
+    sensorsTableWdgt(new SensorsTableWidget(this)),
+    listOfLimitsWdgt(new ListOfLimitsWidget(this))
 {
     QMenu *fileMenu = this->menuBar()->addMenu(tr("Файл"));
     QAction *closeAction = new QAction(tr("Закрыть"), this);
@@ -17,9 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     viewMenu->addAction(openListOfLimitsAction);
     connect(openListOfLimitsAction, &QAction::triggered, this, &MainWindow::openListOfLimits);
 
-    sensorsTableWdg->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QMenu *settingsMenu = menuBar()->addMenu(tr("Настройки"));
+    QAction *openLOLAction = new QAction(tr("Список сенсоров"), this);
+    settingsMenu->addAction(openLOLAction);
+    connect(openLOLAction, &QAction::triggered, this, &MainWindow::openListOfLimitsWdgt);
 
-    setCentralWidget(sensorsTableWdg); // Устанавливаем центральный виджет
+    sensorsTableWdgt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    setCentralWidget(sensorsTableWdgt); // Устанавливаем центральный виджет
 }
 
 void MainWindow::close()
@@ -29,5 +35,10 @@ void MainWindow::close()
 
 void MainWindow::openListOfLimits()
 {
-    sensorsTableWdg->toggleLimitsVisibility();
+    sensorsTableWdgt->toggleLimitsVisibility();
+}
+
+void MainWindow::openListOfLimitsWdgt()
+{
+    listOfLimitsWdgt->show();
 }

@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 
 #include "SensorsTable/SensorsTableWidget.h"
+#include "SensorsTable/ListOfLimitsWidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -15,9 +16,12 @@ public:
 private:
     void close();
     void openListOfLimits();
+    void openListOfLimitsWdgt();
 
 private:
-    SensorsTableWidget *sensorsTableWdg;
+    SensorsTableWidget *sensorsTableWdgt;
+    ListOfLimitsWidget *listOfLimitsWdgt;
+
 };
 
 #endif // MAINWINDOW_H

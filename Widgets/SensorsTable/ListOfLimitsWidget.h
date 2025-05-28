@@ -12,7 +12,7 @@ class ListOfLimitsWidget : public QWidget
 public:
     explicit ListOfLimitsWidget(QWidget *parent = nullptr);
 
-    void addNewFrame(BaseProtocol *frame);
+    void addNewFrame(std::shared_ptr<BaseProtocol> frame);
 signals:
 
 private:

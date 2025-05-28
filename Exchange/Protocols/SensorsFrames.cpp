@@ -1,14 +1,17 @@
 #include "SensorsFrames.h"
 
-SensorsFrames::SensorsFrames():
-    engineSensors(new EngineSensors::EngineSensors),
-    voltageRegulatorsSensors(new VoltageRegulators::VoltageRegulators),
-    escSensors(new EscSensors::EscSensors)
-{
+#include "EngineSensors/EngineSensors.h"
+#include "Exchange/Protocols/EscSensors/EscSensors.h"
+#include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
 
+SensorsFrames::SensorsFrames()
+{
+    frames.push_back(std::make_shared<EngineSensors::EngineSensors>());
+    frames.push_back(std::make_shared<VoltageRegulators::VoltageRegulators>());
+    frames.push_back(std::make_shared<EscSensors::EscSensors>());
 }
 
-EngineSensors::EngineSensors *SensorsFrames::getEngineSensors() const
+std::list<std::shared_ptr<BaseProtocol> > SensorsFrames::getFrames() const
 {
-    return engineSensors;
+    return frames;
 }

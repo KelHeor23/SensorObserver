@@ -1,16 +1,16 @@
 #include "ListOfLimitsWidget.h"
 
+#include <QLineEdit>
+
 #include "Tools/CollapsibleGroupBox.h"
-#include "qtextedit.h"
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
     : QWidget{parent}
     ,framesVBLt(new QVBoxLayout(this))
 {
-    setMinimumSize(300, 200);  // задайте минимальный размер
 }
 
-void ListOfLimitsWidget::addNewFrame(BaseProtocol *frame)
+void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 {
     CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox(this);
 
@@ -22,11 +22,10 @@ void ListOfLimitsWidget::addNewFrame(BaseProtocol *frame)
         QHBoxLayout *hBoxLt = new QHBoxLayout(frameGroupBox);
         hBoxLt->addWidget(new QLabel(it.data(), frameGroupBox));
         hBoxLt->addWidget(new QLabel("Min: ", frameGroupBox));
-        QTextEdit *minTxtEdt = new QTextEdit(frameGroupBox);
-        connect(minTxtEdt, &QTextEdit::textChanged, [minTxtEdt, &fieldData](){
+        QLineEdit *minTxtEdt = new QLineEdit(frameGroupBox);
+        connect(minTxtEdt, &QLineEdit::textChanged, [minTxtEdt, &fieldData](){
             bool ok = false;
-            QString text = minTxtEdt->toPlainText();
-            int value = text.toInt(&ok);
+            int value = minTxtEdt->text().toInt(&ok);
             if (ok) {
                 fieldData.limit.min = value;
             }
@@ -34,11 +33,10 @@ void ListOfLimitsWidget::addNewFrame(BaseProtocol *frame)
         hBoxLt->addWidget(minTxtEdt);
 
         hBoxLt->addWidget(new QLabel("Max: ", frameGroupBox));
-        QTextEdit *maxTxtEdt = new QTextEdit(frameGroupBox);
-        connect(maxTxtEdt, &QTextEdit::textChanged, [maxTxtEdt, &fieldData](){
+        QLineEdit *maxTxtEdt = new QLineEdit(frameGroupBox);
+        connect(maxTxtEdt, &QLineEdit::textChanged, [maxTxtEdt, &fieldData](){
             bool ok = false;
-            QString text = maxTxtEdt->toPlainText();
-            int value = text.toInt(&ok);
+            int value = maxTxtEdt->text().toInt(&ok);
             if (ok) {
                 fieldData.limit.max = value;
             }
@@ -47,5 +45,6 @@ void ListOfLimitsWidget::addNewFrame(BaseProtocol *frame)
 
         frameGroupBox->addLayout(hBoxLt);
     }
-    framesVBLt->addWidget(frameGroupBox);
+
+    framesVBLt->addWidget(frameGroupBox, 0, Qt::AlignTop | Qt::AlignLeft);
 }

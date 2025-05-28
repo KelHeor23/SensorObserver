@@ -28,7 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCentralWidget(sensorsTableWdgt); // Устанавливаем центральный виджет
 
-    listOfLimitsWdgt->addNewFrame(sensorsManager->getEngineSensors());
+    for (auto it : sensorsManager->getFrames()){
+        listOfLimitsWdgt->addNewFrame(it);
+    }
 }
 
 void MainWindow::close()

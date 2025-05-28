@@ -5,7 +5,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../Sensors.h"
+#include "Exchange/Protocols/Sensors.h"
+#include "Exchange/Protocols/Base.h"
 
 namespace EscSensors {
 
@@ -13,7 +14,7 @@ namespace {
     std::vector<SensorName> orderedNames = {"RPM motor speed", "recv_pwm", "comm_pwm", "Bus voltage", "Bus current", "Motor line current", "cap_temp", "mcu_temp", "motor_temp", "Error"};
 };
 
-class EscSensors
+class EscSensors : public BaseProtocol
 {
 
 public:

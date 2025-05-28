@@ -6,7 +6,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../Sensors.h"
+#include "Exchange/Protocols/Sensors.h"
+#include "Exchange/Protocols/Base.h"
 
 namespace VoltageRegulators {
 
@@ -28,7 +29,7 @@ struct VoltageRegulatorsData{
 
 
 
-class VoltageRegulators
+class VoltageRegulators : public BaseProtocol
 {
 public:
     VoltageRegulators();

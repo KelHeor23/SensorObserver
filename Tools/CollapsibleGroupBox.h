@@ -30,7 +30,7 @@ public slots:
 
 private:
     QToolButton* toggleButton;
-    QLabel* headerLabel;
+    QToolButton* headerLabel;
     QWidget* contentWidget;
     QVBoxLayout* mainLayout;
     QVBoxLayout* contentLayout;

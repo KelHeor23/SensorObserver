@@ -10,7 +10,9 @@ CollapsibleGroupBox::CollapsibleGroupBox(QWidget *parent)
     toggleButton->setCheckable(false);
 
     // Заголовок
-    headerLabel = new QLabel(this);
+    headerLabel = new QToolButton(this);
+    headerLabel->setStyleSheet("QToolButton { border: none; }");
+    headerLabel->setCheckable(false);
 
     // Заголовочный layout
     QHBoxLayout* headerLayout = new QHBoxLayout;
@@ -32,6 +34,7 @@ CollapsibleGroupBox::CollapsibleGroupBox(QWidget *parent)
 
     // Сигналы/слоты
     connect(toggleButton, &QToolButton::clicked, this, &CollapsibleGroupBox::toggle);
+    connect(headerLabel, &QToolButton::clicked, this, &CollapsibleGroupBox::toggle);
 }
 
 void CollapsibleGroupBox::setTitle(const QString &title) {

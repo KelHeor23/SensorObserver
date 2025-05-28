@@ -14,11 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     fileMenu->addAction(closeAction);
     connect(closeAction, &QAction::triggered, this, &MainWindow::close);
 
-    QMenu *viewMenu = menuBar()->addMenu(tr("Вид"));
-    QAction *openListOfLimitsAction = new QAction(tr("Открыть список переделов"), this);
-    viewMenu->addAction(openListOfLimitsAction);
-    connect(openListOfLimitsAction, &QAction::triggered, this, &MainWindow::openListOfLimits);
-
     QMenu *settingsMenu = menuBar()->addMenu(tr("Настройки"));
     QAction *openLOLAction = new QAction(tr("Список сенсоров"), this);
     settingsMenu->addAction(openLOLAction);
@@ -36,11 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::close()
 {
     this->close();
-}
-
-void MainWindow::openListOfLimits()
-{
-    sensorsTableWdgt->toggleLimitsVisibility();
 }
 
 void MainWindow::openListOfLimitsWdgt()

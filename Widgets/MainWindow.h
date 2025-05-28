@@ -16,7 +16,6 @@ public:
 
 private:
     void close();
-    void openListOfLimits();
     void openListOfLimitsWdgt();
 
 private:

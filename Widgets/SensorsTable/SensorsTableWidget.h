@@ -3,7 +3,6 @@
 
 #include <QtWidgets/QWidget>
 
-#include "ListOfLimits.h"
 #include "DisplayingSensors.h"
 #include "../../Exchange/Client.h"
 #include "VibrationDirection.h"
@@ -15,7 +14,6 @@ public:
     explicit SensorsTableWidget(QWidget *parent = nullptr);
 
 private:
-    void limitsVisual();
     void engineSensorsVisual();
     void readEngineSensorsMsg(uint8_t num, const QByteArray& data);
     void readVoltageRegulatorsMsg(uint8_t num, const QByteArray& data);
@@ -23,12 +21,10 @@ private:
 
 public slots:
     void parseMsg(const QByteArray& data);
-    void toggleLimitsVisibility();
 
 private:
     QHBoxLayout *mainHBoxLt;
     QWidget *placeholderWidget;
-    ListOfLimits *listOfLimits;
 
     QVector<VibrationDirection *> vibrationDirections;
     QVector<DisplayingSensors *> displayngSensors;

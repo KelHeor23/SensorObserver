@@ -16,7 +16,7 @@ set(PROJECT_SOURCES
         main.cpp
         Widgets/MainWindow.h Widgets/MainWindow.cpp
         Exchange/Client.h Exchange/Client.cpp
-        Widgets/SensorsTable/ListOfLimits.h Widgets/SensorsTable/ListOfLimits.cpp
+
         Widgets/SensorsTable/DisplayingSensors.h Widgets/SensorsTable/DisplayingSensors.cpp
         Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
         Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp

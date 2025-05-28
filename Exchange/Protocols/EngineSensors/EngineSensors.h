@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../Sensors.h"
+#include "Exchange/Protocols/Base.h"
 
 namespace EngineSensors {
 namespace {
@@ -20,7 +20,7 @@ namespace {
     };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
-class EngineSensors
+class EngineSensors : public BaseProtocol
 {
 public:
     EngineSensors();
@@ -28,8 +28,6 @@ public:
     void setData(std::string_view data);
 
     std::unordered_map<SensorName, int> getSensorsData() const;
-
-
 
 private:
     std::unordered_map<SensorName, int> sensorsData;

@@ -4,9 +4,11 @@
 #include "qtextedit.h"
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
-    : QWidget{parent},
-    framesVBLt(new QVBoxLayout(this))
-{}
+    : QWidget{parent}
+    ,framesVBLt(new QVBoxLayout(this))
+{
+    setMinimumSize(300, 200);  // задайте минимальный размер
+}
 
 void ListOfLimitsWidget::addNewFrame(BaseProtocol *frame)
 {
@@ -41,8 +43,9 @@ void ListOfLimitsWidget::addNewFrame(BaseProtocol *frame)
                 fieldData.limit.max = value;
             }
         });
-        hBoxLt->addWidget(minTxtEdt);
+        hBoxLt->addWidget(maxTxtEdt);
 
         frameGroupBox->addLayout(hBoxLt);
     }
+    framesVBLt->addWidget(frameGroupBox);
 }

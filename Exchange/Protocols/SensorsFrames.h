@@ -1,14 +1,16 @@
-#ifndef FRAMES_H
-#define FRAMES_H
+#ifndef SENSORSFRAMES_H
+#define SENSORSFRAMES_H
 
 #include "EngineSensors/EngineSensors.h"
 #include "Exchange/Protocols/EscSensors/EscSensors.h"
 #include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
 
-class Frames
+class SensorsFrames
 {
 public:
-    Frames();
+    SensorsFrames();
+
+    EngineSensors::EngineSensors *getEngineSensors() const;
 
 private:
     EngineSensors::EngineSensors *engineSensors;
@@ -16,4 +18,4 @@ private:
     EscSensors::EscSensors *escSensors;
 };
 
-#endif // FRAMES_H
+#endif // SENSORSFRAMES_H

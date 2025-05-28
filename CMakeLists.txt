@@ -31,7 +31,7 @@ set(PROJECT_SOURCES
         Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
         Exchange/Protocols/Base.h
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
-        Exchange/Protocols/Frames.h Exchange/Protocols/Frames.cpp
+        Exchange/Protocols/SensorsFrames.h Exchange/Protocols/SensorsFrames.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

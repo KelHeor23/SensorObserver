@@ -4,9 +4,10 @@
 #include <QMenu>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow{parent},
-    sensorsTableWdgt(new SensorsTableWidget(this)),
-    listOfLimitsWdgt(new ListOfLimitsWidget(this))
+    : QMainWindow{parent}
+    ,sensorsManager(std::make_shared<SensorsFrames>())
+    ,sensorsTableWdgt(new SensorsTableWidget(this))
+    ,listOfLimitsWdgt(new ListOfLimitsWidget())
 {
     QMenu *fileMenu = this->menuBar()->addMenu(tr("Файл"));
     QAction *closeAction = new QAction(tr("Закрыть"), this);
@@ -26,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent)
     sensorsTableWdgt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     setCentralWidget(sensorsTableWdgt); // Устанавливаем центральный виджет
+
+    listOfLimitsWdgt->addNewFrame(sensorsManager->getEngineSensors());
 }
 
 void MainWindow::close()

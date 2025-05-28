@@ -4,6 +4,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QHBoxLayout>
 
+#include "Exchange/Protocols/SensorsFrames.h"
 #include "SensorsTable/SensorsTableWidget.h"
 #include "SensorsTable/ListOfLimitsWidget.h"
 
@@ -19,8 +20,9 @@ private:
     void openListOfLimitsWdgt();
 
 private:
-    SensorsTableWidget *sensorsTableWdgt;
-    ListOfLimitsWidget *listOfLimitsWdgt;
+    std::shared_ptr<SensorsFrames> sensorsManager;
+    SensorsTableWidget  *sensorsTableWdgt;
+    ListOfLimitsWidget  *listOfLimitsWdgt;
 
 };
 

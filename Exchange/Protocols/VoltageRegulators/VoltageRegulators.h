@@ -11,9 +11,6 @@
 
 namespace VoltageRegulators {
 
-namespace {
-    std::vector<SensorName> orderedNames = {"Входное напряжене", "ток (ампер)", "Управляющий ШИМ", "Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
-};
 #pragma pack(push, 1) // Отключаем выравнивание
 struct VoltageRegulatorsData{
     uint32_t    canID;              // 0x1FF1210-0x1FF1217 (Младший бит - номер регулятора))
@@ -34,12 +31,7 @@ class VoltageRegulators : public BaseProtocol
 public:
     VoltageRegulators();
 
-    void setData(std::string_view data);
-
-    std::unordered_map<SensorName, double> getSensorsData() const;
-
-private:
-    std::unordered_map<SensorName, double> sensorsData;
+    void setData(std::string_view data) override;
 };
 
 };

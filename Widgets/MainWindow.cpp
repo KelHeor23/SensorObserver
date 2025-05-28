@@ -6,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent}
     ,sensorsManager(std::make_shared<SensorsFrames>())
-    ,sensorsTableWdgt(new SensorsTableWidget(this))
+    ,sensorsTableWdgt(new SensorsTableWidget(sensorsManager, this))
     ,listOfLimitsWdgt(new ListOfLimitsWidget())
 {
     QMenu *fileMenu = this->menuBar()->addMenu(tr("Файл"));
@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(sensorsTableWdgt); // Устанавливаем центральный виджет
 
     for (auto it : sensorsManager->getFrames()){
-        listOfLimitsWdgt->addNewFrame(it);
+        listOfLimitsWdgt->addNewFrame(it.second);
     }
 }
 

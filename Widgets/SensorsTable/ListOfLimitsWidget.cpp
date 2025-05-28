@@ -35,7 +35,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
             bool ok = false;
             int value = minTxtEdt->text().toInt(&ok);
             if (ok) {
-                fieldData.limit.min = value;
+                fieldData.limit->min = value;
             }
         });
         hBoxLt->addWidget(minTxtEdt);
@@ -46,7 +46,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
             bool ok = false;
             int value = maxTxtEdt->text().toInt(&ok);
             if (ok) {
-                fieldData.limit.max = value;
+                fieldData.limit->max = value;
             }
         });
         hBoxLt->addWidget(maxTxtEdt);

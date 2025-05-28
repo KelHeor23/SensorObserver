@@ -15,20 +15,10 @@ void EngineSensors::setData(std::string_view data)
 
     const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
 
-    sensorsData["Обороты"]          = static_cast<int>(receivedData->speed);
-    sensorsData["Температура"]      = static_cast<int>(receivedData->temperature);
-    sensorsData["Угол биения"]      = static_cast<int>(receivedData->runoutAngle);
-    sensorsData["Амплитуда биения"] = static_cast<int>(receivedData->runoutAmplitude);
-
     fields["Обороты"].val          = static_cast<int>(receivedData->speed);
     fields["Температура"].val      = static_cast<int>(receivedData->temperature);
     fields["Угол биения"].val      = static_cast<int>(receivedData->runoutAngle);
     fields["Амплитуда биения"].val = static_cast<int>(receivedData->runoutAmplitude);
-}
-
-std::unordered_map<SensorName, int> EngineSensors::getSensorsData() const
-{
-    return sensorsData;
 }
 
 }

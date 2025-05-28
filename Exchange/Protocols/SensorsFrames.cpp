@@ -6,12 +6,12 @@
 
 SensorsFrames::SensorsFrames()
 {
-    frames.push_back(std::make_shared<EngineSensors::EngineSensors>());
-    frames.push_back(std::make_shared<VoltageRegulators::VoltageRegulators>());
-    frames.push_back(std::make_shared<EscSensors::EscSensors>());
+    frames[ESC] = std::make_shared<EscSensors::EscSensors>();
+    frames[ENGINE] = std::make_shared<EngineSensors::EngineSensors>();
+    frames[VOLTAGE_REGULATORS] = std::make_shared<VoltageRegulators::VoltageRegulators>();
 }
 
-std::list<std::shared_ptr<BaseProtocol> > SensorsFrames::getFrames() const
+std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol> > SensorsFrames::getFrames() const
 {
     return frames;
 }

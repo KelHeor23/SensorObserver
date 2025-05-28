@@ -2,16 +2,18 @@
 #define SENSORSTABLEWIDGET_H
 
 #include <QtWidgets/QWidget>
+#include <QHBoxLayout>
 
 #include "DisplayingSensors.h"
-#include "../../Exchange/Client.h"
+#include "Exchange/Client.h"
+#include "Exchange/Protocols/SensorsFrames.h"
 #include "VibrationDirection.h"
 
 class SensorsTableWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SensorsTableWidget(QWidget *parent = nullptr);
+    explicit SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent = nullptr);
 
 private:
     void engineSensorsVisual();
@@ -25,7 +27,7 @@ public slots:
 private:
     QHBoxLayout *mainHBoxLt;
     QWidget *placeholderWidget;
-
+    std::shared_ptr<SensorsFrames> sensorsManager;
     QVector<VibrationDirection *> vibrationDirections;
     QVector<DisplayingSensors *> displayngSensors;
 

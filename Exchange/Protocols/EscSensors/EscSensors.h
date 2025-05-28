@@ -10,22 +10,14 @@
 
 namespace EscSensors {
 
-namespace {
-    std::vector<SensorName> orderedNames = {"RPM motor speed", "recv_pwm", "comm_pwm", "Bus voltage", "Bus current", "Motor line current", "cap_temp", "mcu_temp", "motor_temp", "Error"};
-};
-
 class EscSensors : public BaseProtocol
 {
 
 public:
     EscSensors();
 
-    void setData(uint16_t frame_id, std::string_view data);
-
-    std::unordered_map<SensorName, double> getSensorsData() const;
-
-private:
-    std::unordered_map<SensorName, double> sensorsData;
+    void setData(std::string_view data) override;
+    void setDataESC(uint16_t frame_id, std::string_view data);
 };
 
 }

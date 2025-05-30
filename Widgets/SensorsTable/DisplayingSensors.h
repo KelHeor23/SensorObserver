@@ -21,6 +21,7 @@ public:
 
     SensorsFrames*getSensorManager() const;
     void linkLimitsSensorsFrames(SensorsFrames&);
+    void linkFrame(FrameTypes type, SensorsFrames& target);
 
 public slots:
     void addWidgets(std::string_view);

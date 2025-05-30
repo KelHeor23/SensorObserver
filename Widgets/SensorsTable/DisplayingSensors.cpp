@@ -50,23 +50,28 @@ SensorsFrames*DisplayingSensors::getSensorManager() const
 
 void DisplayingSensors::linkLimitsSensorsFrames(SensorsFrames& sensorFrame)
 {
-    auto& managerFrames = sensorManager->getFrames(); // Ссылка на оригинал
-    auto& targetFrames = sensorFrame.getFrames();     // Ссылка на оригинал
+    linkFrame(ENGINE, sensorFrame);
+    linkFrame(VOLTAGE_REGULATORS, sensorFrame);
+    linkFrame(ESC, sensorFrame);
+}
 
-    for (auto &it : managerFrames[ENGINE]->getFields()){
-        it.second.linkLimits(targetFrames[ENGINE]->getFields()[it.first]);
-    }
-    for (auto &it : managerFrames[VOLTAGE_REGULATORS]->getFields()){
-        it.second.linkLimits(targetFrames[VOLTAGE_REGULATORS]->getFields()[it.first]);
-    }
-    for (auto &it : managerFrames[ESC]->getFields()){
-        it.second.linkLimits(targetFrames[ESC]->getFields()[it.first]);
+void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
+{
+    auto& srcFrame = sensorManager->getFrames()[type];
+    auto& dstFrame = target.getFrames()[type];
+
+    if (!srcFrame || !dstFrame) return;
+
+    for (auto& [name, data] : srcFrame->getFields()) {
+        if (auto it = dstFrame->getFields().find(name); it != dstFrame->getFields().end()) {
+            data.linkLimits(it->second);
+        }
     }
 }
 
 void DisplayingSensors::setEngineSensorsData(std::string_view data)
 {
-    auto& managerFrames = sensorManager->getFrames(); // Ссылка на оригинал
+    auto& managerFrames = sensorManager->getFrames();
     managerFrames[ENGINE]->setData(data);
     auto fields = managerFrames[ENGINE]->getFields();
 
@@ -78,7 +83,7 @@ void DisplayingSensors::setEngineSensorsData(std::string_view data)
 
 void DisplayingSensors::setVoltageRegulatorsSensorsData(std::string_view data)
 {
-    auto& managerFrames = sensorManager->getFrames(); // Ссылка на оригинал
+    auto& managerFrames = sensorManager->getFrames();
     managerFrames[VOLTAGE_REGULATORS]->setData(data);
     auto fields = managerFrames[VOLTAGE_REGULATORS]->getFields();
 
@@ -90,7 +95,7 @@ void DisplayingSensors::setVoltageRegulatorsSensorsData(std::string_view data)
 
 void DisplayingSensors::setEscSensors(uint16_t frame_id, std::string_view data)
 {
-    auto& managerFrames = sensorManager->getFrames(); // Ссылка на оригинал
+    auto& managerFrames = sensorManager->getFrames();
     managerFrames[ESC]->setData(data);
     auto fields = managerFrames[ESC]->getFields();
 

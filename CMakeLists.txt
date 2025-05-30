@@ -14,6 +14,24 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
 set(PROJECT_SOURCES
         main.cpp
+        Widgets/MainWindow.h Widgets/MainWindow.cpp
+        Exchange/Client.h Exchange/Client.cpp
+
+        Widgets/SensorsTable/DisplayingSensors.h Widgets/SensorsTable/DisplayingSensors.cpp
+        Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
+        Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
+        Exchange/Protocols/Sensors.h
+        Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
+        Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
+        Common/Common.h
+        Exchange/Protocols/Constants.h
+        Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
+        Exchange/Protocols/EscSensors/Frames.h
+        Exchange/Protocols/EscSensors/EscSensors.h Exchange/Protocols/EscSensors/EscSensors.cpp
+        Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
+        Exchange/Protocols/Base.h
+        Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
+        Exchange/Protocols/SensorsFrames.h Exchange/Protocols/SensorsFrames.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -35,24 +53,12 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
-            Widgets/MainWindow.h Widgets/MainWindow.cpp
-            Exchange/Client.h Exchange/Client.cpp
-            Widgets/SensorsTable/ListOfLimits.h Widgets/SensorsTable/ListOfLimits.cpp
-            Widgets/SensorsTable/DisplayingSensors.h Widgets/SensorsTable/DisplayingSensors.cpp
-            Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
-            Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
-            Exchange/Protocols/Sensors.h
-            Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
-            Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
-            Common/Common.h
-            Exchange/Protocols/Constants.h
-
-
         )
     endif()
 endif()
 
 target_link_libraries(SensorObserver PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
+target_include_directories(SensorObserver PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

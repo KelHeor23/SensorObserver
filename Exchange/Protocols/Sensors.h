@@ -2,13 +2,9 @@
 #define SENSORS_H
 
 #include <QString>
+#include <memory>
 
 using SensorName = std::string;
-
-struct NameSensor {
-    size_t orderNum;
-    SensorName name;
-};
 
 struct SensorLimits {
     int min = 0;
@@ -16,8 +12,16 @@ struct SensorLimits {
 };
 
 struct SensorData {
-    SensorLimits limit;
+    std::shared_ptr<SensorLimits> limit; // Общий ресурс
     int val = 0;
+
+    SensorData() {
+        limit = std::make_shared<SensorLimits>();
+    }
+
+    void linkLimits(SensorData& other) {
+        limit = other.limit;  // Используем тот же shared_ptr
+    }
 };
 
 #endif // SENSORS_H

@@ -1,42 +1,19 @@
 #include "DisplayingSensors.h"
 
 DisplayingSensors::DisplayingSensors(QWidget *parent)
-    : QWidget(parent),
-    mainLayout(new QVBoxLayout(this)),
-    engineSensors(new EngineSensors::EngineSensors),
-    voltageRegulatorsSensors(new VoltageRegulators::VoltageRegulators)
+    : QWidget(parent)
+    ,mainLayout(new QVBoxLayout(this))
+    ,sensorManager(std::make_unique<SensorsFrames>())
 {
     setLayout(mainLayout);
     mainLayout->addStretch();
-}
-
-void DisplayingSensors::setEngineSensorsData(std::string_view data)
-{
-    engineSensors->setData(data);
-
-    for (auto &it : EngineSensors::orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(engineSensors->getSensorsData()[it.data()]));
-        checkRangeValues(sensorsDataLabels[it.data()], engineSensors->getSensorsData()[it.data()], (*sensorsDataLimits)[it.data()]);
-    }
-
-    //vibrationDirection->update(engineSensors->getSensorsData()["Амплитуда биения"] / 1000, engineSensors->getSensorsData()["Угол биения"]);
-}
-
-void DisplayingSensors::setVoltageRegulatorsSensorsData(std::string_view data)
-{
-    voltageRegulatorsSensors->setData(data);
-
-    for (auto &it : VoltageRegulators::orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(voltageRegulatorsSensors->getSensorsData()[it.data()], 'f', 1));
-        checkRangeValues(sensorsDataLabels[it.data()], voltageRegulatorsSensors->getSensorsData()[it.data()], (*sensorsDataLimits)[it.data()]);
-    }
 }
 
 void DisplayingSensors::addWidgets(std::string_view name)
 {
     QHBoxLayout *row = new QHBoxLayout(this);
     QLabel *labelVal = new QLabel("Значение", this);
-    sensorsDataLabels.insert(name.data(), labelVal);
+    sensorsDataLabels[name.data()] = labelVal;
     labelVal->setMaximumHeight(30);
     QLabel *labelName = new QLabel(name.data(), this);
     labelVal->setMaximumHeight(30);
@@ -49,34 +26,83 @@ void DisplayingSensors::addWidgets(std::string_view name)
     mainLayout->insertLayout(mainLayout->count() - 1, row);
 }
 
-void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, SensorLimits lim)
+void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, std::shared_ptr<SensorLimits> lim)
 {
     QPalette palette = lbl->palette();
-    if (lim.min < lim.max) {
-        double threshold = 0.15 * (lim.max - lim.min);
-        if (val < lim.min || val > lim.max)
+    if (lim->min < lim->max) {
+        double threshold = 0.15 * (lim->max - lim->min);
+        if (val < lim->min || val > lim->max)
             palette.setColor(QPalette::Window, Qt::red);
-            //lbl->setStyleSheet("background-color:: red; }");
-        else if (val <= lim.min + threshold || val >= lim.max - threshold) {
-            //lbl->setStyleSheet("background-color:: yellow; }");
+        else if (val <= lim->min + threshold || val >= lim->max - threshold) {
             palette.setColor(QPalette::Window, Qt::yellow);
         }
         else
             palette.setColor(QPalette::Window, Qt::transparent);
-            //lbl->setStyleSheet("background: transparent;");
     }
     lbl->setPalette(palette);
     lbl->setAutoFillBackground(true); // Включаем перерисовку фона
 }
 
-EngineSensors::EngineSensors *DisplayingSensors::getEngineSensors() const
+SensorsFrames*DisplayingSensors::getSensorManager() const
 {
-    return engineSensors;
+    return sensorManager.get();
 }
 
-void DisplayingSensors::setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits)
+void DisplayingSensors::linkLimitsSensorsFrames(SensorsFrames& sensorFrame)
 {
-    sensorsDataLimits = newSensorsDataLimits;
+    linkFrame(ENGINE, sensorFrame);
+    linkFrame(VOLTAGE_REGULATORS, sensorFrame);
+    linkFrame(ESC, sensorFrame);
+}
+
+void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
+{
+    auto& srcFrame = sensorManager->getFrames()[type];
+    auto& dstFrame = target.getFrames()[type];
+
+    if (!srcFrame || !dstFrame) return;
+
+    for (auto& [name, data] : srcFrame->getFields()) {
+        if (auto it = dstFrame->getFields().find(name); it != dstFrame->getFields().end()) {
+            data.linkLimits(it->second);
+        }
+    }
+}
+
+void DisplayingSensors::setEngineSensorsData(std::string_view data)
+{
+    auto& managerFrames = sensorManager->getFrames();
+    managerFrames[ENGINE]->setData(data);
+    auto fields = managerFrames[ENGINE]->getFields();
+
+    for (auto &it : managerFrames[ENGINE]->orderedNames) {
+        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
+        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
+    }
+}
+
+void DisplayingSensors::setVoltageRegulatorsSensorsData(std::string_view data)
+{
+    auto& managerFrames = sensorManager->getFrames();
+    managerFrames[VOLTAGE_REGULATORS]->setData(data);
+    auto fields = managerFrames[VOLTAGE_REGULATORS]->getFields();
+
+    for (auto &it : managerFrames[VOLTAGE_REGULATORS]->orderedNames) {
+        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
+        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
+    }
+}
+
+void DisplayingSensors::setEscSensors(uint16_t frame_id, std::string_view data)
+{
+    auto& managerFrames = sensorManager->getFrames();
+    managerFrames[ESC]->setData(data);
+    auto fields = managerFrames[ESC]->getFields();
+
+    for (auto &it : managerFrames[ESC]->orderedNames) {
+        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
+        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
+    }
 }
 
 void DisplayingSensors::addNewDataLabels(std::vector<SensorName> &list)

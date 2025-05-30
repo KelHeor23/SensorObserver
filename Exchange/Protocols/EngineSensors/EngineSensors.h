@@ -4,12 +4,10 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../Sensors.h"
+#include "Exchange/Protocols/Base.h"
 
 namespace EngineSensors {
-namespace {
-    std::vector<SensorName> orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
-};
+
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
         uint32_t    canID;              // 0x1FF1200-0x1FF1207 (Младший бит - номер двигателя)
@@ -20,19 +18,12 @@ namespace {
     };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
-class EngineSensors
+class EngineSensors : public BaseProtocol
 {
 public:
     EngineSensors();
 
-    void setData(std::string_view data);
-
-    std::unordered_map<SensorName, int> getSensorsData() const;
-
-
-
-private:
-    std::unordered_map<SensorName, int> sensorsData;
+    void setData(std::string_view data) override;
 };
 };
 

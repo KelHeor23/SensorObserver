@@ -6,9 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-#include "ListOfLimits.h"
-#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
-#include "../../Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
+#include "Exchange/Protocols/SensorsFrames.h"
 
 class DisplayingSensors : public QWidget
 {
@@ -18,22 +16,21 @@ public:
 
     void setEngineSensorsData(std::string_view data);
     void setVoltageRegulatorsSensorsData(std::string_view data);
-    void setSensorsDataLimits(const std::shared_ptr<HashLimits> &newSensorsDataLimits);
+    void setEscSensors(uint16_t frame_id, std::string_view data);
     void addNewDataLabels(std::vector<SensorName> &list);
 
-    EngineSensors::EngineSensors *getEngineSensors() const;
+    SensorsFrames*getSensorManager() const;
+    void linkLimitsSensorsFrames(SensorsFrames&);
+    void linkFrame(FrameTypes type, SensorsFrames& target);
 
 public slots:
     void addWidgets(std::string_view);
-    void checkRangeValues(QLabel *, int val, SensorLimits lim);
+    void checkRangeValues(QLabel *, int val, std::shared_ptr<SensorLimits> lim);
 
 private:    
     QVBoxLayout *mainLayout;
-    EngineSensors::EngineSensors *engineSensors;
-    VoltageRegulators::VoltageRegulators *voltageRegulatorsSensors;    
-    QMap<QString, QLabel *> sensorsDataLabels;
-
-    std::shared_ptr<HashLimits> sensorsDataLimits;
+    std::unique_ptr<SensorsFrames> sensorManager;
+    std::unordered_map<QString, QLabel *> sensorsDataLabels;
 };
 
 #endif // DISPLAYINGSENSORS_H

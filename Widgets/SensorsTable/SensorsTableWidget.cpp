@@ -1,21 +1,19 @@
 #include "SensorsTableWidget.h"
+#include "Common/Common.h"
+#include "Exchange/Protocols/Constants.h"
+#include "Exchange/Protocols/EngineSensors/EngineSensors.h"
+#include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
 #include <iostream>
 #include <ostream>
 
-#include "../../Common/Common.h"
-#include "../../Exchange/Protocols/Constants.h"
-#include "../../Exchange/Protocols/EngineSensors/EngineSensors.h"
-
-SensorsTableWidget::SensorsTableWidget(QWidget *parent)
-    : QWidget{parent},
-    mainHBoxLt(new QHBoxLayout(this)),
-    listOfLimits(new ListOfLimits(this)),
-    client(new Client(this))
+SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
+    : QWidget{parent}
+    ,mainHBoxLt(new QHBoxLayout(this))
+    ,placeholderWidget(new QWidget(this))
+    ,sensorsManager(sensorsManager_t)
+    ,client(new Client(this))
 {
     setLayout(mainHBoxLt);
-
-    // Формир0уем визуализацию столбца приделов
-    limitsVisual();
 
     for (int i = 0; i < 4; i++){
         vibrationDirections.append(new VibrationDirection(this));
@@ -23,33 +21,16 @@ SensorsTableWidget::SensorsTableWidget(QWidget *parent)
 
     for (int i = 0; i < 8; i++){
         displayngSensors.append(new DisplayingSensors(this));
-        displayngSensors.last()->addNewDataLabels(EngineSensors::orderedNames);
-        displayngSensors.last()->addNewDataLabels(VoltageRegulators::orderedNames);
-        displayngSensors.last()->setSensorsDataLimits(listOfLimits->getSensorsDataLimits());
+        displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[VOLTAGE_REGULATORS]->orderedNames);
+        displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ENGINE]->orderedNames);
+        displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC]->orderedNames);
+        displayngSensors.last()->linkLimitsSensorsFrames(*sensorsManager);
     }
 
     // Формирование визуализации датчиков двигателей
     engineSensorsVisual();
 
     connect(client, SIGNAL(engineSensorsDataSent(QByteArray)), this, SLOT(parseMsg(QByteArray)));
-}
-
-void SensorsTableWidget::limitsVisual()
-{
-    // Создаем пустой виджет:
-    QWidget *placeholderWidget = new QWidget(this);
-
-    QVBoxLayout *limitsVBox = new QVBoxLayout(this);
-    limitsVBox->addWidget(placeholderWidget);
-    limitsVBox->addWidget(listOfLimits);
-
-    listOfLimits->addNewLimits(EngineSensors::orderedNames);
-    listOfLimits->addNewLimits(VoltageRegulators::orderedNames);
-
-    mainHBoxLt->addLayout(limitsVBox);
-
-    placeholderWidget->setMinimumSize(170, 170);
-    placeholderWidget->setMaximumSize(170, 170);
 }
 
 void SensorsTableWidget::engineSensorsVisual()
@@ -81,8 +62,10 @@ void SensorsTableWidget::readEngineSensorsMsg(uint8_t num, const QByteArray &dat
 
     displayngSensors[num]->setEngineSensorsData(sv);
 
+    auto frame = displayngSensors[num]->getSensorManager()->getFrames()[ENGINE]->fields;
+
     if (num % 2 == 0) {
-        vibrationDirections[num / 2]->update(displayngSensors[num]->getEngineSensors()->getSensorsData()["Амплитуда биения"] / 1000, displayngSensors[num]->getEngineSensors()->getSensorsData()["Угол биения"]);
+        vibrationDirections[num / 2]->update(frame["Амплитуда биения"].val / 1000, frame["Угол биения"].val);
     }
 }
 
@@ -99,9 +82,30 @@ void SensorsTableWidget::readVoltageRegulatorsMsg(uint8_t num, const QByteArray 
     displayngSensors[num]->setVoltageRegulatorsSensorsData(sv);
 }
 
+void SensorsTableWidget::readEscSensors(uint8_t num, uint16_t frame_id, const QByteArray& data)
+{
+    std::string_view sv(data.constData() , data.size());
+
+    if (num >= 8)
+    {
+        std::cerr << "readVoltageRegulatorsMsg" << std::endl;
+        return;
+    }
+
+    displayngSensors[num]->setEscSensors(frame_id, sv);
+}
+
+#include <QtEndian>
+
 void SensorsTableWidget::parseMsg(const QByteArray& message)
 {
     int it = 0;
+
+    int16_t node_id = qFromLittleEndian<uint16_t>(reinterpret_cast<const uchar*>(message.constData()));
+    int16_t frame_id = qFromLittleEndian<uint16_t>(reinterpret_cast<const uchar*>(message.constData() + sizeof(uint16_t)));
+
+    readEscSensors(node_id % 32, frame_id, message.mid(4));
+
     while (it + 4 < message.size()) { // первые четыре байта в каждом сообщении зарезервивона по дидентефикатор
         // Считываем первые 4 байта
         uint32_t value = (static_cast<uint32_t>(static_cast<unsigned char>(message[it])) << 24 |
@@ -136,3 +140,4 @@ void SensorsTableWidget::parseMsg(const QByteArray& message)
         };
     }
 }
+

@@ -6,6 +6,9 @@ VoltageRegulators::VoltageRegulators::VoltageRegulators()
 {
     nameFrame = "Датчики питания";
     orderedNames = {"Входное напряжене", "ток (ампер)", "Управляющий ШИМ", "Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
+
+    for (auto &it : orderedNames)
+        fields[it].val = 0;
 }
 
 void VoltageRegulators::VoltageRegulators::setData(std::string_view data)

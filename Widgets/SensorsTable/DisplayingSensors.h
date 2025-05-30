@@ -20,6 +20,7 @@ public:
     void addNewDataLabels(std::vector<SensorName> &list);
 
     SensorsFrames*getSensorManager() const;
+    void linkLimitsSensorsFrames(SensorsFrames&);
 
 public slots:
     void addWidgets(std::string_view);

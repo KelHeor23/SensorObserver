@@ -24,6 +24,7 @@ SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsMan
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[VOLTAGE_REGULATORS]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ENGINE]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC]->orderedNames);
+        displayngSensors.last()->linkLimitsSensorsFrames(*sensorsManager);
     }
 
     // Формирование визуализации датчиков двигателей

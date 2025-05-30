@@ -9,7 +9,7 @@
 class BaseProtocol {
 
 public:
-    std::unordered_map<SensorName, SensorData> getFields() const {
+    std::unordered_map<SensorName, SensorData>& getFields() {
         return fields;
     }
 

@@ -17,7 +17,7 @@ class SensorsFrames
 public:
     SensorsFrames();
 
-    std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol> > getFrames() const;
+    std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol>>& getFrames();
 
 private:
     std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol>> frames;

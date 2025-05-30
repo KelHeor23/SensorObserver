@@ -11,7 +11,7 @@ SensorsFrames::SensorsFrames()
     frames[VOLTAGE_REGULATORS] = std::make_shared<VoltageRegulators::VoltageRegulators>();
 }
 
-std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol> > SensorsFrames::getFrames() const
+std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol>>& SensorsFrames::getFrames()
 {
     return frames;
 }

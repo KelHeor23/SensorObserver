@@ -18,6 +18,10 @@ struct SensorData {
     SensorData() {
         limit = std::make_shared<SensorLimits>();
     }
+
+    void linkLimits(SensorData& other) {
+        limit = other.limit;  // Используем тот же shared_ptr
+    }
 };
 
 #endif // SENSORS_H

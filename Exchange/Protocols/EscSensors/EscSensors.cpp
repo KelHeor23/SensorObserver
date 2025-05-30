@@ -6,6 +6,9 @@ namespace EscSensors {
 EscSensors::EscSensors() {
     nameFrame = "Датчики ESC";
     orderedNames = {"RPM motor speed", "recv_pwm", "comm_pwm", "Bus voltage", "Bus current", "Motor line current", "cap_temp", "mcu_temp", "motor_temp", "Error"};
+
+    for (auto &it : orderedNames)
+        fields[it].val = 0;
 }
 
 void EscSensors::setData(std::string_view data)

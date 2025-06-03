@@ -7,7 +7,9 @@
 #include "Base.h"
 
 enum FrameTypes{
-    ESC,
+    ESC_FRAME1,
+    ESC_FRAME2,
+    ESC_FRAME3,
     ENGINE,
     VOLTAGE_REGULATORS
 };

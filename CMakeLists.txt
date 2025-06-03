@@ -27,11 +27,15 @@ set(PROJECT_SOURCES
         Exchange/Protocols/Constants.h
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Exchange/Protocols/EscSensors/Frames.h
-        Exchange/Protocols/EscSensors/EscSensors.h Exchange/Protocols/EscSensors/EscSensors.cpp
+
         Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
         Exchange/Protocols/Base.h
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
         Exchange/Protocols/SensorsFrames.h Exchange/Protocols/SensorsFrames.cpp
+        Exchange/Protocols/SensorSettingsManager.h Exchange/Protocols/SensorSettingsManager.cpp
+        Exchange/Protocols/EscSensors/EscStatus1.h Exchange/Protocols/EscSensors/EscStatus1.cpp
+        Exchange/Protocols/EscSensors/EscStatus2.h Exchange/Protocols/EscSensors/EscStatus2.cpp
+        Exchange/Protocols/EscSensors/EscStatus3.h Exchange/Protocols/EscSensors/EscStatus3.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -53,7 +57,6 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
-            Exchange/Protocols/SensorSettingsManager.h Exchange/Protocols/SensorSettingsManager.cpp
         )
     endif()
 endif()

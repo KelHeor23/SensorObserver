@@ -1,37 +1,44 @@
 #ifndef FRAMES_H
 #define FRAMES_H
 
+#include "qdebug.h"
+#include "qglobal.h"
 #include <cstdint>
 
 namespace EscSensors {
 
-#pragma pack(push, 1) // Отключаем выравнивание
 struct EscStatusInfo1{
     int32_t  speed;      // 24-bit RPM motor speed (sign-extended to 32 bits)
     uint16_t recv_pwm;  // 0.1us units (little-endian)
     uint16_t comm_pwm;  // 0.1us units (little-endian)
 
     static EscStatusInfo1 unpack(const char buffer[8]) {
-        EscStatusInfo1 result;
+    EscStatusInfo1 result;
 
-        // Парсинг 24-битного скорости (speed)
-        uint32_t raw_speed = (static_cast<uint32_t>(static_cast<uint8_t>(buffer[2])) << 16) |
-                             (static_cast<uint32_t>(static_cast<uint8_t>(buffer[1])) << 8) |
-                             static_cast<uint8_t>(buffer[0]);
-        result.speed = static_cast<int32_t>(raw_speed << 8) >> 8; // Знаковое расширение
+    // Исправленный парсинг 24-битной скорости (little-endian)
+    uint32_t raw_speed = static_cast<uint32_t>(static_cast<uint8_t>(buffer[2]) << 16) |
+                         static_cast<uint32_t>(static_cast<uint8_t>(buffer[1]) << 8) |
+                         static_cast<uint8_t>(buffer[0]);
+    // Коррекция знака для 24-битного числа
+    result.speed = (raw_speed & 0x800000) ?
+                   (static_cast<int32_t>(raw_speed) | 0xFF000000) :
+                   raw_speed;
 
-        // Парсинг recv_pwm (uint16_t, little-endian)
-        result.recv_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[3])) |
-                          (static_cast<uint16_t>(static_cast<uint8_t>(buffer[4])) << 8);
+    // Исправленный парсинг recv_pwm (little-endian)
+    result.recv_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[4]) << 8) |
+                      static_cast<uint16_t>(static_cast<uint8_t>(buffer[3]));
 
-        // Парсинг comm_pwm (uint16_t, little-endian)
-        result.comm_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[5])) |
-                          (static_cast<uint16_t>(static_cast<uint8_t>(buffer[6])) << 8);
+    // Исправленный парсинг comm_pwm (little-endian)
+    result.comm_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[7]) << 8) |
+                      static_cast<uint16_t>(static_cast<uint8_t>(buffer[6]));
 
-        return result;
+    // Масштабирование PWM значений
+    result.recv_pwm /= 10;
+    result.comm_pwm /= 10;
+
+    return result;
     }
 };
-#pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 
 #pragma pack(push, 1) // Отключаем выравнивание
 struct EscStatusInfo2{
@@ -44,22 +51,22 @@ struct EscStatusInfo2{
 
         // Парсинг voltage (uint16_t, little-endian)
         result.voltage =
-            static_cast<uint16_t>(static_cast<uint8_t>(buffer[0])) |
-            (static_cast<uint16_t>(static_cast<uint8_t>(buffer[1])) << 8);
+            (static_cast<uint16_t>(static_cast<uint8_t>(buffer[0])) |
+            (static_cast<uint16_t>(static_cast<uint8_t>(buffer[1])) << 8)) / 10;
 
         // Парсинг bus_current (int16_t, little-endian)
         result.bus_current =
             static_cast<int16_t>(
                 static_cast<uint16_t>(static_cast<uint8_t>(buffer[2])) |
                 (static_cast<uint16_t>(static_cast<uint8_t>(buffer[3])) << 8)
-                );
+                ) / 10;
 
         // Парсинг current (int16_t, little-endian)
         result.current =
             static_cast<int16_t>(
                 static_cast<uint16_t>(static_cast<uint8_t>(buffer[4])) |
                 (static_cast<uint16_t>(static_cast<uint8_t>(buffer[5])) << 8)
-                );
+                ) / 10;
 
         return result;
     }
@@ -77,9 +84,9 @@ struct EscStatusInfo3{
         EscStatusInfo3 result;
 
         // Парсинг температур (прямое присваивание)
-        result.cap_temp = static_cast<uint8_t>(buffer[2]);
-        result.mcu_temp = static_cast<uint8_t>(buffer[3]);
-        result.motor_temp = static_cast<uint8_t>(buffer[4]);
+        result.cap_temp = static_cast<uint8_t>(buffer[2]) - 50;
+        result.mcu_temp = static_cast<uint8_t>(buffer[3]) - 50;
+        result.motor_temp = static_cast<uint8_t>(buffer[4]) - 50;
 
         // Парсинг резервных байт (buffer[5] и buffer[6]) или другой running_error
         result.Error =

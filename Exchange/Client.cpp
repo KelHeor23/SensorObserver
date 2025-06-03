@@ -30,7 +30,7 @@ void Client::connectToServer()
         reconnectTimer->stop(); // Остановить таймер перед новой попыткой
     }
 
-    socket->connectToHost(QHostAddress("127.0.0.1"), 8002); // Замените на адрес и порт вашего сервера
+    socket->connectToHost(QHostAddress("192.168.1.102"), 8002); // Замените на адрес и порт вашего сервера
     if (socket->waitForConnected(1000)) {
         qDebug() << "Connected to server";
         reconnectTimer->stop(); // Остановить таймер, если подключение успешно
@@ -55,8 +55,7 @@ void Client::disconnected()
 void Client::readData()
 {
     QByteArray data = socket->readAll();
-    buffer.append(data); // Записать данные в буфер
-    qDebug() << "Received data: " << data;
+    buffer.append(data); // Записать данные в буфер    
 
     emit engineSensorsDataSent(data);
 }

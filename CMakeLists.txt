@@ -53,6 +53,7 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
+            Exchange/Protocols/SensorSettingsManager.h Exchange/Protocols/SensorSettingsManager.cpp
         )
     endif()
 endif()

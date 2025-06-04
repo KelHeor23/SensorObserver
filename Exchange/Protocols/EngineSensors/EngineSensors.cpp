@@ -5,6 +5,9 @@ namespace EngineSensors {
 EngineSensors::EngineSensors(){
     nameFrame = "Датчики двигателя";
     orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+
+    for (auto &it : orderedNames)
+        fields[it].val = 0;
 }
 
 void EngineSensors::setData(std::string_view data)

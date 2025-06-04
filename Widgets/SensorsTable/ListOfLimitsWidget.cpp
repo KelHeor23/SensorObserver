@@ -3,6 +3,8 @@
 #include <QLineEdit>
 
 #include "Tools/CollapsibleGroupBox.h"
+#include "Exchange/Protocols/SensorSettingsManager.h"
+#include "qdebug.h"
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
     : QWidget{parent}
@@ -20,8 +22,13 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
     frameGroupBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     frameGroupBox->setTitle(frame->nameFrame);
 
-    for (auto it : frame->orderedNames){
+    for (auto &it : frame->orderedNames){
         SensorData &fieldData = frame->fields[it];
+
+        if (SensorSettingsManager::loadSensor(org, app, it.data(), fieldData)) {
+            qDebug() << &it << ":" << fieldData.val
+                     << "(" << fieldData.limit->min << "-" << fieldData.limit->max << ")";
+        }
 
         QHBoxLayout *hBoxLt = new QHBoxLayout(frameGroupBox);
         hBoxLt->setContentsMargins(0, 0, 0, 0);
@@ -31,22 +38,26 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         hBoxLt->addWidget(nameField);
         hBoxLt->addWidget(new QLabel("Min: ", frameGroupBox));
         QLineEdit *minTxtEdt = new QLineEdit(frameGroupBox);
-        connect(minTxtEdt, &QLineEdit::textChanged, [minTxtEdt, &fieldData](){
+        minTxtEdt->setText(QString::number(fieldData.limit->min));
+        connect(minTxtEdt, &QLineEdit::textChanged, [&it, minTxtEdt, &fieldData, this](){
             bool ok = false;
             int value = minTxtEdt->text().toInt(&ok);
             if (ok) {
                 fieldData.limit->min = value;
+                SensorSettingsManager::saveSensor(org, app, it.data(), fieldData);
             }
         });
         hBoxLt->addWidget(minTxtEdt);
 
         hBoxLt->addWidget(new QLabel("Max: ", frameGroupBox));
         QLineEdit *maxTxtEdt = new QLineEdit(frameGroupBox);
-        connect(maxTxtEdt, &QLineEdit::textChanged, [maxTxtEdt, &fieldData](){
+        maxTxtEdt->setText(QString::number(fieldData.limit->max));
+        connect(maxTxtEdt, &QLineEdit::textChanged, [&it, maxTxtEdt, &fieldData, this](){
             bool ok = false;
             int value = maxTxtEdt->text().toInt(&ok);
             if (ok) {
                 fieldData.limit->max = value;
+                SensorSettingsManager::saveSensor(org, app, it.data(), fieldData);
             }
         });
         hBoxLt->addWidget(maxTxtEdt);

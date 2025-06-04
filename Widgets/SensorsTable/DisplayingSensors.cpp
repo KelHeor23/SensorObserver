@@ -52,7 +52,9 @@ void DisplayingSensors::linkLimitsSensorsFrames(SensorsFrames& sensorFrame)
 {
     linkFrame(ENGINE, sensorFrame);
     linkFrame(VOLTAGE_REGULATORS, sensorFrame);
-    linkFrame(ESC, sensorFrame);
+    linkFrame(ESC_FRAME1, sensorFrame);
+    linkFrame(ESC_FRAME2, sensorFrame);
+    linkFrame(ESC_FRAME3, sensorFrame);
 }
 
 void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
@@ -69,37 +71,13 @@ void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
     }
 }
 
-void DisplayingSensors::setEngineSensorsData(std::string_view data)
+void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data)
 {
     auto& managerFrames = sensorManager->getFrames();
-    managerFrames[ENGINE]->setData(data);
-    auto fields = managerFrames[ENGINE]->getFields();
+    managerFrames[type]->setData(data);
+    auto fields = managerFrames[type]->getFields();
 
-    for (auto &it : managerFrames[ENGINE]->orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
-        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
-    }
-}
-
-void DisplayingSensors::setVoltageRegulatorsSensorsData(std::string_view data)
-{
-    auto& managerFrames = sensorManager->getFrames();
-    managerFrames[VOLTAGE_REGULATORS]->setData(data);
-    auto fields = managerFrames[VOLTAGE_REGULATORS]->getFields();
-
-    for (auto &it : managerFrames[VOLTAGE_REGULATORS]->orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
-        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
-    }
-}
-
-void DisplayingSensors::setEscSensors(uint16_t frame_id, std::string_view data)
-{
-    auto& managerFrames = sensorManager->getFrames();
-    managerFrames[ESC]->setData(data);
-    auto fields = managerFrames[ESC]->getFields();
-
-    for (auto &it : managerFrames[ESC]->orderedNames) {
+    for (auto &it : managerFrames[type]->orderedNames) {
         sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
         checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
     }

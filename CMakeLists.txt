@@ -15,24 +15,23 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 set(PROJECT_SOURCES
         main.cpp
         Widgets/MainWindow.h Widgets/MainWindow.cpp
-        Exchange/Client.h Exchange/Client.cpp
-
         Widgets/SensorsTable/DisplayingSensors.h Widgets/SensorsTable/DisplayingSensors.cpp
         Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
-        Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
-        Exchange/Protocols/Sensors.h
-        Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
-        Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
-        Common/Common.h
-        Exchange/Protocols/Constants.h
-        Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
-        Exchange/Protocols/EscSensors/Frames.h
-
         Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
-        Exchange/Protocols/Base.h
+        Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
+        Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
+        Common/Common.h        
+        Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
+        Exchange/Client.h Exchange/Client.cpp
+        Exchange/Protocols/Constants.h
+        Exchange/Protocols/Base.h
+        Exchange/Protocols/Sensors.h
         Exchange/Protocols/SensorsFrames.h Exchange/Protocols/SensorsFrames.cpp
         Exchange/Protocols/SensorSettingsManager.h Exchange/Protocols/SensorSettingsManager.cpp
+        Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
+        Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
+        Exchange/Protocols/EscSensors/Frames.h
         Exchange/Protocols/EscSensors/EscStatus1.h Exchange/Protocols/EscSensors/EscStatus1.cpp
         Exchange/Protocols/EscSensors/EscStatus2.h Exchange/Protocols/EscSensors/EscStatus2.cpp
         Exchange/Protocols/EscSensors/EscStatus3.h Exchange/Protocols/EscSensors/EscStatus3.cpp
@@ -57,6 +56,7 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
+
         )
     endif()
 endif()

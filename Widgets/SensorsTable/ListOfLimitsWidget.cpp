@@ -1,10 +1,15 @@
 #include "ListOfLimitsWidget.h"
 
 #include <QLineEdit>
+#include <QCheckBox>
+#include "qdebug.h"
+#include "qpushbutton.h"
 
 #include "Tools/CollapsibleGroupBox.h"
 #include "Exchange/Protocols/SensorSettingsManager.h"
-#include "qdebug.h"
+#include "DetailingLimitsWidget.h"
+#include "qscrollarea.h"
+
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
     : QWidget{parent}
@@ -34,7 +39,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         hBoxLt->setContentsMargins(0, 0, 0, 0);
         hBoxLt->setSpacing(5);  // небольшой фиксированный отступ между элементами
         QLabel *nameField = new QLabel(it.data(), frameGroupBox);
-        nameField->setMinimumWidth(200);
+        nameField->setMinimumWidth(250);
         hBoxLt->addWidget(nameField);
         hBoxLt->addWidget(new QLabel("Min: ", frameGroupBox));
         QLineEdit *minTxtEdt = new QLineEdit(frameGroupBox);
@@ -65,6 +70,24 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         frameGroupBox->addLayout(hBoxLt);
         minTxtEdt->setMinimumWidth(150);
         maxTxtEdt->setMinimumWidth(150);
+
+        QCheckBox *checkBox = new QCheckBox("Детал.", this);
+        checkBox->setChecked(fieldData.useDetalaizedLimits);
+        connect(checkBox, &QCheckBox::toggled, [&fieldData](int checked){
+            fieldData.useDetalaizedLimits = (checked == Qt::Checked);
+        });
+
+        hBoxLt->addWidget(checkBox);
+
+        QPushButton *openLimitsDetail(new QPushButton("...", this));
+        connect(openLimitsDetail, &QPushButton::clicked, [&fieldData](){
+            DetailingLimitsWidget *detatlsLimits(new DetailingLimitsWidget(fieldData));
+            detatlsLimits->setAttribute(Qt::WA_DeleteOnClose);
+            detatlsLimits->show();
+        });
+        hBoxLt->addWidget(openLimitsDetail);
+
+        hBoxLt->addStretch(); // Занимает свободное пространство
     }
     frameGroupBox->setExpanded(false);
     framesVBLt->addWidget(frameGroupBox, 0, Qt::AlignTop | Qt::AlignLeft);

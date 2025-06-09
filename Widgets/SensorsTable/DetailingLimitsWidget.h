@@ -17,8 +17,8 @@ public:
     explicit DetailingLimitsWidget(QWidget *parent = nullptr) = delete;
 
 public slots:
-    void addNewMinMax(SensorLimitsColored&);
-    void addNewPoint(SensorLimitsColored&);
+    void addNewMinMax(size_t);
+    void addNewPoint(size_t);
 
 signals:
 

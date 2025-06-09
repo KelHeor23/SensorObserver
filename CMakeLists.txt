@@ -56,6 +56,7 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
+            Tools/ColorButton.h Tools/ColorButton.cpp
 
         )
     endif()

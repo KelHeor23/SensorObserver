@@ -80,8 +80,8 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         hBoxLt->addWidget(checkBox);
 
         QPushButton *openLimitsDetail(new QPushButton("...", this));
-        connect(openLimitsDetail, &QPushButton::clicked, [&fieldData](){
-            DetailingLimitsWidget *detatlsLimits(new DetailingLimitsWidget(fieldData));
+        connect(openLimitsDetail, &QPushButton::clicked, [&fieldData, &it](){
+            DetailingLimitsWidget *detatlsLimits(new DetailingLimitsWidget(fieldData, it));
             detatlsLimits->setAttribute(Qt::WA_DeleteOnClose);
             detatlsLimits->show();
         });

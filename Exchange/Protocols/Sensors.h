@@ -26,6 +26,7 @@ struct SensorData {
 
     SensorData() {
         limit = std::make_shared<SensorLimits>();
+        detalaizedLimits = std::make_shared<std::vector<SensorLimitsColored>>();
     }
 
     void linkLimits(SensorData& other) {

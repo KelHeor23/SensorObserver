@@ -21,6 +21,7 @@ void ColorButton::setColor(const QColor& newColor) {
     if (newColor != m_color) {
         m_color = newColor.isValid() ? newColor : Qt::black;
         updateButton();
+        emit colorChanged(m_color);
     }
 }
 

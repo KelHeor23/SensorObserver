@@ -12,13 +12,13 @@ class DetailingLimitsWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DetailingLimitsWidget(SensorData& data, QWidget *parent = nullptr);
+    explicit DetailingLimitsWidget(SensorData& data, std::string &name, QWidget *parent = nullptr);
 
     explicit DetailingLimitsWidget(QWidget *parent = nullptr) = delete;
 
 public slots:
-    void addNewMinMax();
-    void addNewPoint();
+    void addNewMinMax(SensorLimitsColored&);
+    void addNewPoint(SensorLimitsColored&);
 
 signals:
 

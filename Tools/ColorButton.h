@@ -19,6 +19,9 @@ protected:
 private slots:
     void chooseColor();
 
+signals:
+    void colorChanged(const QColor&);
+
 private:
     QColor m_color = Qt::black;
     void updateButton();

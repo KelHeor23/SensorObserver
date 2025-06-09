@@ -25,6 +25,7 @@ signals:
 private:
     SensorData& data_t;
     QVBoxLayout *mainLt;
+    QVBoxLayout *fieldsLt;
     QHBoxLayout *buttonsLt;
     QPushButton *addNewMinMaxBtn;
     QPushButton *addNewPointBtn;

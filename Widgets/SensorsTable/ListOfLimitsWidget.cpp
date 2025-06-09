@@ -23,7 +23,7 @@ ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
 
 void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 {
-    CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox(this);
+    CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox();
     frameGroupBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     frameGroupBox->setTitle(frame->nameFrame);
 
@@ -35,7 +35,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
                      << "(" << fieldData.limit->min << "-" << fieldData.limit->max << ")";
         }
 
-        QHBoxLayout *hBoxLt = new QHBoxLayout(frameGroupBox);
+        QHBoxLayout *hBoxLt = new QHBoxLayout();
         hBoxLt->setContentsMargins(0, 0, 0, 0);
         hBoxLt->setSpacing(5);  // небольшой фиксированный отступ между элементами
         QLabel *nameField = new QLabel(it.data(), frameGroupBox);

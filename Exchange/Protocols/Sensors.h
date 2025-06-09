@@ -19,7 +19,7 @@ struct SensorLimitsColored {
 
 struct SensorData {
     std::shared_ptr<SensorLimits> limit; // Общий ресурс
-    std::shared_ptr<QList<SensorLimitsColored>> detalaizedLimits;
+    std::shared_ptr<std::vector<SensorLimitsColored>> detalaizedLimits;
 
     bool useDetalaizedLimits = false;
     int val = 0;

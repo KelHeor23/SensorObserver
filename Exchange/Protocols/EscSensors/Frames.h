@@ -90,8 +90,8 @@ struct EscStatusInfo3{
 
         // Парсинг резервных байт (buffer[5] и buffer[6]) или другой running_error
         result.Error =
-            static_cast<uint16_t>(static_cast<uint8_t>(buffer[5])) |
-            (static_cast<uint16_t>(static_cast<uint8_t>(buffer[6])) << 8);
+            static_cast<uint16_t>(static_cast<uint8_t>(buffer[6])) |
+            (static_cast<uint16_t>(static_cast<uint8_t>(buffer[7])) << 8);
 
         return result;
     }

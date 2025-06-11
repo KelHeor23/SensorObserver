@@ -12,7 +12,7 @@ class DetailingLimitsWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DetailingLimitsWidget(std::shared_ptr<SensorData> data, std::string name, QWidget *parent = nullptr);
+    explicit DetailingLimitsWidget(std::shared_ptr<SensorData> data, const std::string& name, QWidget *parent = nullptr);
 
     explicit DetailingLimitsWidget(QWidget *parent = nullptr) = delete;
 

@@ -25,17 +25,16 @@ ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
 
 void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 {
-
     CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox(this);
     frameGroupBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     frameGroupBox->setTitle(frame->nameFrame);
 
-    for (auto &it : frame->orderedNames){
+    for (auto &it : frame->orderedNames) {
         std::shared_ptr<SensorData> fieldData = std::make_shared<SensorData>(frame->fields[it]);
 
-        auto frameShared = frame; // shared_ptr для продления жизни frame
-        std::string sensorName = it;  // копия имени сенсора
-        std::shared_ptr<SensorData> fieldDataPtr(fieldData);
+        auto frameShared = frame;
+        std::string sensorName = it;  // Локальная копия
+        std::shared_ptr<SensorData> fieldDataPtr = fieldData;  // Корректное копирование!
 
         if (SensorSettingsManager::loadSensor(org, app, it.data(), *fieldData)) {
             qDebug() << &it << ":" << fieldData->val
@@ -43,55 +42,59 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         }
 
         QHBoxLayout *hBoxLt = new QHBoxLayout();
-        hBoxLt->setContentsMargins(0, 0, 0, 0);
-        hBoxLt->setSpacing(5);  // небольшой фиксированный отступ между элементами
-        QLabel *nameField = new QLabel(it.data(), frameGroupBox);
-        nameField->setMinimumWidth(250);
+        hBoxLt->setContentsMargins(5, 2, 5, 2);  // Улучшенные отступы
+        hBoxLt->setSpacing(5);
+
+        QLabel *nameField = new QLabel(QString::fromStdString(it), frameGroupBox);
+        nameField->setMinimumWidth(150);  // Более подходящий размер
         hBoxLt->addWidget(nameField);
+
+        // Min field
         hBoxLt->addWidget(new QLabel("Min: ", frameGroupBox));
         QLineEdit *minTxtEdt = new QLineEdit(frameGroupBox);
-        minTxtEdt->setValidator(new QIntValidator);
+        minTxtEdt->setValidator(new QIntValidator(INT_MIN, INT_MAX, this));
         minTxtEdt->setText(QString::number(fieldData->limit->min));
-        connect(minTxtEdt, &QLineEdit::textChanged, [&it, minTxtEdt, &fieldData, this](){
-            bool ok = false;
-            int value = minTxtEdt->text().toInt(&ok);
-            if (ok) {
-                fieldData->limit->min = value;
-                SensorSettingsManager::saveSensor(org, app, it.data(), *fieldData);
-            }
-        });
+        minTxtEdt->setMinimumWidth(100);
+
+        connect(minTxtEdt, &QLineEdit::textChanged,
+                [sensorName, fieldData, this, minTxtEdt]() {  // Захват по значению
+                    bool ok = false;
+                    int value = minTxtEdt->text().toInt(&ok);
+                    if (ok) {
+                        fieldData->limit->min = value;
+                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), *fieldData);
+                    }
+                });
         hBoxLt->addWidget(minTxtEdt);
 
+        // Max field
         hBoxLt->addWidget(new QLabel("Max: ", frameGroupBox));
         QLineEdit *maxTxtEdt = new QLineEdit(frameGroupBox);
-        maxTxtEdt->setValidator(new QIntValidator);
+        maxTxtEdt->setValidator(new QIntValidator(INT_MIN, INT_MAX, this));
         maxTxtEdt->setText(QString::number(fieldData->limit->max));
-        connect(maxTxtEdt, &QLineEdit::textChanged, [&it, maxTxtEdt, &fieldData, this](){
-            bool ok = false;
-            int value = maxTxtEdt->text().toInt(&ok);
-            if (ok) {
-            fieldData->limit->max = value;
-                SensorSettingsManager::saveSensor(org, app, it.data(), *fieldData);
-            }
-        });
+        maxTxtEdt->setMinimumWidth(100);
+
+        connect(maxTxtEdt, &QLineEdit::textChanged,
+                [sensorName, fieldData, this, maxTxtEdt]() {  // Захват по значению
+                    bool ok = false;
+                    int value = maxTxtEdt->text().toInt(&ok);
+                    if (ok) {
+                        fieldData->limit->max = value;
+                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), *fieldData);
+                    }
+                });
         hBoxLt->addWidget(maxTxtEdt);
 
-        frameGroupBox->addLayout(hBoxLt);
-        minTxtEdt->setMinimumWidth(150);
-        maxTxtEdt->setMinimumWidth(150);
-
-        QCheckBox *checkBox = new QCheckBox("Детал.", this);
+        // Checkbox
+        QCheckBox *checkBox = new QCheckBox("Детал.", frameGroupBox);
         checkBox->setChecked(fieldData->useDetalaizedLimits);
-
-        connect(checkBox, &QCheckBox::toggled, [frameShared, fieldDataPtr](bool checked) {
-            qDebug() << "Checkbox state changed to:" << checked;
+        connect(checkBox, &QCheckBox::toggled, [fieldDataPtr](bool checked) {
             fieldDataPtr->useDetalaizedLimits = checked;
-            qDebug() << "New value in fieldData:" << fieldDataPtr->useDetalaizedLimits;
         });
-
         hBoxLt->addWidget(checkBox);
 
-        QPushButton *openLimitsDetail(new QPushButton("...", this));
+        // Details button
+        QPushButton *openLimitsDetail = new QPushButton("...", frameGroupBox);
         connect(openLimitsDetail, &QPushButton::clicked, [frameShared, fieldDataPtr, sensorName]() {
             DetailingLimitsWidget *detatlsLimits = new DetailingLimitsWidget(fieldDataPtr, sensorName);
             detatlsLimits->setAttribute(Qt::WA_DeleteOnClose);
@@ -99,8 +102,10 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         });
         hBoxLt->addWidget(openLimitsDetail);
 
-        hBoxLt->addStretch(); // Занимает свободное пространство
+        hBoxLt->addStretch();
+        frameGroupBox->addLayout(hBoxLt);
     }
+
     frameGroupBox->setExpanded(false);
     framesVBLt->addWidget(frameGroupBox, 0, Qt::AlignTop | Qt::AlignLeft);
 }

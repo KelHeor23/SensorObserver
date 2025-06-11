@@ -2,6 +2,7 @@
 
 #include <QLabel>
 #include <QLineEdit>
+#include <QIntValidator>
 
 #include "Tools/ColorButton.h"
 #include "qdebug.h"
@@ -54,10 +55,12 @@ void DetailingLimitsWidget::addNewMinMax(size_t index)
 
     QLabel *lblMin = new QLabel("Min:", this);
     QLineEdit *minTxtEdt = new QLineEdit(this);
+    minTxtEdt->setValidator(new QIntValidator);
     minTxtEdt->setText(QString::number(field.limit.min));
 
     QLabel *lblMax = new QLabel("Max:", this);
     QLineEdit *maxTxtEdt = new QLineEdit(this);
+    maxTxtEdt->setValidator(new QIntValidator);
     maxTxtEdt->setText(QString::number(field.limit.max));
 
     ColorButton *colorBtn = new ColorButton(this);

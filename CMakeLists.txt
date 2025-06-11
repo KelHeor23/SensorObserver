@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
         Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
         Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
         Common/Common.h        
+        Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
         Exchange/Client.h Exchange/Client.cpp
@@ -56,7 +57,6 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
-            Tools/ColorButton.h Tools/ColorButton.cpp
 
         )
     endif()

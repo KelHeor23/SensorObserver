@@ -4,6 +4,7 @@
 #include <QCheckBox>
 #include "qdebug.h"
 #include "qpushbutton.h"
+#include <QIntValidator>
 
 #include "Tools/CollapsibleGroupBox.h"
 #include "Exchange/Protocols/SensorSettingsManager.h"
@@ -43,6 +44,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         hBoxLt->addWidget(nameField);
         hBoxLt->addWidget(new QLabel("Min: ", frameGroupBox));
         QLineEdit *minTxtEdt = new QLineEdit(frameGroupBox);
+        minTxtEdt->setValidator(new QIntValidator);
         minTxtEdt->setText(QString::number(fieldData.limit->min));
         connect(minTxtEdt, &QLineEdit::textChanged, [&it, minTxtEdt, &fieldData, this](){
             bool ok = false;
@@ -56,6 +58,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 
         hBoxLt->addWidget(new QLabel("Max: ", frameGroupBox));
         QLineEdit *maxTxtEdt = new QLineEdit(frameGroupBox);
+        maxTxtEdt->setValidator(new QIntValidator);
         maxTxtEdt->setText(QString::number(fieldData.limit->max));
         connect(maxTxtEdt, &QLineEdit::textChanged, [&it, maxTxtEdt, &fieldData, this](){
             bool ok = false;

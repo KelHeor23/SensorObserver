@@ -26,18 +26,24 @@ void DisplayingSensors::addWidgets(std::string_view name)
     mainLayout->insertLayout(mainLayout->count() - 1, row);
 }
 
-void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, std::shared_ptr<SensorLimits> lim)
+void DisplayingSensors::checkRangeValues(QLabel *lbl, SensorData &field)
 {
     QPalette palette = lbl->palette();
-    if (lim->min < lim->max) {
-        double threshold = 0.15 * (lim->max - lim->min);
-        if (val < lim->min || val > lim->max)
+    if (field.limit->min < field.limit->max) {
+        double threshold = 0.15 * (field.limit->max - field.limit->min);
+        if (field.val < field.limit->min || field.val > field.limit->max)
             palette.setColor(QPalette::Window, Qt::red);
-        else if (val <= lim->min + threshold || val >= lim->max - threshold) {
+        else if (field.val <= field.limit->min + threshold || field.val >= field.limit->max - threshold) {
             palette.setColor(QPalette::Window, Qt::yellow);
         }
         else
             palette.setColor(QPalette::Window, Qt::transparent);
+    }
+    if (field.useDetalaizedLimits) {
+        for (auto &it : *field.detalaizedLimits) {
+            if (field.val >= it.limit.min && field.val <= it.limit.max)
+               palette.setColor(QPalette::Window, it.color);
+        }
     }
     lbl->setPalette(palette);
     lbl->setAutoFillBackground(true); // Включаем перерисовку фона
@@ -79,7 +85,7 @@ void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data)
 
     for (auto &it : managerFrames[type]->orderedNames) {
         sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
-        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
+        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()]);
     }
 }
 

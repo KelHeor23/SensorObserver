@@ -12,7 +12,7 @@ class DetailingLimitsWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DetailingLimitsWidget(SensorData& data, std::string &name, QWidget *parent = nullptr);
+    explicit DetailingLimitsWidget(std::shared_ptr<SensorData> data, std::string name, QWidget *parent = nullptr);
 
     explicit DetailingLimitsWidget(QWidget *parent = nullptr) = delete;
 
@@ -23,7 +23,7 @@ public slots:
 signals:
 
 private:
-    SensorData& data_t;
+    std::shared_ptr<SensorData> data_t;
     QVBoxLayout *mainLt;
     QVBoxLayout *fieldsLt;
     QHBoxLayout *buttonsLt;

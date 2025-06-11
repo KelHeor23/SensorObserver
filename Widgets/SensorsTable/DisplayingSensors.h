@@ -23,7 +23,7 @@ public:
 
 public slots:
     void addWidgets(std::string_view);
-    void checkRangeValues(QLabel *, int val, std::shared_ptr<SensorLimits> lim);
+    void checkRangeValues(QLabel *, SensorData &filed);
 
 private:    
     QVBoxLayout *mainLayout;

@@ -25,16 +25,21 @@ ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
 
 void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 {
+
     CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox(this);
     frameGroupBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     frameGroupBox->setTitle(frame->nameFrame);
 
     for (auto &it : frame->orderedNames){
-        SensorData &fieldData = frame->fields[it];
+        std::shared_ptr<SensorData> fieldData = std::make_shared<SensorData>(frame->fields[it]);
 
-        if (SensorSettingsManager::loadSensor(org, app, it.data(), fieldData)) {
-            qDebug() << &it << ":" << fieldData.val
-                     << "(" << fieldData.limit->min << "-" << fieldData.limit->max << ")";
+        auto frameShared = frame; // shared_ptr для продления жизни frame
+        std::string sensorName = it;  // копия имени сенсора
+        std::shared_ptr<SensorData> fieldDataPtr(fieldData);
+
+        if (SensorSettingsManager::loadSensor(org, app, it.data(), *fieldData)) {
+            qDebug() << &it << ":" << fieldData->val
+                     << "(" << fieldData->limit->min << "-" << fieldData->limit->max << ")";
         }
 
         QHBoxLayout *hBoxLt = new QHBoxLayout();
@@ -46,13 +51,13 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         hBoxLt->addWidget(new QLabel("Min: ", frameGroupBox));
         QLineEdit *minTxtEdt = new QLineEdit(frameGroupBox);
         minTxtEdt->setValidator(new QIntValidator);
-        minTxtEdt->setText(QString::number(fieldData.limit->min));
+        minTxtEdt->setText(QString::number(fieldData->limit->min));
         connect(minTxtEdt, &QLineEdit::textChanged, [&it, minTxtEdt, &fieldData, this](){
             bool ok = false;
             int value = minTxtEdt->text().toInt(&ok);
             if (ok) {
-                fieldData.limit->min = value;
-                SensorSettingsManager::saveSensor(org, app, it.data(), fieldData);
+                fieldData->limit->min = value;
+                SensorSettingsManager::saveSensor(org, app, it.data(), *fieldData);
             }
         });
         hBoxLt->addWidget(minTxtEdt);
@@ -60,13 +65,13 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         hBoxLt->addWidget(new QLabel("Max: ", frameGroupBox));
         QLineEdit *maxTxtEdt = new QLineEdit(frameGroupBox);
         maxTxtEdt->setValidator(new QIntValidator);
-        maxTxtEdt->setText(QString::number(fieldData.limit->max));
+        maxTxtEdt->setText(QString::number(fieldData->limit->max));
         connect(maxTxtEdt, &QLineEdit::textChanged, [&it, maxTxtEdt, &fieldData, this](){
             bool ok = false;
             int value = maxTxtEdt->text().toInt(&ok);
             if (ok) {
-                fieldData.limit->max = value;
-                SensorSettingsManager::saveSensor(org, app, it.data(), fieldData);
+            fieldData->limit->max = value;
+                SensorSettingsManager::saveSensor(org, app, it.data(), *fieldData);
             }
         });
         hBoxLt->addWidget(maxTxtEdt);
@@ -76,16 +81,19 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         maxTxtEdt->setMinimumWidth(150);
 
         QCheckBox *checkBox = new QCheckBox("Детал.", this);
-        checkBox->setChecked(fieldData.useDetalaizedLimits);
-        connect(checkBox, &QCheckBox::toggled, [&fieldData](int checked){
-            fieldData.useDetalaizedLimits = (checked == Qt::Checked);
+        checkBox->setChecked(fieldData->useDetalaizedLimits);
+
+        connect(checkBox, &QCheckBox::toggled, [frameShared, fieldDataPtr](bool checked) {
+            qDebug() << "Checkbox state changed to:" << checked;
+            fieldDataPtr->useDetalaizedLimits = checked;
+            qDebug() << "New value in fieldData:" << fieldDataPtr->useDetalaizedLimits;
         });
 
         hBoxLt->addWidget(checkBox);
 
         QPushButton *openLimitsDetail(new QPushButton("...", this));
-        connect(openLimitsDetail, &QPushButton::clicked, [&fieldData, &it](){
-            DetailingLimitsWidget *detatlsLimits(new DetailingLimitsWidget(fieldData, it));
+        connect(openLimitsDetail, &QPushButton::clicked, [frameShared, fieldDataPtr, sensorName]() {
+            DetailingLimitsWidget *detatlsLimits = new DetailingLimitsWidget(fieldDataPtr, sensorName);
             detatlsLimits->setAttribute(Qt::WA_DeleteOnClose);
             detatlsLimits->show();
         });

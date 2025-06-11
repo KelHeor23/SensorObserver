@@ -7,7 +7,7 @@
 #include "Tools/ColorButton.h"
 #include "qdebug.h"
 
-DetailingLimitsWidget::DetailingLimitsWidget(SensorData &data, std::string &name, QWidget *parent)
+DetailingLimitsWidget::DetailingLimitsWidget(std::shared_ptr<SensorData> data, std::string name, QWidget *parent)
     : QWidget{parent}
     , data_t(data)
     , mainLt(new QVBoxLayout())
@@ -22,18 +22,18 @@ DetailingLimitsWidget::DetailingLimitsWidget(SensorData &data, std::string &name
 
     // Добавление новых элементов по индексу
     connect(addNewMinMaxBtn, &QPushButton::clicked, this, [this](){
-        data_t.detalaizedLimits->push_back(SensorLimitsColored{{0, 0}, QColor(Qt::black)});
-        addNewMinMax(data_t.detalaizedLimits->size() - 1); // Передаём индекс
+        data_t->detalaizedLimits->push_back(SensorLimitsColored{{0, 0}, QColor(Qt::black)});
+        addNewMinMax(data_t->detalaizedLimits->size() - 1); // Передаём индекс
     });
 
     connect(addNewPointBtn, &QPushButton::clicked, this, [this](){
-        data_t.detalaizedLimits->push_back(SensorLimitsColored{{0, 0}, QColor(Qt::black)});
-        addNewPoint(data_t.detalaizedLimits->size() - 1); // Передаём индекс
+        data_t->detalaizedLimits->push_back(SensorLimitsColored{{0, 0}, QColor(Qt::black)});
+        addNewPoint(data_t->detalaizedLimits->size() - 1); // Передаём индекс
     });
 
     // Итерация по индексам
-    for (size_t i = 0; i < data_t.detalaizedLimits->size(); ++i) {
-        auto& it = (*data_t.detalaizedLimits)[i];
+    for (size_t i = 0; i < data_t->detalaizedLimits->size(); ++i) {
+        auto& it = (*data_t->detalaizedLimits)[i];
         if (it.limit.min == it.limit.max)
             addNewPoint(i); // Передаём индекс
         else
@@ -51,7 +51,7 @@ void DetailingLimitsWidget::addNewMinMax(size_t index)
     tmpLt->setContentsMargins(0, 0, 0, 0);
     tmpLt->setSpacing(5);
 
-    auto& field = (*data_t.detalaizedLimits)[index]; // Доступ по индексу
+    auto& field = (*data_t->detalaizedLimits)[index]; // Доступ по индексу
 
     QLabel *lblMin = new QLabel("Min:", this);
     QLineEdit *minTxtEdt = new QLineEdit(this);
@@ -70,17 +70,17 @@ void DetailingLimitsWidget::addNewMinMax(size_t index)
     connect(minTxtEdt, &QLineEdit::textChanged, [this, index](const QString& text) {
         bool ok;
         double value = text.toDouble(&ok);
-        if (ok) (*data_t.detalaizedLimits)[index].limit.min = value;
+        if (ok) (*data_t->detalaizedLimits)[index].limit.min = value;
     });
 
     connect(maxTxtEdt, &QLineEdit::textChanged, [this, index](const QString& text) {
         bool ok;
         double value = text.toDouble(&ok);
-        if (ok) (*data_t.detalaizedLimits)[index].limit.max = value;
+        if (ok) (*data_t->detalaizedLimits)[index].limit.max = value;
     });
 
     connect(colorBtn, &ColorButton::colorChanged, [this, index](const QColor& color) {
-        (*data_t.detalaizedLimits)[index].color = color;
+        (*data_t->detalaizedLimits)[index].color = color;
     });
 
     tmpLt->addWidget(lblMin);
@@ -98,7 +98,7 @@ void DetailingLimitsWidget::addNewPoint(size_t index)
     tmpLt->setContentsMargins(0, 0, 0, 0);
     tmpLt->setSpacing(5);
 
-    auto& field = (*data_t.detalaizedLimits)[index]; // Доступ по индексу
+    auto& field = (*data_t->detalaizedLimits)[index]; // Доступ по индексу
 
     QLabel *lblPoint = new QLabel("Point:", this);
     QLineEdit *pointTxtEdt = new QLineEdit(this);
@@ -112,13 +112,13 @@ void DetailingLimitsWidget::addNewPoint(size_t index)
         bool ok;
         double value = text.toDouble(&ok);
         if (ok) {
-            auto& limit = (*data_t.detalaizedLimits)[index].limit;
+            auto& limit = (*data_t->detalaizedLimits)[index].limit;
             limit.min = limit.max = value;
         }
     });
 
     connect(colorBtn, &ColorButton::colorChanged, [this, index](const QColor& color) {
-        (*data_t.detalaizedLimits)[index].color = color;
+        (*data_t->detalaizedLimits)[index].color = color;
     });
 
     tmpLt->addWidget(lblPoint);

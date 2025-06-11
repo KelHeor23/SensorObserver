@@ -35,6 +35,7 @@ CollapsibleGroupBox::CollapsibleGroupBox(QWidget *parent)
     // Сигналы/слоты
     connect(toggleButton, &QToolButton::clicked, this, &CollapsibleGroupBox::toggle);
     connect(headerLabel, &QToolButton::clicked, this, &CollapsibleGroupBox::toggle);
+    setLayout(mainLayout);
 }
 
 void CollapsibleGroupBox::setTitle(const QString &title) {

@@ -20,11 +20,12 @@ ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
     setMinimumWidth(700);
     framesVBLt->setContentsMargins(0, 0, 0, 0);
     framesVBLt->setSpacing(5);  // небольшой фиксированный отступ между элементами
+    setLayout(framesVBLt);
 }
 
 void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 {
-    CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox();
+    CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox(this);
     frameGroupBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     frameGroupBox->setTitle(frame->nameFrame);
 

@@ -30,11 +30,10 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
     frameGroupBox->setTitle(frame->nameFrame);
 
     for (auto &it : frame->orderedNames) {
-        std::shared_ptr<SensorData> fieldData = std::make_shared<SensorData>(frame->fields[it]);
+        std::shared_ptr<SensorData> fieldData = frame->fields[it];
 
         auto frameShared = frame;
         std::string sensorName = it;  // Локальная копия
-        std::shared_ptr<SensorData> fieldDataPtr = fieldData;
 
         if (SensorSettingsManager::loadSensor(org, app, it.data(), *fieldData)) {
             qDebug() << &it << ":" << fieldData->val
@@ -88,15 +87,17 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         // Checkbox
         QCheckBox *checkBox = new QCheckBox("Детал.", frameGroupBox);
         checkBox->setChecked(fieldData->useDetalaizedLimits);
-        connect(checkBox, &QCheckBox::toggled, [fieldDataPtr](bool checked) {
-            fieldDataPtr->useDetalaizedLimits = checked;
+        connect(checkBox, &QCheckBox::toggled, [fieldData](bool checked) {
+            qDebug() << "checked:" << checked;
+            fieldData->useDetalaizedLimits = checked;
+            qDebug() << "New value in fieldData:" << fieldData->useDetalaizedLimits;
         });
         hBoxLt->addWidget(checkBox);
 
         // Details button
         QPushButton *openLimitsDetail = new QPushButton("...", frameGroupBox);
-        connect(openLimitsDetail, &QPushButton::clicked, [frameShared, fieldDataPtr, sensorName]() {
-            DetailingLimitsWidget *detatlsLimits = new DetailingLimitsWidget(fieldDataPtr, sensorName);
+        connect(openLimitsDetail, &QPushButton::clicked, [frameShared, fieldData, sensorName]() {
+            DetailingLimitsWidget *detatlsLimits = new DetailingLimitsWidget(fieldData, sensorName);
             detatlsLimits->setAttribute(Qt::WA_DeleteOnClose);
             detatlsLimits->show();
         });

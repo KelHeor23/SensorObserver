@@ -9,7 +9,7 @@
 class BaseProtocol {
 
 public:
-    std::unordered_map<SensorName, SensorData>& getFields() {
+    std::unordered_map<SensorName, std::shared_ptr<SensorData>>& getFields() {
         return fields;
     }
 
@@ -18,7 +18,7 @@ public:
 public:
     QString nameFrame;
     std::vector<SensorName> orderedNames;
-    std::unordered_map<SensorName, SensorData> fields;
+    std::unordered_map<SensorName, std::shared_ptr<SensorData>> fields;
 
 };
 

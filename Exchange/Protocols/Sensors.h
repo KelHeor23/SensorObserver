@@ -29,12 +29,12 @@ struct SensorData {
         detalaizedLimits = std::make_shared<std::vector<SensorLimitsColored>>();
     }
 
-    void linkLimits(SensorData& other) {
-        limit = other.limit;  // Используем тот же shared_ptr
+    void linkLimits(std::shared_ptr<SensorData> other) {
+        limit = other->limit;  // Используем тот же shared_ptr
     }
 
-    void linkDetalaizedLimits(SensorData& other) {
-        detalaizedLimits = other.detalaizedLimits;  // Используем тот же shared_ptr
+    void linkDetalaizedLimits(std::shared_ptr<SensorData> other) {
+        detalaizedLimits = other->detalaizedLimits;  // Используем тот же shared_ptr
     }
 };
 

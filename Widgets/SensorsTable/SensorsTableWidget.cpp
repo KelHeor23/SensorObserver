@@ -67,7 +67,7 @@ void SensorsTableWidget::readEngineSensorsMsg(uint8_t num, const QByteArray &dat
     auto frame = displayngSensors[num]->getSensorManager()->getFrames()[ENGINE]->fields;
 
     if (num % 2 == 0) {
-        vibrationDirections[num / 2]->update(frame["Амплитуда биения"].val / 1000, frame["Угол биения"].val);
+        vibrationDirections[num / 2]->update(frame["Амплитуда биения"]->val / 1000, frame["Угол биения"]->val);
     }
 }
 

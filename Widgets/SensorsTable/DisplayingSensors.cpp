@@ -2,7 +2,7 @@
 
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent)
-    ,mainLayout(new QVBoxLayout(this))
+    ,mainLayout(new QVBoxLayout())
     ,sensorManager(std::make_unique<SensorsFrames>())
 {
     setLayout(mainLayout);
@@ -11,7 +11,7 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
 
 void DisplayingSensors::addWidgets(std::string_view name)
 {
-    QHBoxLayout *row = new QHBoxLayout(this);
+    QHBoxLayout *row = new QHBoxLayout();
     QLabel *labelVal = new QLabel("Значение", this);
     sensorsDataLabels[name.data()] = labelVal;
     labelVal->setMaximumHeight(30);

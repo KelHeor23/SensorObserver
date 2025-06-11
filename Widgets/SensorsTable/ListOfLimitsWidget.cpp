@@ -14,7 +14,7 @@
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
     : QWidget{parent}
-    ,framesVBLt(new QVBoxLayout(this))
+    ,framesVBLt(new QVBoxLayout())
 {
     setWindowTitle("Список датчиков");
     setMinimumWidth(700);

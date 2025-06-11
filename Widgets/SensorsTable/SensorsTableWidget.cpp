@@ -8,7 +8,7 @@
 
 SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}
-    ,mainHBoxLt(new QHBoxLayout(this))
+    ,mainHBoxLt(new QHBoxLayout())
     ,placeholderWidget(new QWidget(this))
     ,sensorsManager(sensorsManager_t)
     ,client(new Client(this))
@@ -41,8 +41,8 @@ void SensorsTableWidget::engineSensorsVisual()
     QHBoxLayout *engineSensorsHBLt;
 
     for (int i = 0; i < vibrationDirections.size(); i++){
-        engineVBoxLt = new QVBoxLayout(this);
-        engineSensorsHBLt = new QHBoxLayout(this);
+        engineVBoxLt = new QVBoxLayout();
+        engineSensorsHBLt = new QHBoxLayout();
         vibrationDirections[i]->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         engineVBoxLt->addWidget(vibrationDirections[i]);
         engineSensorsHBLt->addWidget(displayngSensors[i * 2]);

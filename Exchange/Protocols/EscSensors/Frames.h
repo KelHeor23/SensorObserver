@@ -1,8 +1,6 @@
 #ifndef FRAMES_H
 #define FRAMES_H
 
-#include "qdebug.h"
-#include "qglobal.h"
 #include <cstdint>
 
 namespace EscSensors {

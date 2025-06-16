@@ -17,9 +17,6 @@ signals:
 
 private:
     QVBoxLayout *framesVBLt;
-
-    const QString org = "Breez";
-    const QString app = "SensorApp";
 };
 
 #endif // LISTOFLIMITSWIDGET_H

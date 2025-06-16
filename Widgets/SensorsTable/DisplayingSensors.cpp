@@ -2,7 +2,7 @@
 
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent)
-    ,mainLayout(new QVBoxLayout(this))
+    ,mainLayout(new QVBoxLayout())
     ,sensorManager(std::make_unique<SensorsFrames>())
 {
     setLayout(mainLayout);
@@ -11,7 +11,7 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
 
 void DisplayingSensors::addWidgets(std::string_view name)
 {
-    QHBoxLayout *row = new QHBoxLayout(this);
+    QHBoxLayout *row = new QHBoxLayout();
     QLabel *labelVal = new QLabel("Значение", this);
     sensorsDataLabels[name.data()] = labelVal;
     labelVal->setMaximumHeight(30);
@@ -26,21 +26,50 @@ void DisplayingSensors::addWidgets(std::string_view name)
     mainLayout->insertLayout(mainLayout->count() - 1, row);
 }
 
-void DisplayingSensors::checkRangeValues(QLabel *lbl, int val, std::shared_ptr<SensorLimits> lim)
+void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData> field)
 {
     QPalette palette = lbl->palette();
-    if (lim->min < lim->max) {
-        double threshold = 0.15 * (lim->max - lim->min);
-        if (val < lim->min || val > lim->max)
-            palette.setColor(QPalette::Window, Qt::red);
-        else if (val <= lim->min + threshold || val >= lim->max - threshold) {
-            palette.setColor(QPalette::Window, Qt::yellow);
+    const int value = field->val;  // Кэшируем значение
+    const auto& limits = *field->detalaizedLimits;  // Ссылка на вектор
+
+    // 1. Проверка детализированных лимитов (если включены)
+    if (field->settings->useDetalaizedLimits) {
+        for (const auto& it : limits) {
+            if (value >= it.limit.min && value <= it.limit.max) {
+                palette.setColor(QPalette::Window, it.color);
+                lbl->setPalette(palette);
+                lbl->setAutoFillBackground(true);
+                return;  // Выходим сразу после установки цвета
+            }
         }
-        else
-            palette.setColor(QPalette::Window, Qt::transparent);
     }
+
+    // 2. Проверка основных лимитов (только если min < max)
+    const auto& main_limit = *field->limit;
+    if (main_limit.min >= main_limit.max) {
+        lbl->setAutoFillBackground(false);
+        return;
+    }
+
+    // Кэшируем вычисляемые значения
+    const int range = main_limit.max - main_limit.min;
+    const double threshold = 0.15 * range;
+    const int low_threshold = main_limit.min + static_cast<int>(threshold);
+    const int high_threshold = main_limit.max - static_cast<int>(threshold);
+
+    // Определение цвета по основным лимитам
+    if (value < main_limit.min || value > main_limit.max) {
+        palette.setColor(QPalette::Window, Qt::red);
+    }
+    else if (value <= low_threshold || value >= high_threshold) {
+        palette.setColor(QPalette::Window, Qt::yellow);
+    }
+    else {
+        palette.setColor(QPalette::Window, Qt::transparent);
+    }
+
     lbl->setPalette(palette);
-    lbl->setAutoFillBackground(true); // Включаем перерисовку фона
+    lbl->setAutoFillBackground(true);
 }
 
 SensorsFrames*DisplayingSensors::getSensorManager() const
@@ -66,7 +95,7 @@ void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
 
     for (auto& [name, data] : srcFrame->getFields()) {
         if (auto it = dstFrame->getFields().find(name); it != dstFrame->getFields().end()) {
-            data.linkLimits(it->second);
+            data->linksSensorData(it->second);
         }
     }
 }
@@ -75,11 +104,11 @@ void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data)
 {
     auto& managerFrames = sensorManager->getFrames();
     managerFrames[type]->setData(data);
-    auto fields = managerFrames[type]->getFields();
+    auto &fields = managerFrames[type]->getFields();
 
     for (auto &it : managerFrames[type]->orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()].val, 'f', 1));
-        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()].val, fields[it.data()].limit);
+        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()]->val, 'f', 1));
+        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()]);
     }
 }
 

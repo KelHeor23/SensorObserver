@@ -6,8 +6,10 @@ EngineSensors::EngineSensors(){
     nameFrame = "Датчики двигателя";
     orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
 
-    for (auto &it : orderedNames)
-        fields[it].val = 0;
+    for (auto &it : orderedNames){
+        fields[it] = std::make_shared<SensorData>();
+        fields[it]->val = 0;
+    }
 }
 
 void EngineSensors::setData(std::string_view data)
@@ -18,10 +20,10 @@ void EngineSensors::setData(std::string_view data)
 
     const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
 
-    fields["Обороты"].val          = static_cast<int>(receivedData->speed);
-    fields["Температура"].val      = static_cast<int>(receivedData->temperature);
-    fields["Угол биения"].val      = static_cast<int>(receivedData->runoutAngle);
-    fields["Амплитуда биения"].val = static_cast<int>(receivedData->runoutAmplitude);
+    fields["Обороты"]->val          = static_cast<int>(receivedData->speed);
+    fields["Температура"]->val      = static_cast<int>(receivedData->temperature);
+    fields["Угол биения"]->val      = static_cast<int>(receivedData->runoutAngle);
+    fields["Амплитуда биения"]->val = static_cast<int>(receivedData->runoutAmplitude);
 }
 
 }

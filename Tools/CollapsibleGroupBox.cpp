@@ -26,7 +26,7 @@ CollapsibleGroupBox::CollapsibleGroupBox(QWidget *parent)
     contentLayout->setContentsMargins(12, 0, 0, 0);
 
     // Основной layout
-    mainLayout = new QVBoxLayout(this);
+    mainLayout = new QVBoxLayout();
     mainLayout->setSpacing(0);
     mainLayout->setContentsMargins(1, 1, 1, 1);
     mainLayout->addLayout(headerLayout);
@@ -35,6 +35,7 @@ CollapsibleGroupBox::CollapsibleGroupBox(QWidget *parent)
     // Сигналы/слоты
     connect(toggleButton, &QToolButton::clicked, this, &CollapsibleGroupBox::toggle);
     connect(headerLabel, &QToolButton::clicked, this, &CollapsibleGroupBox::toggle);
+    setLayout(mainLayout);
 }
 
 void CollapsibleGroupBox::setTitle(const QString &title) {

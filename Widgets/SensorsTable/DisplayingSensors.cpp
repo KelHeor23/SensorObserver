@@ -39,7 +39,7 @@ void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData
         else
             palette.setColor(QPalette::Window, Qt::transparent);
     }
-    if (field->useDetalaizedLimits) {
+    if (field->settings->useDetalaizedLimits) {
         for (auto &it : *field->detalaizedLimits) {
             if (field->val >= it.limit.min && field->val <= it.limit.max)
                palette.setColor(QPalette::Window, it.color);
@@ -72,7 +72,7 @@ void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
 
     for (auto& [name, data] : srcFrame->getFields()) {
         if (auto it = dstFrame->getFields().find(name); it != dstFrame->getFields().end()) {
-            data->linkLimits(it->second);
+            data->linksSensorData(it->second);
         }
     }
 }
@@ -81,7 +81,7 @@ void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data)
 {
     auto& managerFrames = sensorManager->getFrames();
     managerFrames[type]->setData(data);
-    auto fields = managerFrames[type]->getFields();
+    auto &fields = managerFrames[type]->getFields();
 
     for (auto &it : managerFrames[type]->orderedNames) {
         sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()]->val, 'f', 1));

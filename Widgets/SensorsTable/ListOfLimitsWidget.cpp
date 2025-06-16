@@ -86,11 +86,11 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 
         // Checkbox
         QCheckBox *checkBox = new QCheckBox("Детал.", frameGroupBox);
-        checkBox->setChecked(fieldData->useDetalaizedLimits);
-        connect(checkBox, &QCheckBox::toggled, [fieldData](bool checked) {
+        checkBox->setChecked(fieldData->settings->useDetalaizedLimits);
+        connect(checkBox, &QCheckBox::toggled, [fieldData, it](bool checked) {
             qDebug() << "checked:" << checked;
-            fieldData->useDetalaizedLimits = checked;
-            qDebug() << "New value in fieldData:" << fieldData->useDetalaizedLimits;
+            fieldData->settings->useDetalaizedLimits = checked;
+            qDebug() << "New value in fieldData:" << fieldData->settings->useDetalaizedLimits;
         });
         hBoxLt->addWidget(checkBox);
 

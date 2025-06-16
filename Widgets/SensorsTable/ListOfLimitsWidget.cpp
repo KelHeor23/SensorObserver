@@ -33,9 +33,9 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         std::shared_ptr<SensorData> fieldData = frame->fields[it];
 
         auto frameShared = frame;
-        std::string sensorName = it;  // Локальная копия
+        QString sensorName = QString::fromStdString(it);  // Локальная копия
 
-        if (SensorSettingsManager::loadSensor(org, app, it.data(), fieldData)) {
+        if (SensorSettingsManager::loadSensor(it.data(), fieldData)) {
             qDebug() << &it << ":" << fieldData->val
                      << "(" << fieldData->limit->min << "-" << fieldData->limit->max << ")";
         }
@@ -61,7 +61,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
                     int value = minTxtEdt->text().toInt(&ok);
                     if (ok) {
                         fieldData->limit->min = value;
-                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), fieldData);
+                        SensorSettingsManager::saveSensor(sensorName, fieldData);
                     }
                 });
         hBoxLt->addWidget(minTxtEdt);
@@ -79,7 +79,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
                     int value = maxTxtEdt->text().toInt(&ok);
                     if (ok) {
                         fieldData->limit->max = value;
-                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), fieldData);
+                        SensorSettingsManager::saveSensor(sensorName, fieldData);
                     }
                 });
         hBoxLt->addWidget(maxTxtEdt);
@@ -87,10 +87,9 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         // Checkbox
         QCheckBox *checkBox = new QCheckBox("Детал.", frameGroupBox);
         checkBox->setChecked(fieldData->settings->useDetalaizedLimits);
-        connect(checkBox, &QCheckBox::toggled, [fieldData, it](bool checked) {
-            qDebug() << "checked:" << checked;
+        connect(checkBox, &QCheckBox::toggled, [fieldData, it, sensorName,  this](bool checked) {
             fieldData->settings->useDetalaizedLimits = checked;
-            qDebug() << "New value in fieldData:" << fieldData->settings->useDetalaizedLimits;
+            SensorSettingsManager::saveSensor(sensorName, fieldData);
         });
         hBoxLt->addWidget(checkBox);
 

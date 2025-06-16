@@ -6,18 +6,19 @@
 #include <QRandomGenerator>
 
 #include "Tools/ColorButton.h"
-#include "qdebug.h"
+#include "Exchange/Protocols/SensorSettingsManager.h"
 
-DetailingLimitsWidget::DetailingLimitsWidget(std::shared_ptr<SensorData> data, const std::string& name, QWidget *parent)
+DetailingLimitsWidget::DetailingLimitsWidget(std::shared_ptr<SensorData> data, QString name, QWidget *parent)
     : QWidget(parent)
     , data_t(data)
+    , sensorName(name)
     , mainLt(new QVBoxLayout(this))  // Установка родителя для layout
     , fieldsLt(new QVBoxLayout())
     , buttonsLt(new QHBoxLayout())
     , addNewMinMaxBtn(new QPushButton("Добавить MinMax", this))
     , addNewPointBtn(new QPushButton("Добавить точку", this))
 {
-    setWindowTitle("Поле " + QString::fromStdString(name));
+    setWindowTitle("Поле " + sensorName);
     buttonsLt->addWidget(addNewMinMaxBtn);
     buttonsLt->addWidget(addNewPointBtn);
 
@@ -134,4 +135,10 @@ void DetailingLimitsWidget::addNewPoint(size_t index)
     tmpLt->addWidget(colorBtn);
 
     fieldsLt->addLayout(tmpLt);
+}
+
+void DetailingLimitsWidget::closeEvent(QCloseEvent *event)
+{
+    SensorSettingsManager::saveSensor(sensorName, data_t);
+    QWidget::closeEvent(event);
 }

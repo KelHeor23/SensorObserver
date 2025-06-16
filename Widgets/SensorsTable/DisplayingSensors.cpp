@@ -29,24 +29,47 @@ void DisplayingSensors::addWidgets(std::string_view name)
 void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData> field)
 {
     QPalette palette = lbl->palette();
-    if (field->limit->min < field->limit->max) {
-        double threshold = 0.15 * (field->limit->max - field->limit->min);
-        if (field->val < field->limit->min || field->val > field->limit->max)
-            palette.setColor(QPalette::Window, Qt::red);
-        else if (field->val <= field->limit->min + threshold || field->val >= field->limit->max - threshold) {
-            palette.setColor(QPalette::Window, Qt::yellow);
-        }
-        else
-            palette.setColor(QPalette::Window, Qt::transparent);
-    }
+    const int value = field->val;  // Кэшируем значение
+    const auto& limits = *field->detalaizedLimits;  // Ссылка на вектор
+
+    // 1. Проверка детализированных лимитов (если включены)
     if (field->settings->useDetalaizedLimits) {
-        for (auto &it : *field->detalaizedLimits) {
-            if (field->val >= it.limit.min && field->val <= it.limit.max)
-               palette.setColor(QPalette::Window, it.color);
+        for (const auto& it : limits) {
+            if (value >= it.limit.min && value <= it.limit.max) {
+                palette.setColor(QPalette::Window, it.color);
+                lbl->setPalette(palette);
+                lbl->setAutoFillBackground(true);
+                return;  // Выходим сразу после установки цвета
+            }
         }
     }
+
+    // 2. Проверка основных лимитов (только если min < max)
+    const auto& main_limit = *field->limit;
+    if (main_limit.min >= main_limit.max) {
+        lbl->setAutoFillBackground(false);
+        return;
+    }
+
+    // Кэшируем вычисляемые значения
+    const int range = main_limit.max - main_limit.min;
+    const double threshold = 0.15 * range;
+    const int low_threshold = main_limit.min + static_cast<int>(threshold);
+    const int high_threshold = main_limit.max - static_cast<int>(threshold);
+
+    // Определение цвета по основным лимитам
+    if (value < main_limit.min || value > main_limit.max) {
+        palette.setColor(QPalette::Window, Qt::red);
+    }
+    else if (value <= low_threshold || value >= high_threshold) {
+        palette.setColor(QPalette::Window, Qt::yellow);
+    }
+    else {
+        palette.setColor(QPalette::Window, Qt::transparent);
+    }
+
     lbl->setPalette(palette);
-    lbl->setAutoFillBackground(true); // Включаем перерисовку фона
+    lbl->setAutoFillBackground(true);
 }
 
 SensorsFrames*DisplayingSensors::getSensorManager() const

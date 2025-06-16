@@ -23,11 +23,11 @@ public:
 
     // Сохранить отдельный сенсор
     static bool saveSensor(const QString& organization, const QString& appName,
-                           const QString& sensorName, const SensorData& data);
+                           const QString& sensorName, std::shared_ptr<SensorData> data);
 
     // Загрузить отдельный сенсор
     static bool loadSensor(const QString& organization, const QString& appName,
-                           const QString& sensorName, SensorData& outData);
+                           const QString& sensorName, std::shared_ptr<SensorData> outData);
 
     // Удалить отдельный сенсор
     static bool removeSensor(const QString& organization, const QString& appName,

@@ -55,19 +55,19 @@ bool SensorSettingsManager::loadAll(const QString &organization, const QString &
     return settings.status() == QSettings::NoError;
 }
 
-bool SensorSettingsManager::saveSensor(const QString &organization, const QString &appName, const QString &sensorName, const SensorData &data) {
+bool SensorSettingsManager::saveSensor(const QString &organization, const QString &appName, const QString &sensorName, std::shared_ptr<SensorData> data) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
 
     settings.beginGroup("Sensors/" + sensorName);
-    settings.setValue("value", data.val);
-    settings.setValue("min_limit", data.limit->min);
-    settings.setValue("max_limit", data.limit->max);
+    settings.setValue("value", data->val);
+    settings.setValue("min_limit", data->limit->min);
+    settings.setValue("max_limit", data->limit->max);
     settings.endGroup();
 
     return settings.status() == QSettings::NoError;
 }
 
-bool SensorSettingsManager::loadSensor(const QString &organization, const QString &appName, const QString &sensorName, SensorData &outData) {
+bool SensorSettingsManager::loadSensor(const QString &organization, const QString &appName, const QString &sensorName, std::shared_ptr<SensorData> outData) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
 
     settings.beginGroup("Sensors/" + sensorName);
@@ -77,9 +77,9 @@ bool SensorSettingsManager::loadSensor(const QString &organization, const QStrin
         return false;
     }
 
-    outData.val = settings.value("value", 0).toInt();
-    outData.limit->min = settings.value("min_limit", 0).toInt();
-    outData.limit->max = settings.value("max_limit", 0).toInt();
+    outData->val = settings.value("value", 0).toInt();
+    outData->limit->min = settings.value("min_limit", 0).toInt();
+    outData->limit->max = settings.value("max_limit", 0).toInt();
 
     settings.endGroup();
     return settings.status() == QSettings::NoError;

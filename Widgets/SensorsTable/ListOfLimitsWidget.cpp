@@ -35,7 +35,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
         auto frameShared = frame;
         std::string sensorName = it;  // Локальная копия
 
-        if (SensorSettingsManager::loadSensor(org, app, it.data(), *fieldData)) {
+        if (SensorSettingsManager::loadSensor(org, app, it.data(), fieldData)) {
             qDebug() << &it << ":" << fieldData->val
                      << "(" << fieldData->limit->min << "-" << fieldData->limit->max << ")";
         }
@@ -61,7 +61,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
                     int value = minTxtEdt->text().toInt(&ok);
                     if (ok) {
                         fieldData->limit->min = value;
-                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), *fieldData);
+                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), fieldData);
                     }
                 });
         hBoxLt->addWidget(minTxtEdt);
@@ -79,7 +79,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
                     int value = maxTxtEdt->text().toInt(&ok);
                     if (ok) {
                         fieldData->limit->max = value;
-                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), *fieldData);
+                        SensorSettingsManager::saveSensor(org, app, sensorName.data(), fieldData);
                     }
                 });
         hBoxLt->addWidget(maxTxtEdt);

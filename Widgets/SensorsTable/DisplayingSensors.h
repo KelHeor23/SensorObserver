@@ -2,7 +2,7 @@
 #define DISPLAYINGSENSORS_H
 
 #include <QWidget>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
 
@@ -28,7 +28,7 @@ public slots:
     void checkRangeValues(ColorProgressBar *, std::shared_ptr<SensorData> field);
 
 private:    
-    QVBoxLayout *mainLayout;
+    QGridLayout *mainLayout;
     std::unique_ptr<SensorsFrames> sensorManager;
     std::unordered_map<QString, QLabel *> sensorsDataLabels;
     std::unordered_map<QString, ColorProgressBar *> sensorsColorProgressBarDataLabels;

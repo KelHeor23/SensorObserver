@@ -2,32 +2,39 @@
 
 DisplayingSensors::DisplayingSensors(QWidget *parent)
     : QWidget(parent)
-    ,mainLayout(new QVBoxLayout())
+    ,mainLayout(new QGridLayout())
     ,sensorManager(std::make_unique<SensorsFrames>())
 {
     setLayout(mainLayout);
-    mainLayout->addStretch();
+    mainLayout->setColumnStretch(1, 1);  // Прогресс-бары будут растягиваться
+    mainLayout->setColumnMinimumWidth(0, 150); // Фиксированная ширина для меток (опционально)
+    mainLayout->setAlignment(Qt::AlignTop);
+    mainLayout->setColumnMinimumWidth(1, 80);
 }
 
 void DisplayingSensors::addWidgets(std::string_view name)
 {
-    QHBoxLayout *row = new QHBoxLayout();
-    //QLabel *labelVal = new QLabel("Значение", this);
-    //sensorsDataLabels[name.data()] = labelVal;
+    QLabel *labelName = new QLabel(QString::fromStdString(std::string(name)), this);
 
     ColorProgressBar *pb = new ColorProgressBar(this);
     sensorsColorProgressBarDataLabels[name.data()] = pb;
-    //labelVal->setMaximumHeight(30);
-    QLabel *labelName = new QLabel(name.data(), this);
-    //labelVal->setMaximumHeight(30);
-    //labelVal->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    row->addWidget(labelName);
-    //row->addWidget(labelVal);
-    row->addWidget(pb);
 
-    row->addSpacing(20);
+    // Получаем текущий индекс строки
+    int row = mainLayout->rowCount();
 
-    mainLayout->insertLayout(mainLayout->count() - 1, row);
+    // Добавляем элементы в сетку
+    mainLayout->addWidget(labelName, row, 0);          // Столбец 0: метка
+    mainLayout->addWidget(pb, row, 1);                 // Столбец 1: прогресс-бар
+    mainLayout->addItem(new QSpacerItem(20, 20), row, 2); // Столбец 2: отступ
+
+    // Устанавливаем растяжение для последней строки (чтобы контент был прижат к верху)
+    //mainLayout->setRowStretch(row + 1, 1);
+
+    // Для выравнивания текста меток по правому краю
+    labelName->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+    // Для установки фиксированной высоты строк
+    mainLayout->setRowMinimumHeight(row, 20);
 }
 
 /*void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData> field)

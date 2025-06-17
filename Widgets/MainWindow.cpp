@@ -26,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     for (auto it : sensorsManager->getFrames()){
         listOfLimitsWdgt->addNewFrame(it.second);
     }
-
-    listOfLimitsWdgt->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void MainWindow::close()

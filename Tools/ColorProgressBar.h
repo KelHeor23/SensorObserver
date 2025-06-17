@@ -14,14 +14,14 @@ public:
     explicit ColorProgressBar(QWidget *parent = nullptr);
 
     int value() const { return m_value; }
+    int minimum() const { return m_minimum; }
     int maximum() const { return m_maximum; }
     QColor color() const { return m_color; }
 
 public slots:
     void setValue(int value);
-
+    void setMinimum(int minimum);
     void setMaximum(int maximum);
-
     void setColor(const QColor &color);
 
 protected:
@@ -29,7 +29,8 @@ protected:
 
 private:
     int m_value;
-    int m_maximum;
-    QColor m_color;
+    int m_minimum = 0;   // Добавлено минимальное значение
+    int m_maximum = 1000;
+    QColor m_color = Qt::blue;
 };
 #endif // COLORPROGRESSBAR_H

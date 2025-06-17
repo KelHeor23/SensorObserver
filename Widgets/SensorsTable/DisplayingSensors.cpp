@@ -12,21 +12,25 @@ DisplayingSensors::DisplayingSensors(QWidget *parent)
 void DisplayingSensors::addWidgets(std::string_view name)
 {
     QHBoxLayout *row = new QHBoxLayout();
-    QLabel *labelVal = new QLabel("Значение", this);
-    sensorsDataLabels[name.data()] = labelVal;
-    labelVal->setMaximumHeight(30);
-    QLabel *labelName = new QLabel(name.data(), this);
-    labelVal->setMaximumHeight(30);
-    labelVal->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    row->addWidget(labelName);
-    row->addWidget(labelVal);
+    //QLabel *labelVal = new QLabel("Значение", this);
+    //sensorsDataLabels[name.data()] = labelVal;
 
-    row->addSpacerItem(new QSpacerItem(20, 29));
+    ColorProgressBar *pb = new ColorProgressBar(this);
+    sensorsColorProgressBarDataLabels[name.data()] = pb;
+    //labelVal->setMaximumHeight(30);
+    QLabel *labelName = new QLabel(name.data(), this);
+    //labelVal->setMaximumHeight(30);
+    //labelVal->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    row->addWidget(labelName);
+    //row->addWidget(labelVal);
+    row->addWidget(pb);
+
+    row->addSpacing(20);
 
     mainLayout->insertLayout(mainLayout->count() - 1, row);
 }
 
-void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData> field)
+/*void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData> field)
 {
     QPalette palette = lbl->palette();
     const int value = field->val;  // Кэшируем значение
@@ -70,6 +74,48 @@ void DisplayingSensors::checkRangeValues(QLabel *lbl, std::shared_ptr<SensorData
 
     lbl->setPalette(palette);
     lbl->setAutoFillBackground(true);
+}*/
+
+void DisplayingSensors::checkRangeValues(ColorProgressBar *pb, std::shared_ptr<SensorData> field){
+    const int value = field->val;  // Кэшируем значение
+    const auto& limits = *field->detalaizedLimits;  // Ссылка на вектор
+
+    pb->setMinimum(field->limit->min);
+    pb->setMaximum(field->limit->max);
+
+    // 1. Проверка детализированных лимитов (если включены)
+    if (field->settings->useDetalaizedLimits) {
+        for (const auto& it : limits) {
+            if (value >= it.limit.min && value <= it.limit.max) {
+                pb->setColor(it.color);
+                return;  // Выходим сразу после установки цвета
+            }
+        }
+    }
+
+    // 2. Проверка основных лимитов (только если min < max)
+    const auto& main_limit = *field->limit;
+    if (main_limit.min >= main_limit.max) {
+        pb->setColor(Qt::transparent);
+        return;
+    }
+
+    // Кэшируем вычисляемые значения
+    const int range = main_limit.max - main_limit.min;
+    const double threshold = 0.15 * range;
+    const int low_threshold = main_limit.min + static_cast<int>(threshold);
+    const int high_threshold = main_limit.max - static_cast<int>(threshold);
+
+    // Определение цвета по основным лимитам
+    if (value < main_limit.min || value > main_limit.max) {
+        pb->setColor(Qt::red);
+    }
+    else if (value <= low_threshold || value >= high_threshold) {
+        pb->setColor(Qt::yellow);
+    }
+    else {
+        pb->setColor(Qt::green);
+    }
 }
 
 SensorsFrames*DisplayingSensors::getSensorManager() const
@@ -107,8 +153,10 @@ void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data)
     auto &fields = managerFrames[type]->getFields();
 
     for (auto &it : managerFrames[type]->orderedNames) {
-        sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()]->val, 'f', 1));
-        checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()]);
+        //sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()]->val, 'f', 1));
+        //checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()]);
+        sensorsColorProgressBarDataLabels[it.data()]->setValue(fields[it.data()]->val);
+        checkRangeValues(sensorsColorProgressBarDataLabels[it.data()], fields[it.data()]);
     }
 }
 

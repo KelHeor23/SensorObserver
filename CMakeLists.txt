@@ -24,6 +24,7 @@ set(PROJECT_SOURCES
         Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
+        Tools/SaveToCSV.h Tools/SaveToCSV.cpp
         Exchange/Client.h Exchange/Client.cpp
         Exchange/Protocols/Constants.h
         Exchange/Protocols/Base.h
@@ -57,7 +58,6 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
-
         )
     endif()
 endif()

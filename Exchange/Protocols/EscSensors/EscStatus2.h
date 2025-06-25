@@ -8,7 +8,7 @@ class EscStatus2 : public BaseProtocol
 {
 public:
     EscStatus2();
-    void setData(std::string_view data) override;
+    void setData(std::string_view data, int16_t node_id) override;
 };
 }
 

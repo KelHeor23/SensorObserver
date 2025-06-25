@@ -1,22 +1,15 @@
 #ifndef SAVETOCSV_H
 #define SAVETOCSV_H
 
-#include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
 #include <thread>
 #include <mutex>
-#include <queue>
 #include <condition_variable>
-#include <iomanip>
-#include <sstream>
 #include <atomic>
-#include <chrono>
 #include <cstdint>
 #include <unordered_map>
 #include <optional>
-#include <iomanip>
 
 #include "Exchange/Protocols/EngineSensors/EngineSensors.h"
 #include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
@@ -33,16 +26,22 @@ struct DeviceData {
 };
 
 class UnifiedCsvWriter {
+private:
+    UnifiedCsvWriter(const std::string& filename, uint64_t flush_interval_ms = 20);
+
 public:
-    UnifiedCsvWriter(const std::string& filename, uint64_t flush_interval_ms = 100);
+    static UnifiedCsvWriter& Instance(){
+        static UnifiedCsvWriter temp("sensors.csv");
+        return temp;
+    }
 
     ~UnifiedCsvWriter();
 
     void addEngineData(const EngineSensors::EngineSensorsData& data);
-
     void addRegulatorData(const VoltageRegulators::VoltageRegulatorsData& data);
-
-    void addEscData(uint8_t device_id, const EscSensors::EscStatusInfo1& data);
+    void addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data);
+    void addEscF2Data(uint8_t device_id, const EscSensors::EscStatusInfo2&& data);
+    void addEscF3Data(uint8_t device_id, const EscSensors::EscStatusInfo3&& data);
 
     void stop();
 

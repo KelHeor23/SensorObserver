@@ -153,15 +153,13 @@ void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
     }
 }
 
-void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data)
+void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data, int16_t node_id)
 {
     auto& managerFrames = sensorManager->getFrames();
-    managerFrames[type]->setData(data);
+    managerFrames[type]->setData(data, node_id);
     auto &fields = managerFrames[type]->getFields();
 
     for (auto &it : managerFrames[type]->orderedNames) {
-        //sensorsDataLabels[it.data()]->setText(QString::number(fields[it.data()]->val, 'f', 1));
-        //checkRangeValues(sensorsDataLabels[it.data()], fields[it.data()]);
         sensorsColorProgressBarDataLabels[it.data()]->setValue(fields[it.data()]->val);
         checkRangeValues(sensorsColorProgressBarDataLabels[it.data()], fields[it.data()]);
     }

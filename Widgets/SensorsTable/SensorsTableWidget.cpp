@@ -62,7 +62,7 @@ void SensorsTableWidget::readEngineSensorsMsg(uint8_t num, const QByteArray &dat
         return;
     }
 
-    displayngSensors[num]->setSensorsData(ENGINE, sv);
+    displayngSensors[num]->setSensorsData(ENGINE, sv, num);
 
     auto frame = displayngSensors[num]->getSensorManager()->getFrames()[ENGINE]->fields;
 
@@ -81,7 +81,7 @@ void SensorsTableWidget::readVoltageRegulatorsMsg(uint8_t num, const QByteArray 
         return;
     }
 
-    displayngSensors[num]->setSensorsData(VOLTAGE_REGULATORS, sv);
+    displayngSensors[num]->setSensorsData(VOLTAGE_REGULATORS, sv, num);
 }
 
 #include <QtEndian>
@@ -95,15 +95,15 @@ void SensorsTableWidget::parseMsg(const QByteArray& message)
 
     switch(frame_id){
     case 20022: {
-        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME1, message.mid(4).constData());
+        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME1, message.mid(4).constData(), node_id);
         break;
     }
     case 20023: {
-        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME2, message.mid(4).constData());
+        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME2, message.mid(4).constData(), node_id);
         break;
     }
     case 20024: {
-        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME3, message.mid(4).constData());
+        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME3, message.mid(4).constData(), node_id);
         break;
     }
     default: break;

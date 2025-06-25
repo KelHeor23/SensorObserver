@@ -23,7 +23,7 @@ class EngineSensors : public BaseProtocol
 public:
     EngineSensors();
 
-    void setData(std::string_view data) override;
+    void setData(std::string_view data, int16_t node_id) override;
 };
 };
 

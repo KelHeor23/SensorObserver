@@ -15,7 +15,7 @@ class DisplayingSensors : public QWidget
 public:
     explicit DisplayingSensors(QWidget *parent = nullptr);
 
-    void setSensorsData(FrameTypes type, std::string_view data);
+    void setSensorsData(FrameTypes type, std::string_view data, int16_t node_id);
     void addNewDataLabels(std::vector<SensorName> &list);
 
     SensorsFrames*getSensorManager() const;

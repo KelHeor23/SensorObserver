@@ -16,7 +16,7 @@ UnifiedCsvWriter::~UnifiedCsvWriter() {
     stop();
 }
 
-void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData &data) {
+void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData& data) {
     const uint8_t device_id = data.canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceData[device_id].engine = data;
@@ -25,7 +25,7 @@ void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData &dat
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addRegulatorData(const VoltageRegulators::VoltageRegulatorsData &data) {
+void UnifiedCsvWriter::addRegulatorData(const VoltageRegulators::VoltageRegulatorsData& data) {
     const uint8_t device_id = data.canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceData[device_id].regulator = data;
@@ -34,9 +34,28 @@ void UnifiedCsvWriter::addRegulatorData(const VoltageRegulators::VoltageRegulato
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addEscData(uint8_t device_id, const EscSensors::EscStatusInfo1 &data) {
+void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data)
+{
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceData[device_id].escF1 = data;
+    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_updated = true;
+    m_cv.notify_one();
+}
+
+void UnifiedCsvWriter::addEscF2Data(uint8_t device_id, const EscSensors::EscStatusInfo2&& data)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_deviceData[device_id].escF2 = data;
+    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_updated = true;
+    m_cv.notify_one();
+}
+
+void UnifiedCsvWriter::addEscF3Data(uint8_t device_id, const EscSensors::EscStatusInfo3&& data)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_deviceData[device_id].escF3 = data;
     m_deviceData[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();

@@ -31,7 +31,7 @@ class VoltageRegulators : public BaseProtocol
 public:
     VoltageRegulators();
 
-    void setData(std::string_view data) override;
+    void setData(std::string_view data, int16_t node_id) override;
 };
 
 };

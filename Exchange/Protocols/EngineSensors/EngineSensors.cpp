@@ -5,7 +5,7 @@ namespace EngineSensors {
 
 EngineSensors::EngineSensors(){
     nameFrame = "Датчики двигателя";
-    orderedNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+    orderedNames = sensorNames;
 
     for (auto &it : orderedNames){
         fields[it] = std::make_shared<SensorData>();

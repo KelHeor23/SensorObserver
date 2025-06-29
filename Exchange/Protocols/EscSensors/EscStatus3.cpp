@@ -6,7 +6,7 @@
 EscSensors::EscStatus3::EscStatus3()
 {
     nameFrame = "ESC Температуры";
-    orderedNames = {"cap_temp", "mcu_temp", "motor_temp", "Error"};
+    orderedNames = sensorNamesFrame3;
 
     for (auto &it : orderedNames){
         fields[it] = std::make_shared<SensorData>();

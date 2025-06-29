@@ -6,7 +6,7 @@
 VoltageRegulators::VoltageRegulators::VoltageRegulators()
 {
     nameFrame = "Датчики питания";
-    orderedNames = {"Входное напряжене", "ток (ампер)", "Управляющий ШИМ", "Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
+    orderedNames = sensorNames;
 
     for (auto &it : orderedNames){
         fields[it] = std::make_shared<SensorData>();

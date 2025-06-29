@@ -6,7 +6,7 @@
 EscSensors::EscStatus2::EscStatus2()
 {
     nameFrame = "ESC Питание";
-    orderedNames = {"Bus voltage", "Bus current", "Motor line current"};
+    orderedNames = sensorNamesFrame2;
 
     for (auto &it : orderedNames){
         fields[it] = std::make_shared<SensorData>();

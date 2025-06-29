@@ -4,6 +4,9 @@
 #include "Exchange/Protocols/Base.h"
 
 namespace EscSensors {
+
+static std::vector<SensorName> sensorNamesFrame1 = {"RPM motor speed", "recv_pwm", "comm_pwm"};
+
 class EscStatus1 : public BaseProtocol
 {
 public:

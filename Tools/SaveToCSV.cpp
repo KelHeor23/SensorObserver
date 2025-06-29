@@ -1,4 +1,7 @@
 #include "SaveToCSV.h"
+#include "Exchange/Protocols/EscSensors/EscStatus1.h"
+#include "Exchange/Protocols/EscSensors/EscStatus2.h"
+#include "Exchange/Protocols/EscSensors/EscStatus3.h"
 
 UnifiedCsvWriter::UnifiedCsvWriter(const std::string &filename, uint64_t flush_interval_ms)
     : m_filename(filename), m_flush_interval(flush_interval_ms),
@@ -6,9 +9,10 @@ UnifiedCsvWriter::UnifiedCsvWriter(const std::string &filename, uint64_t flush_i
     // Запись заголовка CSV
     std::ofstream file(m_filename, std::ios::out);
     if (file.is_open()) {
-        file << "timestamp,device_id,engine_speed,engine_temp,engine_angle,engine_amplitude,"
-             << "reg_voltage_hp,reg_voltage_lp,reg_current,reg_pwm,reg_voltage_a,reg_voltage_b,reg_voltage_c,"
-             << "esc_speed,esc_recv_pwm,esc_comm_pwm\n";
+        file << buildCSVheader({{"time", "device_id"}
+                                , EngineSensors::sensorNames, VoltageRegulators::sensorNames
+                                , EscSensors::sensorNamesFrame1, EscSensors::sensorNamesFrame2
+                                , EscSensors::sensorNamesFrame3});
     }
 }
 
@@ -76,6 +80,21 @@ void UnifiedCsvWriter::stop() {
     }
 }
 
+std::string UnifiedCsvWriter::buildCSVheader(const std::vector<std::vector<std::string> > &vectors) {
+    std::string result;
+    bool first = true;
+    for (const auto& vec : vectors) {
+        for (const auto& elem : vec) {
+            if (!first) {
+                result += ",";
+            }
+            result += elem;
+            first = false;
+        }
+    }
+    return result;
+}
+
 void UnifiedCsvWriter::run() {
     while (m_running) {
         std::unique_lock<std::mutex> lock(m_mutex);
@@ -130,13 +149,32 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
         file << ",,,,,,,";
     }
 
-    // ESC данные
+    // ESC1 данные
     if (data.escF1) {
         file << data.escF1->speed << ","
              << data.escF1->recv_pwm << ","
-             << data.escF1->comm_pwm;
+             << data.escF1->comm_pwm << ",";
     } else {
-        file << ",,";
+        file << ",,,";
+    }
+
+    // ESC2 данные
+    if (data.escF2) {
+        file << data.escF2->voltage << ","
+             << data.escF2->bus_current << ","
+             << data.escF2->current << ",";
+    } else {
+        file << ",,,";
+    }
+
+    // ESC3 данные
+    if (data.escF3) {
+        file << data.escF3->cap_temp << ","
+             << data.escF3->mcu_temp << ","
+             << data.escF3->motor_temp << ","
+             << data.escF3->Error;
+    } else {
+        file << ",,,";
     }
 
     file << "\n";

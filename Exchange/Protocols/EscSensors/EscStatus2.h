@@ -4,6 +4,9 @@
 #include "Exchange/Protocols/Base.h"
 
 namespace EscSensors {
+
+static std::vector<SensorName> sensorNamesFrame2 = {"Bus voltage", "Bus current", "Motor line current"};
+
 class EscStatus2 : public BaseProtocol
 {
 public:

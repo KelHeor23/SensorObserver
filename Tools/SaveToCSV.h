@@ -46,6 +46,8 @@ public:
     void stop();
 
 private:
+    std::string buildCSVheader(const std::vector<std::vector<std::string>>& vectors);
+
     void run();
 
     void flushAllData();

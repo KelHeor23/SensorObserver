@@ -6,7 +6,7 @@
 EscSensors::EscStatus1::EscStatus1()
 {
     nameFrame = "ESC Мотор";
-    orderedNames = {"RPM motor speed", "recv_pwm", "comm_pwm"};
+    orderedNames = sensorNamesFrame1;
 
     for (auto &it : orderedNames){
         fields[it] = std::make_shared<SensorData>();

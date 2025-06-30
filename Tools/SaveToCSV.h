@@ -47,6 +47,7 @@ public:
 
 private:
     std::string buildCSVheader(const std::vector<std::vector<std::string>>& vectors);
+    std::string formatTimeWithMilliseconds(long long ms_since_epoch);
 
     void run();
 

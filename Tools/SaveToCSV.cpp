@@ -2,17 +2,18 @@
 #include "Exchange/Protocols/EscSensors/EscStatus1.h"
 #include "Exchange/Protocols/EscSensors/EscStatus2.h"
 #include "Exchange/Protocols/EscSensors/EscStatus3.h"
+#include <iomanip>
 
 UnifiedCsvWriter::UnifiedCsvWriter(const std::string &filename, uint64_t flush_interval_ms)
     : m_filename(filename), m_flush_interval(flush_interval_ms),
     m_running(true), m_thread(&UnifiedCsvWriter::run, this) {
     // Запись заголовка CSV
-    std::ofstream file(m_filename, std::ios::out);
+    std::ofstream file(m_filename, std::ios::out | std::ios::trunc);
     if (file.is_open()) {
         file << buildCSVheader({{"time", "device_id"}
                                 , EngineSensors::sensorNames, VoltageRegulators::sensorNames
                                 , EscSensors::sensorNamesFrame1, EscSensors::sensorNamesFrame2
-                                , EscSensors::sensorNamesFrame3});
+                                , EscSensors::sensorNamesFrame3, {"\n"}});
     }
 }
 
@@ -95,6 +96,22 @@ std::string UnifiedCsvWriter::buildCSVheader(const std::vector<std::vector<std::
     return result;
 }
 
+std::string UnifiedCsvWriter::formatTimeWithMilliseconds(long long ms_since_epoch) {
+    std::time_t seconds = ms_since_epoch / 1000;
+    int milliseconds = ms_since_epoch % 1000;
+
+    // Преобразуем в локальное время
+    std::tm tm = *std::localtime(&seconds);
+
+    // Формируем строку с датой и временем
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
+    // Добавляем миллисекунды с ведущими нулями
+    oss << '.' << std::setw(3) << std::setfill('0') << milliseconds;
+
+    return oss.str();
+}
+
 void UnifiedCsvWriter::run() {
     while (m_running) {
         std::unique_lock<std::mutex> lock(m_mutex);
@@ -124,8 +141,11 @@ void UnifiedCsvWriter::flushAllData() {
 }
 
 void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, const DeviceData &data) {
-    file << data.last_update << "," << static_cast<int>(device_id) << ",";
+    //file << formatTimeWithMilliseconds(data.last_update)
+    file << data.last_update
+         << "," << static_cast<int>(device_id) << ",";
 
+    file << std::fixed << std::setprecision(2);
     // Engine данные
     if (data.engine) {
         file << data.engine->speed << ","
@@ -139,7 +159,7 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
     // Регулятор данные
     if (data.regulator) {
         file << static_cast<int>(data.regulator->inputVoltageHP) << ","
-             << static_cast<int>(data.regulator->inputVoltageLP) << ","
+             //<< static_cast<int>(data.regulator->inputVoltageLP) << ","
              << static_cast<int>(data.regulator->electricCurrent) << ","
              << data.regulator->controlPWM << ","
              << static_cast<int>(data.regulator->averageVoltageA) << ","
@@ -169,9 +189,9 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
 
     // ESC3 данные
     if (data.escF3) {
-        file << data.escF3->cap_temp << ","
-             << data.escF3->mcu_temp << ","
-             << data.escF3->motor_temp << ","
+        file << static_cast<int>(data.escF3->cap_temp) << ","
+             << static_cast<int>(data.escF3->mcu_temp) << ","
+             << static_cast<int>(data.escF3->motor_temp) << ","
              << data.escF3->Error;
     } else {
         file << ",,,";

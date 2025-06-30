@@ -156,7 +156,7 @@ void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
 void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data, int16_t node_id)
 {
     auto& managerFrames = sensorManager->getFrames();
-    managerFrames[type]->setData(data, node_id);
+    managerFrames[type]->setData(data, node_id % 32);
     auto &fields = managerFrames[type]->getFields();
 
     for (auto &it : managerFrames[type]->orderedNames) {

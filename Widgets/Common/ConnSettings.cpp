@@ -11,6 +11,7 @@ ConnSettings::ConnSettings(QWidget *parent)
     , dronePortledt(new QLineEdit(this))
     , okBtn(new QPushButton("Ok", this))
     , cancelBtn(new QPushButton("Cancel", this))
+    , conSettings(new QSettings("settings", "conSettings", this))
 {
     setWindowTitle("Настройка подключения");
 
@@ -24,9 +25,13 @@ ConnSettings::ConnSettings(QWidget *parent)
     buttonsLt->addWidget(okBtn);
     buttonsLt->addWidget(cancelBtn);
 
-    mainLt->addLayout(buttonsLt);
+    connect(okBtn, &QPushButton::clicked, this, &ConnSettings::ok);
+    connect(cancelBtn, &QPushButton::clicked,  this, &ConnSettings::cancel);
 
+    mainLt->addLayout(buttonsLt);
     setLayout(mainLt);
+
+    loadSettings();
 }
 
 QString ConnSettings::getDroneIP() const
@@ -54,8 +59,55 @@ bool ConnSettings::isValidIPPort(const QString &port)
 
 void ConnSettings::setDefaultBorders()
 {
-    droneIPledt->setStyleSheet("QTextEdit { border: 0px solid black }");
-    dronePortledt->setStyleSheet("QTextEdit { border: 0px solid black }");
+    droneIPledt->setStyleSheet("QLineEdit { border: 0px solid black }");
+    dronePortledt->setStyleSheet("QLineEdit { border: 0px solid black }");
+}
+
+void ConnSettings::saveSettings()
+{
+    conSettings->setValue("droneIP", droneIP);
+    conSettings->setValue("dronePort", dronePort);
+}
+
+void ConnSettings::loadSettings()
+{
+    droneIP    = conSettings->value("droneIP", "localhost").toString();
+    dronePort  = conSettings->value("dronePort", 8021).toInt();
+
+    droneIPledt->setText(droneIP);
+    dronePortledt->setText(QString::number(dronePort));
+}
+
+void ConnSettings::ok()
+{
+    bool isFalse = false;
+
+    if (!isValidIPAddress(droneIPledt->text())){
+        droneIPledt->setStyleSheet("QLineEdit { border: 2px solid red; }");
+        isFalse = true;
+    }
+
+    if (!isValidIPPort(dronePortledt->text())){
+        dronePortledt->setStyleSheet("QLineEdit { border: 2px solid red; }");
+        isFalse = true;
+    }
+
+    if (!isFalse) {
+        droneIP    = droneIPledt->text();
+        dronePort  = dronePortledt->text().toInt();
+
+        setDefaultBorders();
+        saveSettings();
+
+        emit newConnSettings();
+        this->close();
+    }
+}
+
+void ConnSettings::cancel()
+{
+    loadSettings();
+    setDefaultBorders();
 }
 
 

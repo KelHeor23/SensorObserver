@@ -21,8 +21,15 @@ private:
     bool isValidIPAddress(const QString &ip);
     bool isValidIPPort(const QString &port);
     void setDefaultBorders();
+    void saveSettings();
+    void loadSettings();
+
+public slots:
+    void ok();
+    void cancel();
 
 signals:
+    void newConnSettings();
 
 private:
     QVBoxLayout *mainLt;

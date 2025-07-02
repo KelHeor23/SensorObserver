@@ -15,8 +15,9 @@ public:
     ~Client();
 
     void setDroneIP(const QString &newDroneIP);
-
     void setDronePort(quint16 newDronePort);
+
+    void sendMsg(const QByteArray &data);
 
 private:
     void loadSettings();

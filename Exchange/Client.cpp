@@ -35,7 +35,7 @@ void Client::connectToServer()
 
     socket->connectToHost(QHostAddress(droneIP), dronePort); // Замените на адрес и порт вашего сервера
     if (socket->waitForConnected(1000)) {
-        qDebug() << "Connected to server";
+        qDebug() << "Connected to server";        
         reconnectTimer->stop(); // Остановить таймер, если подключение успешно
     } else {
         qDebug() << "Connection failed. Trying again..." << i++;
@@ -45,9 +45,9 @@ void Client::connectToServer()
 
 void Client::connected()
 {
-    reconnectTimer->stop(); // Остановить таймер при успешном подключении
-    qDebug() << "Connected to server";
     emit connEnable();
+    reconnectTimer->stop(); // Остановить таймер при успешном подключении
+    qDebug() << "Connected to server";    
 }
 
 void Client::disconnected()
@@ -63,11 +63,20 @@ void Client::readData()
     buffer.append(data); // Записать данные в буфер    
 
     emit engineSensorsDataSent(data);
+    emit connEnable();
 }
 
 void Client::setDronePort(quint16 newDronePort)
 {
     dronePort = newDronePort;
+}
+
+void Client::sendMsg(const QByteArray &data)
+{
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->write(data); // Отправляем данные через сокет
+        socket->flush();     // Немедленная отправка без ожидания
+    }
 }
 
 void Client::loadSettings()

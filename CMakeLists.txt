@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
         Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
         Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
         Widgets/Common/ConnSettings.h Widgets/Common/ConnSettings.cpp
+        Widgets/Other//MotorControl.h Widgets/Other/MotorControl.cpp
         Common/Common.h        
         Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
@@ -58,7 +59,7 @@ else()
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(SensorObserver
-            ${PROJECT_SOURCES}            
+            ${PROJECT_SOURCES}
         )
     endif()
 endif()

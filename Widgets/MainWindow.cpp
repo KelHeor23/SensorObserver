@@ -27,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
     settingsMenu->addAction(openConnAction);
     connect(openConnAction, &QAction::triggered, this, &MainWindow::openСonnSettingsWdgt);
 
+    QMenu *otherMenu = menuBar()->addMenu(tr("Другое"));
+    QAction *motorAction = new QAction(tr("Управление двигателями"), this);
+    otherMenu->addAction(motorAction);
+    connect(motorAction, &QAction::triggered, this, &MainWindow::openMotorControlWdgt);
+
     sensorsTableWdgt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     setCentralWidget(sensorsTableWdgt); // Устанавливаем центральный виджет
@@ -56,6 +61,13 @@ void MainWindow::openListOfLimitsWdgt()
 void MainWindow::openСonnSettingsWdgt()
 {
     connSettingsWdgt->show();
+}
+
+void MainWindow::openMotorControlWdgt()
+{
+    motorControlWdgt = new MotorControl(client);
+    motorControlWdgt->setAttribute(Qt::WA_DeleteOnClose);
+    motorControlWdgt->show();
 }
 
 void MainWindow::reconnect()

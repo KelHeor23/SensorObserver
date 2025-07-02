@@ -6,6 +6,22 @@
 #include <QTimer>
 #include <QSettings>
 
+
+namespace Msg {
+
+enum Command{
+    MOTOR_CONTROL = 0x01
+};
+
+#pragma pack(push, 1) // Отключаем выравнивание
+struct MotorControlMsg {
+    Command     comand;
+    uint8_t     motorNum;
+    uint16_t    pwm;
+};
+#pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
+
+};
 class Client : public QObject
 {
     Q_OBJECT

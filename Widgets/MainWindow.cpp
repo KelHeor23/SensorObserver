@@ -7,10 +7,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent}
     , sensorsManager(std::make_shared<SensorsFrames>())
-    , sensorsTableWdgt(new SensorsTableWidget(sensorsManager, this))
-    , listOfLimitsWdgt(new ListOfLimitsWidget())
     , connSettingsWdgt(new ConnSettings())
-    , ipConnectionLbl(new QLabel("IP адрес бортового компьютера: ", this))
+    , client(new Client(this))
+    , sensorsTableWdgt(new SensorsTableWidget(sensorsManager, client, this))
+    , listOfLimitsWdgt(new ListOfLimitsWidget())    
+    , ipConnectionLbl(new QLabel("IP адрес бортового компьютера: ", this))    
 {
     QMenu *fileMenu = this->menuBar()->addMenu(tr("Файл"));
     QAction *closeAction = new QAction(tr("Закрыть"), this);
@@ -34,7 +35,12 @@ MainWindow::MainWindow(QWidget *parent)
         listOfLimitsWdgt->addNewFrame(it.second);
     }
 
+    ipConnectionLbl->setStyleSheet("color: orange;");
     statusBar()->addPermanentWidget(ipConnectionLbl); // добавляет справа, не убирается при showMessage
+    reconnect();
+    connect(connSettingsWdgt, &ConnSettings::newConnSettings, this, &MainWindow::reconnect);
+    connect(client, &Client::connEnable, [this](){ipConnectionLbl->setStyleSheet("color: green;");});
+    connect(client, &Client::connDisable, [this](){ipConnectionLbl->setStyleSheet("color: red;");});
 }
 
 void MainWindow::close()
@@ -50,4 +56,11 @@ void MainWindow::openListOfLimitsWdgt()
 void MainWindow::openСonnSettingsWdgt()
 {
     connSettingsWdgt->show();
+}
+
+void MainWindow::reconnect()
+{
+    client->setDroneIP(connSettingsWdgt->getDroneIP());
+    client->setDronePort(connSettingsWdgt->getDronePort());
+    ipConnectionLbl->setText("Drone IP:" + connSettingsWdgt->getDroneIP() + ":" + QString::number(connSettingsWdgt->getDronePort()));
 }

@@ -6,12 +6,12 @@
 #include <iostream>
 #include <ostream>
 
-SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
+SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, Client *client_t, QWidget *parent)
     : QWidget{parent}
-    ,mainHBoxLt(new QHBoxLayout())
-    ,placeholderWidget(new QWidget(this))
-    ,sensorsManager(sensorsManager_t)
-    ,client(new Client(this))
+    , mainHBoxLt(new QHBoxLayout())
+    , placeholderWidget(new QWidget(this))
+    , sensorsManager(sensorsManager_t)
+    , client(client_t)
 {
     setLayout(mainHBoxLt);
 

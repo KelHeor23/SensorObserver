@@ -19,14 +19,15 @@ private:
     void close();
     void openListOfLimitsWdgt();
     void openСonnSettingsWdgt();
+    void reconnect();
 
 private:
     std::shared_ptr<SensorsFrames> sensorsManager;
-    SensorsTableWidget  *sensorsTableWdgt;
-    ListOfLimitsWidget  *listOfLimitsWdgt;
     ConnSettings        *connSettingsWdgt;
-    QLabel              *ipConnectionLbl;
-
+    Client              *client;
+    SensorsTableWidget  *sensorsTableWdgt;
+    ListOfLimitsWidget  *listOfLimitsWdgt;    
+    QLabel              *ipConnectionLbl;    
 };
 
 #endif // MAINWINDOW_H

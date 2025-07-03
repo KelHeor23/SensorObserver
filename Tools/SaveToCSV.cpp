@@ -166,7 +166,7 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
              << static_cast<int>(data.regulator->averageVoltageB) << ","
              << static_cast<int>(data.regulator->averageVoltageC) << ",";
     } else {
-        file << ",,,,,,,";
+        file << ",,,,,,";
     }
 
     // ESC1 данные

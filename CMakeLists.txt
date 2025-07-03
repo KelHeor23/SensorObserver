@@ -27,6 +27,7 @@ set(PROJECT_SOURCES
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
         Tools/SaveToCSV.h Tools/SaveToCSV.cpp
+        Tools/ValueIncrementer.h Tools/ValueIncrementer.cpp
         Exchange/Client.h Exchange/Client.cpp
         Exchange/Protocols/Constants.h
         Exchange/Protocols/Base.h
@@ -59,7 +60,7 @@ else()
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(SensorObserver
-            ${PROJECT_SOURCES}
+            ${PROJECT_SOURCES}            
         )
     endif()
 endif()

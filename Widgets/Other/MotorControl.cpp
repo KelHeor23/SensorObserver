@@ -10,6 +10,7 @@ MotorControl::MotorControl(Client *client_t, QWidget *parent)
     , client(client_t)
     , mainLt(new QVBoxLayout)
 {
+    setWindowTitle("Управление двигателями");
     setLayout(mainLt);
 
     for (uint8_t i = 0; i < 8; i++)

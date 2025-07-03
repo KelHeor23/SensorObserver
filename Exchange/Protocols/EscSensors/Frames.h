@@ -6,9 +6,9 @@
 namespace EscSensors {
 
 struct EscStatusInfo1{
-    int32_t  speed;      // 24-bit RPM motor speed (sign-extended to 32 bits)
-    uint16_t recv_pwm;  // 0.1us units (little-endian)
-    uint16_t comm_pwm;  // 0.1us units (little-endian)
+    int32_t  speed      = 0;      // 24-bit RPM motor speed (sign-extended to 32 bits)
+    uint16_t recv_pwm   = 0;  // 0.1us units (little-endian)
+    uint16_t comm_pwm   = 0;  // 0.1us units (little-endian)
 
     static EscStatusInfo1 unpack(const char buffer[8]) {
     EscStatusInfo1 result;
@@ -40,9 +40,9 @@ struct EscStatusInfo1{
 
 #pragma pack(push, 1) // Отключаем выравнивание
 struct EscStatusInfo2{
-    uint16_t voltage;    // 0.1V Bus voltage (little-endian)
-    int16_t bus_current; // 0.1A Bus current (little-endian)
-    int16_t current;     // 0.1A Motor line current (little-endian)
+    uint16_t voltage    = 0;    // 0.1V Bus voltage (little-endian)
+    int16_t bus_current = 0; // 0.1A Bus current (little-endian)
+    int16_t current     = 0;     // 0.1A Motor line current (little-endian)
 
     static EscStatusInfo2 unpack(const char buffer[8]) {
         EscStatusInfo2 result;
@@ -73,9 +73,9 @@ struct EscStatusInfo2{
 
 #pragma pack(push, 1) // Отключаем выравнивание
 struct EscStatusInfo3{
-    uint8_t cap_temp;        // Temperature in °C (беззнаковое)
-    uint8_t mcu_temp;        // Temperature in °C (беззнаковое)
-    uint8_t motor_temp;      // Temperature in °C (беззнаковое)
+    uint8_t cap_temp    = 0;        // Temperature in °C (беззнаковое)
+    uint8_t mcu_temp    = 0;        // Temperature in °C (беззнаковое)
+    uint8_t motor_temp  = 0;      // Temperature in °C (беззнаковое)
     uint16_t Error;
 
     static EscStatusInfo3 unpack(const char buffer[8]) {

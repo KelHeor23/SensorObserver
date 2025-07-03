@@ -1,6 +1,6 @@
 #include "ValueIncrementer.h"
 
-ValueIncrementer::ValueIncrementer(double min, double max, int timeSeconds, QObject *parent)
+ValueIncrementer::ValueIncrementer(uint16_t min, uint16_t max, uint16_t timeSeconds, QObject *parent)
     : QObject(parent), m_min(min), m_max(max), m_time(timeSeconds), m_val(min)
 {
     m_timer = new QTimer(this);

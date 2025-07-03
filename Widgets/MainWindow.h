@@ -9,6 +9,7 @@
 #include "SensorsTable/ListOfLimitsWidget.h"
 #include "Common/ConnSettings.h"
 #include "Other/MotorControl.h"
+#include "Other/SmoothMotorControl.h"
 
 class MainWindow : public QMainWindow
 {
@@ -21,12 +22,14 @@ private:
     void openListOfLimitsWdgt();
     void openСonnSettingsWdgt();
     void openMotorControlWdgt();
+    void openSmoothMotorControlWdgt();
     void reconnect();
 
 private:
     std::shared_ptr<SensorsFrames> sensorsManager;
     ConnSettings        *connSettingsWdgt;
     MotorControl        *motorControlWdgt;
+    SmoothMotorControl  *smoothMotorControlWdgt;
     Client              *client;
     SensorsTableWidget  *sensorsTableWdgt;
     ListOfLimitsWidget  *listOfLimitsWdgt;    

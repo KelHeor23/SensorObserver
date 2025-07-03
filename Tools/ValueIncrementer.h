@@ -12,7 +12,7 @@ class ValueIncrementer : public QObject
     Q_OBJECT
 
 public:
-    ValueIncrementer(double min, double max, int timeSeconds, QObject* parent = nullptr);
+    ValueIncrementer(uint16_t min, uint16_t max, uint16_t timeSeconds, QObject* parent = nullptr);
 
     void start();
 

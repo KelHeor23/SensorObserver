@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
     otherMenu->addAction(motorAction);
     connect(motorAction, &QAction::triggered, this, &MainWindow::openMotorControlWdgt);
 
+    QAction *smoothMotorAction = new QAction(tr("Плавное управление двигателями"), this);
+    otherMenu->addAction(smoothMotorAction);
+    connect(smoothMotorAction, &QAction::triggered, this, &MainWindow::openSmoothMotorControlWdgt);
+
     sensorsTableWdgt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     setCentralWidget(sensorsTableWdgt); // Устанавливаем центральный виджет
@@ -68,6 +72,13 @@ void MainWindow::openMotorControlWdgt()
     motorControlWdgt = new MotorControl(client);
     motorControlWdgt->setAttribute(Qt::WA_DeleteOnClose);
     motorControlWdgt->show();
+}
+
+void MainWindow::openSmoothMotorControlWdgt()
+{
+    smoothMotorControlWdgt = new SmoothMotorControl(client);
+    smoothMotorControlWdgt->setAttribute(Qt::WA_DeleteOnClose);
+    smoothMotorControlWdgt->show();
 }
 
 void MainWindow::reconnect()

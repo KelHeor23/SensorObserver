@@ -2,11 +2,12 @@
 #define DISPLAYINGSENSORS_H
 
 #include <QWidget>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
 
 #include "Exchange/Protocols/SensorsFrames.h"
+#include "Tools/ColorProgressBar.h"
 
 class DisplayingSensors : public QWidget
 {
@@ -14,7 +15,7 @@ class DisplayingSensors : public QWidget
 public:
     explicit DisplayingSensors(QWidget *parent = nullptr);
 
-    void setSensorsData(FrameTypes type, std::string_view data);
+    void setSensorsData(FrameTypes type, std::string_view data, int16_t node_id);
     void addNewDataLabels(std::vector<SensorName> &list);
 
     SensorsFrames*getSensorManager() const;
@@ -23,12 +24,14 @@ public:
 
 public slots:
     void addWidgets(std::string_view);
-    void checkRangeValues(QLabel *, std::shared_ptr<SensorData> filed);
+    //void checkRangeValues(QLabel *, std::shared_ptr<SensorData> field);
+    void checkRangeValues(ColorProgressBar *, std::shared_ptr<SensorData> field);
 
 private:    
-    QVBoxLayout *mainLayout;
+    QGridLayout *mainLayout;
     std::unique_ptr<SensorsFrames> sensorManager;
     std::unordered_map<QString, QLabel *> sensorsDataLabels;
+    std::unordered_map<QString, ColorProgressBar *> sensorsColorProgressBarDataLabels;
 };
 
 #endif // DISPLAYINGSENSORS_H

@@ -1,12 +1,13 @@
 #ifndef ENGINESENSORS_H
 #define ENGINESENSORS_H
 
-#include <unordered_map>
 #include <vector>
 
 #include "Exchange/Protocols/Base.h"
 
 namespace EngineSensors {
+
+static std::vector<SensorName> sensorNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
 
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
@@ -23,7 +24,7 @@ class EngineSensors : public BaseProtocol
 public:
     EngineSensors();
 
-    void setData(std::string_view data) override;
+    void setData(std::string_view data, int16_t node_id) override;
 };
 };
 

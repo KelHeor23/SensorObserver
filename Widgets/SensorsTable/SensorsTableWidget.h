@@ -13,7 +13,7 @@ class SensorsTableWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent = nullptr);
+    explicit SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, Client *client_t, QWidget *parent = nullptr);
 
 private:
     void engineSensorsVisual();

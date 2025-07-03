@@ -20,10 +20,15 @@ set(PROJECT_SOURCES
         Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
         Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
         Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
+        Widgets/Common/ConnSettings.h Widgets/Common/ConnSettings.cpp
+        Widgets/Other//MotorControl.h Widgets/Other/MotorControl.cpp
+        Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
         Common/Common.h        
         Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
+        Tools/SaveToCSV.h Tools/SaveToCSV.cpp
+        Tools/ValueIncrementer.h Tools/ValueIncrementer.cpp
         Exchange/Client.h Exchange/Client.cpp
         Exchange/Protocols/Constants.h
         Exchange/Protocols/Base.h
@@ -57,7 +62,6 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
-
         )
     endif()
 endif()

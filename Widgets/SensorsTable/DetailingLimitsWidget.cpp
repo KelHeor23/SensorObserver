@@ -91,7 +91,6 @@ void DetailingLimitsWidget::addNewMinMax(size_t index)
                 (*data_t->detalaizedLimits)[index].color = color;
             });
 
-
     connect(deleteBtn, &QPushButton::clicked, [lblMin, minTxtEdt, lblMax, maxTxtEdt, colorBtn, deleteBtn, this, index](){
         lblMin->deleteLater();
         minTxtEdt->deleteLater();
@@ -128,6 +127,8 @@ void DetailingLimitsWidget::addNewPoint(size_t index)
     ColorButton *colorBtn = new ColorButton(this);
     colorBtn->setColor(field.color);
 
+    QPushButton *deleteBtn = new QPushButton("X", this);
+
     // Безопасный захват по значению
     connect(pointTxtEdt, &QLineEdit::textChanged,
             [this, index](const QString& text) {
@@ -144,7 +145,6 @@ void DetailingLimitsWidget::addNewPoint(size_t index)
                 (*data_t->detalaizedLimits)[index].color = color;
             });
 
-    QPushButton *deleteBtn = new QPushButton("X", this);
     connect(deleteBtn, &QPushButton::clicked, [lblPoint, pointTxtEdt, colorBtn, deleteBtn, this, index](){
         lblPoint->deleteLater();
         pointTxtEdt->deleteLater();

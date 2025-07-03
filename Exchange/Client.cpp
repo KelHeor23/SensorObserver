@@ -2,7 +2,9 @@
 
 #include <QHostAddress>
 
-Client::Client(QObject *parent): QObject(parent)
+Client::Client(QObject *parent)
+    : QObject(parent)
+    , conSettings(new QSettings("settings", "conSettings", this))
 {
     socket = new QTcpSocket(this);
     reconnectTimer = new QTimer(this);
@@ -13,6 +15,7 @@ Client::Client(QObject *parent): QObject(parent)
     connect(socket, &QTcpSocket::readyRead, this, &Client::readData);
     connect(reconnectTimer, &QTimer::timeout, this, &Client::connectToServer);
 
+    loadSettings();
     connectToServer(); // Первая попытка подключения
 }
 
@@ -30,9 +33,9 @@ void Client::connectToServer()
         reconnectTimer->stop(); // Остановить таймер перед новой попыткой
     }
 
-    socket->connectToHost(QHostAddress("192.168.1.102"), 8002); // Замените на адрес и порт вашего сервера
+    socket->connectToHost(QHostAddress(droneIP), dronePort); // Замените на адрес и порт вашего сервера
     if (socket->waitForConnected(1000)) {
-        qDebug() << "Connected to server";
+        qDebug() << "Connected to server";        
         reconnectTimer->stop(); // Остановить таймер, если подключение успешно
     } else {
         qDebug() << "Connection failed. Trying again..." << i++;
@@ -42,14 +45,16 @@ void Client::connectToServer()
 
 void Client::connected()
 {
+    emit connEnable();
     reconnectTimer->stop(); // Остановить таймер при успешном подключении
-    qDebug() << "Connected to server";
+    qDebug() << "Connected to server";    
 }
 
 void Client::disconnected()
 {
     qDebug() << "Disconnected. Trying to reconnect...";
     reconnectTimer->start(); // Запустить таймер для повторных попыток
+    emit connDisable();
 }
 
 void Client::readData()
@@ -58,4 +63,29 @@ void Client::readData()
     buffer.append(data); // Записать данные в буфер    
 
     emit engineSensorsDataSent(data);
+    emit connEnable();
+}
+
+void Client::setDronePort(quint16 newDronePort)
+{
+    dronePort = newDronePort;
+}
+
+void Client::sendMsg(const QByteArray &data)
+{
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->write(data); // Отправляем данные через сокет
+        socket->flush();     // Немедленная отправка без ожидания
+    }
+}
+
+void Client::loadSettings()
+{
+    droneIP    = conSettings->value("droneIP", "localhost").toString();
+    dronePort  = conSettings->value("dronePort", 8002).toInt();
+}
+
+void Client::setDroneIP(const QString &newDroneIP)
+{
+    droneIP = newDroneIP;
 }

@@ -1,11 +1,12 @@
 #include "VoltageRegulators.h"
+#include "Tools/SaveToCSV.h"
 #include <cmath>
 
 
 VoltageRegulators::VoltageRegulators::VoltageRegulators()
 {
     nameFrame = "Датчики питания";
-    orderedNames = {"Входное напряжене", "ток (ампер)", "Управляющий ШИМ", "Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
+    orderedNames = sensorNames;
 
     for (auto &it : orderedNames){
         fields[it] = std::make_shared<SensorData>();
@@ -13,7 +14,7 @@ VoltageRegulators::VoltageRegulators::VoltageRegulators()
     }
 }
 
-void VoltageRegulators::VoltageRegulators::setData(std::string_view data)
+void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_t node_id)
 {
     if (data.size() < sizeof(VoltageRegulatorsData)) {
         throw std::runtime_error("Insufficient data size");
@@ -30,4 +31,6 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data)
     fields["Среднее напряжение A"]->val         = static_cast<double>(receivedData->averageVoltageA);
     fields["Среднее напряжение B"]->val         = static_cast<double>(receivedData->averageVoltageB);
     fields["Среднее напряжение C"]->val         = static_cast<double>(receivedData->averageVoltageC);
+
+    UnifiedCsvWriter::Instance().addRegulatorData(*receivedData);
 }

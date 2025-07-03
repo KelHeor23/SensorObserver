@@ -2,14 +2,12 @@
 
 #include <QLineEdit>
 #include <QCheckBox>
-#include "qdebug.h"
 #include "qpushbutton.h"
 #include <QIntValidator>
 
 #include "Tools/CollapsibleGroupBox.h"
 #include "Exchange/Protocols/SensorSettingsManager.h"
 #include "DetailingLimitsWidget.h"
-#include "qscrollarea.h"
 
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)
@@ -30,15 +28,13 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
     frameGroupBox->setTitle(frame->nameFrame);
 
     for (auto &it : frame->orderedNames) {
+
         std::shared_ptr<SensorData> fieldData = frame->fields[it];
+
+        SensorSettingsManager::loadSensor(it.data(), fieldData);
 
         auto frameShared = frame;
         QString sensorName = QString::fromStdString(it);  // Локальная копия
-
-        if (SensorSettingsManager::loadSensor(it.data(), fieldData)) {
-            qDebug() << &it << ":" << fieldData->val
-                     << "(" << fieldData->limit->min << "-" << fieldData->limit->max << ")";
-        }
 
         QHBoxLayout *hBoxLt = new QHBoxLayout();
         hBoxLt->setContentsMargins(5, 2, 5, 2);

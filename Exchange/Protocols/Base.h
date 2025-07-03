@@ -13,8 +13,7 @@ public:
         return fields;
     }
 
-    virtual void setData(std::string_view data) = 0;
-
+    virtual void setData(std::string_view data, int16_t node_id) = 0;
 public:
     QString nameFrame;
     std::vector<SensorName> orderedNames;

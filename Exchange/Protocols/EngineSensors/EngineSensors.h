@@ -7,13 +7,12 @@
 
 namespace EngineSensors {
 
-static std::vector<SensorName> sensorNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+static std::vector<SensorName> sensorNames = {"Угол биения", "Амплитуда биения"};
 
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {
         uint32_t    canID;              // 0x1FF1200-0x1FF1207 (Младший бит - номер двигателя)
-        uint16_t    speed;              // Обороты двигателя (0 - 65535), обор/м
-        int8_t      temperature;        // Температура двигателя (-128 ... +127), градусы/10
+        bool        isCustomSensros;    // Флаг о том, что данные пришли с не вшшитых датчиков в ESc
         uint16_t    runoutAngle;        // Угол биения относительно метки на двигателе (0-359), градусы
         uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
     };

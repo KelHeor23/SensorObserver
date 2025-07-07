@@ -21,8 +21,6 @@ void EngineSensors::setData(std::string_view data, int16_t node_id)
 
     const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
 
-    fields["Обороты"]->val          = static_cast<int>(receivedData->speed);
-    fields["Температура"]->val      = static_cast<int>(receivedData->temperature);
     fields["Угол биения"]->val      = static_cast<int>(receivedData->runoutAngle);
     fields["Амплитуда биения"]->val = static_cast<int>(receivedData->runoutAmplitude);
 

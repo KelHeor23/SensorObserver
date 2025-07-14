@@ -24,18 +24,32 @@ void ValueIncrementer::start()
 
 double ValueIncrementer::value() const { return m_val; }
 
+void ValueIncrementer::stopThis()
+{
+    stop = true;
+}
+
 void ValueIncrementer::updateValue()
 {
-    if (m_val < m_max) {
-        m_val += m_step;
-        if (m_val > m_max)
-            m_val = m_max;
+    if (!stop){
+        if (m_val < m_max) {
+            m_val += m_step;
+            if (m_val > m_max)
+                m_val = m_max;
 
-        qDebug() << "Updated value:" << m_val;
-        emit valueChanged(m_val);
+            qDebug() << "Updated value:" << m_val;
+            emit valueChanged(m_val);
+        } else {
+            stop = false;
+            m_timer->stop();
+            emit finished();
+            qDebug() << "Finished at value:" << m_val;
+        }
     } else {
+        stop = false;
         m_timer->stop();
         emit finished();
         qDebug() << "Finished at value:" << m_val;
     }
+
 }

@@ -17,7 +17,7 @@ public:
     void start();
 
     double value() const;
-
+    void stopThis();
 signals:
     void valueChanged(double newVal);
     void finished();
@@ -32,6 +32,8 @@ private:
     double m_val;
     double m_step;
     QTimer* m_timer;
+
+    bool stop = false;
 };
 
 

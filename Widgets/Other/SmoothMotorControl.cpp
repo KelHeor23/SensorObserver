@@ -2,7 +2,6 @@
 #include "Tools/ValueIncrementer.h"
 
 #include <QLabel>
-#include <QLineEdit>
 #include <QIntValidator>
 #include <QPushButton>
 #include <QThread>
@@ -15,8 +14,14 @@ SmoothMotorControl::SmoothMotorControl(Client *client_t, QWidget *parent)
     setWindowTitle("Плавное управление двигателями");
     setLayout(mainLt);
 
-    for (uint8_t i = 0; i < 8; i++)
+    for (uint8_t i = 0; i < cntMototrs; i++)
         addNewMotor(i);
+
+    listOfMinMax.reserve(cntMototrs);
+
+    QPushButton *sendlAllBtn = new QPushButton("Отправить всем", this);
+    mainLt->addWidget(sendlAllBtn);
+    connect(sendlAllBtn, &QPushButton::clicked, this, &SmoothMotorControl::sendAllMotorsControlMsg);
 }
 
 void SmoothMotorControl::addNewMotor(uint8_t num)
@@ -55,7 +60,16 @@ void SmoothMotorControl::addNewMotor(uint8_t num)
     dataLt->addWidget(timeLnEdt);
 
     QPushButton *sendBtn = new QPushButton("Задать", this);
-    connect(sendBtn, &QPushButton::clicked, [num, minPwmLnEdt, this, maxPwmLnEdt, timeLnEdt](){
+    dataLt->addWidget(sendBtn);
+
+    QPushButton *stopBtn = new QPushButton("Стоп", this);
+    connect(stopBtn, &QPushButton::clicked, [num, minPwmLnEdt, this](){
+        minPwmLnEdt->setStyleSheet("QLineEdit { border: 0px solid black }");
+        sendMotorControlMsg(num, 900);
+        minPwmLnEdt->setText(QString::number(900));
+    });
+
+    connect(sendBtn, &QPushButton::clicked, [num, minPwmLnEdt, this, maxPwmLnEdt, timeLnEdt, stopBtn](){
         bool isGood = true;
 
         uint16_t tempMin = minPwmLnEdt->text().toUInt();
@@ -76,20 +90,14 @@ void SmoothMotorControl::addNewMotor(uint8_t num)
 
         uint16_t tempTime = timeLnEdt->text().toUInt();
         if (isGood) {
-            smoothControl(num, tempMin, tempMax, tempTime);
+            smoothControl(stopBtn, num, tempMin, tempMax, tempTime);
         }
-    });
-    dataLt->addWidget(sendBtn);
-
-    QPushButton *stopBtn = new QPushButton("Стоп", this);
-    connect(stopBtn, &QPushButton::clicked, [num, minPwmLnEdt, this](){
-        minPwmLnEdt->setStyleSheet("QLineEdit { border: 0px solid black }");
-        sendMotorControlMsg(num, 900);
-        minPwmLnEdt->setText(QString::number(900));
     });
     dataLt->addWidget(stopBtn);
 
     mainLt->addLayout(dataLt);
+
+    listOfMinMax.push_back(ControlsSetting{minPwmLnEdt, maxPwmLnEdt, timeLnEdt});
 }
 
 void SmoothMotorControl::sendMotorControlMsg(uint8_t num, uint16_t pwm)
@@ -102,9 +110,12 @@ void SmoothMotorControl::sendMotorControlMsg(uint8_t num, uint16_t pwm)
     client->sendMsg(byteArray);
 }
 
-void SmoothMotorControl::smoothControl(uint8_t num, uint16_t minPwm, uint16_t maxPwm, uint16_t timer)
+void SmoothMotorControl::smoothControl(QPushButton *stopBtn, uint8_t num, uint16_t minPwm, uint16_t maxPwm, uint16_t timer)
 {
     ValueIncrementer *incrementer = new ValueIncrementer(minPwm, maxPwm, timer);
+
+    if (stopBtn != nullptr)
+        connect(stopBtn, &QPushButton::clicked, [incrementer](){incrementer->stopThis();});
 
     connect(incrementer, &ValueIncrementer::valueChanged, [num, this](double val){
         sendMotorControlMsg(num, val);
@@ -114,6 +125,12 @@ void SmoothMotorControl::smoothControl(uint8_t num, uint16_t minPwm, uint16_t ma
     });
 
     incrementer->start();
+}
+
+void SmoothMotorControl::sendAllMotorsControlMsg(){
+    for (uint8_t i = 0; i < listOfMinMax.size(); i++) {
+        smoothControl(nullptr, i, listOfMinMax[i].minPwm->text().toUInt(), listOfMinMax[i].maxPwm->text().toUInt(), listOfMinMax[i].timer->text().toUInt());
+    }
 }
 
 void SmoothMotorControl::closeEvent(QCloseEvent *event) {

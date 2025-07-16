@@ -76,7 +76,7 @@ struct EscStatusInfo3{
     uint8_t cap_temp    = 0;        // Temperature in °C (беззнаковое)
     uint8_t mcu_temp    = 0;        // Temperature in °C (беззнаковое)
     uint8_t motor_temp  = 0;      // Temperature in °C (беззнаковое)
-    uint16_t Error;
+    uint16_t Error      = 0;
 
     static EscStatusInfo3 unpack(const char buffer[8]) {
         EscStatusInfo3 result;

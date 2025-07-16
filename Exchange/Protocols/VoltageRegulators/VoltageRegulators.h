@@ -11,7 +11,7 @@
 
 namespace VoltageRegulators {
 
-static std::vector<SensorName> sensorNames = {"Входное напряжене", "ток (ампер)", "Управляющий ШИМ", "Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
+static std::vector<SensorName> sensorNames = {"Среднее напряжение A", "Среднее напряжение B", "Среднее напряжение C"};
 
 #pragma pack(push, 1) // Отключаем выравнивание
 struct VoltageRegulatorsData{

@@ -7,7 +7,7 @@
 
 namespace EngineSensors {
 
-static std::vector<SensorName> sensorNames = {"Обороты", "Температура", "Угол биения", "Амплитуда биения"};
+static std::vector<SensorName> sensorNames = {"Угол биения", "Амплитуда биения"};
 
 #pragma pack(push, 1) // Отключаем выравнивание
     struct EngineSensorsData {

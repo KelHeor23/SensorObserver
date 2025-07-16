@@ -27,11 +27,11 @@ struct DeviceData {
 
 class UnifiedCsvWriter {
 private:
-    UnifiedCsvWriter(const std::string& filename, uint64_t flush_interval_ms = 20);
+    UnifiedCsvWriter(uint64_t flush_interval_ms = 20);
 
 public:
     static UnifiedCsvWriter& Instance(){
-        static UnifiedCsvWriter temp("sensors.csv");
+        static UnifiedCsvWriter temp;
         return temp;
     }
 
@@ -53,9 +53,13 @@ private:
 
     void flushAllData();
 
-    void writeDeviceData(std::ofstream& file, uint8_t device_id, const DeviceData& data);
+    void writeDeviceData(std::ofstream& file, uint8_t device_id, const DeviceData& data, bool isCustom);
 
     uint64_t getCurrentTimeMillis() const;
+
+    std::string getNewName();
+
+private:
 
     std::string m_filename;
     uint64_t m_flush_interval;
@@ -64,7 +68,8 @@ private:
     std::thread m_thread;
     std::mutex m_mutex;
     std::condition_variable m_cv;
-    std::unordered_map<uint8_t, DeviceData> m_deviceData;
+    std::unordered_map<uint8_t, DeviceData> m_deviceDataESC;
+    std::unordered_map<uint8_t, DeviceData> m_deviceDataCustom;
 };
 
 #endif // SAVETOCSV_H

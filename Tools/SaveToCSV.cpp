@@ -1,16 +1,40 @@
 #include "SaveToCSV.h"
+
+#include <QDateTime>
+#include <QDir>
+
 #include "Exchange/Protocols/EscSensors/EscStatus1.h"
 #include "Exchange/Protocols/EscSensors/EscStatus2.h"
 #include "Exchange/Protocols/EscSensors/EscStatus3.h"
+#include "qlocale.h"
 #include <iomanip>
 
-UnifiedCsvWriter::UnifiedCsvWriter(const std::string &filename, uint64_t flush_interval_ms)
-    : m_filename(filename), m_flush_interval(flush_interval_ms),
+UnifiedCsvWriter::UnifiedCsvWriter(uint64_t flush_interval_ms)
+    : m_flush_interval(flush_interval_ms),
     m_running(true), m_thread(&UnifiedCsvWriter::run, this) {
+
+    QDateTime now = QDateTime::currentDateTime();
+    QString dateString = now.date().toString("dd.MM.yy");
+    QString timeString = now.time().toString("hh:mm");
+
+    QDir dir;
+    if (!dir.exists("log")) {
+        dir.mkdir("log");
+    }
+
+    QString dateDirPath = QString("log/%1").arg(dateString);
+    if (!dir.exists(dateDirPath)) {
+        dir.mkdir(dateDirPath);
+    }
+
+    QString fileName = QString("%1_%2.csv").arg(dateString, timeString);
+    QString filePath = dateDirPath + "/" + fileName;
+
+
     // Запись заголовка CSV
-    std::ofstream file(m_filename, std::ios::out | std::ios::trunc);
+    std::ofstream file(filePath.toStdString(), std::ios::out | std::ios::trunc);
     if (file.is_open()) {
-        file << buildCSVheader({{"time", "device_id"}
+        file << buildCSVheader({{"time", "device_id", "isCustom"}
                                 , EngineSensors::sensorNames, VoltageRegulators::sensorNames
                                 , EscSensors::sensorNamesFrame1, EscSensors::sensorNamesFrame2
                                 , EscSensors::sensorNamesFrame3, {"\n"}});
@@ -24,8 +48,10 @@ UnifiedCsvWriter::~UnifiedCsvWriter() {
 void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData& data) {
     const uint8_t device_id = data.canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_deviceData[device_id].engine = data;
-    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_deviceDataCustom[device_id].engine = data;
+    m_deviceDataCustom[device_id].escF1->speed = data.speed;
+    m_deviceDataCustom[device_id].escF3->motor_temp = data.temperature;
+    m_deviceDataCustom[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
@@ -33,8 +59,11 @@ void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData& dat
 void UnifiedCsvWriter::addRegulatorData(const VoltageRegulators::VoltageRegulatorsData& data) {
     const uint8_t device_id = data.canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_deviceData[device_id].regulator = data;
-    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_deviceDataCustom[device_id].regulator = data;
+    m_deviceDataCustom[device_id].escF1->comm_pwm = data.controlPWM;
+    m_deviceDataCustom[device_id].escF2->voltage = data.inputVoltageHP | (data.inputVoltageLP & 0xF);
+    m_deviceDataCustom[device_id].escF2->current = data.electricCurrent;
+    m_deviceDataCustom[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
@@ -42,8 +71,8 @@ void UnifiedCsvWriter::addRegulatorData(const VoltageRegulators::VoltageRegulato
 void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_deviceData[device_id].escF1 = data;
-    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_deviceDataESC[device_id].escF1 = data;
+    m_deviceDataESC[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
@@ -51,8 +80,8 @@ void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, const EscSensors::EscStat
 void UnifiedCsvWriter::addEscF2Data(uint8_t device_id, const EscSensors::EscStatusInfo2&& data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_deviceData[device_id].escF2 = data;
-    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_deviceDataESC[device_id].escF2 = data;
+    m_deviceDataESC[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
@@ -60,8 +89,8 @@ void UnifiedCsvWriter::addEscF2Data(uint8_t device_id, const EscSensors::EscStat
 void UnifiedCsvWriter::addEscF3Data(uint8_t device_id, const EscSensors::EscStatusInfo3&& data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_deviceData[device_id].escF3 = data;
-    m_deviceData[device_id].last_update = getCurrentTimeMillis();
+    m_deviceDataESC[device_id].escF3 = data;
+    m_deviceDataESC[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
@@ -131,25 +160,31 @@ void UnifiedCsvWriter::flushAllData() {
     if (!file.is_open()) return;
 
     const uint64_t current_time = getCurrentTimeMillis();
-    for (auto& [device_id, data] : m_deviceData) {
+    for (auto& [device_id, data] : m_deviceDataESC) {
         // Пропуск устаревших или неполных данных
         if (current_time - data.last_update > m_flush_interval * 5) continue;
 
-        writeDeviceData(file, device_id, data);
+        writeDeviceData(file, device_id, data, false);
+    }
+    for (auto& [device_id, data] : m_deviceDataCustom) {
+        // Пропуск устаревших или неполных данных
+        if (current_time - data.last_update > m_flush_interval * 5) continue;
+
+        writeDeviceData(file, device_id, data, true);
     }
     file.flush();
 }
 
-void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, const DeviceData &data) {
+void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, const DeviceData &data, bool isCustom) {
     //file << formatTimeWithMilliseconds(data.last_update)
     file << data.last_update
-         << "," << static_cast<int>(device_id) << ",";
+         << "," << static_cast<int>(device_id) << "," << (isCustom ? 1 : 0) << ",";
 
     file << std::fixed << std::setprecision(2);
     // Engine данные
     //if (data.engine) {
-        file << data.engine->speed << ","
-             << static_cast<int>(data.engine->temperature) << ","
+        file /*<< data.engine->speed << ","
+             << static_cast<int>(data.engine->temperature) << ","*/
              << data.engine->runoutAngle << ","
              << data.engine->runoutAmplitude << ",";
     //} else {
@@ -158,10 +193,10 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
 
     // Регулятор данные
     //if (data.regulator) {
-        file << static_cast<int>(data.regulator->inputVoltageHP) << ","
+        file //<< static_cast<int>(data.regulator->inputVoltageHP) << ","
              //<< static_cast<int>(data.regulator->inputVoltageLP) << ","
-             << static_cast<int>(data.regulator->electricCurrent) << ","
-             << data.regulator->controlPWM << ","
+             //<< static_cast<int>(data.regulator->electricCurrent) << ","
+             //<< data.regulator->controlPWM << ","
              << static_cast<int>(data.regulator->averageVoltageA) << ","
              << static_cast<int>(data.regulator->averageVoltageB) << ","
              << static_cast<int>(data.regulator->averageVoltageC) << ",";
@@ -188,14 +223,14 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
     //}
 
     // ESC3 данные
-    if (data.escF3) {
+    //if (data.escF3) {
         file << static_cast<int>(data.escF3->cap_temp) << ","
              << static_cast<int>(data.escF3->mcu_temp) << ","
              << static_cast<int>(data.escF3->motor_temp) << ","
              << data.escF3->Error;
-    } else {
-        file << ",,,";
-    }
+    //} else {
+    //    file << ",,,";
+    //}
 
     file << "\n";
 }

@@ -18,6 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     fileMenu->addAction(closeAction);
     connect(closeAction, &QAction::triggered, this, &MainWindow::close);
 
+    QMenu *dataMenu = menuBar()->addMenu(tr("Данные"));
+    QAction *openSensorGraphAction = new QAction(tr("Открыть в виде графика"), this);
+    dataMenu->addAction(openSensorGraphAction);
+    connect(openSensorGraphAction, &QAction::triggered, this, &MainWindow::openDataGraphWdgt);
+
     QMenu *settingsMenu = menuBar()->addMenu(tr("Настройки"));
     QAction *openLOLAction = new QAction(tr("Список сенсоров"), this);
     settingsMenu->addAction(openLOLAction);
@@ -79,6 +84,13 @@ void MainWindow::openSmoothMotorControlWdgt()
     smoothMotorControlWdgt = new SmoothMotorControl(client);
     smoothMotorControlWdgt->setAttribute(Qt::WA_DeleteOnClose);
     smoothMotorControlWdgt->show();
+}
+
+void MainWindow::openDataGraphWdgt()
+{
+    sensorDataGraphWdgt = new SensorDataGraph();
+    sensorDataGraphWdgt->setAttribute(Qt::WA_DeleteOnClose);
+    sensorDataGraphWdgt->show();
 }
 
 void MainWindow::reconnect()

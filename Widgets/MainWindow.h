@@ -10,6 +10,7 @@
 #include "Common/ConnSettings.h"
 #include "Other/MotorControl.h"
 #include "Other/SmoothMotorControl.h"
+#include "Widgets/SensorDataGraph/SensorDataGraph.h"
 
 class MainWindow : public QMainWindow
 {
@@ -23,6 +24,7 @@ private:
     void openСonnSettingsWdgt();
     void openMotorControlWdgt();
     void openSmoothMotorControlWdgt();
+    void openDataGraphWdgt();
     void reconnect();
 
 private:
@@ -32,7 +34,8 @@ private:
     SmoothMotorControl  *smoothMotorControlWdgt;
     Client              *client;
     SensorsTableWidget  *sensorsTableWdgt;
-    ListOfLimitsWidget  *listOfLimitsWdgt;    
+    ListOfLimitsWidget  *listOfLimitsWdgt;
+    SensorDataGraph     *sensorDataGraphWdgt;
     QLabel              *ipConnectionLbl;    
 };
 

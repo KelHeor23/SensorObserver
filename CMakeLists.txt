@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
         Widgets/Common/ConnSettings.h Widgets/Common/ConnSettings.cpp
         Widgets/Other//MotorControl.h Widgets/Other/MotorControl.cpp
         Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
+        Widgets/SensorDataGraph/SensorDataGraph.cpp Widgets/SensorDataGraph/SensorDataGraph.h
         Common/Common.h        
         Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp

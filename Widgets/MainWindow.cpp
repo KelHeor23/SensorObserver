@@ -88,7 +88,7 @@ void MainWindow::openSmoothMotorControlWdgt()
 
 void MainWindow::openDataGraphWdgt()
 {
-    sensorDataGraphWdgt = new SensorDataGraph();
+    sensorDataGraphWdgt = new SensorDataGraph(sensorsManager);
     sensorDataGraphWdgt->setAttribute(Qt::WA_DeleteOnClose);
     sensorDataGraphWdgt->show();
 }

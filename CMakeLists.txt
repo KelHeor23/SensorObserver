@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network PrintSupport)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network PrintSupport)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -21,7 +21,7 @@ set(PROJECT_SOURCES
         Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
         Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
         Widgets/Common/ConnSettings.h Widgets/Common/ConnSettings.cpp
-        Widgets/Other//MotorControl.h Widgets/Other/MotorControl.cpp
+        Widgets/Other/MotorControl.h Widgets/Other/MotorControl.cpp
         Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
         Widgets/SensorDataGraph/SensorDataGraph.cpp Widgets/SensorDataGraph/SensorDataGraph.h
         Common/Common.h        
@@ -42,6 +42,7 @@ set(PROJECT_SOURCES
         Exchange/Protocols/EscSensors/EscStatus1.h Exchange/Protocols/EscSensors/EscStatus1.cpp
         Exchange/Protocols/EscSensors/EscStatus2.h Exchange/Protocols/EscSensors/EscStatus2.cpp
         Exchange/Protocols/EscSensors/EscStatus3.h Exchange/Protocols/EscSensors/EscStatus3.cpp
+        Libs/QCustomPlot/qcustomplot.cpp Libs/QCustomPlot/qcustomplot.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -67,8 +68,9 @@ else()
     endif()
 endif()
 
-target_link_libraries(SensorObserver PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
-target_include_directories(SensorObserver PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(SensorObserver PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/Libs/QCustomPlot")
+
+target_link_libraries(SensorObserver PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::PrintSupport)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

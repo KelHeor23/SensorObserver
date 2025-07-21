@@ -12,6 +12,7 @@ public:
     explicit SensorDataGraph(QWidget *parent = nullptr);
 
 private:
+    void setDarkstyle();
 
 signals:
 

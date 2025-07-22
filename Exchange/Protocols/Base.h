@@ -19,6 +19,12 @@ public:
     std::vector<SensorName> orderedNames;
     std::unordered_map<SensorName, std::shared_ptr<SensorData>> fields;
 
+    QString getNameFrame() const;
 };
+
+inline QString BaseProtocol::getNameFrame() const
+{
+    return nameFrame;
+}
 
 #endif // BASE_H

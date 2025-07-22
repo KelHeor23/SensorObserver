@@ -95,11 +95,15 @@ void SensorDataGraph::fillSensorsList()
     sensorsListTreeWdgt->setMaximumWidth(300);
 
     // Пример данных: группы и элементы
-    QList<QPair<QString, QStringList>> groups = {
-        {"Fruits", {"Apple", "Banana", "Orange"}},
-        {"Vegetables", {"Carrot", "Broccoli", "Spinach"}},
-        {"Colors", {"Red", "Green", "Blue"}}
-    };
+    QList<QPair<QString, QStringList>> groups;
+
+    for (auto &it : sensorsManager->getFrames()) {
+        QPair<QString, QStringList> temp;
+        temp.first = it.second->getNameFrame();
+        for (auto &field : it.second->getFields())
+            temp.second.push_back(QString::fromStdString(field.first));
+        groups.push_back(temp);
+    }
 
     // Заполняем дерево
     for (const auto &group : groups) {

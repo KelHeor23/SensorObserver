@@ -6,6 +6,7 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
     , m_plot(new QCustomPlot(this))
     , sensorsListTreeWdgt(new QTreeWidget)
     , sensorsManager(sensorsManager_t)
+    , m_timer(new QTimer(this))
 {
     setWindowTitle("График данных");
 
@@ -17,40 +18,18 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
     mainLt->addLayout(hboxLt);
 
     fillSensorsList();
-    setDarkstyle();
+    settingPlot();
 
-    m_plot->addGraph();
-    m_plot->graph(0)->setPen(QPen(Qt::blue)); // line color blue for first graph
-    m_plot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20))); // first graph will be filled with translucent blue
-    m_plot->addGraph();
-    m_plot->graph(1)->setPen(QPen(Qt::red)); // line color red for second graph
-    // generate some points of data (y0 for first, y1 for second graph):
-    QVector<double> x(251), y0(251), y1(251);
-    for (int i=0; i<251; ++i)
-    {
-        x[i] = i;
-        y0[i] = qExp(-i/150.0)*qCos(i/10.0); // exponentially decaying cosine
-        y1[i] = qExp(-i/150.0);              // exponential envelope
-    }
-    // configure right and top axis to show ticks but no labels:
-    // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
-    m_plot->xAxis2->setVisible(true);
-    m_plot->xAxis2->setTickLabels(false);
-    m_plot->yAxis2->setVisible(true);
-    m_plot->yAxis2->setTickLabels(false);
-    // make left and bottom axes always transfer their ranges to right and top axes:
-    connect(m_plot->xAxis, SIGNAL(rangeChanged(QCPRange)), m_plot->xAxis2, SLOT(setRange(QCPRange)));
-    connect(m_plot->yAxis, SIGNAL(rangeChanged(QCPRange)), m_plot->yAxis2, SLOT(setRange(QCPRange)));
-    // pass data points to graphs:
-    m_plot->graph(0)->setData(x, y0);
-    m_plot->graph(1)->setData(x, y1);
-    // let the ranges scale themselves so graph 0 fits perfectly in the visible area:
-    m_plot->graph(0)->rescaleAxes();
-    // same thing for graph 1, but only enlarge ranges (in case graph 1 is smaller than graph 0):
-    m_plot->graph(1)->rescaleAxes(true);
-    // Note: we could have also just called m_plot->rescaleAxes(); instead
-    // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
+    connect(m_timer, &QTimer::timeout, this, &SensorDataGraph::addNewData);
+    m_timer->start(40);  // мс интервал
+}
+
+void SensorDataGraph::settingPlot()
+{
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    m_plot->legend->setVisible(true);
+    m_plot->legend->setFont(QFont("Helvetica", 9));
+    setDarkstyle();
 }
 
 void SensorDataGraph::setDarkstyle()
@@ -120,12 +99,58 @@ void SensorDataGraph::fillSensorsList()
             childItem->setText(0, item);
         }
         // Разворачиваем группу по умолчанию
-        groupItem->setExpanded(true);
+        groupItem->setExpanded(false);
     }
 
     // Обработка изменений состояния чекбоксов
-    QObject::connect(sensorsListTreeWdgt, &QTreeWidget::itemChanged, [](QTreeWidgetItem *item, int column) {
-        if (column != 0) return;
-        qDebug() << "Item changed:" << item->text(0) << "State:" << item->checkState(0);
-    });
+    QObject::connect(sensorsListTreeWdgt, &QTreeWidget::itemChanged, this, &SensorDataGraph::onItemChanged);
+}
+
+QColor SensorDataGraph::getColor()
+{
+    static int i = 0;
+    QColor color = QColor(qSin(i*1+1.2)*80+80, qSin(i*0.3+0)*80+80, qSin(i*0.3+1.5)*80+80);
+    i++;
+    return color;
+}
+
+void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
+{
+    if (column != 0) return;
+
+    QString sensorName = item->text(0);
+    bool isChecked = (item->checkState(0) == Qt::Checked);
+
+    if (isChecked) {
+        QCPGraph *graph = m_plot->addGraph();
+        graph->setName(sensorName);
+
+        graphMap[sensorName] = graph;
+
+        // Настраиваем внешний вид
+        QColor color(getColor());
+        graph->setPen(QPen(color, 2));
+        graph->setName(sensorName);
+    } else {
+        if (graphMap.contains(sensorName)) {
+            m_plot->removeGraph(graphMap[sensorName]);
+            graphMap.remove(sensorName);
+        }
+    }
+    m_plot->rescaleAxes();
+    m_plot->replot();
+}
+
+void SensorDataGraph::addNewData()
+{
+    static int i = 0;
+    for (auto it = graphMap.constBegin(); it != graphMap.constEnd(); ++it) {
+        QString key = it.key();
+        QTime time = QTime::currentTime();
+
+        graphMap[key]->addData(i, sensorsManager->fastFind(key.toStdString())->val);
+    }
+    m_plot->rescaleAxes();
+    m_plot->replot();
+    i++;
 }

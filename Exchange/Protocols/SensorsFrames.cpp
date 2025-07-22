@@ -13,9 +13,29 @@ SensorsFrames::SensorsFrames()
     frames[ESC_FRAME3] = std::make_shared<EscSensors::EscStatus3>();
     frames[ENGINE] = std::make_shared<EngineSensors::EngineSensors>();
     frames[VOLTAGE_REGULATORS] = std::make_shared<VoltageRegulators::VoltageRegulators>();
+
+    rebuildIndex();
 }
 
 std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol>>& SensorsFrames::getFrames()
 {
     return frames;
+}
+
+std::shared_ptr<SensorData> SensorsFrames::fastFind(const SensorName &name) const {
+    auto it = index.find(name);
+    if ( it != index.end()) {
+        return it->second.lock();
+    }
+    return nullptr;
+}
+
+void SensorsFrames::rebuildIndex()
+{
+    index.clear();
+    for (const auto& frame : frames) {
+        for (const auto& field : frame.second->fields) {
+            index[field.first] = field.second;
+        }
+    }
 }

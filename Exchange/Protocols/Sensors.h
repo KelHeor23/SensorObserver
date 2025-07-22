@@ -26,7 +26,7 @@ struct SensorData {
     std::shared_ptr<std::vector<SensorLimitsColored>> detalaizedLimits;
     std::shared_ptr<SensorSharedSettings> settings; // Общий ресурс
 
-    int val = 0;
+    double val = 0;
 
     SensorData() {
         limit = std::make_shared<SensorLimits>();

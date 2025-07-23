@@ -21,7 +21,7 @@ bool SensorSettingsManager::saveAll(const SensorHashTable &data) {
 
     for (auto it = data.begin(); it != data.end(); ++it) {
         settings.beginGroup(it->first);
-        settings.setValue("value", it->second.val);
+        settings.setValue("value", it->second.val.load());
         settings.setValue("min_limit", it->second.limit->min);
         settings.setValue("max_limit", it->second.limit->max);
         settings.setValue("useDetalaizedLimits", it->second.settings->useDetalaizedLimits);
@@ -97,7 +97,7 @@ bool SensorSettingsManager::saveSensor(const QString &sensorName, std::shared_pt
     QSettings settings(getConfigPath(), QSettings::IniFormat);
 
     settings.beginGroup("Sensors/" + sensorName);
-    settings.setValue("value", data->val);
+    settings.setValue("value", data->val.load());
     settings.setValue("min_limit", data->limit->min);
     settings.setValue("max_limit", data->limit->max);
     settings.setValue("useDetalaizedLimits", data->settings->useDetalaizedLimits);

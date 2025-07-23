@@ -5,6 +5,7 @@
 #include "Exchange/Protocols/EscSensors/EscStatus2.h"
 #include "Exchange/Protocols/EscSensors/EscStatus3.h"
 #include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
+#include "qdebug.h"
 
 SensorsFrames::SensorsFrames()
 {
@@ -24,10 +25,11 @@ std::unordered_map<FrameTypes, std::shared_ptr<BaseProtocol>>& SensorsFrames::ge
 
 std::shared_ptr<SensorData> SensorsFrames::fastFind(const SensorName &name) const {
     auto it = index.find(name);
-    if ( it != index.end()) {
-        return it->second.lock();
+    if (it == index.end()) {
+        qDebug() << "Датчик не найден:" << &name; // Логировать отсутствующие имена
+        return nullptr;
     }
-    return nullptr;
+    return it->second.lock();
 }
 
 void SensorsFrames::rebuildIndex()

@@ -1,9 +1,9 @@
 #include "DisplayingSensors.h"
 
-DisplayingSensors::DisplayingSensors(QWidget *parent)
+DisplayingSensors::DisplayingSensors(std::shared_ptr<SensorsFrames> sensorManager_t, QWidget *parent)
     : QWidget(parent)
     ,mainLayout(new QGridLayout())
-    ,sensorManager(std::make_unique<SensorsFrames>())
+    ,sensorManager(sensorManager_t)
 {
     setLayout(mainLayout);
     mainLayout->setColumnStretch(1, 1);  // Прогресс-бары будут растягиваться
@@ -125,12 +125,13 @@ void DisplayingSensors::checkRangeValues(ColorProgressBar *pb, std::shared_ptr<S
     }
 }
 
-SensorsFrames*DisplayingSensors::getSensorManager() const
+std::shared_ptr<SensorsFrames> DisplayingSensors::getSensorManager() const
 {
-    return sensorManager.get();
+    return sensorManager;
 }
 
-void DisplayingSensors::linkLimitsSensorsFrames(SensorsFrames& sensorFrame)
+
+void DisplayingSensors::linkLimitsSensorsFrames(std::shared_ptr<SensorsFrames> sensorFrame)
 {
     linkFrame(ENGINE, sensorFrame);
     linkFrame(VOLTAGE_REGULATORS, sensorFrame);
@@ -139,10 +140,10 @@ void DisplayingSensors::linkLimitsSensorsFrames(SensorsFrames& sensorFrame)
     linkFrame(ESC_FRAME3, sensorFrame);
 }
 
-void DisplayingSensors::linkFrame(FrameTypes type, SensorsFrames &target)
+void DisplayingSensors::linkFrame(FrameTypes type, std::shared_ptr<SensorsFrames>target)
 {
     auto& srcFrame = sensorManager->getFrames()[type];
-    auto& dstFrame = target.getFrames()[type];
+    auto& dstFrame = target->getFrames()[type];
 
     if (!srcFrame || !dstFrame) return;
 

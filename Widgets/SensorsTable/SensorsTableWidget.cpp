@@ -20,13 +20,13 @@ SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsMan
     }
 
     for (int i = 0; i < 8; i++){
-        displayngSensors.append(new DisplayingSensors(this));
+        displayngSensors.append(new DisplayingSensors(sensorsManager, this));
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[VOLTAGE_REGULATORS]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ENGINE]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC_FRAME1]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC_FRAME2]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC_FRAME3]->orderedNames);
-        displayngSensors.last()->linkLimitsSensorsFrames(*sensorsManager);
+        displayngSensors.last()->linkLimitsSensorsFrames(sensorsManager);
     }
 
     // Формирование визуализации датчиков двигателей

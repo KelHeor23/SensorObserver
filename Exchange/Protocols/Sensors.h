@@ -26,12 +26,22 @@ struct SensorData {
     std::shared_ptr<std::vector<SensorLimitsColored>> detalaizedLimits;
     std::shared_ptr<SensorSharedSettings> settings; // Общий ресурс
 
-    double val = 0;
+    std::atomic<double> val = 0;
 
     SensorData() {
         limit = std::make_shared<SensorLimits>();
         detalaizedLimits = std::make_shared<std::vector<SensorLimitsColored>>();
         settings = std::make_shared<SensorSharedSettings>();
+    }
+
+    SensorData& operator=(const SensorData& other) {
+        if (this != &other) {
+            limit = other.limit;
+            detalaizedLimits = other.detalaizedLimits;
+            settings = other.settings;
+            val.store(other.val.load());
+        }
+        return *this;
     }
 
     void linkLimits(std::shared_ptr<SensorData> other) {

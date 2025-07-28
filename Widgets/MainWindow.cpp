@@ -55,10 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(connSettingsWdgt, &ConnSettings::newConnSettings, this, &MainWindow::reconnect);
     connect(client, &Client::connEnable, [this](){ipConnectionLbl->setStyleSheet("color: green;");});
     connect(client, &Client::connDisable, [this](){ipConnectionLbl->setStyleSheet("color: red;");});
-
-    QTimer *m_timer = new QTimer(this);
-    connect(m_timer, &QTimer::timeout, [this](){ qDebug() << sensorsManager->fastFind("Среднее напряжение A")->val;});
-    m_timer->start(40);  // мс интервал
 }
 
 void MainWindow::close()

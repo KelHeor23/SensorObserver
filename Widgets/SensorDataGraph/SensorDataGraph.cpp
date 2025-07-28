@@ -26,6 +26,7 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
 
 void SensorDataGraph::settingPlot()
 {
+    m_plot->setNotAntialiasedElements(QCP::aeAll);
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     m_plot->legend->setVisible(true);
     m_plot->legend->setFont(QFont("Helvetica", 9));
@@ -150,7 +151,9 @@ void SensorDataGraph::addNewData()
 
         graphMap[key]->addData(i, sensorsManager->fastFind(key.toStdString())->val);
     }
-    m_plot->rescaleAxes();
-    m_plot->replot();
+
+    m_plot->xAxis->setRange(i - 500, i);
+    m_plot->yAxis->setRange(-500, 500);
+    m_plot->replot(QCustomPlot::rpQueuedReplot);
     i++;
 }

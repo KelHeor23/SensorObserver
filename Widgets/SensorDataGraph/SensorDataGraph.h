@@ -23,6 +23,7 @@ private:
 private slots:
     void onItemChanged(QTreeWidgetItem *item, int column);
     void addNewData();
+    void updateGraph();
 
 signals:
 

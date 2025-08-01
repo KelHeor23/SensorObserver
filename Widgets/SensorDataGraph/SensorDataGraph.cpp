@@ -22,6 +22,10 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
 
     connect(m_timer, &QTimer::timeout, this, &SensorDataGraph::addNewData);
     m_timer->start(40);  // мс интервал
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &SensorDataGraph::updateGraph); // updateGraph — ваш слот для обновления данных и графика
+    timer->start(100); // интервалы 200 мс
 }
 
 void SensorDataGraph::settingPlot()
@@ -138,8 +142,6 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
             graphMap.remove(sensorName);
         }
     }
-    m_plot->rescaleAxes();
-    m_plot->replot();
 }
 
 void SensorDataGraph::addNewData()
@@ -154,6 +156,10 @@ void SensorDataGraph::addNewData()
 
     m_plot->xAxis->setRange(i - 500, i);
     m_plot->yAxis->setRange(-500, 500);
-    m_plot->replot(QCustomPlot::rpQueuedReplot);
     i++;
+}
+
+void SensorDataGraph::updateGraph()
+{
+    m_plot->replot(QCustomPlot::rpQueuedReplot);
 }

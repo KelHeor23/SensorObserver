@@ -23,6 +23,7 @@ struct VoltageRegulatorsData{
     uint8_t     averageVoltageA;    // Среднее напряжение на фазе A (0-255), вольты/10
     uint8_t     averageVoltageB;    // Среднее напряжение на фазе B (0-255), вольты/10
     uint8_t     averageVoltageC;    // Среднее напряжение на фазе C (0-255), вольты/10
+    uint64_t    time;
 };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 

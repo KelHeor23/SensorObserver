@@ -18,8 +18,11 @@ class DataStructure
     using FrameData     = std::unordered_map<FrameName, SensorData>;    // база всех данных датчиков
 
 public:
+    DataStructure();
+    void addData(size_t engineNum, FrameTypes type, BaseFrame *data);
 
-    void addData(FrameTypes type, BaseFrame data);
+public:
+    void addEngineSensorsData(size_t engineNum, EngineSensorsData *data);
 
 public:
     std::vector<FrameData> engines; // вектор объединяющий

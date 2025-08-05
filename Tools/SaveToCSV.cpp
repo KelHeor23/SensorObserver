@@ -45,7 +45,7 @@ UnifiedCsvWriter::~UnifiedCsvWriter() {
     stop();
 }
 
-void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData& data) {
+void UnifiedCsvWriter::addEngineData(const EngineSensorsData& data) {
     const uint8_t device_id = data.canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataCustom[device_id].engine = data;
@@ -56,7 +56,7 @@ void UnifiedCsvWriter::addEngineData(const EngineSensors::EngineSensorsData& dat
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addRegulatorData(const VoltageRegulators::VoltageRegulatorsData& data) {
+void UnifiedCsvWriter::addRegulatorData(const VoltageRegulatorsData& data) {
     const uint8_t device_id = data.canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataCustom[device_id].regulator = data;

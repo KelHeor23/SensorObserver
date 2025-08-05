@@ -38,10 +38,12 @@ set(PROJECT_SOURCES
         Exchange/Protocols/SensorSettingsManager.h Exchange/Protocols/SensorSettingsManager.cpp
         Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
         Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
-        Exchange/Protocols/EscSensors/Frames.h
+
         Exchange/Protocols/EscSensors/EscStatus1.h Exchange/Protocols/EscSensors/EscStatus1.cpp
         Exchange/Protocols/EscSensors/EscStatus2.h Exchange/Protocols/EscSensors/EscStatus2.cpp
         Exchange/Protocols/EscSensors/EscStatus3.h Exchange/Protocols/EscSensors/EscStatus3.cpp
+        Data/DataStructure.cpp Data/DataStructure.h
+        Data/Frames.h
         Libs/QCustomPlot/qcustomplot.cpp Libs/QCustomPlot/qcustomplot.h
 )
 

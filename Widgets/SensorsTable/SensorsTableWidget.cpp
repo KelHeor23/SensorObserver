@@ -1,8 +1,7 @@
 #include "SensorsTableWidget.h"
 #include "Common/Common.h"
 #include "Exchange/Protocols/Constants.h"
-#include "Exchange/Protocols/EngineSensors/EngineSensors.h"
-#include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
+#include "Data/Frames.h"
 #include <iostream>
 #include <ostream>
 
@@ -120,22 +119,22 @@ void SensorsTableWidget::parseMsg(const QByteArray& message)
 
         switch (value & ~0b111) {
         case Protocol_numbers::ENGINE_SENSORS:
-            if (it + sizeof(EngineSensors::EngineSensorsData) > message.size())
+            if (it + sizeof(EngineSensorsData) > message.size())
             {
                 qDebug() << "Ошибка чтения пакета данных";
                 return;
             }
-            readEngineSensorsMsg(value & 0b111, message.mid(it, sizeof(EngineSensors::EngineSensorsData)));
-            it += sizeof(EngineSensors::EngineSensorsData);
+            readEngineSensorsMsg(value & 0b111, message.mid(it, sizeof(EngineSensorsData)));
+            it += sizeof(EngineSensorsData);
             break;
         case Protocol_numbers::VOLTAGE_REGULATORS:
-            if (it + sizeof(VoltageRegulators::VoltageRegulatorsData) > message.size())
+            if (it + sizeof(VoltageRegulatorsData) > message.size())
             {
                 qDebug() << "Ошибка чтения пакета данных";
                 return;
             }
-            readVoltageRegulatorsMsg(value & 0b111, message.mid(it, sizeof(VoltageRegulators::VoltageRegulatorsData)));
-            it += sizeof(VoltageRegulators::VoltageRegulatorsData);
+            readVoltageRegulatorsMsg(value & 0b111, message.mid(it, sizeof(VoltageRegulatorsData)));
+            it += sizeof(VoltageRegulatorsData);
             break;
         default:
             qDebug() << "Ошибка чтения пакета данных";

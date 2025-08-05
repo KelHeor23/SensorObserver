@@ -1,6 +1,5 @@
 #include "EscStatus1.h"
 
-#include "Frames.h"
 #include "Tools/SaveToCSV.h"
 
 EscSensors::EscStatus1::EscStatus1()

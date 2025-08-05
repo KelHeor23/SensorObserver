@@ -4,15 +4,8 @@
 #include <unordered_map>
 #include <memory>
 
+#include "Data/Frames.h"
 #include "Base.h"
-
-enum FrameTypes{
-    ESC_FRAME1,
-    ESC_FRAME2,
-    ESC_FRAME3,
-    ENGINE,
-    VOLTAGE_REGULATORS
-};
 
 class SensorsFrames
 {

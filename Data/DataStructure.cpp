@@ -38,46 +38,38 @@ void DataStructure::addData(size_t engineNum, FrameTypes type, BaseFrame *data) 
 }
 
 void DataStructure::addEngineSensorsData(size_t engineNum, EngineSensorsData* data) {
-    auto& engineData = engines[engineNum];
-    auto& frameData = engineData[ENGINE];
-
-    frameData["Угол биения"].push_back(static_cast<int64_t>(data->runoutAngle));
-    frameData["Амплитуда биения"].push_back(static_cast<int64_t>(data->runoutAmplitude));
+    addValueToFrame(engineNum, FrameTypes::ENGINE, "Угол биения", data->runoutAngle);
+    addValueToFrame(engineNum, FrameTypes::ENGINE, "Амплитуда биения", data->runoutAmplitude);
 }
 
 void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, VoltageRegulatorsData *data) {
-    auto &engineData    = engines[engineNum];
-    auto &frameData     = engineData[VOLTAGE_REGULATORS];
-
-    frameData["Среднее напряжение A"].push_back(static_cast<int>(data->averageVoltageA));
-    frameData["Среднее напряжение B"].push_back(static_cast<int>(data->averageVoltageB));
-    frameData["Среднее напряжение C"].push_back(static_cast<int>(data->averageVoltageC));
+    addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Среднее напряжение A", data->averageVoltageA);
+    addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Среднее напряжение B", data->averageVoltageB);
+    addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Среднее напряжение C", data->averageVoltageC);
 }
 
 void DataStructure::addEscStatusInfo1Data(size_t engineNum, EscSensors::EscStatusInfo1 *data) {
-    auto &engineData    = engines[engineNum];
-    auto &frameData     = engineData[ESC_FRAME1];
-
-    frameData["RPM motor speed"].push_back(static_cast<int>(data->speed));
-    frameData["recv_pwm"].push_back(static_cast<int>(data->recv_pwm));
-    frameData["comm_pwm"].push_back(static_cast<int>(data->comm_pwm));
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "RPM мотор", data->speed);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "recv_pwm", data->recv_pwm);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "comm_pwm", data->comm_pwm);
 }
 
 void DataStructure::addEscStatusInfo2Data(size_t engineNum, EscSensors::EscStatusInfo2* data) {
-    auto& engineData = engines[engineNum];
-    auto& frameData = engineData[ESC_FRAME2];  // Исправлено на ESC_FRAME2
-
-    frameData["Bus voltage"].push_back(static_cast<int64_t>(data->voltage));
-    frameData["Bus current"].push_back(static_cast<int64_t>(data->bus_current));
-    frameData["Motor line current"].push_back(static_cast<int64_t>(data->current));
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Напряжение шины", data->voltage);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Ток шины", data->bus_current);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Ток мотора", data->current);
 }
 
 void DataStructure::addEscStatusInfo3Data(size_t engineNum, EscSensors::EscStatusInfo3* data) {
-    auto& engineData = engines[engineNum];
-    auto& frameData = engineData[ESC_FRAME3];  // Исправлено на ESC_FRAME3
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Температура конденсатора", data->cap_temp);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Температура MCU", data->mcu_temp);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Температура мотора", data->motor_temp);
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Ошибка", data->Error);
+}
 
-    frameData["cap_temp"].push_back(static_cast<int64_t>(data->cap_temp));
-    frameData["mcu_temp"].push_back(static_cast<int64_t>(data->mcu_temp));
-    frameData["motor_temp"].push_back(static_cast<int64_t>(data->motor_temp));
-    frameData["Error"].push_back(static_cast<int64_t>(data->Error));
+template<typename T>
+void DataStructure::addValueToFrame(size_t engineNum, FrameTypes type, const std::string &key, T value){
+    auto& engineData = engines.at(engineNum);
+    auto& frameData = engineData[type];
+    frameData[key].emplace_back(value);
 }

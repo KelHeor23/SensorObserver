@@ -1,7 +1,9 @@
 #include "VoltageRegulators.h"
-#include "Tools/SaveToCSV.h"
+
 #include <cmath>
 
+#include "Tools/SaveToCSV.h"
+#include "Data/DataStructure.h"
 
 VoltageRegulators::VoltageRegulators::VoltageRegulators()
 {
@@ -22,10 +24,10 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_
 
     const VoltageRegulatorsData* receivedData = reinterpret_cast<const VoltageRegulatorsData*>(data.data());
 
-    uint16_t intPart    = receivedData->inputVoltageHP | (receivedData->inputVoltageLP & 0xF);
+    /*uint16_t intPart    = receivedData->inputVoltageHP | (receivedData->inputVoltageLP & 0xF);
     uint8_t  floatPart  = receivedData->inputVoltageLP & 0x0F;
 
-    /*fields["Входное напряжене"]->val            = static_cast<double>(intPart) + (floatPart * 0.1 + 0.01); //  !! Исправить
+    fields["Входное напряжене"]->val            = static_cast<double>(intPart) + (floatPart * 0.1 + 0.01); //  !! Исправить
     fields["ток (ампер)"]->val                  = static_cast<double>(receivedData->electricCurrent);
     fields["Управляющий ШИМ"]->val              = static_cast<double>(receivedData->controlPWM);*/
     fields["Среднее напряжение A"]->val         = static_cast<double>(receivedData->averageVoltageA);
@@ -33,4 +35,5 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_
     fields["Среднее напряжение C"]->val         = static_cast<double>(receivedData->averageVoltageC);
 
     UnifiedCsvWriter::Instance().addRegulatorData(*receivedData);
+    DataStructure::Instance().addData(node_id, VOLTAGE_REGULATORS, const_cast<VoltageRegulatorsData*>(receivedData));
 }

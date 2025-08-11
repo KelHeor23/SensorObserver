@@ -1,5 +1,7 @@
 #include "EngineSensors.h"
+
 #include "Tools/SaveToCSV.h"
+#include "Data/DataStructure.h"
 
 namespace EngineSensors {
 
@@ -25,6 +27,7 @@ void EngineSensors::setData(std::string_view data, int16_t node_id)
     fields["Амплитуда биения"]->val = static_cast<int>(receivedData->runoutAmplitude);
 
     UnifiedCsvWriter::Instance().addEngineData(*receivedData);
+    DataStructure::Instance().addData(node_id, ENGINE, const_cast<EngineSensorsData*>(receivedData));
 }
 
 }

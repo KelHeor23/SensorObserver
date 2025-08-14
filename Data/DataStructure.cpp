@@ -1,4 +1,5 @@
 #include "DataStructure.h"
+#include "qdatetime.h"
 
 #include <stdexcept>
 
@@ -38,29 +39,34 @@ void DataStructure::addData(size_t engineNum, FrameTypes type, BaseFrame *data) 
 }
 
 void DataStructure::addEngineSensorsData(size_t engineNum, EngineSensorsData* data) {
+    addValueToFrame(engineNum, FrameTypes::ENGINE, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, FrameTypes::ENGINE, "Угол биения", data->runoutAngle);
     addValueToFrame(engineNum, FrameTypes::ENGINE, "Амплитуда биения", data->runoutAmplitude);
 }
 
 void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, VoltageRegulatorsData *data) {
+    addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Среднее напряжение A", data->averageVoltageA);
     addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Среднее напряжение B", data->averageVoltageB);
     addValueToFrame(engineNum, FrameTypes::VOLTAGE_REGULATORS, "Среднее напряжение C", data->averageVoltageC);
 }
 
 void DataStructure::addEscStatusInfo1Data(size_t engineNum, EscSensors::EscStatusInfo1 *data) {
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "RPM мотор", data->speed);
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "recv_pwm", data->recv_pwm);
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME1, "comm_pwm", data->comm_pwm);
 }
 
 void DataStructure::addEscStatusInfo2Data(size_t engineNum, EscSensors::EscStatusInfo2* data) {
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Напряжение шины", data->voltage);
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Ток шины", data->bus_current);
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME2, "Ток мотора", data->current);
 }
 
 void DataStructure::addEscStatusInfo3Data(size_t engineNum, EscSensors::EscStatusInfo3* data) {
+    addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Температура конденсатора", data->cap_temp);
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Температура MCU", data->mcu_temp);
     addValueToFrame(engineNum, FrameTypes::ESC_FRAME3, "Температура мотора", data->motor_temp);
@@ -71,5 +77,5 @@ template<typename T>
 void DataStructure::addValueToFrame(size_t engineNum, FrameTypes type, const std::string &key, T value){
     auto& engineData = engines.at(engineNum);
     auto& frameData = engineData[type];
-    frameData[key].emplace_back(value);
+    frameData[key].push_back(value);
 }

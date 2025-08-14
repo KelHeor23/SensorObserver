@@ -1,5 +1,8 @@
 #include "SensorDataGraph.h"
 
+#include "Data/DataStructure.h"
+#include "Data/Frames.h"
+
 SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}
     , mainLt(new QVBoxLayout)
@@ -30,6 +33,9 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
 
 void SensorDataGraph::settingPlot()
 {
+    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
+    dateTicker->setDateTimeFormat("dd.MM.yyyy hh:mm:ss"); // формат отображения
+    m_plot->xAxis->setTicker(dateTicker);
     m_plot->setNotAntialiasedElements(QCP::aeAll);
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     m_plot->legend->setVisible(true);
@@ -130,12 +136,17 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
         QCPGraph *graph = m_plot->addGraph();
         graph->setName(sensorName);
 
+        QString parentText = item->parent()->text(0);
         graphMap[sensorName] = graph;
 
         // Настраиваем внешний вид
         QColor color(getColor());
         graph->setPen(QPen(color, 2));
         graph->setName(sensorName);
+
+        auto &data = DataStructure::Instance().engines[0];
+        graph->setData(data[FrameTypes::VOLTAGE_REGULATORS]["Time"], data[FrameTypes::VOLTAGE_REGULATORS][sensorName.toStdString()]);
+
     } else {
         if (graphMap.contains(sensorName)) {
             m_plot->removeGraph(graphMap[sensorName]);
@@ -146,7 +157,7 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
 
 void SensorDataGraph::addNewData()
 {
-    static int i = 0;
+    /*static int i = 0;
     for (auto it = graphMap.constBegin(); it != graphMap.constEnd(); ++it) {
         QString key = it.key();
         QTime time = QTime::currentTime();
@@ -156,7 +167,7 @@ void SensorDataGraph::addNewData()
 
     m_plot->xAxis->setRange(i - 500, i);
     m_plot->yAxis->setRange(-500, 500);
-    i++;
+    i++;*/
 }
 
 void SensorDataGraph::updateGraph()

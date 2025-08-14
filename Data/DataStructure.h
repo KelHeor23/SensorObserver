@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 #include <unordered_map>
-#include <vector>
+#include <QVector>
 
 #include "Frames.h"
 
@@ -12,7 +12,7 @@ class DataStructure
 {
     using SensorName    = std::string;
     using FrameName     = FrameTypes;
-    using Data          = std::vector<int64_t>;
+    using Data          = QVector<double>;
     using SensorData    = std::unordered_map<SensorName, Data>;         // датчик и все пришедшие данные данные
     using FrameData     = std::unordered_map<FrameName, SensorData>;    // база всех данных датчиков
 

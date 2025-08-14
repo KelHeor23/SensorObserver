@@ -34,7 +34,7 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
 void SensorDataGraph::settingPlot()
 {
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("dd.MM.yyyy hh:mm:ss"); // формат отображения
+    dateTicker->setDateTimeFormat("hh:mm:ss.zzz"); // формат отображения
     m_plot->xAxis->setTicker(dateTicker);
     m_plot->setNotAntialiasedElements(QCP::aeAll);
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);

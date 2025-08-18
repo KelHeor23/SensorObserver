@@ -146,8 +146,8 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
         graph->setPen(QPen(color, 2));
         graph->setName(sensorName);
 
-        auto &time = DataStructure::Instance().engines[0][FrameTypes::VOLTAGE_REGULATORS]["Time"];
-        auto &data = DataStructure::Instance().engines[0][FrameTypes::VOLTAGE_REGULATORS][sensorName.toStdString()];
+        auto &time = DataStructure::Instance().engines[0][groupName]["Time"];
+        auto &data = DataStructure::Instance().engines[0][groupName][sensorName.toStdString()];
 
         graph->setData(time, data);
 

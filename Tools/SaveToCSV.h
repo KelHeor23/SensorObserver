@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <unordered_map>
 #include <optional>
+#include <vector>
 
 #include "Data/Frames/Frames.h"
 

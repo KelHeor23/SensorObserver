@@ -35,5 +35,5 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_
     fields["Среднее напряжение C"]->val         = static_cast<double>(receivedData->averageVoltageC);
 
     UnifiedCsvWriter::Instance().addRegulatorData(*receivedData);
-    DataStructure::Instance().addData(node_id, VOLTAGE_REGULATORS, const_cast<VoltageRegulatorsData*>(receivedData));
+    DataStructure::Instance().addData(node_id, nameFrame, VOLTAGE_REGULATORS, const_cast<VoltageRegulatorsData*>(receivedData));
 }

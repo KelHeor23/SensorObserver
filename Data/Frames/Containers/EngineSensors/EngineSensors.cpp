@@ -27,7 +27,7 @@ void EngineSensors::setData(std::string_view data, int16_t node_id)
     fields["Амплитуда биения"]->val = static_cast<int>(receivedData->runoutAmplitude);
 
     UnifiedCsvWriter::Instance().addEngineData(*receivedData);
-    DataStructure::Instance().addData(node_id, ENGINE, const_cast<EngineSensorsData*>(receivedData));
+    DataStructure::Instance().addData(node_id, nameFrame, ENGINE, const_cast<EngineSensorsData*>(receivedData));
 }
 
 }

@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-#include "Exchange/Protocols/Sensors.h"
+#include "Data/Frames/Containers/Sensors.h"
 
 class DetailingLimitsWidget : public QWidget
 {

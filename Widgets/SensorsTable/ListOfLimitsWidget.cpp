@@ -6,7 +6,7 @@
 #include <QIntValidator>
 
 #include "Tools/CollapsibleGroupBox.h"
-#include "Exchange/Protocols/SensorSettingsManager.h"
+#include "Data/Frames/Containers/SensorSettingsManager.h"
 #include "DetailingLimitsWidget.h"
 
 

@@ -6,7 +6,7 @@
 
 #include "DisplayingSensors.h"
 #include "Exchange/Client.h"
-#include "Exchange/Protocols/SensorsFrames.h"
+#include "Data/Frames/Containers/SensorsFrames.h"
 #include "VibrationDirection.h"
 
 class SensorsTableWidget : public QWidget

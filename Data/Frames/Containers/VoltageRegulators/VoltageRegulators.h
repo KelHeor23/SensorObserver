@@ -6,8 +6,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Exchange/Protocols/Sensors.h"
-#include "Exchange/Protocols/Base.h"
+#include "Data/Frames/Containers/Sensors.h"
+#include "Data/Frames/Containers/Base.h"
 
 namespace VoltageRegulators {
 

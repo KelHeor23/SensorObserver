@@ -11,9 +11,7 @@
 #include <unordered_map>
 #include <optional>
 
-#include "Exchange/Protocols/EngineSensors/EngineSensors.h"
-#include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
-#include "Data/Frames.h"
+#include "Data/Frames/Frames.h"
 
 // Класс для объединенных данных устройства
 struct DeviceData {

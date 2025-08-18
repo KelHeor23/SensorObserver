@@ -1,7 +1,7 @@
 #include "SensorDataGraph.h"
 
 #include "Data/DataStructure.h"
-#include "Data/Frames.h"
+#include "Data//Frames/Frames.h"
 
 SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}

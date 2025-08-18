@@ -1,10 +1,10 @@
 #include "SensorsFrames.h"
 
 #include "EngineSensors/EngineSensors.h"
-#include "Exchange/Protocols/EscSensors/EscStatus1.h"
-#include "Exchange/Protocols/EscSensors/EscStatus2.h"
-#include "Exchange/Protocols/EscSensors/EscStatus3.h"
-#include "Exchange/Protocols/VoltageRegulators/VoltageRegulators.h"
+#include "Data/Frames/Containers/EscSensors/EscStatus1.h"
+#include "Data/Frames/Containers/EscSensors/EscStatus2.h"
+#include "Data/Frames/Containers/EscSensors/EscStatus3.h"
+#include "Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h"
 #include "qdebug.h"
 
 SensorsFrames::SensorsFrames()

@@ -5,7 +5,7 @@
 #include <QTreeWidget>
 #include <QTimer>
 
-#include "Exchange/Protocols/SensorsFrames.h"
+#include "Data/Frames/Containers/SensorsFrames.h"
 #include "qcustomplot.h"
 
 class SensorDataGraph : public QWidget

@@ -1,7 +1,7 @@
 #include "SensorsTableWidget.h"
 #include "Common/Common.h"
-#include "Exchange/Protocols/Constants.h"
-#include "Data/Frames.h"
+#include "Data/Frames/Containers/Constants.h"
+#include "Data/Frames/Frames.h"
 #include <iostream>
 #include <ostream>
 

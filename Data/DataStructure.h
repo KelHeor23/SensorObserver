@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <QVector>
 
-#include "Frames.h"
+#include "Frames/Frames.h"
 
 class DataStructure
 {

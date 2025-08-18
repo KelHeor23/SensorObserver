@@ -1,7 +1,7 @@
 #ifndef ESCSTATUS2_H
 #define ESCSTATUS2_H
 
-#include "Exchange/Protocols/Base.h"
+#include "Data/Frames/Containers/Base.h"
 
 namespace EscSensors {
 

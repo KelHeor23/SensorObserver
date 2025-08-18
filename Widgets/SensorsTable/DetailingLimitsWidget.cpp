@@ -6,7 +6,7 @@
 #include <QRandomGenerator>
 
 #include "Tools/ColorButton.h"
-#include "Exchange/Protocols/SensorSettingsManager.h"
+#include "Data/Frames/Containers/SensorSettingsManager.h"
 
 DetailingLimitsWidget::DetailingLimitsWidget(std::shared_ptr<SensorData> data, QString name, QWidget *parent)
     : QWidget(parent)

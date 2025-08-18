@@ -6,7 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-#include "Exchange/Protocols/SensorsFrames.h"
+#include "Data/Frames/Containers/SensorsFrames.h"
 #include "Tools/ColorProgressBar.h"
 
 class DisplayingSensors : public QWidget

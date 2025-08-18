@@ -3,9 +3,11 @@
 #include <QDateTime>
 #include <QDir>
 
-#include "Exchange/Protocols/EscSensors/EscStatus1.h"
-#include "Exchange/Protocols/EscSensors/EscStatus2.h"
-#include "Exchange/Protocols/EscSensors/EscStatus3.h"
+#include "Data/Frames/Containers/EngineSensors/EngineSensors.h"
+#include "Data/Frames/Containers/EscSensors/EscStatus1.h"
+#include "Data/Frames/Containers/EscSensors/EscStatus2.h"
+#include "Data/Frames/Containers/EscSensors/EscStatus3.h"
+#include "Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h"
 #include "qlocale.h"
 #include <iomanip>
 

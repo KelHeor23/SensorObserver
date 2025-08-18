@@ -4,7 +4,7 @@
 #include <QtWidgets/QWidget>
 #include <QVBoxLayout>
 
-#include "Exchange/Protocols/Base.h"
+#include "Data/Frames/Containers/Base.h"
 
 class ListOfLimitsWidget : public QWidget
 {

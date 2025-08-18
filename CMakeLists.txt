@@ -32,7 +32,18 @@ set(PROJECT_SOURCES
         Tools/ValueIncrementer.h Tools/ValueIncrementer.cpp
         Exchange/Client.h Exchange/Client.cpp
         Data/DataStructure.cpp Data/DataStructure.h
-        Data/Frames.h
+        Data/Frames/Containers/EngineSensors/EngineSensors.cpp Data/Frames/Containers/EngineSensors/EngineSensors.h
+        Data/Frames/Containers/EscSensors/EscStatus1.cpp Data/Frames/Containers/EscSensors/EscStatus1.h
+        Data/Frames/Containers/EscSensors/EscStatus2.cpp Data/Frames/Containers/EscSensors/EscStatus2.h
+        Data/Frames/Containers/EscSensors/EscStatus3.cpp Data/Frames/Containers/EscSensors/EscStatus3.h
+        Data/Frames/Containers/VoltageRegulators/VoltageRegulators.cpp Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h
+        Data/Frames/Containers/Base.h
+        Data/Frames/Containers/Constants.h
+        Data/Frames/Containers/Sensors.h
+        Data/Frames/Containers/SensorSettingsManager.cpp Data/Frames/Containers/SensorSettingsManager.h
+        Data/Frames/Containers/SensorsFrames.cpp Data/Frames/Containers/SensorsFrames.h
+        Data/Frames/Frames.h
+        Data/DataStructure.cpp Data/DataStructure.h
         Libs/QCustomPlot/qcustomplot.cpp Libs/QCustomPlot/qcustomplot.h
 )
 

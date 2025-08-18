@@ -130,6 +130,8 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
     if (column != 0) return;
 
     QString sensorName = item->text(0);
+    QString groupName = item->parent()->text(0);
+
     bool isChecked = (item->checkState(0) == Qt::Checked);
 
     if (isChecked) {
@@ -144,8 +146,10 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
         graph->setPen(QPen(color, 2));
         graph->setName(sensorName);
 
-        auto &data = DataStructure::Instance().engines[0];
-        graph->setData(data[FrameTypes::VOLTAGE_REGULATORS]["Time"], data[FrameTypes::VOLTAGE_REGULATORS][sensorName.toStdString()]);
+        auto &time = DataStructure::Instance().engines[0][FrameTypes::VOLTAGE_REGULATORS]["Time"];
+        auto &data = DataStructure::Instance().engines[0][FrameTypes::VOLTAGE_REGULATORS][sensorName.toStdString()];
+
+        graph->setData(time, data);
 
     } else {
         if (graphMap.contains(sensorName)) {
@@ -172,5 +176,6 @@ void SensorDataGraph::addNewData()
 
 void SensorDataGraph::updateGraph()
 {
-    m_plot->replot(QCustomPlot::rpQueuedReplot);
+    m_plot->replot(QCustomPlot::rpQueuedReplot);    
+    m_plot->rescaleAxes(); // Критически важно!
 }

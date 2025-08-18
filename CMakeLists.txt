@@ -24,24 +24,13 @@ set(PROJECT_SOURCES
         Widgets/Other/MotorControl.h Widgets/Other/MotorControl.cpp
         Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
         Widgets/SensorDataGraph/SensorDataGraph.cpp Widgets/SensorDataGraph/SensorDataGraph.h
-        Common/Common.h        
+        Common/Common.h
         Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
         Tools/SaveToCSV.h Tools/SaveToCSV.cpp
         Tools/ValueIncrementer.h Tools/ValueIncrementer.cpp
         Exchange/Client.h Exchange/Client.cpp
-        Exchange/Protocols/Constants.h
-        Exchange/Protocols/Base.h
-        Exchange/Protocols/Sensors.h
-        Exchange/Protocols/SensorsFrames.h Exchange/Protocols/SensorsFrames.cpp
-        Exchange/Protocols/SensorSettingsManager.h Exchange/Protocols/SensorSettingsManager.cpp
-        Exchange/Protocols/EngineSensors/EngineSensors.h Exchange/Protocols/EngineSensors/EngineSensors.cpp
-        Exchange/Protocols/VoltageRegulators/VoltageRegulators.h Exchange/Protocols/VoltageRegulators/VoltageRegulators.cpp
-
-        Exchange/Protocols/EscSensors/EscStatus1.h Exchange/Protocols/EscSensors/EscStatus1.cpp
-        Exchange/Protocols/EscSensors/EscStatus2.h Exchange/Protocols/EscSensors/EscStatus2.cpp
-        Exchange/Protocols/EscSensors/EscStatus3.h Exchange/Protocols/EscSensors/EscStatus3.cpp
         Data/DataStructure.cpp Data/DataStructure.h
         Data/Frames.h
         Libs/QCustomPlot/qcustomplot.cpp Libs/QCustomPlot/qcustomplot.h

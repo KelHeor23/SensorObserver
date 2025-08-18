@@ -39,7 +39,7 @@ void DataStructure::addData(size_t engineNum, FrameTypes type, BaseFrame *data) 
 }
 
 void DataStructure::addEngineSensorsData(size_t engineNum, EngineSensorsData* data) {
-    addValueToFrame(engineNum, FrameTypes::ENGINE, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
+    addValueToFrame(engineNum, data, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, FrameTypes::ENGINE, "Угол биения", data->runoutAngle);
     addValueToFrame(engineNum, FrameTypes::ENGINE, "Амплитуда биения", data->runoutAmplitude);
 }

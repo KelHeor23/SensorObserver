@@ -11,7 +11,7 @@
 class DataStructure
 {
     using SensorName    = std::string;
-    using FrameName     = FrameTypes;
+    using FrameName     = std::string;
     using Data          = QVector<double>;
     using SensorData    = std::unordered_map<SensorName, Data>;         // датчик и все пришедшие данные данные
     using FrameData     = std::unordered_map<FrameName, SensorData>;    // база всех данных датчиков

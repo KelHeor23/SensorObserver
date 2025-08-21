@@ -1,7 +1,6 @@
 #include "SensorDataGraph.h"
 
 #include "Data/DataStructure.h"
-#include "Data//Frames/Frames.h"
 
 SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}
@@ -34,7 +33,7 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
 void SensorDataGraph::settingPlot()
 {
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("hh:mm:ss.zzz"); // формат отображения
+    dateTicker->setDateTimeFormat("hh:mm:ss"); // формат отображения
     m_plot->xAxis->setTicker(dateTicker);
     m_plot->setNotAntialiasedElements(QCP::aeAll);
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
@@ -161,21 +160,14 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
 
 void SensorDataGraph::addNewData()
 {
-    /*static int i = 0;
-    for (auto it = graphMap.constBegin(); it != graphMap.constEnd(); ++it) {
-        QString key = it.key();
-        QTime time = QTime::currentTime();
 
-        graphMap[key]->addData(i, sensorsManager->fastFind(key.toStdString())->val);
-    }
-
-    m_plot->xAxis->setRange(i - 500, i);
-    m_plot->yAxis->setRange(-500, 500);
-    i++;*/
 }
 
 void SensorDataGraph::updateGraph()
 {
-    m_plot->replot(QCustomPlot::rpQueuedReplot);    
-    m_plot->rescaleAxes(); // Критически важно!
+    double now = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0;
+    m_plot->xAxis->setRange(now - 20, now);
+    // Масштабируем только ось Y по данным
+    m_plot->yAxis->rescale();
+    m_plot->replot(QCustomPlot::rpQueuedReplot);
 }

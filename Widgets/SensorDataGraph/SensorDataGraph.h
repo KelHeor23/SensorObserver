@@ -11,6 +11,19 @@
 class SensorDataGraph : public QWidget
 {
     Q_OBJECT
+
+    struct DataFullName {
+        size_t  engineNum;
+        QString frameName;
+        QString sensorName;
+
+        bool operator==(const DataFullName &other) const {
+            return engineNum == other.engineNum &&
+                   frameName == other.frameName &&
+                   sensorName == other.sensorName;
+        }
+    };
+
 public:
     explicit SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent = nullptr);
 
@@ -35,6 +48,8 @@ private:
 
     std::shared_ptr<SensorsFrames> sensorsManager;
     QMap<QString, QCPGraph*> graphMap;
+
+    std::unordered_map<DataFullName, size_t> dataSize;
 };
 
 #endif // SENSORDATAGRAPH_H

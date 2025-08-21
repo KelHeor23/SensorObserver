@@ -10,7 +10,7 @@
 
 class DataStructure
 {
-    using SensorName    = std::string;
+    using SensorName    = QString;
     using FrameName     = QString;
     using Data          = QVector<double>;
     using SensorData    = std::unordered_map<SensorName, Data>;         // датчик и все пришедшие данные данные
@@ -30,13 +30,13 @@ private:
     DataStructure();
 
     template<typename T>
-    void addValueToFrame(size_t engineNum, QString type, const std::string& key, T value);
+    void addValueToFrame(size_t engineNum, const QString &frameName, const QString& key, T value);
 
-    void addEngineSensorsData(size_t engineNum, QString type, EngineSensorsData *data);
-    void addVoltageRegulatorSensorsData(size_t engineNum, QString type, VoltageRegulatorsData *data);
-    void addEscStatusInfo1Data(size_t engineNum, QString type, EscSensors::EscStatusInfo1 *data);
-    void addEscStatusInfo2Data(size_t engineNum, QString type, EscSensors::EscStatusInfo2 *data);
-    void addEscStatusInfo3Data(size_t engineNum, QString type, EscSensors::EscStatusInfo3 *data);
+    void addEngineSensorsData(size_t engineNum, const QString &type, EngineSensorsData *data);
+    void addVoltageRegulatorSensorsData(size_t engineNum, const QString &type, VoltageRegulatorsData *data);
+    void addEscStatusInfo1Data(size_t engineNum, const QString &type, EscSensors::EscStatusInfo1 *data);
+    void addEscStatusInfo2Data(size_t engineNum, const QString &type, EscSensors::EscStatusInfo2 *data);
+    void addEscStatusInfo3Data(size_t engineNum, const QString &type, EscSensors::EscStatusInfo3 *data);
 
 public:
     std::vector<FrameData> engines; // вектор объединяющий

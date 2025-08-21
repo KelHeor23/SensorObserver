@@ -22,8 +22,8 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
     fillSensorsList();
     settingPlot();
 
-    //connect(m_timer, &QTimer::timeout, this, &SensorDataGraph::addNewData);
-    //m_timer->start(100);  // мс интервал
+    connect(m_timer, &QTimer::timeout, this, &SensorDataGraph::addNewData);
+    m_timer->start(100);  // мс интервал
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &SensorDataGraph::updateGraph); // updateGraph — ваш слот для обновления данных и графика
@@ -152,9 +152,16 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
         graph->setName(sensorName);
 
         auto &time = DataStructure::Instance().engines[0][groupName]["Time"];
-        auto &data = DataStructure::Instance().engines[0][groupName][sensorName.toStdString()];
+        auto &data = DataStructure::Instance().engines[0][groupName][sensorName];
 
         graph->setData(time, data);
+
+        DataFullName temp;
+        temp.engineNum = 0;
+        temp.frameName = groupName;
+        temp.sensorName = sensorName;
+
+        dataSize[temp] = DataStructure::Instance().engines[0][groupName]["Time"].size();
     } else {
         if (graphMap.contains(sensorName)) {
             m_plot->removeGraph(graphMap[sensorName]);
@@ -165,7 +172,19 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
 
 void SensorDataGraph::addNewData()
 {
+    for (auto &it : dataSize) {
+        auto &data = DataStructure::Instance().engines[it.first.engineNum][it.first.frameName][it.first.sensorName];
+        if (data.size() > it.second) {
+            auto &graph = graphMap[it.first.sensorName];
+            for (int i = it.second; i < data.size(); i++){
+                auto &time = DataStructure::Instance().engines[0][it.first.frameName]["Time"];
+                auto &data = DataStructure::Instance().engines[0][it.first.frameName][it.first.sensorName];
 
+                graph->setData(time, data);
+            }
+            it.second = data.size();
+        }
+    }
 }
 
 

@@ -55,6 +55,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(connSettingsWdgt, &ConnSettings::newConnSettings, this, &MainWindow::reconnect);
     connect(client, &Client::connEnable, [this](){ipConnectionLbl->setStyleSheet("color: green;");});
     connect(client, &Client::connDisable, [this](){ipConnectionLbl->setStyleSheet("color: red;");});
+
+    QSurfaceFormat format;
+    format.setRenderableType(QSurfaceFormat::OpenGL);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setSwapInterval(0); // Отключаем VSync для максимальной производительности
+    QSurfaceFormat::setDefaultFormat(format);
 }
 
 void MainWindow::close()

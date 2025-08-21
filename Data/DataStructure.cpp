@@ -39,13 +39,13 @@ void DataStructure::addData(size_t engineNum, QString frameName, FrameTypes type
 }
 
 void DataStructure::addEngineSensorsData(size_t engineNum, QString frameName, EngineSensorsData* data) {
-    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch());
+    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.);
     addValueToFrame(engineNum, frameName, "Угол биения", data->runoutAngle);
     addValueToFrame(engineNum, frameName, "Амплитуда биения", data->runoutAmplitude);
 }
 
 void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, QString frameName, VoltageRegulatorsData *data) {
-    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch());
+    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
     addValueToFrame(engineNum, frameName, "Среднее напряжение A", data->averageVoltageA);
     addValueToFrame(engineNum, frameName, "Среднее напряжение B", data->averageVoltageB);
     addValueToFrame(engineNum, frameName, "Среднее напряжение C", data->averageVoltageC);

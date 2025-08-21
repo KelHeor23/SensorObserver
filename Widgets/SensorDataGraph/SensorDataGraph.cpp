@@ -33,7 +33,8 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
 void SensorDataGraph::settingPlot()
 {
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("hh:mm:ss"); // формат отображения
+    dateTicker->setDateTimeFormat("hh:mm:ss.zzz");
+
     m_plot->xAxis->setTicker(dateTicker);
     m_plot->setNotAntialiasedElements(QCP::aeAll);
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
@@ -171,7 +172,7 @@ void SensorDataGraph::addNewData()
 void SensorDataGraph::updateGraph()
 {
     int time = 20;
-    double now = QDateTime::currentDateTime().toSecsSinceEpoch();
+    double now = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.;
     m_plot->xAxis->setRange(now - time, now);
 
     // Ограничиваем количество точек для каждого графика

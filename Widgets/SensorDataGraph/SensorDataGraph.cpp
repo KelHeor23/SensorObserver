@@ -22,8 +22,8 @@ SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t
     fillSensorsList();
     settingPlot();
 
-    connect(m_timer, &QTimer::timeout, this, &SensorDataGraph::addNewData);
-    m_timer->start(40);  // мс интервал
+    //connect(m_timer, &QTimer::timeout, this, &SensorDataGraph::addNewData);
+    //m_timer->start(100);  // мс интервал
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &SensorDataGraph::updateGraph); // updateGraph — ваш слот для обновления данных и графика
@@ -37,6 +37,9 @@ void SensorDataGraph::settingPlot()
     m_plot->xAxis->setTicker(dateTicker);
     m_plot->setNotAntialiasedElements(QCP::aeAll);
     m_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    m_plot->setNoAntialiasingOnDrag(true);
+    m_plot->setPlottingHints(QCP::phFastPolylines);
+    m_plot->setBufferDevicePixelRatio(1); // Отключаем сглаживание для HiDPI
     m_plot->legend->setVisible(true);
     m_plot->legend->setFont(QFont("Helvetica", 9));
     setDarkstyle();
@@ -135,6 +138,8 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
 
     if (isChecked) {
         QCPGraph *graph = m_plot->addGraph();
+        graph->setLineStyle(QCPGraph::lsLine);
+        graph->setAdaptiveSampling(true); // Включите адаптивную выборку
         graph->setName(sensorName);
 
         QString parentText = item->parent()->text(0);
@@ -149,7 +154,6 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
         auto &data = DataStructure::Instance().engines[0][groupName][sensorName.toStdString()];
 
         graph->setData(time, data);
-
     } else {
         if (graphMap.contains(sensorName)) {
             m_plot->removeGraph(graphMap[sensorName]);
@@ -163,10 +167,20 @@ void SensorDataGraph::addNewData()
 
 }
 
+
 void SensorDataGraph::updateGraph()
 {
-    double now = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0;
-    m_plot->xAxis->setRange(now - 20, now);
+    int time = 20;
+    double now = QDateTime::currentDateTime().toSecsSinceEpoch();
+    m_plot->xAxis->setRange(now - time, now);
+
+    // Ограничиваем количество точек для каждого графика
+    for (auto it = graphMap.begin(); it != graphMap.end(); ++it) {
+        QCPGraph* graph = it.value();
+        if (graph->data()->size() > 5000) { // Максимум 5000 точек на график
+            graph->data()->removeBefore(now - time); // Удаляем старые данные
+        }
+    }
     // Масштабируем только ось Y по данным
     m_plot->yAxis->rescale();
     m_plot->replot(QCustomPlot::rpQueuedReplot);

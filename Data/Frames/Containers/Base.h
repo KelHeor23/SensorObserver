@@ -7,9 +7,8 @@
 class BaseProtocol {
 
 public:
-    std::unordered_map<SensorName, std::shared_ptr<SensorData>>& getFields() {
-        return fields;
-    }
+    const auto& getFields() const   { return fields; }
+    auto& getFields()               { return fields; }
 
     virtual void setData(std::string_view data, int16_t node_id) = 0;
 public:

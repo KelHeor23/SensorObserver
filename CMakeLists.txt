@@ -1,101 +1,116 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
-project(SensorObserver VERSION 0.1 LANGUAGES CXX)
+project(SensorObserver
+  VERSION 0.1
+  LANGUAGES CXX)
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
+# ---- C++ / Qt базовые настройки ----
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Автоматическая обработка Qt-макросов/форм/ресурсов
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+# Предпочтительно Qt6, но допускаем Qt5.15+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network PrintSupport)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network PrintSupport)
 
-set(PROJECT_SOURCES
-        main.cpp
-        Widgets/MainWindow.h Widgets/MainWindow.cpp
-        Widgets/SensorsTable/DisplayingSensors.h Widgets/SensorsTable/DisplayingSensors.cpp
-        Widgets/SensorsTable/VibrationDirection.h Widgets/SensorsTable/VibrationDirection.cpp
-        Widgets/SensorsTable/ListOfLimitsWidget.h Widgets/SensorsTable/ListOfLimitsWidget.cpp
-        Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
-        Widgets/SensorsTable/SensorsTableWidget.h Widgets/SensorsTable/SensorsTableWidget.cpp
-        Widgets/Common/ConnSettings.h Widgets/Common/ConnSettings.cpp
-        Widgets/Other/MotorControl.h Widgets/Other/MotorControl.cpp
-        Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
-        Widgets/SensorDataGraph/SensorDataGraph.cpp Widgets/SensorDataGraph/SensorDataGraph.h
-        Common/Common.h
-        Data/CommonTypes.h
-        Tools/ColorButton.h Tools/ColorButton.cpp
-        Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
-        Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
-        Tools/SaveToCSV.h Tools/SaveToCSV.cpp
-        Tools/ValueIncrementer.h Tools/ValueIncrementer.cpp
-        Exchange/Client.h Exchange/Client.cpp
-        Data/DataStructure.cpp Data/DataStructure.h
-        Data/Frames/Containers/EngineSensors/EngineSensors.cpp Data/Frames/Containers/EngineSensors/EngineSensors.h
-        Data/Frames/Containers/EscSensors/EscStatus1.cpp Data/Frames/Containers/EscSensors/EscStatus1.h
-        Data/Frames/Containers/EscSensors/EscStatus2.cpp Data/Frames/Containers/EscSensors/EscStatus2.h
-        Data/Frames/Containers/EscSensors/EscStatus3.cpp Data/Frames/Containers/EscSensors/EscStatus3.h
-        Data/Frames/Containers/VoltageRegulators/VoltageRegulators.cpp Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h
-        Data/Frames/Containers/Base.h
-        Data/Frames/Containers/Constants.h
-        Data/Frames/Containers/Sensors.h
-        Data/Frames/Containers/SensorSettingsManager.cpp Data/Frames/Containers/SensorSettingsManager.h
-        Data/Frames/Containers/SensorsFrames.cpp Data/Frames/Containers/SensorsFrames.h
-        Data/Frames/Frames.h
-        Data/DataStructure.cpp Data/DataStructure.h
-        Libs/QCustomPlot/qcustomplot.cpp Libs/QCustomPlot/qcustomplot.h
-)
-
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(SensorObserver
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET SensorObserver APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
+# ---- Варианты предупреждений под компилятор ----
+if(MSVC)
+  add_compile_options(/W4 /permissive-)
 else()
-    if(ANDROID)
-        add_library(SensorObserver SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(SensorObserver
-            ${PROJECT_SOURCES}            
-        )
-    endif()
+  add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-target_include_directories(SensorObserver PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/Libs/QCustomPlot")
+# ---- Источники проекта ----
+set(PROJECT_SOURCES
+  main.cpp
+  Widgets/MainWindow.h            Widgets/MainWindow.cpp
 
-target_link_libraries(SensorObserver PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::PrintSupport)
+  Widgets/SensorsTable/DisplayingSensors.h     Widgets/SensorsTable/DisplayingSensors.cpp
+  Widgets/SensorsTable/VibrationDirection.h    Widgets/SensorsTable/VibrationDirection.cpp
+  Widgets/SensorsTable/ListOfLimitsWidget.h    Widgets/SensorsTable/ListOfLimitsWidget.cpp
+  Widgets/SensorsTable/DetailingLimitsWidget.h Widgets/SensorsTable/DetailingLimitsWidget.cpp
+  Widgets/SensorsTable/SensorsTableWidget.h    Widgets/SensorsTable/SensorsTableWidget.cpp
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.SensorObserver)
-endif()
-set_target_properties(SensorObserver PROPERTIES
-    ${BUNDLE_ID_OPTION}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
+  Widgets/Common/ConnSettings.h   Widgets/Common/ConnSettings.cpp
+  Widgets/Other/MotorControl.h    Widgets/Other/MotorControl.cpp
+  Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
+
+  Widgets/SensorDataGraph/SensorDataGraph.h Widgets/SensorDataGraph/SensorDataGraph.cpp
+
+  Common/Common.h
+  Data/CommonTypes.h
+
+  Tools/ColorButton.h         Tools/ColorButton.cpp
+  Tools/ColorProgressBar.h    Tools/ColorProgressBar.cpp
+  Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
+  Tools/SaveToCSV.h           Tools/SaveToCSV.cpp
+  Tools/ValueIncrementer.h    Tools/ValueIncrementer.cpp
+
+  Exchange/Client.h           Exchange/Client.cpp
+
+  Data/DataStructure.h        Data/DataStructure.cpp
+
+  Data/Frames/Containers/Base.h
+  Data/Frames/Containers/Constants.h
+  Data/Frames/Containers/Sensors.h
+  Data/Frames/Containers/SensorSettingsManager.h Data/Frames/Containers/SensorSettingsManager.cpp
+  Data/Frames/Containers/SensorsFrames.h        Data/Frames/Containers/SensorsFrames.cpp
+
+  Data/Frames/Containers/EngineSensors/EngineSensors.h  Data/Frames/Containers/EngineSensors/EngineSensors.cpp
+  Data/Frames/Containers/EscSensors/EscStatus1.h        Data/Frames/Containers/EscSensors/EscStatus1.cpp
+  Data/Frames/Containers/EscSensors/EscStatus2.h        Data/Frames/Containers/EscSensors/EscStatus2.cpp
+  Data/Frames/Containers/EscSensors/EscStatus3.h        Data/Frames/Containers/EscSensors/EscStatus3.cpp
+
+  Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h Data/Frames/Containers/VoltageRegulators/VoltageRegulators.cpp
+
+  Data/Frames/Frames.h
+
+  Libs/QCustomPlot/qcustomplot.h Libs/QCustomPlot/qcustomplot.cpp
 )
 
+# ---- Исполняемый файл ----
+# На Windows создаём GUI-приложение (без консольного окна)
+if(WIN32)
+  add_executable(SensorObserver WIN32 ${PROJECT_SOURCES})
+else()
+  add_executable(SensorObserver     ${PROJECT_SOURCES})
+endif()
+
+# ---- Публичные include-директории ----
+target_include_directories(SensorObserver
+  PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Libs/QCustomPlot
+)
+
+# ---- Линки ----
+target_link_libraries(SensorObserver
+  PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::PrintSupport
+)
+
+# Немного защиты от устаревших Qt-API (необязательно)
+target_compile_definitions(SensorObserver
+  PRIVATE
+    QT_DISABLE_DEPRECATED_BEFORE=0x050F00 # запретить API, помеченный как deprecated до Qt 5.15
+)
+
+# Для Qt6 — корректное завершение настройки таргета
+if(QT_VERSION_MAJOR EQUAL 6)
+  qt_finalize_executable(SensorObserver)
+endif()
+
+# ---- Установка (опционально) ----
 include(GNUInstallDirs)
 install(TARGETS SensorObserver
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  BUNDLE  DESTINATION .
 )
-
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(SensorObserver)
-endif()

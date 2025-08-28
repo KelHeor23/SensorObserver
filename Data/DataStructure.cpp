@@ -45,28 +45,28 @@ void DataStructure::addEngineSensorsData(size_t engineNum, const std::string &fr
 }
 
 void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, const std::string &frameName, VoltageRegulatorsData *data) {
-    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch());
+    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.);
     addValueToFrame(engineNum, frameName, "Среднее напряжение A", data->averageVoltageA);
     addValueToFrame(engineNum, frameName, "Среднее напряжение B", data->averageVoltageB);
     addValueToFrame(engineNum, frameName, "Среднее напряжение C", data->averageVoltageC);
 }
 
 void DataStructure::addEscStatusInfo1Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo1 *data) {
-    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch());
+    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch() / 1000.);
     addValueToFrame(engineNum, frameName, "RPM мотор", data->speed);
     addValueToFrame(engineNum, frameName, "recv_pwm", data->recv_pwm);
     addValueToFrame(engineNum, frameName, "comm_pwm", data->comm_pwm);
 }
 
 void DataStructure::addEscStatusInfo2Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo2* data) {
-    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch());
+    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch() / 1000.);
     addValueToFrame(engineNum, frameName, "Напряжение шины", data->voltage);
     addValueToFrame(engineNum, frameName, "Ток шины", data->bus_current);
     addValueToFrame(engineNum, frameName, "Ток мотора", data->current);
 }
 
 void DataStructure::addEscStatusInfo3Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo3* data) {
-    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch());
+    addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch() / 1000.);
     addValueToFrame(engineNum, frameName, "Температура конденсатора", data->cap_temp);
     addValueToFrame(engineNum, frameName, "Температура MCU", data->mcu_temp);
     addValueToFrame(engineNum, frameName, "Температура мотора", data->motor_temp);

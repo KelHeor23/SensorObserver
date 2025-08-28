@@ -135,6 +135,11 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
     QString sensorName = item->text(0);
     QString groupName = item->parent()->text(0);
 
+    DataFullName frame;
+    frame.engineNum = 0;
+    frame.frameName = groupName;
+    frame.sensorName = sensorName;
+
     bool isChecked = (item->checkState(0) == Qt::Checked);
 
     if (isChecked) {
@@ -156,14 +161,10 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
 
         graph->setData(time, data);
 
-        DataFullName temp;
-        temp.engineNum = 0;
-        temp.frameName = groupName;
-        temp.sensorName = sensorName;
-
-        dataSize[temp] = DataStructure::Instance().engines[0][groupName]["Time"].size();
+        dataSize[frame] = DataStructure::Instance().engines[0][groupName]["Time"].size();
     } else {
         if (graphMap.contains(sensorName)) {
+            dataSize.erase(frame);
             m_plot->removeGraph(graphMap[sensorName]);
             graphMap.remove(sensorName);
         }

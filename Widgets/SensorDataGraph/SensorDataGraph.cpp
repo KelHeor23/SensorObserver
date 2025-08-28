@@ -92,7 +92,7 @@ void SensorDataGraph::fillSensorsList()
 
     for (auto &it : sensorsManager->getFrames()) {
         QPair<QString, QStringList> temp;
-        temp.first = it.second->getNameFrame();
+        temp.first = QString::fromStdString(it.second->getNameFrame());
         for (auto &field : it.second->getFields())
             temp.second.push_back(QString::fromStdString(field.first));
         groups.push_back(temp);
@@ -156,12 +156,12 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
         graph->setPen(QPen(color, 2));
         graph->setName(sensorName);
 
-        auto &time = DataStructure::Instance().engines[0][groupName]["Time"];
-        auto &data = DataStructure::Instance().engines[0][groupName][sensorName];
+        auto &time = DataStructure::Instance().engines[0][groupName.toStdString()]["Time"];
+        auto &data = DataStructure::Instance().engines[0][groupName.toStdString()][sensorName.toStdString()];
 
-        graph->setData(time, data);
+        graph->setData(QVector<double>(time.begin(), time.end()), QVector<double>(data.begin(), data.end()));
 
-        dataSize[frame] = DataStructure::Instance().engines[0][groupName]["Time"].size();
+        dataSize[frame] = DataStructure::Instance().engines[0][groupName.toStdString()]["Time"].size();
     } else {
         if (graphMap.contains(sensorName)) {
             dataSize.erase(frame);
@@ -174,14 +174,14 @@ void SensorDataGraph::onItemChanged(QTreeWidgetItem *item, int column)
 void SensorDataGraph::addNewData()
 {
     for (auto &it : dataSize) {
-        auto &data = DataStructure::Instance().engines[it.first.engineNum][it.first.frameName][it.first.sensorName];
+        auto &data = DataStructure::Instance().engines[it.first.engineNum][it.first.frameName.toStdString()][it.first.sensorName.toStdString()];
         if (data.size() > it.second) {
             auto &graph = graphMap[it.first.sensorName];
             for (int i = it.second; i < data.size(); i++){
-                auto &time = DataStructure::Instance().engines[0][it.first.frameName]["Time"];
-                auto &data = DataStructure::Instance().engines[0][it.first.frameName][it.first.sensorName];
+                auto &time = DataStructure::Instance().engines[0][it.first.frameName.toStdString()]["Time"];
+                auto &data = DataStructure::Instance().engines[0][it.first.frameName.toStdString()][it.first.sensorName.toStdString()];
 
-                graph->setData(time, data);
+                graph->setData(QVector<double>(time.begin(), time.end()), QVector<double>(data.begin(), data.end()));
             }
             it.second = data.size();
         }

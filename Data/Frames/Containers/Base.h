@@ -1,10 +1,8 @@
 #ifndef BASE_H
 #define BASE_H
 
-#include <unordered_map>
-#include <vector>
-
 #include "Sensors.h"
+#include "Data/CommonTypes.h"
 
 class BaseProtocol {
 
@@ -15,14 +13,14 @@ public:
 
     virtual void setData(std::string_view data, int16_t node_id) = 0;
 public:
-    QString nameFrame;
+    FrameName nameFrame;
     std::vector<SensorName> orderedNames;
     std::unordered_map<SensorName, std::shared_ptr<SensorData>> fields;
 
-    QString getNameFrame() const;
+    FrameName getNameFrame() const;
 };
 
-inline QString BaseProtocol::getNameFrame() const
+inline FrameName BaseProtocol::getNameFrame() const
 {
     return nameFrame;
 }

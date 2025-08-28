@@ -25,7 +25,7 @@ void ListOfLimitsWidget::addNewFrame(std::shared_ptr<BaseProtocol> frame)
 {
     CollapsibleGroupBox *frameGroupBox = new CollapsibleGroupBox(this);
     frameGroupBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-    frameGroupBox->setTitle(frame->nameFrame);
+    frameGroupBox->setTitle(QString::fromStdString(frame->nameFrame));
 
     for (auto &it : frame->orderedNames) {
 

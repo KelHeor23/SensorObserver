@@ -5,8 +5,6 @@
 #include <QString>
 #include <memory>
 
-using SensorName = std::string;
-
 struct SensorLimits {
     int min = 0;
     int max = 0;

@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
         Widgets/Other/SmoothMotorControl.h Widgets/Other/SmoothMotorControl.cpp
         Widgets/SensorDataGraph/SensorDataGraph.cpp Widgets/SensorDataGraph/SensorDataGraph.h
         Common/Common.h
+        Data/CommonTypes.h
         Tools/ColorButton.h Tools/ColorButton.cpp
         Tools/ColorProgressBar.h Tools/ColorProgressBar.cpp
         Tools/CollapsibleGroupBox.h Tools/CollapsibleGroupBox.cpp
@@ -65,7 +66,7 @@ else()
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(SensorObserver
-            ${PROJECT_SOURCES}
+            ${PROJECT_SOURCES}            
         )
     endif()
 endif()

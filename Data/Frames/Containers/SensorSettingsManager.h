@@ -9,9 +9,9 @@
 
 class SensorSettingsManager {
     using SensorPtr = std::shared_ptr<SensorData>;
+    using SensorHashTable = std::unordered_map<QString, SensorPtr>;
 
 public:
-    using SensorHashTable = std::unordered_map<QString, SensorPtr>;
 
     static QString getConfigPath();
 

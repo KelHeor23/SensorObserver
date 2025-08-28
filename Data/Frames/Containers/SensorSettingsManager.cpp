@@ -21,18 +21,18 @@ bool SensorSettingsManager::saveAll(const SensorHashTable &data) {
 
     for (auto it = data.begin(); it != data.end(); ++it) {
         settings.beginGroup(it->first);
-        settings.setValue("value", it->second.val.load());
-        settings.setValue("min_limit", it->second.limit->min);
-        settings.setValue("max_limit", it->second.limit->max);
-        settings.setValue("useDetalaizedLimits", it->second.settings->useDetalaizedLimits);
+        settings.setValue("value", it->second->val.load());
+        settings.setValue("min_limit", it->second->limit->min);
+        settings.setValue("max_limit", it->second->limit->max);
+        settings.setValue("useDetalaizedLimits", it->second->settings->useDetalaizedLimits);
 
-        settings.setValue("DetalaizedLimitsCount", static_cast<int>(it->second.detalaizedLimits->size()));
+        settings.setValue("DetalaizedLimitsCount", static_cast<int>(it->second->detalaizedLimits->size()));
 
         // Сохраняем каждый лимит
-        for (int i = 0; i < it->second.detalaizedLimits->size(); ++i) {
+        for (int i = 0; i < it->second->detalaizedLimits->size(); ++i) {
             settings.beginGroup("Limit_" + QString::number(i));
 
-            const auto& item = it->second.detalaizedLimits->at(i);
+            const auto& item = it->second->detalaizedLimits->at(i);
             settings.setValue("min", item.limit.min);
             settings.setValue("max", item.limit.max);
             settings.setValue("color", item.color.name(QColor::HexArgb)); // Сохраняем с альфа-каналом
@@ -58,14 +58,14 @@ bool SensorSettingsManager::loadAll(SensorHashTable &outData) {
     for (const QString& key : sensorKeys) {
         settings.beginGroup(key);
 
-        SensorData sensor;
-        sensor.val = settings.value("value", 0).toInt();
-        sensor.limit->min = settings.value("min_limit", 0).toInt();
-        sensor.limit->max = settings.value("max_limit", 0).toInt();
-        sensor.settings->useDetalaizedLimits = settings.value("useDetalaizedLimits", 0).toBool();
+        SensorPtr sensor = std::make_shared<SensorData>();
+        sensor->val = settings.value("value", 0).toInt();
+        sensor->limit->min = settings.value("min_limit", 0).toInt();
+        sensor->limit->max = settings.value("max_limit", 0).toInt();
+        sensor->settings->useDetalaizedLimits = settings.value("useDetalaizedLimits", 0).toBool();
 
         const int count = settings.value("DetalaizedLimitsCount", 0).toInt();
-        sensor.detalaizedLimits->reserve(count);
+        sensor->detalaizedLimits->reserve(count);
 
         // Загружаем каждый лимит
         for (int i = 0; i < count; ++i) {
@@ -81,7 +81,7 @@ bool SensorSettingsManager::loadAll(SensorHashTable &outData) {
                 item.color = Qt::transparent; // Фолбек на случай ошибки
             }
 
-            sensor.detalaizedLimits->push_back(std::move(item));
+            sensor->detalaizedLimits->push_back(std::move(item));
             settings.endGroup();
         }
 
@@ -93,7 +93,7 @@ bool SensorSettingsManager::loadAll(SensorHashTable &outData) {
     return settings.status() == QSettings::NoError;
 }
 
-bool SensorSettingsManager::saveSensor(const QString &sensorName, std::shared_ptr<SensorData> data) {
+bool SensorSettingsManager::saveSensor(const QString &sensorName, SensorPtr data) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
 
     settings.beginGroup("Sensors/" + sensorName);

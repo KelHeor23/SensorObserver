@@ -8,8 +8,10 @@
 #include "Sensors.h"
 
 class SensorSettingsManager {
+    using SensorPtr = std::shared_ptr<SensorData>;
+
 public:
-    using SensorHashTable = std::unordered_map<QString, SensorData>;
+    using SensorHashTable = std::unordered_map<QString, SensorPtr>;
 
     static QString getConfigPath();
 
@@ -20,10 +22,10 @@ public:
     static bool loadAll(SensorHashTable& outData);
 
     // Сохранить отдельный сенсор
-    static bool saveSensor(const QString& sensorName, std::shared_ptr<SensorData> data);
+    static bool saveSensor(const QString& sensorName, SensorPtr data);
 
     // Загрузить отдельный сенсор
-    static bool loadSensor(const QString& sensorName, std::shared_ptr<SensorData> outData);
+    static bool loadSensor(const QString& sensorName, SensorPtr outData);
 
     // Удалить отдельный сенсор
     static bool removeSensor(const QString& sensorName);

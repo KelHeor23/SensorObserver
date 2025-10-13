@@ -58,7 +58,7 @@ void SensorsTableWidget::readEngineSensorsMsg(uint8_t num, const QByteArray &dat
 
     if (num >= 8)
     {
-        std::cerr << "readVoltageRegulatorsMsg" << std::endl;
+        std::cerr << "readEngineSensorsMsg" << std::endl;
         return;
     }
 
@@ -82,6 +82,19 @@ void SensorsTableWidget::readVoltageRegulatorsMsg(uint8_t num, const QByteArray 
     }
 
     displayngSensors[num]->setSensorsData(VOLTAGE_REGULATORS, sv, num);
+}
+
+void SensorsTableWidget::readOtherSensorsMsg(uint8_t num, const QByteArray &data)
+{
+    std::string_view sv(data.constData() , data.size());
+
+    if (num >= 8)
+    {
+        std::cerr << "readOtherSensorsMsg" << std::endl;
+        return;
+    }
+
+    displayngSensors[num]->setSensorsData(OTHER_SENSROS, sv, num);
 }
 
 #include <QtEndian>
@@ -136,6 +149,15 @@ void SensorsTableWidget::parseMsg(const QByteArray& message)
             }
             readVoltageRegulatorsMsg(value & 0b111, message.mid(it, sizeof(VoltageRegulatorsData)));
             it += sizeof(VoltageRegulatorsData);
+            break;
+        case Protocol_numbers::OTHER_SENSROS:
+            if (it + sizeof(OtherSensorsData) > message.size())
+            {
+                qDebug() << "Ошибка чтения пакета данных";
+                return;
+            }
+            readOtherSensorsMsg(value & 0b111, message.mid(it, sizeof(OtherSensorsData)));
+            it += sizeof(OtherSensorsData);
             break;
         default:
             qDebug() << "Ошибка чтения пакета данных";

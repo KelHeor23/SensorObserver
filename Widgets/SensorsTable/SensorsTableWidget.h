@@ -19,6 +19,7 @@ private:
     void engineSensorsVisual();
     void readEngineSensorsMsg(uint8_t num, const QByteArray& data);
     void readVoltageRegulatorsMsg(uint8_t num, const QByteArray& data);
+    void readOtherSensorsMsg(uint8_t num, const QByteArray& data);
 
 public slots:
     void parseMsg(const QByteArray& data);

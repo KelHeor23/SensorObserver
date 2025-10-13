@@ -33,6 +33,9 @@ void DataStructure::addData(size_t engineNum, std::string frameName, FrameTypes 
     case VOLTAGE_REGULATORS:
         addVoltageRegulatorSensorsData(engineNum, frameName, static_cast<VoltageRegulatorsData*>(data));
         break;
+    case OTHER_SENSROS:
+        addOtherSensorsData(engineNum, frameName, static_cast<OtherSensorsData*>(data));
+        break;
     default:
         throw std::invalid_argument("Unknown frame type");
     }
@@ -49,6 +52,11 @@ void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, const std::
     addValueToFrame(engineNum, frameName, "Среднее напряжение A", data->averageVoltageA);
     addValueToFrame(engineNum, frameName, "Среднее напряжение B", data->averageVoltageB);
     addValueToFrame(engineNum, frameName, "Среднее напряжение C", data->averageVoltageC);
+}
+
+void DataStructure::addOtherSensorsData(size_t engineNum, const std::string &frameName, OtherSensorsData *data)
+{
+    addValueToFrame(engineNum, frameName, "Тяга", data->weight);
 }
 
 void DataStructure::addEscStatusInfo1Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo1 *data) {

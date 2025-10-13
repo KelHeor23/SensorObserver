@@ -71,6 +71,7 @@ set(PROJECT_SOURCES
   Data/Frames/Frames.h
 
   Libs/QCustomPlot/qcustomplot.h Libs/QCustomPlot/qcustomplot.cpp
+  Data/Frames/Containers/OtherSensors/OtherSensors.h Data/Frames/Containers/OtherSensors/OtherSensors.cpp
 )
 
 # ---- Исполняемый файл ----
@@ -78,7 +79,8 @@ set(PROJECT_SOURCES
 if(WIN32)
   add_executable(SensorObserver WIN32 ${PROJECT_SOURCES})
 else()
-  add_executable(SensorObserver     ${PROJECT_SOURCES})
+  add_executable(SensorObserver     ${PROJECT_SOURCES}
+      )
 endif()
 
 # ---- Публичные include-директории ----

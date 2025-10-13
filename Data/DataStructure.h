@@ -27,6 +27,7 @@ private:
 
     void addEngineSensorsData(size_t engineNum, const std::string &type, EngineSensorsData *data);
     void addVoltageRegulatorSensorsData(size_t engineNum, const std::string &type, VoltageRegulatorsData *data);
+    void addOtherSensorsData(size_t engineNum, const std::string &type, OtherSensorsData *data);
     void addEscStatusInfo1Data(size_t engineNum, const std::string &type, EscSensors::EscStatusInfo1 *data);
     void addEscStatusInfo2Data(size_t engineNum, const std::string &type, EscSensors::EscStatusInfo2 *data);
     void addEscStatusInfo3Data(size_t engineNum, const std::string &type, EscSensors::EscStatusInfo3 *data);

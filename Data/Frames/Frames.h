@@ -9,6 +9,7 @@ enum FrameTypes{
     ESC_FRAME3,
     ENGINE,
     VOLTAGE_REGULATORS,
+    OTHER_SENSROS,
     NONE
 };
 
@@ -35,6 +36,13 @@ struct EngineSensorsData : BaseFrame {
     int8_t      temperature;        // Температура двигателя (-128 ... +127), градусы/10
     uint16_t    runoutAngle;        // Угол биения относительно метки на двигателе (0-359), градусы
     uint16_t    runoutAmplitude;    // Амплитуда биения (0 - 65535), мили-g
+};
+#pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
+
+#pragma pack(push, 1) // Отключаем выравнивание
+struct OtherSensorsData : BaseFrame {
+    uint32_t    canID;              // 0x1FF1200-0x1FF1207 (Младший бит - номер двигателя)
+    double      weight;
 };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 

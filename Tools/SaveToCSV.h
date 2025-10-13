@@ -18,6 +18,7 @@
 struct DeviceData {
     std::optional<EngineSensorsData> engine;
     std::optional<VoltageRegulatorsData> regulator;
+    std::optional<OtherSensorsData> other;
     std::optional<EscSensors::EscStatusInfo1> escF1;
     std::optional<EscSensors::EscStatusInfo2> escF2;
     std::optional<EscSensors::EscStatusInfo3> escF3;
@@ -38,6 +39,7 @@ public:
 
     void addEngineData(const EngineSensorsData& data);
     void addRegulatorData(const VoltageRegulatorsData& data);
+    void addOtherSensorsData(const OtherSensorsData& data);
     void addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data);
     void addEscF2Data(uint8_t device_id, const EscSensors::EscStatusInfo2&& data);
     void addEscF3Data(uint8_t device_id, const EscSensors::EscStatusInfo3&& data);

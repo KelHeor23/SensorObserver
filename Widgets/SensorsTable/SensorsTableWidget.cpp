@@ -25,6 +25,7 @@ SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsMan
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC_FRAME1]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC_FRAME2]->orderedNames);
         displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[ESC_FRAME3]->orderedNames);
+        displayngSensors.last()->addNewDataLabels(sensorsManager->getFrames()[OTHER_SENSROS]->orderedNames);
         displayngSensors.last()->linkLimitsSensorsFrames(sensorsManager);
     }
 

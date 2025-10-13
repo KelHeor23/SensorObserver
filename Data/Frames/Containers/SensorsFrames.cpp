@@ -5,6 +5,7 @@
 #include "Data/Frames/Containers/EscSensors/EscStatus2.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus3.h"
 #include "Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h"
+#include "Data/Frames/Containers/OtherSensors/OtherSensors.h"
 #include "qdebug.h"
 
 SensorsFrames::SensorsFrames()
@@ -14,6 +15,7 @@ SensorsFrames::SensorsFrames()
     frames[ESC_FRAME3] = std::make_shared<EscSensors::EscStatus3>();
     frames[ENGINE] = std::make_shared<EngineSensors::EngineSensors>();
     frames[VOLTAGE_REGULATORS] = std::make_shared<VoltageRegulators::VoltageRegulators>();
+    frames[OTHER_SENSROS] = std::make_shared<OtherSensors::OtherSensors>();
 
     rebuildIndex();
 }

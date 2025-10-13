@@ -70,6 +70,15 @@ void UnifiedCsvWriter::addRegulatorData(const VoltageRegulatorsData& data) {
     m_cv.notify_one();
 }
 
+void UnifiedCsvWriter::addOtherSensorsData(const OtherSensorsData &data)
+{
+    const uint8_t device_id = data.canID & 0x07;
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_deviceDataCustom[device_id].other = data;
+    m_updated = true;
+    m_cv.notify_one();
+}
+
 void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);

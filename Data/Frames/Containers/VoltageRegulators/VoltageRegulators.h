@@ -2,11 +2,8 @@
 #define VOLTAGEREGULATORS_H
 
 #include <cstdint>
-#include <string>
-#include <unordered_map>
 #include <vector>
 
-#include "Data/Frames/Containers/Sensors.h"
 #include "Data/Frames/Containers/Base.h"
 
 namespace VoltageRegulators {

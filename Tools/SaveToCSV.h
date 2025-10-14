@@ -9,19 +9,18 @@
 #include <atomic>
 #include <cstdint>
 #include <unordered_map>
-#include <optional>
 #include <vector>
 
 #include "Data/Frames/Frames.h"
 
 // Класс для объединенных данных устройства
 struct DeviceData {
-    std::optional<EngineSensorsData> engine;
-    std::optional<VoltageRegulatorsData> regulator;
-    std::optional<OtherSensorsData> other;
-    std::optional<EscSensors::EscStatusInfo1> escF1;
-    std::optional<EscSensors::EscStatusInfo2> escF2;
-    std::optional<EscSensors::EscStatusInfo3> escF3;
+    std::shared_ptr<EngineSensorsData> engine;
+    std::shared_ptr<VoltageRegulatorsData> regulator;
+    std::shared_ptr<OtherSensorsData> other;
+    std::shared_ptr<EscSensors::EscStatusInfo1> escF1 = std::make_shared<EscSensors::EscStatusInfo1>();
+    std::shared_ptr<EscSensors::EscStatusInfo2> escF2 = std::make_shared<EscSensors::EscStatusInfo2>();
+    std::shared_ptr<EscSensors::EscStatusInfo3> escF3 = std::make_shared<EscSensors::EscStatusInfo3>();
     uint64_t last_update = 0;
 };
 
@@ -37,12 +36,12 @@ public:
 
     ~UnifiedCsvWriter();
 
-    void addEngineData(const EngineSensorsData& data);
-    void addRegulatorData(const VoltageRegulatorsData& data);
-    void addOtherSensorsData(const OtherSensorsData& data);
-    void addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data);
-    void addEscF2Data(uint8_t device_id, const EscSensors::EscStatusInfo2&& data);
-    void addEscF3Data(uint8_t device_id, const EscSensors::EscStatusInfo3&& data);
+    void addEngineData(std::shared_ptr<EngineSensorsData> data);
+    void addRegulatorData(std::shared_ptr<VoltageRegulatorsData> data);
+    void addOtherSensorsData(std::shared_ptr<OtherSensorsData> data);
+    void addEscF1Data(uint8_t device_id, std::shared_ptr<EscSensors::EscStatusInfo1> data);
+    void addEscF2Data(uint8_t device_id, std::shared_ptr<EscSensors::EscStatusInfo2> data);
+    void addEscF3Data(uint8_t device_id, std::shared_ptr<EscSensors::EscStatusInfo3> data);
 
     void stop();
 

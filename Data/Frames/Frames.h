@@ -2,6 +2,7 @@
 #define FRAMES_H
 
 #include <cstdint>
+#include <memory>
 
 enum FrameTypes{
     ESC_FRAME1,
@@ -53,29 +54,29 @@ struct EscStatusInfo1 : BaseFrame{
     uint16_t    recv_pwm   = 0;  // 0.1us units (little-endian)
     uint16_t    comm_pwm   = 0;  // 0.1us units (little-endian)
 
-    static EscStatusInfo1 unpack(const char buffer[8]) {
-        EscStatusInfo1 result;
+    static std::shared_ptr<EscStatusInfo1> unpack(const char buffer[8]) {
+        auto result = std::make_shared<EscStatusInfo1>();
 
         // Исправленный парсинг 24-битной скорости (little-endian)
         uint32_t raw_speed = static_cast<uint32_t>(static_cast<uint8_t>(buffer[2]) << 16) |
                              static_cast<uint32_t>(static_cast<uint8_t>(buffer[1]) << 8) |
                              static_cast<uint8_t>(buffer[0]);
         // Коррекция знака для 24-битного числа
-        result.speed = (raw_speed & 0x800000) ?
+        result->speed = (raw_speed & 0x800000) ?
                            (static_cast<int32_t>(raw_speed) | 0xFF000000) :
                            raw_speed;
 
         // Исправленный парсинг recv_pwm (little-endian)
-        result.recv_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[4]) << 8) |
+        result->recv_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[4]) << 8) |
                           static_cast<uint16_t>(static_cast<uint8_t>(buffer[3]));
 
         // Исправленный парсинг comm_pwm (little-endian)
-        result.comm_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[7]) << 8) |
+        result->comm_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[7]) << 8) |
                           static_cast<uint16_t>(static_cast<uint8_t>(buffer[6]));
 
         // Масштабирование PWM значений
-        result.recv_pwm /= 10;
-        result.comm_pwm /= 10;
+        result->recv_pwm /= 10;
+        result->comm_pwm /= 10;
 
         return result;
     }
@@ -87,23 +88,23 @@ struct EscStatusInfo2 : BaseFrame{
     int16_t     bus_current = 0; // 0.1A Bus current (little-endian)
     int16_t     current     = 0;     // 0.1A Motor line current (little-endian)
 
-    static EscStatusInfo2 unpack(const char buffer[8]) {
-        EscStatusInfo2 result;
+    static std::shared_ptr<EscStatusInfo2> unpack(const char buffer[8]) {
+        auto result = std::make_shared<EscStatusInfo2>();
 
         // Парсинг voltage (uint16_t, little-endian)
-        result.voltage =
+        result->voltage =
             (static_cast<uint16_t>(static_cast<uint8_t>(buffer[0])) |
              (static_cast<uint16_t>(static_cast<uint8_t>(buffer[1])) << 8)) / 10;
 
         // Парсинг bus_current (int16_t, little-endian)
-        result.bus_current =
+        result->bus_current =
             static_cast<int16_t>(
                 static_cast<uint16_t>(static_cast<uint8_t>(buffer[2])) |
                 (static_cast<uint16_t>(static_cast<uint8_t>(buffer[3])) << 8)
                 ) / 10;
 
         // Парсинг current (int16_t, little-endian)
-        result.current =
+        result->current =
             static_cast<int16_t>(
                 static_cast<uint16_t>(static_cast<uint8_t>(buffer[4])) |
                 (static_cast<uint16_t>(static_cast<uint8_t>(buffer[5])) << 8)
@@ -121,16 +122,16 @@ struct EscStatusInfo3 : BaseFrame{
     uint8_t     motor_temp  = 0;      // Temperature in °C (беззнаковое)
     uint16_t    Error       = 0;
 
-    static EscStatusInfo3 unpack(const char buffer[8]) {
-        EscStatusInfo3 result;
+    static std::shared_ptr<EscStatusInfo3> unpack(const char buffer[8]) {
+        auto result = std::make_shared<EscStatusInfo3>();
 
         // Парсинг температур (прямое присваивание)
-        result.cap_temp = static_cast<uint8_t>(buffer[2]) - 50;
-        result.mcu_temp = static_cast<uint8_t>(buffer[3]) - 50;
-        result.motor_temp = static_cast<uint8_t>(buffer[4]) - 50;
+        result->cap_temp = static_cast<uint8_t>(buffer[2]) - 50;
+        result->mcu_temp = static_cast<uint8_t>(buffer[3]) - 50;
+        result->motor_temp = static_cast<uint8_t>(buffer[4]) - 50;
 
         // Парсинг резервных байт (buffer[5] и buffer[6]) или другой running_error
-        result.Error =
+        result->Error =
             static_cast<uint16_t>(static_cast<uint8_t>(buffer[6])) |
             (static_cast<uint16_t>(static_cast<uint8_t>(buffer[7])) << 8);
 

@@ -21,11 +21,12 @@ void OtherSensors::setData(std::string_view data, int16_t node_id)
         throw std::runtime_error("Insufficient data size");
     }
 
-    const OtherSensorsData* receivedData = reinterpret_cast<const OtherSensorsData*>(data.data());
+    auto receivedData = std::make_shared<OtherSensorsData>();
+    memcpy(receivedData.get(), data.data(), sizeof(OtherSensorsData));
 
     fields["Тяга"]->val = static_cast<int>(receivedData->weight);
 
-    UnifiedCsvWriter::Instance().addOtherSensorsData(*receivedData);
-    DataStructure::Instance().addData(node_id, nameFrame, OTHER_SENSROS, const_cast<OtherSensorsData*>(receivedData));
+    UnifiedCsvWriter::Instance().addOtherSensorsData(receivedData);
+    DataStructure::Instance().addData(node_id, nameFrame, OTHER_SENSROS, receivedData);
 }
 }

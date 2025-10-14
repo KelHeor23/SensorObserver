@@ -47,39 +47,39 @@ UnifiedCsvWriter::~UnifiedCsvWriter() {
     stop();
 }
 
-void UnifiedCsvWriter::addEngineData(const EngineSensorsData& data) {
-    const uint8_t device_id = data.canID & 0x07;
+void UnifiedCsvWriter::addEngineData(std::shared_ptr<EngineSensorsData> data) {
+    const uint8_t device_id = data->canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataCustom[device_id].engine = data;
-    m_deviceDataCustom[device_id].escF1->speed = data.speed;
-    m_deviceDataCustom[device_id].escF3->motor_temp = data.temperature;
+    m_deviceDataCustom[device_id].escF1->speed = data->speed;
+    m_deviceDataCustom[device_id].escF3->motor_temp = data->temperature;
     m_deviceDataCustom[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addRegulatorData(const VoltageRegulatorsData& data) {
-    const uint8_t device_id = data.canID & 0x07;
+void UnifiedCsvWriter::addRegulatorData(std::shared_ptr<VoltageRegulatorsData> data) {
+    const uint8_t device_id = data->canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataCustom[device_id].regulator = data;
-    m_deviceDataCustom[device_id].escF1->comm_pwm = data.controlPWM;
-    m_deviceDataCustom[device_id].escF2->voltage = data.inputVoltageHP | (data.inputVoltageLP & 0xF);
-    m_deviceDataCustom[device_id].escF2->current = data.electricCurrent;
+    m_deviceDataCustom[device_id].escF1->comm_pwm = data->controlPWM;
+    m_deviceDataCustom[device_id].escF2->voltage = data->inputVoltageHP | (data->inputVoltageLP & 0xF);
+    m_deviceDataCustom[device_id].escF2->current = data->electricCurrent;
     m_deviceDataCustom[device_id].last_update = getCurrentTimeMillis();
     m_updated = true;
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addOtherSensorsData(const OtherSensorsData &data)
+void UnifiedCsvWriter::addOtherSensorsData(std::shared_ptr<OtherSensorsData> data)
 {
-    const uint8_t device_id = data.canID & 0x07;
+    const uint8_t device_id = data->canID & 0x07;
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataCustom[device_id].other = data;
     m_updated = true;
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, const EscSensors::EscStatusInfo1&& data)
+void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, std::shared_ptr<EscSensors::EscStatusInfo1> data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataESC[device_id].escF1 = data;
@@ -88,7 +88,7 @@ void UnifiedCsvWriter::addEscF1Data(uint8_t device_id, const EscSensors::EscStat
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addEscF2Data(uint8_t device_id, const EscSensors::EscStatusInfo2&& data)
+void UnifiedCsvWriter::addEscF2Data(uint8_t device_id, std::shared_ptr<EscSensors::EscStatusInfo2> data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataESC[device_id].escF2 = data;
@@ -97,7 +97,7 @@ void UnifiedCsvWriter::addEscF2Data(uint8_t device_id, const EscSensors::EscStat
     m_cv.notify_one();
 }
 
-void UnifiedCsvWriter::addEscF3Data(uint8_t device_id, const EscSensors::EscStatusInfo3&& data)
+void UnifiedCsvWriter::addEscF3Data(uint8_t device_id, std::shared_ptr<EscSensors::EscStatusInfo3> data)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     m_deviceDataESC[device_id].escF3 = data;

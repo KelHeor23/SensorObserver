@@ -7,7 +7,7 @@ DataStructure::DataStructure() {
     engines.resize(8);
 }
 
-void DataStructure::addData(size_t engineNum, std::string frameName, FrameTypes type, BaseFrame *data) {
+void DataStructure::addData(size_t engineNum, std::string frameName, FrameTypes type, std::shared_ptr<BaseFrame> data) {
     if (engineNum >= engines.size()) {
         throw std::out_of_range("Incorrect engine index");
     }
@@ -19,66 +19,72 @@ void DataStructure::addData(size_t engineNum, std::string frameName, FrameTypes 
     case NONE:
         throw std::invalid_argument("Invalid frame type: NONE");
     case ENGINE:
-        addEngineSensorsData(engineNum, frameName, static_cast<EngineSensorsData*>(data));
+        addEngineSensorsData(engineNum, frameName, data);
         break;
     case ESC_FRAME1:
-        addEscStatusInfo1Data(engineNum, frameName, static_cast<EscSensors::EscStatusInfo1*>(data));
+        addEscStatusInfo1Data(engineNum, frameName, data);
         break;
     case ESC_FRAME2:
-        addEscStatusInfo2Data(engineNum, frameName, static_cast<EscSensors::EscStatusInfo2*>(data));
+        addEscStatusInfo2Data(engineNum, frameName, data);
         break;
     case ESC_FRAME3:
-        addEscStatusInfo3Data(engineNum, frameName, static_cast<EscSensors::EscStatusInfo3*>(data));
+        addEscStatusInfo3Data(engineNum, frameName, data);
         break;
     case VOLTAGE_REGULATORS:
-        addVoltageRegulatorSensorsData(engineNum, frameName, static_cast<VoltageRegulatorsData*>(data));
+        addVoltageRegulatorSensorsData(engineNum, frameName, data);
         break;
     case OTHER_SENSROS:
-        addOtherSensorsData(engineNum, frameName, static_cast<OtherSensorsData*>(data));
+        addOtherSensorsData(engineNum, frameName, data);
         break;
     default:
         throw std::invalid_argument("Unknown frame type");
     }
 }
 
-void DataStructure::addEngineSensorsData(size_t engineNum, const std::string &frameName, EngineSensorsData* data) {
+void DataStructure::addEngineSensorsData(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame> data) {
+    auto castedData = std::static_pointer_cast<EngineSensorsData>(data);
     addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.);
-    addValueToFrame(engineNum, frameName, "Угол биения", data->runoutAngle);
-    addValueToFrame(engineNum, frameName, "Амплитуда биения", data->runoutAmplitude);
+    addValueToFrame(engineNum, frameName, "Угол биения", castedData->runoutAngle);
+    addValueToFrame(engineNum, frameName, "Амплитуда биения", castedData->runoutAmplitude);
 }
 
-void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, const std::string &frameName, VoltageRegulatorsData *data) {
+void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame> data) {
+    auto castedData = std::static_pointer_cast<VoltageRegulatorsData>(data);
     addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.);
-    addValueToFrame(engineNum, frameName, "Среднее напряжение A", data->averageVoltageA);
-    addValueToFrame(engineNum, frameName, "Среднее напряжение B", data->averageVoltageB);
-    addValueToFrame(engineNum, frameName, "Среднее напряжение C", data->averageVoltageC);
+    addValueToFrame(engineNum, frameName, "Среднее напряжение A", castedData->averageVoltageA);
+    addValueToFrame(engineNum, frameName, "Среднее напряжение B", castedData->averageVoltageB);
+    addValueToFrame(engineNum, frameName, "Среднее напряжение C", castedData->averageVoltageC);
 }
 
-void DataStructure::addOtherSensorsData(size_t engineNum, const std::string &frameName, OtherSensorsData *data)
+void DataStructure::addOtherSensorsData(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame>  data)
 {
-    addValueToFrame(engineNum, frameName, "Тяга", data->weight);
+    auto castedData = std::static_pointer_cast<OtherSensorsData>(data);
+    addValueToFrame(engineNum, frameName, "Тяга", castedData->weight);
 }
 
-void DataStructure::addEscStatusInfo1Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo1 *data) {
+void DataStructure::addEscStatusInfo1Data(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame> data) {
+    auto castedData = std::static_pointer_cast<EscSensors::EscStatusInfo1>(data);
     addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch() / 1000.);
-    addValueToFrame(engineNum, frameName, "RPM мотор", data->speed);
-    addValueToFrame(engineNum, frameName, "recv_pwm", data->recv_pwm);
-    addValueToFrame(engineNum, frameName, "comm_pwm", data->comm_pwm);
+    addValueToFrame(engineNum, frameName, "RPM мотор", castedData->speed);
+    addValueToFrame(engineNum, frameName, "recv_pwm", castedData->recv_pwm);
+    addValueToFrame(engineNum, frameName, "comm_pwm", castedData->comm_pwm);
 }
 
-void DataStructure::addEscStatusInfo2Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo2* data) {
+void DataStructure::addEscStatusInfo2Data(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame> data) {
+    auto castedData = std::static_pointer_cast<EscSensors::EscStatusInfo2>(data);
     addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch() / 1000.);
-    addValueToFrame(engineNum, frameName, "Напряжение шины", data->voltage);
-    addValueToFrame(engineNum, frameName, "Ток шины", data->bus_current);
-    addValueToFrame(engineNum, frameName, "Ток мотора", data->current);
+    addValueToFrame(engineNum, frameName, "Напряжение шины", castedData->voltage);
+    addValueToFrame(engineNum, frameName, "Ток шины", castedData->bus_current);
+    addValueToFrame(engineNum, frameName, "Ток мотора", castedData->current);
 }
 
-void DataStructure::addEscStatusInfo3Data(size_t engineNum, const std::string &frameName, EscSensors::EscStatusInfo3* data) {
+void DataStructure::addEscStatusInfo3Data(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame> data) {
+    auto castedData = std::static_pointer_cast<EscSensors::EscStatusInfo3>(data);
     addValueToFrame(engineNum, frameName, "Time", QDateTime::currentDateTime().toSecsSinceEpoch() / 1000.);
-    addValueToFrame(engineNum, frameName, "Температура конденсатора", data->cap_temp);
-    addValueToFrame(engineNum, frameName, "Температура MCU", data->mcu_temp);
-    addValueToFrame(engineNum, frameName, "Температура мотора", data->motor_temp);
-    addValueToFrame(engineNum, frameName, "Ошибка", data->Error);
+    addValueToFrame(engineNum, frameName, "Температура конденсатора", castedData->cap_temp);
+    addValueToFrame(engineNum, frameName, "Температура MCU", castedData->mcu_temp);
+    addValueToFrame(engineNum, frameName, "Температура мотора", castedData->motor_temp);
+    addValueToFrame(engineNum, frameName, "Ошибка", castedData->Error);
 }
 
 template<typename T>

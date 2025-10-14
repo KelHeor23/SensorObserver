@@ -22,7 +22,8 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_
         throw std::runtime_error("Insufficient data size");
     }
 
-    const VoltageRegulatorsData* receivedData = reinterpret_cast<const VoltageRegulatorsData*>(data.data());
+    auto receivedData = std::make_shared<VoltageRegulatorsData>();
+    memcpy(receivedData.get(), data.data(), sizeof(VoltageRegulatorsData));
 
     /*uint16_t intPart    = receivedData->inputVoltageHP | (receivedData->inputVoltageLP & 0xF);
     uint8_t  floatPart  = receivedData->inputVoltageLP & 0x0F;
@@ -34,6 +35,7 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_
     fields["Среднее напряжение B"]->val         = static_cast<double>(receivedData->averageVoltageB);
     fields["Среднее напряжение C"]->val         = static_cast<double>(receivedData->averageVoltageC);
 
-    UnifiedCsvWriter::Instance().addRegulatorData(*receivedData);
-    DataStructure::Instance().addData(node_id, nameFrame, VOLTAGE_REGULATORS, const_cast<VoltageRegulatorsData*>(receivedData));
+
+    UnifiedCsvWriter::Instance().addRegulatorData(receivedData);
+    DataStructure::Instance().addData(node_id, nameFrame, VOLTAGE_REGULATORS, receivedData);
 }

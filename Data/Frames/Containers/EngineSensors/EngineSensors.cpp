@@ -21,13 +21,14 @@ void EngineSensors::setData(std::string_view data, int16_t node_id)
         throw std::runtime_error("Insufficient data size");
     }
 
-    const EngineSensorsData* receivedData = reinterpret_cast<const EngineSensorsData*>(data.data());
+    auto receivedData = std::make_shared<EngineSensorsData>();
+    memcpy(receivedData.get(), data.data(), sizeof(EngineSensorsData));
 
     fields["Угол биения"]->val      = static_cast<int>(receivedData->runoutAngle);
     fields["Амплитуда биения"]->val = static_cast<int>(receivedData->runoutAmplitude);
 
-    UnifiedCsvWriter::Instance().addEngineData(*receivedData);
-    DataStructure::Instance().addData(node_id, nameFrame, ENGINE, const_cast<EngineSensorsData*>(receivedData));
+    UnifiedCsvWriter::Instance().addEngineData(receivedData);
+    DataStructure::Instance().addData(node_id, nameFrame, ENGINE, receivedData);
 }
 
 }

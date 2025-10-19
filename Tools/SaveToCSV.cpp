@@ -16,8 +16,8 @@ UnifiedCsvWriter::UnifiedCsvWriter(uint64_t flush_interval_ms)
     m_running(true), m_thread(&UnifiedCsvWriter::run, this) {
 
     QDateTime now = QDateTime::currentDateTime();
-    QString dateString = now.date().toString("dd.MM.yy");
-    QString timeString = now.time().toString("hh:mm");
+    QString dateString = now.date().toString("dd_MM_yy");
+    QString timeString = now.time().toString("hh_mm");
 
     QDir dir;
     if (!dir.exists("log")) {
@@ -29,12 +29,12 @@ UnifiedCsvWriter::UnifiedCsvWriter(uint64_t flush_interval_ms)
         dir.mkdir(dateDirPath);
     }
 
-    QString fileName = QString("%1_%2.csv").arg(dateString, timeString);
+    QString fileName = QString("%1t%2.csv").arg(dateString, timeString);
     QString filePath = dateDirPath + "/" + fileName;
 
-
+    m_filename = filePath.toStdString();
     // Запись заголовка CSV
-    std::ofstream file(filePath.toStdString(), std::ios::out | std::ios::trunc);
+    std::ofstream file(m_filename, std::ios::out | std::ios::trunc);
     if (file.is_open()) {
         file << buildCSVheader({{"time", "device_id", "isCustom"}
                                 , EngineSensors::sensorNames, VoltageRegulators::sensorNames

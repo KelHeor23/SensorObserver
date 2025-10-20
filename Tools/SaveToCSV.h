@@ -15,12 +15,12 @@
 
 // Класс для объединенных данных устройства
 struct DeviceData {
-    std::shared_ptr<EngineSensorsData> engine;
-    std::shared_ptr<VoltageRegulatorsData> regulator;
-    std::shared_ptr<OtherSensorsData> other;
-    std::shared_ptr<EscSensors::EscStatusInfo1> escF1 = std::make_shared<EscSensors::EscStatusInfo1>();
-    std::shared_ptr<EscSensors::EscStatusInfo2> escF2 = std::make_shared<EscSensors::EscStatusInfo2>();
-    std::shared_ptr<EscSensors::EscStatusInfo3> escF3 = std::make_shared<EscSensors::EscStatusInfo3>();
+    std::shared_ptr<EngineSensorsData> engine           = std::make_shared<EngineSensorsData>();
+    std::shared_ptr<VoltageRegulatorsData> regulator    = std::make_shared<VoltageRegulatorsData>();
+    std::shared_ptr<OtherSensorsData> other             = std::make_shared<OtherSensorsData>();
+    std::shared_ptr<EscSensors::EscStatusInfo1> escF1   = std::make_shared<EscSensors::EscStatusInfo1>();
+    std::shared_ptr<EscSensors::EscStatusInfo2> escF2   = std::make_shared<EscSensors::EscStatusInfo2>();
+    std::shared_ptr<EscSensors::EscStatusInfo3> escF3   = std::make_shared<EscSensors::EscStatusInfo3>();
     uint64_t last_update = 0;
 };
 

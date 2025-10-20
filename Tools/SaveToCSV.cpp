@@ -191,57 +191,35 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
     file << data.last_update
          << "," << static_cast<int>(device_id) << "," << (isCustom ? 1 : 0) << ",";
 
+    if (isCustom) {
+        data.escF1->recv_pwm = 0;
+        data.escF2->bus_current = 0;
+
+        data.escF3->cap_temp = 0;
+        data.escF3->mcu_temp = 0;
+    }
+
     file << std::fixed << std::setprecision(2);
-    // Engine данные
-    //if (data.engine) {
-        file /*<< data.engine->speed << ","
-             << static_cast<int>(data.engine->temperature) << ","*/
-             << data.engine->runoutAngle << ","
-             << data.engine->runoutAmplitude << ",";
-    //} else {
-    //    file << ",,,,";
-    //}
 
-    // Регулятор данные
-    //if (data.regulator) {
-        file //<< static_cast<int>(data.regulator->inputVoltageHP) << ","
-             //<< static_cast<int>(data.regulator->inputVoltageLP) << ","
-             //<< static_cast<int>(data.regulator->electricCurrent) << ","
-             //<< data.regulator->controlPWM << ","
-             << static_cast<int>(data.regulator->averageVoltageA) << ","
-             << static_cast<int>(data.regulator->averageVoltageB) << ","
-             << static_cast<int>(data.regulator->averageVoltageC) << ",";
-    //} else {
-    //    file << ",,,,,,";
-    //}
+    file << data.engine->runoutAngle << ","
+         << data.engine->runoutAmplitude << ",";
 
-    // ESC1 данные
-    //if (data.escF1) {
-        file << data.escF1->speed << ","
-             << data.escF1->recv_pwm << ","
-             << data.escF1->comm_pwm << ",";
-    //} else {
-    //    file << ",,,";
-    //}
+    file << static_cast<int>(data.regulator->averageVoltageA) << ","
+         << static_cast<int>(data.regulator->averageVoltageB) << ","
+         << static_cast<int>(data.regulator->averageVoltageC) << ",";
 
-    // ESC2 данные
-    //if (data.escF2) {
-        file << data.escF2->voltage << ","
-             << data.escF2->bus_current << ","
-             << data.escF2->current << ",";
-    //} else {
-    //    file << ",,,";
-    //}
+    file << data.escF1->speed << ","
+         << data.escF1->recv_pwm << ","
+         << data.escF1->comm_pwm << ",";
 
-    // ESC3 данные
-    //if (data.escF3) {
-        file << static_cast<int>(data.escF3->cap_temp) << ","
-             << static_cast<int>(data.escF3->mcu_temp) << ","
-             << static_cast<int>(data.escF3->motor_temp) << ","
-             << data.escF3->Error;
-    //} else {
-    //    file << ",,,";
-    //}
+    file << data.escF2->voltage << ","
+         << data.escF2->bus_current << ","
+         << data.escF2->current << ",";
+
+    file << static_cast<int>(data.escF3->cap_temp) << ","
+         << static_cast<int>(data.escF3->mcu_temp) << ","
+         << static_cast<int>(data.escF3->motor_temp) << ","
+         << data.escF3->Error;
 
     file << "\n";
 }

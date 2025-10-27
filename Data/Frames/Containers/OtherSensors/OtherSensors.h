@@ -5,7 +5,7 @@
 
 #include "Data/Frames/Containers/Base.h"
 
-static std::vector<SensorName> sensorNames = {"Тяга"};
+static std::vector<SensorName> sensorNames = {"Реакт. мом. двиг 1", "Реакт. мом. двиг 2", "Тяга 1", "Тяга 2"};
 
 namespace OtherSensors {
 class OtherSensors : public BaseProtocol

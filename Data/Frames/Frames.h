@@ -43,7 +43,10 @@ struct EngineSensorsData : BaseFrame {
 #pragma pack(push, 1) // Отключаем выравнивание
 struct OtherSensorsData : BaseFrame {
     uint32_t    canID;              // 0x1FF1200-0x1FF1207 (Младший бит - номер двигателя)
-    double      weight;
+    double      reactiveTorquEngine1;   // Реактивный момент двигателя 1
+    double      reactiveTorquEngine2;   // Реактивный момент двигателя 2
+    double      thrustEngine1;          // тяга двигателя 1
+    double      thrustEngine2;          // тяга двигателя 2
 };
 #pragma pack(pop) // Восстанавливаем предыдущее значение выравнивания
 

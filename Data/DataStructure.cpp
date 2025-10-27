@@ -59,7 +59,10 @@ void DataStructure::addVoltageRegulatorSensorsData(size_t engineNum, const std::
 void DataStructure::addOtherSensorsData(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame>  data)
 {
     auto castedData = std::static_pointer_cast<OtherSensorsData>(data);
-    addValueToFrame(engineNum, frameName, "Тяга", castedData->weight);
+    addValueToFrame(engineNum, frameName, "Реакт. мом. двиг 1", castedData->reactiveTorquEngine1);
+    addValueToFrame(engineNum, frameName, "Реакт. мом. двиг 2", castedData->reactiveTorquEngine2);
+    addValueToFrame(engineNum, frameName, "Тяга 1", castedData->thrustEngine1);
+    addValueToFrame(engineNum, frameName, "Тяга 2", castedData->thrustEngine2);
 }
 
 void DataStructure::addEscStatusInfo1Data(size_t engineNum, const std::string &frameName, std::shared_ptr<BaseFrame> data) {

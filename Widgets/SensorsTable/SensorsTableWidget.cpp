@@ -1,16 +1,13 @@
 #include "SensorsTableWidget.h"
-#include "Common/Common.h"
-#include "Data/Frames/Containers/Constants.h"
 #include "Data/Frames/Frames.h"
 #include <iostream>
 #include <ostream>
 
-SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, Client *client_t, QWidget *parent)
+SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}
     , mainHBoxLt(new QHBoxLayout())
     , placeholderWidget(new QWidget(this))
     , sensorsManager(sensorsManager_t)
-    , client(client_t)
 {
     setLayout(mainHBoxLt);
 
@@ -31,8 +28,6 @@ SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsMan
 
     // Формирование визуализации датчиков двигателей
     engineSensorsVisual();
-
-    connect(client, SIGNAL(engineSensorsDataSent(QByteArray)), this, SLOT(parseMsg(QByteArray)));
 }
 
 void SensorsTableWidget::engineSensorsVisual()
@@ -96,73 +91,3 @@ void SensorsTableWidget::readOtherSensorsMsg(uint8_t num, const QByteArray &data
 
     displayngSensors[num]->setSensorsData(OTHER_SENSROS, sv, num);
 }
-
-#include <QtEndian>
-
-void SensorsTableWidget::parseMsg(const QByteArray& message)
-{
-    int it = 0;
-
-    int16_t node_id = qFromLittleEndian<uint16_t>(reinterpret_cast<const uchar*>(message.constData()));
-    int16_t frame_id = qFromLittleEndian<uint16_t>(reinterpret_cast<const uchar*>(message.constData() + sizeof(uint16_t)));
-
-    switch(frame_id){
-    case 20022: {
-        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME1, message.mid(4).constData(), node_id);
-        break;
-    }
-    case 20023: {
-        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME2, message.mid(4).constData(), node_id);
-        break;
-    }
-    case 20024: {
-        displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME3, message.mid(4).constData(), node_id);
-        break;
-    }
-    default: break;
-    }
-
-    while (it + 4 < message.size()) { // первые четыре байта в каждом сообщении зарезервивона по дидентефикатор
-        // Считываем первые 4 байта
-        uint32_t value = (static_cast<uint32_t>(static_cast<unsigned char>(message[it])) << 24 |
-                         static_cast<uint32_t>(static_cast<unsigned char>(message[it + 1])) << 16 |
-                         static_cast<uint32_t>(static_cast<unsigned char>(message[it + 2])) << 8  |
-                         static_cast<uint32_t>(static_cast<unsigned char>(message[it + 3])));
-
-        value = swapEndianness(value);
-
-        switch (value & ~0b111) {
-        case Protocol_numbers::ENGINE_SENSORS:
-            if (it + sizeof(EngineSensorsData) > message.size())
-            {
-                qDebug() << "Ошибка чтения пакета данных";
-                return;
-            }
-            readEngineSensorsMsg(value & 0b111, message.mid(it, sizeof(EngineSensorsData)));
-            it += sizeof(EngineSensorsData);
-            break;
-        case Protocol_numbers::VOLTAGE_REGULATORS:
-            if (it + sizeof(VoltageRegulatorsData) > message.size())
-            {
-                qDebug() << "Ошибка чтения пакета данных";
-                return;
-            }
-            readVoltageRegulatorsMsg(value & 0b111, message.mid(it, sizeof(VoltageRegulatorsData)));
-            it += sizeof(VoltageRegulatorsData);
-            break;
-        case Protocol_numbers::OTHER_SENSROS:
-            if (it + sizeof(OtherSensorsData) > message.size())
-            {
-                qDebug() << "Ошибка чтения пакета данных";
-                return;
-            }
-            readOtherSensorsMsg(value & 0b111, message.mid(it, sizeof(OtherSensorsData)));
-            it += sizeof(OtherSensorsData);
-            break;
-        default:
-            qDebug() << "Ошибка чтения пакета данных";
-            return;
-        };
-    }
-}
-

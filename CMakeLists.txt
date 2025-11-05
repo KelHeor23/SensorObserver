@@ -68,6 +68,7 @@ else()
     else()
         add_executable(SensorObserver
             ${PROJECT_SOURCES}
+            Exchange/DataReader.h Exchange/DataReader.cpp
 
         )
     endif()

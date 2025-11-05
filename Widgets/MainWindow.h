@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 
 #include "Data/Frames/Containers/SensorsFrames.h"
+#include "Exchange/DataReader.h"
 #include "SensorsTable/SensorsTableWidget.h"
 #include "SensorsTable/ListOfLimitsWidget.h"
 #include "Common/ConnSettings.h"
@@ -34,6 +35,7 @@ private:
     SmoothMotorControl  *smoothMotorControlWdgt;
     Client              *client;
     SensorsTableWidget  *sensorsTableWdgt;
+    DataReader          *dataReader;
     ListOfLimitsWidget  *listOfLimitsWdgt;
     SensorDataGraph     *sensorDataGraphWdgt;
     QLabel              *ipConnectionLbl;    

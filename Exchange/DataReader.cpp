@@ -15,67 +15,83 @@ DataReader::DataReader(Client *_client, SensorsTableWidget *_sensorsTableWdgt)
 
 void DataReader::parseMsg(const QByteArray& message)
 {
+    if (message.size() < 4) {
+        qDebug() << "Слишком короткое сообщение";
+        return;
+    }
+
+    const auto *base = reinterpret_cast<const uchar*>(message.constData());
+    const quint16 node_id  = qFromLittleEndian<quint16>(base + 0);
+    const quint16 frame_id = qFromLittleEndian<quint16>(base + sizeof(quint16));
+
+    const QByteArray payloadAfterHeader = message.mid(4);
+
+    switch (frame_id) {
+    case 20022:
+        if (node_id < 32 && sensorsTableWdgt->displayngSensors.size() > int(node_id % 32))
+            sensorsTableWdgt->displayngSensors[node_id % 32]
+                ->setSensorsData(ESC_FRAME1, payloadAfterHeader.toStdString(), node_id);
+        break;
+    case 20023:
+        if (node_id < 32 && sensorsTableWdgt->displayngSensors.size() > int(node_id % 32))
+            sensorsTableWdgt->displayngSensors[node_id % 32]
+                ->setSensorsData(ESC_FRAME2, payloadAfterHeader.toStdString(), node_id);
+        break;
+    case 20024:
+        if (node_id < 32 && sensorsTableWdgt->displayngSensors.size() > int(node_id % 32))
+            sensorsTableWdgt->displayngSensors[node_id % 32]
+                ->setSensorsData(ESC_FRAME3, payloadAfterHeader.toStdString(), node_id);
+        break;
+    default:
+        break;
+    }
+
     int it = 0;
 
-    int16_t node_id = qFromLittleEndian<uint16_t>(reinterpret_cast<const uchar*>(message.constData()));
-    int16_t frame_id = qFromLittleEndian<uint16_t>(reinterpret_cast<const uchar*>(message.constData() + sizeof(uint16_t)));
+    // Должно хватать хотя бы на тег (4 байта)
+    while (it + 4 <= message.size()) {
 
-    switch(frame_id){
-    case 20022: {
-        sensorsTableWdgt->displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME1, message.mid(4).constData(), node_id);
-        break;
-    }
-    case 20023: {
-        sensorsTableWdgt->displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME2, message.mid(4).constData(), node_id);
-        break;
-    }
-    case 20024: {
-        sensorsTableWdgt->displayngSensors[node_id % 32]->setSensorsData(ESC_FRAME3, message.mid(4).constData(), node_id);
-        break;
-    }
-    default: break;
-    }
+        // Читаем тег как LE-uint32
+        const quint32 tag = qFromLittleEndian<quint32>(
+            reinterpret_cast<const uchar*>(message.constData() + it)
+            );
 
-    while (it + 4 < message.size()) { // первые четыре байта в каждом сообщении зарезервивона по дидентефикатор
-        // Считываем первые 4 байта
-        uint32_t value = (static_cast<uint32_t>(static_cast<unsigned char>(message[it])) << 24 |
-                          static_cast<uint32_t>(static_cast<unsigned char>(message[it + 1])) << 16 |
-                          static_cast<uint32_t>(static_cast<unsigned char>(message[it + 2])) << 8  |
-                          static_cast<uint32_t>(static_cast<unsigned char>(message[it + 3])));
+        const quint32 type = (tag & ~0b111u);
+        const quint32 idx  = (tag &  0b111u);
 
-        value = swapEndianness(value);
-
-        switch (value & ~0b111) {
-        case Protocol_numbers::ENGINE_SENSORS:
-            if (it + sizeof(EngineSensorsData) > message.size())
-            {
-                qDebug() << "Ошибка чтения пакета данных";
-                return;
+        auto ensureSpace = [&](qsizetype need) -> bool {
+            if (it + need > message.size()) {
+                qDebug() << "Ошибка чтения пакета данных (не хватает байт). type =" << type;
+                return false;
             }
-            sensorsTableWdgt->readEngineSensorsMsg(value & 0b111, message.mid(it, sizeof(EngineSensorsData)));
+            return true;
+        };
+
+        switch (type) {
+        case Protocol_numbers::ENGINE_SENSORS: {
+            if (!ensureSpace(sizeof(EngineSensorsData))) return;
+            const QByteArray chunk = message.mid(it, sizeof(EngineSensorsData));
+            sensorsTableWdgt->readEngineSensorsMsg(idx, chunk);
             it += sizeof(EngineSensorsData);
             break;
-        case Protocol_numbers::VOLTAGE_REGULATORS:
-            if (it + sizeof(VoltageRegulatorsData) > message.size())
-            {
-                qDebug() << "Ошибка чтения пакета данных";
-                return;
-            }
-            sensorsTableWdgt->readVoltageRegulatorsMsg(value & 0b111, message.mid(it, sizeof(VoltageRegulatorsData)));
+        }
+        case Protocol_numbers::VOLTAGE_REGULATORS: {
+            if (!ensureSpace(sizeof(VoltageRegulatorsData))) return;
+            const QByteArray chunk = message.mid(it, sizeof(VoltageRegulatorsData));
+            sensorsTableWdgt->readVoltageRegulatorsMsg(idx, chunk);
             it += sizeof(VoltageRegulatorsData);
             break;
-        case Protocol_numbers::OTHER_SENSROS:
-            if (it + sizeof(OtherSensorsData) > message.size())
-            {
-                qDebug() << "Ошибка чтения пакета данных";
-                return;
-            }
-            sensorsTableWdgt->readOtherSensorsMsg(value & 0b111, message.mid(it, sizeof(OtherSensorsData)));
+        }
+        case Protocol_numbers::OTHER_SENSROS: { // если это действительно такое имя
+            if (!ensureSpace(sizeof(OtherSensorsData))) return;
+            const QByteArray chunk = message.mid(it, sizeof(OtherSensorsData));
+            sensorsTableWdgt->readOtherSensorsMsg(idx, chunk);
             it += sizeof(OtherSensorsData);
             break;
+        }
         default:
-            qDebug() << "Ошибка чтения пакета данных";
+            qDebug() << "Неизвестный тип тега:" << type << " — прекращаю парсинг";
             return;
-        };
+        }
     }
 }

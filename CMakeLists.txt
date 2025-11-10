@@ -2,6 +2,26 @@ cmake_minimum_required(VERSION 3.5)
 
 project(SensorObserver VERSION 0.1 LANGUAGES CXX)
 
+# --- Doxygen target ---
+find_package(Doxygen REQUIRED dot)
+
+# Версию можно задать в project(... VERSION x.y.z)
+if(NOT PROJECT_VERSION)
+  set(PROJECT_VERSION "0.1.0")
+endif()
+
+set(DOXYGEN_IN  "${CMAKE_SOURCE_DIR}/Doxyfile.in")
+set(DOXYGEN_OUT "${CMAKE_BINARY_DIR}/Doxyfile")
+
+configure_file("${DOXYGEN_IN}" "${DOXYGEN_OUT}" @ONLY)
+
+add_custom_target(docs
+  COMMAND ${DOXYGEN_EXECUTABLE} "${DOXYGEN_OUT}"
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+  COMMENT "Generating API documentation with Doxygen → ${CMAKE_BINARY_DIR}/docs/html/index.html"
+  VERBATIM
+)
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)

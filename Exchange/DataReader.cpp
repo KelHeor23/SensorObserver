@@ -1,9 +1,21 @@
+/**
+ * \file DataReader.cpp
+ * \brief Реализация парсинга входящих сообщений телеметрии.
+ * \date 2025-11-07
+ *
+ * This file is part of the SensorObserver project.
+ */
 #include "DataReader.h"
-#include "Common/Common.h"
+#include "Client.h"
 #include "Data/Frames/Containers/Constants.h"
+#include "Widgets/SensorsTable/SensorsTableWidget.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#include <QDataStream>
 #include <QtEndian>
+#endif
 
+/// \brief Создаёт ридер и подключает сигнал клиента к слоту парсинга.
 DataReader::DataReader(Client *_client, SensorsTableWidget *_sensorsTableWdgt)
     : client(_client)
     , sensorsTableWdgt(_sensorsTableWdgt)
@@ -12,7 +24,8 @@ DataReader::DataReader(Client *_client, SensorsTableWidget *_sensorsTableWdgt)
 }
 
 
-
+/// \brief Выполняет пошаговый разбор TLV/потока и обновляет соответствующие виджеты.
+/// \param message Буфер входящих данных.
 void DataReader::parseMsg(const QByteArray& message)
 {
     if (message.size() < 4) {

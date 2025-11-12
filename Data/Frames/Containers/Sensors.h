@@ -1,14 +1,31 @@
+/**
+ * \file Sensors.h
+ * \brief Структуры описания сенсора: пределы, раскраска, настройки и данные.
+ * \details Определяет ограничения, цветовые зоны, параметры отображения и контейнер значений для UI/логики.
+ */
+
 #ifndef SENSORS_H
 #define SENSORS_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include "qcolor.h"
 #include <QString>
 #include <memory>
+#endif
+/**
+ * \struct SensorLimits
+ * \brief Целочисленные пределы допустимых значений для сенсора.
+ * \details Используются для базовой валидации и отображения шкалы.
+ */
 
 struct SensorLimits {
     int min = 0;
     int max = 0;
 };
+/**
+ * \struct SensorLimitsColored
+ * \brief Пределы с привязкой цвета для подсветки зон в UI.
+ */
 
 struct SensorLimitsColored {
     SensorLimits limit;
@@ -49,10 +66,12 @@ struct SensorData {
     void linkDetalaizedLimits(std::shared_ptr<SensorData> other) {
         detalaizedLimits = other->detalaizedLimits;  // Используем тот же shared_ptr
     }
+    /** \brief Связывает настройки (settings) с другим объектом сенсора. */
 
     void linkSettings(std::shared_ptr<SensorData> other) {
         settings = other->settings;
     }
+    /** \brief Разделяет лимиты и настройки с другим сенсором (использует те же shared_ptr). */
 
     void linksSensorData(std::shared_ptr<SensorData> other) {
         limit = other->limit;  // Используем тот же shared_ptr

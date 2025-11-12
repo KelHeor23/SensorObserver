@@ -1,12 +1,24 @@
-#include "SensorsFrames.h"
+/**
+ * \file SensorsFrames.cpp
+ * \brief Реализация реестра фреймов сенсоров.
+ * \details Создаёт и регистрирует контейнеры кадрам (ESC, Engine, VoltageRegulators и т.д.), поддерживает переиндексацию полей.
+ */
 
+#include "SensorsFrames.h"
 #include "EngineSensors/EngineSensors.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus1.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus2.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus3.h"
 #include "Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h"
 #include "Data/Frames/Containers/OtherSensors/OtherSensors.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include "qdebug.h"
+#endif
+/**
+ * \brief Регистрирует доступные фреймы в реестре.
+ * \details Инициализирует контейнеры для ESC (status1/2/3), Engine, VoltageRegulators, OtherSensors.
+ */
 
 SensorsFrames::SensorsFrames()
 {
@@ -33,6 +45,11 @@ std::shared_ptr<SensorData> SensorsFrames::fastFind(const SensorName &name) cons
     }
     return it->second.lock();
 }
+/**
+ * \brief Перестраивает индекс сенсоров.
+ * \details Проходит по всем фреймам и добавляет их поля в словарь быстрого доступа
+ * по имени сенсора. Используется после изменения набора фреймов или их полей.
+ */
 
 void SensorsFrames::rebuildIndex()
 {
@@ -43,3 +60,4 @@ void SensorsFrames::rebuildIndex()
         }
     }
 }
+

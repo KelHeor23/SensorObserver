@@ -1,7 +1,21 @@
+/**
+ * \file SensorSettingsManager.cpp
+ * \brief Реализация менеджера настроек сенсоров (QSettings).
+ * \details Операции save/load/remove для группы и заданного сенсора, а также вспомогательная функция получения пути к INI.
+ */
+
 #include "SensorSettingsManager.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QCoreApplication>
 #include <QDir>
+#endif
+
+/**
+ * \brief Возвращает путь к файлу настроек сенсоров.
+ * \details Создаёт подкаталог \c config при необходимости и возвращает путь
+ * вида <каталог_приложения>/config/sensors.ini.
+ */
 
 QString SensorSettingsManager::getConfigPath()
 {
@@ -12,6 +26,7 @@ QString SensorSettingsManager::getConfigPath()
     }
     return appDir + "/config/sensors.ini";
 }
+/** \brief Сохраняет все сенсоры в INI (группа "Sensors"). */
 
 bool SensorSettingsManager::saveAll(const SensorHashTable &data) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
@@ -46,6 +61,7 @@ bool SensorSettingsManager::saveAll(const SensorHashTable &data) {
     settings.endGroup();
     return settings.status() == QSettings::NoError;
 }
+/** \brief Загружает все сенсоры из INI (группа "Sensors"). */
 
 bool SensorSettingsManager::loadAll(SensorHashTable &outData) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
@@ -92,6 +108,7 @@ bool SensorSettingsManager::loadAll(SensorHashTable &outData) {
     settings.endGroup();
     return settings.status() == QSettings::NoError;
 }
+/** \brief Сохраняет один сенсор под своим ключом в группе "Sensors". */
 
 bool SensorSettingsManager::saveSensor(const QString &sensorName, SensorPtr data) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
@@ -120,6 +137,7 @@ bool SensorSettingsManager::saveSensor(const QString &sensorName, SensorPtr data
 
     return settings.status() == QSettings::NoError;
 }
+/** \brief Загружает один сенсор по имени из группы "Sensors". */
 
 bool SensorSettingsManager::loadSensor(const QString &sensorName, std::shared_ptr<SensorData> outData) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
@@ -160,6 +178,7 @@ bool SensorSettingsManager::loadSensor(const QString &sensorName, std::shared_pt
     settings.endGroup();
     return settings.status() == QSettings::NoError;
 }
+/** \brief Удаляет запись сенсора из INI, возвращает успех операции. */
 
 bool SensorSettingsManager::removeSensor(const QString &sensorName) {
     QSettings settings(getConfigPath(), QSettings::IniFormat);
@@ -170,3 +189,4 @@ bool SensorSettingsManager::removeSensor(const QString &sensorName) {
 
     return settings.status() == QSettings::NoError;
 }
+

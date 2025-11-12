@@ -1,9 +1,20 @@
+/**
+ * \file VoltageRegulators.cpp
+ * \brief Реализация протокола датчиков питания.
+ * \details Разбирает пакет, обновляет поля для UI, пишет CSV и прокидывает данные в DataStructure.
+ */
+
 #include "VoltageRegulators.h"
-
-#include <cmath>
-
 #include "Tools/SaveToCSV.h"
 #include "Data/DataStructure.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#include <cmath>
+#endif
+/**
+ * \brief Инициализирует фрейм «Датчики питания» и регистрирует поля.
+ * \details Выставляет \c nameFrame и \c orderedNames, создаёт записи в \c fields со значением 0.
+ */
 
 VoltageRegulators::VoltageRegulators::VoltageRegulators()
 {
@@ -25,17 +36,12 @@ void VoltageRegulators::VoltageRegulators::setData(std::string_view data, int16_
     auto receivedData = std::make_shared<VoltageRegulatorsData>();
     memcpy(receivedData.get(), data.data(), sizeof(VoltageRegulatorsData));
 
-    /*uint16_t intPart    = receivedData->inputVoltageHP | (receivedData->inputVoltageLP & 0xF);
-    uint8_t  floatPart  = receivedData->inputVoltageLP & 0x0F;
-
-    fields["Входное напряжене"]->val            = static_cast<double>(intPart) + (floatPart * 0.1 + 0.01); //  !! Исправить
-    fields["ток (ампер)"]->val                  = static_cast<double>(receivedData->electricCurrent);
-    fields["Управляющий ШИМ"]->val              = static_cast<double>(receivedData->controlPWM);*/
     fields["Среднее напряжение A"]->val         = static_cast<double>(receivedData->averageVoltageA);
     fields["Среднее напряжение B"]->val         = static_cast<double>(receivedData->averageVoltageB);
     fields["Среднее напряжение C"]->val         = static_cast<double>(receivedData->averageVoltageC);
 
 
+    /** Запись строки в CSV и публикация кадра в глобальное хранилище. */
     UnifiedCsvWriter::Instance().addRegulatorData(receivedData);
     DataStructure::Instance().addData(node_id, nameFrame, VOLTAGE_REGULATORS, receivedData);
 }

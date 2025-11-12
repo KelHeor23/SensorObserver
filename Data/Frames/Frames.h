@@ -1,17 +1,30 @@
+/**
+ * \file Frames.h
+ * \brief Определения типов и парсеров телеметрических кадров.
+ * \details Содержит перечисление типов кадров (FrameTypes) и структуры/парсеры кадров ESC и других модулей.
+ */
+
 #ifndef FRAMES_H
 #define FRAMES_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <cstdint>
 #include <memory>
+#endif
+
+/** \enum FrameTypes
+ *  \brief Типы телеметрических кадров/сообщений.
+ *  \details Используются маршрутизатором данных для выбора конкретной схемы разбора.
+ */
 
 enum FrameTypes{
-    ESC_FRAME1,
-    ESC_FRAME2,
-    ESC_FRAME3,
-    ENGINE,
-    VOLTAGE_REGULATORS,
-    OTHER_SENSROS,
-    NONE
+    /**< Первая часть статуса ESC (например, базовые параметры). */ ESC_FRAME1,
+    /**< Вторая часть статуса ESC (токи/напряжения/температуры). */ ESC_FRAME2,
+    /**< Третья часть статуса ESC (доп. ошибки/счётчики). */ ESC_FRAME3,
+    /**< Параметры двигателя/привода. */ ENGINE,
+    /**< Фрейм датчиков питания (средние фазные напряжения и пр.). */ VOLTAGE_REGULATORS,
+    /**< Прочие сенсоры */ OTHER_SENSROS,
+    /**< Нет данных/неизвестный тип. */ NONE
 };
 
 struct BaseFrame {
@@ -66,16 +79,16 @@ struct EscStatusInfo1 : BaseFrame{
                              static_cast<uint8_t>(buffer[0]);
         // Коррекция знака для 24-битного числа
         result->speed = (raw_speed & 0x800000) ?
-                           (static_cast<int32_t>(raw_speed) | 0xFF000000) :
-                           raw_speed;
+                            (static_cast<int32_t>(raw_speed) | 0xFF000000) :
+                            raw_speed;
 
         // Исправленный парсинг recv_pwm (little-endian)
         result->recv_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[4]) << 8) |
-                          static_cast<uint16_t>(static_cast<uint8_t>(buffer[3]));
+                           static_cast<uint16_t>(static_cast<uint8_t>(buffer[3]));
 
         // Исправленный парсинг comm_pwm (little-endian)
         result->comm_pwm = static_cast<uint16_t>(static_cast<uint8_t>(buffer[7]) << 8) |
-                          static_cast<uint16_t>(static_cast<uint8_t>(buffer[6]));
+                           static_cast<uint16_t>(static_cast<uint8_t>(buffer[6]));
 
         // Масштабирование PWM значений
         result->recv_pwm /= 10;
@@ -134,6 +147,7 @@ struct EscStatusInfo3 : BaseFrame{
         result->motor_temp = static_cast<uint8_t>(buffer[4]) - 50;
 
         // Парсинг резервных байт (buffer[5] и buffer[6]) или другой running_error
+        /** \note Поле Error собирается из младшего/старшего байтов (little-endian). */
         result->Error =
             static_cast<uint16_t>(static_cast<uint8_t>(buffer[6])) |
             (static_cast<uint16_t>(static_cast<uint8_t>(buffer[7])) << 8);

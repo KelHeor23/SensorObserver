@@ -1,11 +1,34 @@
+/**
+ * \file DataStructure.cpp
+ * \brief Реализация хранилища телеметрии и маршрутизации поступающих кадров.
+ * \details Проверяет входные аргументы, кастует данные по типу фрейма и добавляет значения в соответствующие ряды.
+ */
+
 #include "DataStructure.h"
 #include "qdatetime.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <stdexcept>
+#endif
+/**
+ * \brief Инициализирует хранилище на 8 двигателей по умолчанию.
+ * \note Размер можно изменить в будущем, если число двигателей иное.
+ */
 
 DataStructure::DataStructure() {
     engines.resize(8);
 }
+/**
+ * \brief Добавляет значения из расшифрованного кадра в хранилище.
+ * \param[in] engineNum Номер двигателя (индекс в векторе).
+ * \param[in] frameName Имя фрейма (логическая группа параметров).
+ * \param[in] type Тип кадра (маршрутизация на конкретную структуру).
+ * \param[in] data Указатель на базовую структуру кадра.
+ * \throws std::out_of_range Если engineNum вне диапазона.
+ * \throws std::invalid_argument Если data == nullptr.
+ * \details Выполняет безопасный static_pointer_cast к нужной структуре
+ *           и кладёт поля в соответствующие временные ряды через addValueToFrame().
+ */
 
 void DataStructure::addData(size_t engineNum, std::string frameName, FrameTypes type, std::shared_ptr<BaseFrame> data) {
     if (engineNum >= engines.size()) {
@@ -89,6 +112,15 @@ void DataStructure::addEscStatusInfo3Data(size_t engineNum, const std::string &f
     addValueToFrame(engineNum, frameName, "Температура мотора", castedData->motor_temp);
     addValueToFrame(engineNum, frameName, "Ошибка", castedData->Error);
 }
+/**
+ * \brief Утилита для добавления значения в конкретную ячейку хранилища.
+ * \tparam T Числовой тип значения (приводится к double при хранении).
+ * \param[in] engineNum Двигатель.
+ * \param[in] frameName Имя фрейма.
+ * \param[in] key Имя сенсора.
+ * \param[in] value Значение (в целевых единицах).
+ * \post Создаёт недостающие уровни и дописывает значение в конец ряда.
+ */
 
 template<typename T>
 void DataStructure::addValueToFrame(size_t engineNum, const std::string &frameName, const std::string &key, T value){

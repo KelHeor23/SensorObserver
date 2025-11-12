@@ -1,6 +1,14 @@
+/**
+ * \file Client.cpp
+ * \brief Реализация TCP‑клиента: подключение, ретраи, отправка/приём.
+ * \details Содержит обработчики событий сокета и логику reconnect.
+ */
+
 #include "Client.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QHostAddress>
+#endif
 
 Client::Client(QObject *parent)
     : QObject(parent)
@@ -35,20 +43,28 @@ void Client::connectToServer()
 
     socket->connectToHost(QHostAddress(droneIP), dronePort); // Замените на адрес и порт вашего сервера
     if (socket->waitForConnected(1000)) {
-        qDebug() << "Connected to server";        
+        qDebug() << "Connected to server";
         reconnectTimer->stop(); // Остановить таймер, если подключение успешно
     } else {
         qDebug() << "Connection failed. Trying again..." << i++;
         reconnectTimer->start(); // Запустить таймер для повторных попыток
     }
 }
+/**
+ * \brief Слот вызвается, когда TCP-соединение установлено.
+ * \post Эмитируется сигнал для активирования UI/логики подключения.
+ */
 
 void Client::connected()
 {
     emit connEnable();
     reconnectTimer->stop(); // Остановить таймер при успешном подключении
-    qDebug() << "Connected to server";    
+    qDebug() << "Connected to server";
 }
+/**
+ * \brief Слот вызывается при разрыве соединения.
+ * \details Может перезапускать таймер повторных подключений.
+ */
 
 void Client::disconnected()
 {
@@ -60,7 +76,7 @@ void Client::disconnected()
 void Client::readData()
 {
     QByteArray data = socket->readAll();
-    buffer.append(data); // Записать данные в буфер    
+    buffer.append(data); // Записать данные в буфер
 
     emit engineSensorsDataSent(data);
     emit connEnable();
@@ -78,12 +94,23 @@ void Client::sendMsg(const QByteArray &data)
         socket->flush();     // Немедленная отправка без ожидания
     }
 }
+/**
+ * \brief Загружает сетевые параметры подключения из QSettings.
+ * \details Читает ключи \c "droneIP" и \c "dronePort". При отсутствии используются
+ * значения по умолчанию: \c "localhost" и \c 8002.
+ * \post Поля \c droneIP и \c dronePort обновлены.
+ */
 
 void Client::loadSettings()
 {
     droneIP    = conSettings->value("droneIP", "localhost").toString();
     dronePort  = conSettings->value("dronePort", 8002).toInt();
 }
+/**
+ * \brief Устанавливает IP/hostname целевого узла для будущих подключений.
+ * \param[in] newDroneIP IP-адрес или имя хоста (например, "192.168.1.50", "localhost").
+ * \post Поле \c droneIP обновлено. Автоматического переподключения не выполняется.
+ */
 
 void Client::setDroneIP(const QString &newDroneIP)
 {

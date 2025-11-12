@@ -8,7 +8,9 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <type_traits>
+#endif
 
 /**
  * \brief Меняет порядок байт (эндивность) значения любого тривиального целочисленного типа.

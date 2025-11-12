@@ -1,11 +1,18 @@
+/**
+ * \file Client.h
+ * \brief Интерфейс TCP‑клиента для связи с дроном.
+ * \details Инкапсулирует QTcpSocket, хранит параметры подключения, сигналы/слоты.
+ */
+
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QObject>
 #include <QTcpSocket>
 #include <QTimer>
 #include <QSettings>
-
+#endif
 
 namespace Msg {
 

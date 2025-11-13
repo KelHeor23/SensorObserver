@@ -1,0 +1,7 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/DetailingLimitsWidget.h" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/DetailingLimitsWidget.h">
+<area shape="rect" id="Node000001" title="Детальная настройка порогов/цветов для одного сенсора." alt="" coords="148,5,419,60"/>
+<area shape="rect" id="Node000002" href="$DetailingLimitsWidget_8cpp.html" title="Реализация детальной настройки лимитов." alt="" coords="5,108,276,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,70,180,110,177,106,233,66"/>
+<area shape="rect" id="Node000003" href="$ListOfLimitsWidget_8cpp.html" title="Реализация списка лимитов." alt="" coords="301,108,551,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="333,66,390,106,387,110,330,70"/>
+</map>

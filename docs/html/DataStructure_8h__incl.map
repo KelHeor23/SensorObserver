@@ -1,0 +1,7 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/DataStructure.h" name="/home/kel/MyJob/SensorObserver/Data/DataStructure.h">
+<area shape="rect" id="Node000001" title="Хранилище временных рядов телеметрии по двигателям/кадрам/сенсорам." alt="" coords="56,5,293,45"/>
+<area shape="rect" id="Node000002" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="5,93,171,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,48,113,86,109,82,152,44"/>
+<area shape="rect" id="Node000003" href="$Frames_8h.html" title="Определения типов и парсеров телеметрических кадров." alt="" coords="195,93,330,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,44,241,82,237,86,194,48"/>
+</map>

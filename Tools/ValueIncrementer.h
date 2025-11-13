@@ -1,11 +1,22 @@
+/**
+ * \file ValueIncrementer.h
+ * \brief Таймер‑инкрементатор значения для тестов/демо.
+ * \details Плавно увеличивает значение от min до max за заданное время в секундах, генерируя сигнал при изменении.
+ */
+
 #ifndef VALUEINCREMENTER_H
 #define VALUEINCREMENTER_H
 
-#include <QtCore/QObject>
-
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QObject>
 #include <QTimer>
 #include <QDebug>
+#endif
+
+/**\class ValueIncrementer
+ * \brief Плавно увеличивает значение от \c m_min до \c m_max за заданное время.
+ * \details Используется для тестирования/демо UI. Опирается на QTimer с шагом 1 сек.
+ */
 
 class ValueIncrementer : public QObject
 {

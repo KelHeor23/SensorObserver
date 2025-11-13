@@ -1,0 +1,11 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorDataGraph/SensorDataGraph.h" name="/home/kel/MyJob/SensorObserver/Widgets/SensorDataGraph/SensorDataGraph.h">
+<area shape="rect" id="Node000001" title="Виджет отображения временных рядов сенсоров на QCustomPlot." alt="" coords="257,5,533,60"/>
+<area shape="rect" id="Node000002" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="136,115,373,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="349,70,283,117,280,113,346,66"/>
+<area shape="rect" id="Node000005" href="$SensorDataGraph_8cpp.html" title="Реализация SensorDataGraph: построение и обновление графиков." alt="" coords="398,108,674,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="444,66,500,106,497,110,441,70"/>
+<area shape="rect" id="Node000003" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="5,211,243,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="218,166,152,213,149,208,215,161"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="267,211,504,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="294,161,360,208,357,213,291,166"/>
+</map>

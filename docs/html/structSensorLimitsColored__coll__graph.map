@@ -1,0 +1,5 @@
+<map id="SensorLimitsColored" name="SensorLimitsColored">
+<area shape="rect" id="Node000001" title="Пределы с привязкой цвета для подсветки зон в UI." alt="" coords="5,153,153,219"/>
+<area shape="rect" id="Node000002" href="$structSensorLimits.html" title="Целочисленные пределы допустимых значений для сенсора." alt="" coords="30,5,129,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,91,82,137,77,137,77,91"/>
+</map>

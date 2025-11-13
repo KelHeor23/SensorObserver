@@ -1,15 +1,24 @@
+/**
+ * \file SaveToCSV.cpp
+ * \brief Реализация UnifiedCsvWriter: очередь, форматирование строк, сброс на диск.
+ * \details Формирует заголовки, переводит значения к строкам, пишет по таймеру/сигналу обновления.
+ */
+
 #include "SaveToCSV.h"
-
-#include <QDateTime>
-#include <QDir>
-
 #include "Data/Frames/Containers/EngineSensors/EngineSensors.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus1.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus2.h"
 #include "Data/Frames/Containers/EscSensors/EscStatus3.h"
 #include "Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#include <QDateTime>
+#include <QDir>
 #include "qlocale.h"
 #include <iomanip>
+#endif
+
+/** \brief Запускает рабочий поток и задаёт интервал сброса. */
 
 UnifiedCsvWriter::UnifiedCsvWriter(uint64_t flush_interval_ms)
     : m_flush_interval(flush_interval_ms),
@@ -151,6 +160,7 @@ std::string UnifiedCsvWriter::formatTimeWithMilliseconds(long long ms_since_epoc
 
     return oss.str();
 }
+/** \brief Основной цикл: ожидание данных/таймера, запись в CSV. */
 
 void UnifiedCsvWriter::run() {
     while (m_running) {
@@ -223,6 +233,7 @@ void UnifiedCsvWriter::writeDeviceData(std::ofstream &file, uint8_t device_id, c
 
     file << "\n";
 }
+/** \brief Текущее время в миллисекундах с эпохи. */
 
 uint64_t UnifiedCsvWriter::getCurrentTimeMillis() const {
     using namespace std::chrono;

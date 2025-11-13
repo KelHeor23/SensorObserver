@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Исходный файл /home/kel/MyJob/SensorObserver/Tools/SaveToCSV.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('SaveToCSV_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SaveToCSV.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SaveToCSV_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment"> * \file SaveToCSV.h</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment"> * \brief Единый потокобезопасный писатель CSV для телеметрии.</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment"> * \details Собирает данные по устройствам (ESC/двигатель/регуляторы) и периодически сбрасывает в CSV в отдельном потоке.</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">SAVETOCSV_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">SAVETOCSV_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">DOXYGEN_SHOULD_SKIP_THIS</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">fstream</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">thread</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">mutex</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">condition_variable</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">atomic</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cstdint</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unordered_map</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">vector</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Data/Frames/Frames.h&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// Класс для объединенных данных устройства</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structDeviceData.html">   25</a></span><span class="keyword">struct</span> <a class="code hl_struct" href="structDeviceData.html">DeviceData</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::shared_ptr&lt;<a class="code hl_struct" href="structEngineSensorsData.html">EngineSensorsData</a>&gt; engine           = <a class="code hl_struct" href="structDeviceData.html">std</a>::<a class="code hl_struct" href="structDeviceData.html">make_shared</a>&lt;<a class="code hl_struct" href="structDeviceData.html">EngineSensorsData</a>&gt;();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    std::shared_ptr&lt;<a class="code hl_struct" href="structVoltageRegulatorsData.html">VoltageRegulatorsData</a>&gt; regulator    = <a class="code hl_struct" href="structDeviceData.html">std</a>::<a class="code hl_struct" href="structDeviceData.html">make_shared</a>&lt;<a class="code hl_struct" href="structDeviceData.html">VoltageRegulatorsData</a>&gt;();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    std::shared_ptr&lt;<a class="code hl_struct" href="structOtherSensorsData.html">OtherSensorsData</a>&gt; other             = <a class="code hl_struct" href="structDeviceData.html">std</a>::<a class="code hl_struct" href="structDeviceData.html">make_shared</a>&lt;<a class="code hl_struct" href="structDeviceData.html">OtherSensorsData</a>&gt;();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    std::shared_ptr&lt;<a class="code hl_namespace" href="namespaceEscSensors.html">EscSensors</a>::<a class="code hl_struct" href="structEscSensors_1_1EscStatusInfo1.html">EscStatusInfo1</a>&gt; escF1   = <a class="code hl_struct" href="structDeviceData.html">std</a>::<a class="code hl_struct" href="structDeviceData.html">make_shared</a>&lt;<a class="code hl_struct" href="structDeviceData.html">EscSensors</a>::<a class="code hl_struct" href="structDeviceData.html">EscStatusInfo1</a>&gt;();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    std::shared_ptr&lt;<a class="code hl_namespace" href="namespaceEscSensors.html">EscSensors</a>::<a class="code hl_struct" href="structEscSensors_1_1EscStatusInfo2.html">EscStatusInfo2</a>&gt; escF2   = <a class="code hl_struct" href="structDeviceData.html">std</a>::<a class="code hl_struct" href="structDeviceData.html">make_shared</a>&lt;<a class="code hl_struct" href="structDeviceData.html">EscSensors</a>::<a class="code hl_struct" href="structDeviceData.html">EscStatusInfo2</a>&gt;();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    std::shared_ptr&lt;<a class="code hl_namespace" href="namespaceEscSensors.html">EscSensors</a>::<a class="code hl_struct" href="structEscSensors_1_1EscStatusInfo3.html">EscStatusInfo3</a>&gt; escF3   = <a class="code hl_struct" href="structDeviceData.html">std</a>::<a class="code hl_struct" href="structDeviceData.html">make_shared</a>&lt;<a class="code hl_struct" href="structDeviceData.html">EscSensors</a>::<a class="code hl_struct" href="structDeviceData.html">EscStatusInfo3</a>&gt;();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    uint64_t last_update = 0;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   35</span><span class="comment"> * \class UnifiedCsvWriter</span></div>
+<div class="line"><span class="lineno">   36</span><span class="comment"> * \brief Потокобезопасная запись телеметрии в CSV с объединением по устройствам.</span></div>
+<div class="line"><span class="lineno">   37</span><span class="comment"> * \details Работает в отдельном потоке, по таймеру/сигналу формирует строки и сбрасывает их на диск.</span></div>
+<div class="line"><span class="lineno">   38</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classUnifiedCsvWriter.html">   40</a></span><span class="keyword">class</span> <a class="code hl_class" href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    UnifiedCsvWriter(uint64_t flush_interval_ms = 20);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">static</span> <a class="code hl_class" href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a>&amp; Instance(){</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">static</span> <a class="code hl_class" href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a> temp;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span> temp;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    ~UnifiedCsvWriter();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">/** \brief Добавляет данные датчиков двигателя. */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">addEngineData</a>(std::shared_ptr&lt;<a class="code hl_struct" href="structEngineSensorsData.html">EngineSensorsData</a>&gt; data);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">/** \brief Добавляет данные регуляторов питания. */</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUnifiedCsvWriter.html#aad816a76c207cfd5681a2d11534b0cbd">addRegulatorData</a>(std::shared_ptr&lt;<a class="code hl_struct" href="structVoltageRegulatorsData.html">VoltageRegulatorsData</a>&gt; data);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">/** \brief Добавляет данные прочих датчиков. */</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUnifiedCsvWriter.html#a03b74946bb9b21af36553dd1d862992b">addOtherSensorsData</a>(std::shared_ptr&lt;<a class="code hl_struct" href="structOtherSensorsData.html">OtherSensorsData</a>&gt; data);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="comment">/** \brief Добавляет данные кадра ESC Status1 для устройства. */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUnifiedCsvWriter.html#aca0e6d2d46becd53b6266082c29a00d4">addEscF1Data</a>(uint8_t device_id, std::shared_ptr&lt;<a class="code hl_namespace" href="namespaceEscSensors.html">EscSensors</a>::<a class="code hl_struct" href="structEscSensors_1_1EscStatusInfo1.html">EscStatusInfo1</a>&gt; data);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">/** \brief Добавляет данные кадра ESC Status2 для устройства. */</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUnifiedCsvWriter.html#ad7e17f69726b7efbad4b197ac23e262b">addEscF2Data</a>(uint8_t device_id, std::shared_ptr&lt;<a class="code hl_namespace" href="namespaceEscSensors.html">EscSensors</a>::<a class="code hl_struct" href="structEscSensors_1_1EscStatusInfo2.html">EscStatusInfo2</a>&gt; data);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="comment">/** \brief Добавляет данные кадра ESC Status3 для устройства. */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUnifiedCsvWriter.html#ac6f7112025bf02a063c68fb5a1865a40">addEscF3Data</a>(uint8_t device_id, std::shared_ptr&lt;<a class="code hl_namespace" href="namespaceEscSensors.html">EscSensors</a>::<a class="code hl_struct" href="structEscSensors_1_1EscStatusInfo3.html">EscStatusInfo3</a>&gt; data);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">void</span> stop();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::string buildCSVheader(<span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; vectors);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::string formatTimeWithMilliseconds(<span class="keywordtype">long</span> <span class="keywordtype">long</span> ms_since_epoch);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">/** \brief Фоновая функция рабочего потока, которая ждёт обновлений и пишет CSV. */</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> run();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span> flushAllData();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> writeDeviceData(std::ofstream&amp; file, uint8_t device_id, <span class="keyword">const</span> <a class="code hl_struct" href="structDeviceData.html">DeviceData</a>&amp; data, <span class="keywordtype">bool</span> isCustom);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    uint64_t getCurrentTimeMillis() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    std::string getNewName();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="comment">/** Имя CSV-файла. */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    std::string m_filename;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">/** Интервал сброса на диск (мс). */</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    uint64_t m_flush_interval;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">/** Флаг работы фонового потока. */</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    std::atomic&lt;<span class="keywordtype">bool</span>&gt; m_running;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="comment">/** Флаг наличия новых данных для записи. */</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    std::atomic&lt;<span class="keywordtype">bool</span>&gt; m_updated{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">/** Поток записи CSV. */</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    std::thread m_thread;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">/** Мьютекс защиты общих структур данных. */</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    std::mutex m_mutex;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">/** Условная переменная для ожидания обновлений/тайм‑аута. */</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    std::condition_variable m_cv;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="comment">/** Данные устройств ESC по node_id. */</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    std::unordered_map&lt;uint8_t, DeviceData&gt; m_deviceDataESC;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">/** Данные «кастомных» устройств (двигатели/регуляторы) по node_id. */</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    std::unordered_map&lt;uint8_t, DeviceData&gt; m_deviceDataCustom;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">// SAVETOCSV_H</span></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc">ENGINE</a></div><div class="ttdeci">@ ENGINE</div><div class="ttdoc">Фрейм датчиков питания (средние фазные напряжения и пр.).</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00025">Frames.h:24</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html"><div class="ttname"><a href="classBaseProtocol.html">BaseProtocol</a></div><div class="ttdoc">Базовый интерфейс контейнера фрейма сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00020">Base.h:20</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a347aded8abb2913af9985f292628e63b"><div class="ttname"><a href="classBaseProtocol.html#a347aded8abb2913af9985f292628e63b">BaseProtocol::getNameFrame</a></div><div class="ttdeci">FrameName getNameFrame() const</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00045">Base.h:45</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a41ef58ef1ded53d669df6f2ec0367fab"><div class="ttname"><a href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">BaseProtocol::fields</a></div><div class="ttdeci">std::unordered_map&lt; SensorName, std::shared_ptr&lt; SensorData &gt; &gt; fields</div><div class="ttdoc">Словарь полей фрейма: имя сенсора → данные и настройки.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00039">Base.h:39</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a6114eafa2a3ef34b9714baa8fd94df55"><div class="ttname"><a href="classBaseProtocol.html#a6114eafa2a3ef34b9714baa8fd94df55">BaseProtocol::getFields</a></div><div class="ttdeci">const auto &amp; getFields() const</div><div class="ttdoc">Возвращает константную ссылку на словарь полей (SensorName → SensorData).</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00024">Base.h:24</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a65980788152b6dd1f68a7b07cea4e24f"><div class="ttname"><a href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">BaseProtocol::orderedNames</a></div><div class="ttdeci">std::vector&lt; SensorName &gt; orderedNames</div><div class="ttdoc">Упорядоченный список имён сенсоров (определяет порядок в UI/CSV).</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00037">Base.h:37</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a6ba3d70b9f90b68ccc6edef133dd624f"><div class="ttname"><a href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">BaseProtocol::nameFrame</a></div><div class="ttdeci">FrameName nameFrame</div><div class="ttdoc">Имя фрейма для UI/логов.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00035">Base.h:35</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a887f090be79325eb4f078825ab2a7a4c"><div class="ttname"><a href="classBaseProtocol.html#a887f090be79325eb4f078825ab2a7a4c">BaseProtocol::getFields</a></div><div class="ttdeci">auto &amp; getFields()</div><div class="ttdoc">Возвращает ссылку на словарь полей (SensorName → SensorData) для модификации.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00026">Base.h:26</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_acb250f6ef9a2d7fda7f79b9d78d7d270"><div class="ttname"><a href="classBaseProtocol.html#acb250f6ef9a2d7fda7f79b9d78d7d270">BaseProtocol::setData</a></div><div class="ttdeci">virtual void setData(std::string_view data, int16_t node_id)=0</div><div class="ttdoc">Разобрать сырые байты сообщения и обновить поля.</div></div>
+<div class="ttc" id="aclassDataStructure_html"><div class="ttname"><a href="classDataStructure.html">DataStructure</a></div><div class="ttdoc">Централизованное хранилище временных рядов телеметрии.</div><div class="ttdef"><b>Definition</b> <a href="DataStructure_8h_source.html#l00028">DataStructure.h:29</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html">EngineSensors::EngineSensors</a></div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8h_source.html#l00025">EngineSensors.h:26</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html_ac36bf18f10be0f57600caf19af803353"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html#ac36bf18f10be0f57600caf19af803353">EngineSensors::EngineSensors::setData</a></div><div class="ttdeci">void setData(std::string_view data, int16_t node_id) override</div><div class="ttdoc">Разбирает входные байты и обновляет поля/хранилище.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00029">EngineSensors.cpp:29</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html_adc8800afa00a6e68d9a21f172432779a"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html#adc8800afa00a6e68d9a21f172432779a">EngineSensors::EngineSensors::EngineSensors</a></div><div class="ttdeci">EngineSensors()</div><div class="ttdoc">Конструктор: задаёт имя фрейма и инициализирует поля значением 0.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00015">EngineSensors.cpp:15</a></div></div>
+<div class="ttc" id="aclassEngineSensors_html_afa0724c86e329a2eedcab1f6c9057c79"><div class="ttname"><a href="classEngineSensors.html#afa0724c86e329a2eedcab1f6c9057c79">EngineSensors::sensorNames</a></div><div class="ttdeci">static std::vector&lt; SensorName &gt; sensorNames</div><div class="ttdoc">Упорядоченный список имён сенсоров для отображения в UI/CSV.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8h_source.html#l00019">EngineSensors.h:19</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html"><div class="ttname"><a href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a></div><div class="ttdoc">Потокобезопасная запись телеметрии в CSV с объединением по устройствам.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8h_source.html#l00040">SaveToCSV.h:40</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_a03b74946bb9b21af36553dd1d862992b"><div class="ttname"><a href="classUnifiedCsvWriter.html#a03b74946bb9b21af36553dd1d862992b">UnifiedCsvWriter::addOtherSensorsData</a></div><div class="ttdeci">void addOtherSensorsData(std::shared_ptr&lt; OtherSensorsData &gt; data)</div><div class="ttdoc">Добавляет данные прочих датчиков.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00082">SaveToCSV.cpp:82</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_a51c5da8597c240de774a196932e4b633"><div class="ttname"><a href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">UnifiedCsvWriter::addEngineData</a></div><div class="ttdeci">void addEngineData(std::shared_ptr&lt; EngineSensorsData &gt; data)</div><div class="ttdoc">Добавляет данные датчиков двигателя.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00059">SaveToCSV.cpp:59</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_aad816a76c207cfd5681a2d11534b0cbd"><div class="ttname"><a href="classUnifiedCsvWriter.html#aad816a76c207cfd5681a2d11534b0cbd">UnifiedCsvWriter::addRegulatorData</a></div><div class="ttdeci">void addRegulatorData(std::shared_ptr&lt; VoltageRegulatorsData &gt; data)</div><div class="ttdoc">Добавляет данные регуляторов питания.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00070">SaveToCSV.cpp:70</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_ac6f7112025bf02a063c68fb5a1865a40"><div class="ttname"><a href="classUnifiedCsvWriter.html#ac6f7112025bf02a063c68fb5a1865a40">UnifiedCsvWriter::addEscF3Data</a></div><div class="ttdeci">void addEscF3Data(uint8_t device_id, std::shared_ptr&lt; EscSensors::EscStatusInfo3 &gt; data)</div><div class="ttdoc">Добавляет данные кадра ESC Status3 для устройства.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00109">SaveToCSV.cpp:109</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_aca0e6d2d46becd53b6266082c29a00d4"><div class="ttname"><a href="classUnifiedCsvWriter.html#aca0e6d2d46becd53b6266082c29a00d4">UnifiedCsvWriter::addEscF1Data</a></div><div class="ttdeci">void addEscF1Data(uint8_t device_id, std::shared_ptr&lt; EscSensors::EscStatusInfo1 &gt; data)</div><div class="ttdoc">Добавляет данные кадра ESC Status1 для устройства.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00091">SaveToCSV.cpp:91</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_ad7e17f69726b7efbad4b197ac23e262b"><div class="ttname"><a href="classUnifiedCsvWriter.html#ad7e17f69726b7efbad4b197ac23e262b">UnifiedCsvWriter::addEscF2Data</a></div><div class="ttdeci">void addEscF2Data(uint8_t device_id, std::shared_ptr&lt; EscSensors::EscStatusInfo2 &gt; data)</div><div class="ttdoc">Добавляет данные кадра ESC Status2 для устройства.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00100">SaveToCSV.cpp:100</a></div></div>
+<div class="ttc" id="anamespaceEngineSensors_html"><div class="ttname"><a href="namespaceEngineSensors.html">EngineSensors</a></div><div class="ttdoc">Контейнеры датчиков двигателя.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00012">EngineSensors.cpp:12</a></div></div>
+<div class="ttc" id="anamespaceEscSensors_html"><div class="ttname"><a href="namespaceEscSensors.html">EscSensors</a></div><div class="ttdoc">Набор контейнеров статусов ESC.</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00066">Frames.h:66</a></div></div>
+<div class="ttc" id="astructDeviceData_html"><div class="ttname"><a href="structDeviceData.html">DeviceData</a></div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8h_source.html#l00025">SaveToCSV.h:25</a></div></div>
+<div class="ttc" id="astructEngineSensorsData_html"><div class="ttname"><a href="structEngineSensorsData.html">EngineSensorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00047">Frames.h:47</a></div></div>
+<div class="ttc" id="astructEscSensors_1_1EscStatusInfo1_html"><div class="ttname"><a href="structEscSensors_1_1EscStatusInfo1.html">EscSensors::EscStatusInfo1</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00068">Frames.h:68</a></div></div>
+<div class="ttc" id="astructEscSensors_1_1EscStatusInfo2_html"><div class="ttname"><a href="structEscSensors_1_1EscStatusInfo2.html">EscSensors::EscStatusInfo2</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00102">Frames.h:102</a></div></div>
+<div class="ttc" id="astructEscSensors_1_1EscStatusInfo3_html"><div class="ttname"><a href="structEscSensors_1_1EscStatusInfo3.html">EscSensors::EscStatusInfo3</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00135">Frames.h:135</a></div></div>
+<div class="ttc" id="astructOtherSensorsData_html"><div class="ttname"><a href="structOtherSensorsData.html">OtherSensorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00057">Frames.h:57</a></div></div>
+<div class="ttc" id="astructSensorData_html"><div class="ttname"><a href="structSensorData.html">SensorData</a></div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00039">Sensors.h:39</a></div></div>
+<div class="ttc" id="astructSensorData_html_a797170cbb5a68872880adce994e8ffdc"><div class="ttname"><a href="structSensorData.html#a797170cbb5a68872880adce994e8ffdc">SensorData::linksSensorData</a></div><div class="ttdeci">void linksSensorData(std::shared_ptr&lt; SensorData &gt; other)</div><div class="ttdoc">Разделяет лимиты и настройки с другим сенсором (использует те же shared_ptr).</div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00076">Sensors.h:76</a></div></div>
+<div class="ttc" id="astructSensorData_html_a9f7474ca21394516376d4f1d4c704e7d"><div class="ttname"><a href="structSensorData.html#a9f7474ca21394516376d4f1d4c704e7d">SensorData::linkSettings</a></div><div class="ttdeci">void linkSettings(std::shared_ptr&lt; SensorData &gt; other)</div><div class="ttdoc">Связывает настройки (settings) с другим объектом сенсора.</div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00071">Sensors.h:71</a></div></div>
+<div class="ttc" id="astructSensorLimitsColored_html"><div class="ttname"><a href="structSensorLimitsColored.html">SensorLimitsColored</a></div><div class="ttdoc">Пределы с привязкой цвета для подсветки зон в UI.</div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00030">Sensors.h:30</a></div></div>
+<div class="ttc" id="astructSensorLimits_html"><div class="ttname"><a href="structSensorLimits.html">SensorLimits</a></div><div class="ttdoc">Целочисленные пределы допустимых значений для сенсора.</div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00021">Sensors.h:21</a></div></div>
+<div class="ttc" id="astructSensorSharedSettings_html"><div class="ttname"><a href="structSensorSharedSettings.html">SensorSharedSettings</a></div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00035">Sensors.h:35</a></div></div>
+<div class="ttc" id="astructVoltageRegulatorsData_html"><div class="ttname"><a href="structVoltageRegulatorsData.html">VoltageRegulatorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00034">Frames.h:34</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_7e461070e7b716e896e0d97cd6a82321.html">Tools</a></li><li class="navelem"><a class="el" href="SaveToCSV_8h.html">SaveToCSV.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

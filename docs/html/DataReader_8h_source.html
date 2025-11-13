@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Исходный файл /home/kel/MyJob/SensorObserver/Exchange/DataReader.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('DataReader_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">DataReader.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="DataReader_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment"> * \file DataReader.h</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment"> * \brief Чтение и разбор входящих сообщений телеметрии.</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment"> * \date 2025-11-07</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment"> *</span></div>
+<div class="line"><span class="lineno">    6</span><span class="comment"> * This file is part of the SensorObserver project.</span></div>
+<div class="line"><span class="lineno">    7</span><span class="comment"> * \details Класс подписывается на события приёма данных от сети (Client) и</span></div>
+<div class="line"><span class="lineno">    8</span><span class="comment"> * обновляет виджеты таблицы датчиков (SensorsTableWidget). Данные приходят в виде последовательности</span></div>
+<div class="line"><span class="lineno">    9</span><span class="comment"> * TLV/пакетов, парсинг выполняется в слоте parseMsg().</span></div>
+<div class="line"><span class="lineno">   10</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">DATAREADER_H</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">DATAREADER_H</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">DOXYGEN_SHOULD_SKIP_THIS</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QObject</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QByteArray</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">class</span> <a class="code hl_class" href="classClient.html">Client</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">class</span> <a class="code hl_class" href="classSensorsTableWidget.html">SensorsTableWidget</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   24</span><span class="comment"> * \class DataReader</span></div>
+<div class="line"><span class="lineno">   25</span><span class="comment"> * \brief Получает бинарные сообщения от Client и транслирует их в виджеты.</span></div>
+<div class="line"><span class="lineno">   26</span><span class="comment"> * \ingroup Exchange</span></div>
+<div class="line"><span class="lineno">   27</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classDataReader.html">   28</a></span><span class="keyword">class</span> <a class="code hl_class" href="classDataReader.html">DataReader</a> : <span class="keyword">public</span> <a class="code hl_class" href="classDataReader.html">QObject</a></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="classDataReader.html">Q_OBJECT</a></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   33</span><span class="comment">     * \brief Конструктор.</span></div>
+<div class="line"><span class="lineno">   34</span><span class="comment">     * \param _client Источник сетевых сообщений (TCP-клиент).</span></div>
+<div class="line"><span class="lineno">   35</span><span class="comment">     * \param _sensorsTableWdgt Виджет, принимающий разобранные данные датчиков.</span></div>
+<div class="line"><span class="lineno">   36</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classDataReader.html">DataReader</a>(<a class="code hl_class" href="classDataReader.html">Client</a> *<a class="code hl_class" href="classDataReader.html">_client</a>, <a class="code hl_class" href="classDataReader.html">SensorsTableWidget</a> *<a class="code hl_class" href="classDataReader.html">_sensorsTableWdgt</a>);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">public</span> <a class="code hl_class" href="classDataReader.html">slots</a>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   41</span><span class="comment">     * \brief Разбор входящего бинарного сообщения.</span></div>
+<div class="line"><span class="lineno">   42</span><span class="comment">     * \param data Полный буфер с новыми байтами протокола.</span></div>
+<div class="line"><span class="lineno">   43</span><span class="comment">     * \note Слот, подключённый к сигналу Client::engineSensorsDataSent().</span></div>
+<div class="line"><span class="lineno">   44</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span> <a class="code hl_class" href="classDataReader.html">parseMsg</a>(<span class="keyword">const</span> <a class="code hl_class" href="classDataReader.html">QByteArray</a>&amp; <a class="code hl_class" href="classDataReader.html">data</a>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_class" href="classClient.html">Client</a> *client; <span class="comment">///&lt; Активный TCP-клиент (источник данных).</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classSensorsTableWidget.html">SensorsTableWidget</a>  *sensorsTableWdgt; <span class="comment">///&lt; Целевой виджет таблицы датчиков.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">// DATAREADER_H</span></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda35e6b327083c5367c65c5c73d5d7057f"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda35e6b327083c5367c65c5c73d5d7057f">ESC_FRAME3</a></div><div class="ttdeci">@ ESC_FRAME3</div><div class="ttdoc">Параметры двигателя/привода.</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00024">Frames.h:23</a></div></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda92ac1e05b851186d00b0efde53de400f"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92ac1e05b851186d00b0efde53de400f">ESC_FRAME1</a></div><div class="ttdeci">@ ESC_FRAME1</div><div class="ttdoc">Первая часть статуса ESC (например, базовые параметры).</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00022">Frames.h:21</a></div></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fdab2d8c0fa7f99768aa099a3bef75da978"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fdab2d8c0fa7f99768aa099a3bef75da978">ESC_FRAME2</a></div><div class="ttdeci">@ ESC_FRAME2</div><div class="ttdoc">Третья часть статуса ESC (доп.</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00023">Frames.h:22</a></div></div>
+<div class="ttc" id="aclassClient_html"><div class="ttname"><a href="classClient.html">Client</a></div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00032">Client.h:33</a></div></div>
+<div class="ttc" id="aclassDataReader_html"><div class="ttname"><a href="classDataReader.html">DataReader</a></div><div class="ttdoc">Получает бинарные сообщения от Client и транслирует их в виджеты.</div><div class="ttdef"><b>Definition</b> <a href="DataReader_8h_source.html#l00028">DataReader.h:29</a></div></div>
+<div class="ttc" id="aclassSensorsTableWidget_html"><div class="ttname"><a href="classSensorsTableWidget.html">SensorsTableWidget</a></div><div class="ttdoc">Контейнер визуализации сенсоров и управляющих панелей.</div><div class="ttdef"><b>Definition</b> <a href="SensorsTableWidget_8h_source.html#l00023">SensorsTableWidget.h:24</a></div></div>
+<div class="ttc" id="astructEngineSensorsData_html"><div class="ttname"><a href="structEngineSensorsData.html">EngineSensorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00047">Frames.h:47</a></div></div>
+<div class="ttc" id="astructOtherSensorsData_html"><div class="ttname"><a href="structOtherSensorsData.html">OtherSensorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00057">Frames.h:57</a></div></div>
+<div class="ttc" id="astructVoltageRegulatorsData_html"><div class="ttname"><a href="structVoltageRegulatorsData.html">VoltageRegulatorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00034">Frames.h:34</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_36d369605db8cc696d267242f1e832d8.html">Exchange</a></li><li class="navelem"><a class="el" href="DataReader_8h.html">DataReader.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

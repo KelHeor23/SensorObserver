@@ -1,0 +1,11 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/OtherSensors/OtherSensors.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/OtherSensors/OtherSensors.h">
+<area shape="rect" id="Node000001" title="Интерфейс фрейма прочих датчиков." alt="" coords="5,5,280,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="39,115,102,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,62,90,106,86,103,120,59"/>
+<area shape="rect" id="Node000003" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="127,108,305,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,59,195,96,191,99,161,62"/>
+<area shape="rect" id="Node000004" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="99,196,184,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="200,150,164,188,160,184,196,146"/>
+<area shape="rect" id="Node000005" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="208,196,373,221"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="236,146,272,184,268,188,232,150"/>
+</map>

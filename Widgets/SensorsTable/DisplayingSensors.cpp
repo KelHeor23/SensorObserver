@@ -1,3 +1,9 @@
+/**
+ * \file DisplayingSensors.cpp
+ * \brief Реализация отображения сенсоров.
+ * \details Добавляет подписи/элементы управления, связывает с менеджером фреймов и лимитами; обновляет значения.
+ */
+
 #include "DisplayingSensors.h"
 
 DisplayingSensors::DisplayingSensors(std::shared_ptr<SensorsFrames> sensorManager_t, QWidget *parent)
@@ -119,6 +125,7 @@ void DisplayingSensors::setSensorsData(FrameTypes type, std::string_view data, i
         checkRangeValues(sensorsColorProgressBarDataLabels[it.data()], fields[it.data()]);
     }
 }
+/** \brief Создаёт и добавляет элементы UI для каждого имени сенсора. */
 
 void DisplayingSensors::addNewDataLabels(std::vector<SensorName> &list)
 {

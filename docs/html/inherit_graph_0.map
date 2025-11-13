@@ -1,0 +1,15 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$structBaseFrame.html" title=" " alt="" coords="5,129,100,155"/>
+<area shape="rect" id="Node000001" href="$structEngineSensorsData.html" title=" " alt="" coords="173,5,321,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="69,116,101,76,123,56,147,40,172,28,175,33,149,44,126,61,105,80,73,119"/>
+<area shape="rect" id="Node000002" href="$structEscSensors_1_1EscStatusInfo1.html" title=" " alt="" coords="148,55,347,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="85,120,147,89,183,78,184,83,149,94,87,124"/>
+<area shape="rect" id="Node000003" href="$structEscSensors_1_1EscStatusInfo2.html" title=" " alt="" coords="148,104,347,129"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="114,131,150,127,150,132,114,137"/>
+<area shape="rect" id="Node000004" href="$structEscSensors_1_1EscStatusInfo3.html" title=" " alt="" coords="148,153,347,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="114,147,148,151,148,156,113,152"/>
+<area shape="rect" id="Node000005" href="$structOtherSensorsData.html" title=" " alt="" coords="177,203,317,228"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="89,159,149,188,189,200,187,205,147,192,87,164"/>
+<area shape="rect" id="Node000006" href="$structVoltageRegulatorsData.html" title=" " alt="" coords="161,252,333,277"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="73,164,106,202,127,221,149,237,178,249,176,254,147,242,123,225,102,206,69,168"/>
+</map>

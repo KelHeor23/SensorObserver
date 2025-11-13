@@ -1,0 +1,28 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/SensorsFrames.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/SensorsFrames.h">
+<area shape="rect" id="Node000001" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="409,5,707,45"/>
+<area shape="rect" id="Node000002" href="$SensorsFrames_8cpp.html" title="Реализация реестра фреймов сенсоров." alt="" coords="5,101,319,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="465,51,243,103,241,98,464,46"/>
+<area shape="rect" id="Node000003" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="289,306,526,346"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="461,53,432,71,410,95,396,121,389,149,386,209,393,264,404,305,398,307,388,265,380,209,383,149,391,119,405,92,429,66,458,48"/>
+<area shape="rect" id="Node000006" href="$SensorDataGraph_8h.html" title="Виджет отображения временных рядов сенсоров на QCustomPlot." alt="" coords="420,93,696,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="561,59,561,93,555,93,555,59"/>
+<area shape="rect" id="Node000008" href="$DisplayingSensors_8h.html" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="753,101,1057,141"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="642,46,835,98,834,103,641,51"/>
+<area shape="rect" id="Node000010" href="$SensorsTableWidget_8h.html" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="1088,196,1345,251"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="722,35,920,57,1007,72,1070,91,1108,113,1143,140,1197,194,1193,198,1140,144,1105,117,1068,96,1006,77,919,62,721,40"/>
+<area shape="rect" id="Node000004" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="158,401,395,441"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="371,356,305,403,302,399,368,352"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="419,401,657,441"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="447,352,513,399,510,403,444,356"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="481,157,455,175,435,198,421,224,413,254,409,306,404,306,408,253,416,222,430,194,452,171,478,153"/>
+<area shape="rect" id="Node000007" href="$SensorDataGraph_8cpp.html" title="Реализация SensorDataGraph: построение и обновление графиков." alt="" coords="445,196,721,251"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="571,161,579,195,574,197,565,162"/>
+<area shape="rect" id="Node000009" href="$DisplayingSensors_8cpp.html" title="Реализация отображения сенсоров." alt="" coords="745,203,1064,243"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="907,155,907,203,902,203,902,155"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="977,142,1136,193,1134,198,975,147"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="1074,254,775,292,526,317,526,312,774,286,1074,248"/>
+<area shape="rect" id="Node000011" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="962,306,1199,346"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="1172,261,1108,308,1105,304,1169,257"/>
+<area shape="rect" id="Node000012" href="$SensorsTableWidget_8cpp.html" title="Реализация таблицы датчиков и построителя панелей." alt="" coords="1224,299,1481,353"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="1265,257,1319,296,1315,301,1262,261"/>
+</map>

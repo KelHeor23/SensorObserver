@@ -1,0 +1,58 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Frames.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Frames.h">
+<area shape="rect" id="Node000001" title="Определения типов и парсеров телеметрических кадров." alt="" coords="2027,5,2264,45"/>
+<area shape="rect" id="Node000002" href="$DataStructure_8h.html" title="Хранилище временных рядов телеметрии по двигателям/кадрам/сенсорам." alt="" coords="908,93,1146,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2013,39,1146,106,1146,100,2013,34"/>
+<area shape="rect" id="Node000011" href="$SensorsFrames_8h.html" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="2530,93,2828,133"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="2277,45,2563,91,2562,96,2276,50"/>
+<area shape="rect" id="Node000021" href="$SensorsTableWidget_8cpp.html" title="Реализация таблицы датчиков и построителя панелей." alt="" coords="3157,387,3414,441"/>
+<area shape="poly" id="edge33_Node000001_Node000021" title=" " alt="" coords="2278,30,2572,49,2926,79,3092,99,3235,122,3341,149,3377,164,3398,180,3413,206,3416,234,3410,263,3397,292,3359,346,3318,388,3314,385,3355,343,3393,289,3405,262,3411,234,3408,207,3394,183,3374,168,3340,154,3234,128,3092,104,2925,84,2572,54,2278,36"/>
+<area shape="rect" id="Node000022" href="$SaveToCSV_8h.html" title="Единый потокобезопасный писатель CSV для телеметрии." alt="" coords="1374,93,1611,133"/>
+<area shape="poly" id="edge25_Node000001_Node000022" title=" " alt="" coords="2014,47,1612,99,1611,94,2013,41"/>
+<area shape="rect" id="Node000003" href="$DataStructure_8cpp.html" title="Реализация хранилища телеметрии и маршрутизации поступающих кадров." alt="" coords="30,189,267,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="895,125,611,146,444,163,278,184,235,191,234,186,277,179,443,158,610,141,894,119"/>
+<area shape="rect" id="Node000004" href="$EngineSensors_8cpp.html" title="Реализация парсера фрейма датчиков двигателя." alt="" coords="1204,181,1487,236"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="1106,135,1257,179,1255,184,1104,140"/>
+<area shape="rect" id="Node000005" href="$EscStatus1_8cpp.html" title="Реализация парсера для фрейма ESC Status1." alt="" coords="1510,181,1770,236"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="1160,129,1500,179,1511,181,1510,186,1499,184,1159,135"/>
+<area shape="rect" id="Node000006" href="$EscStatus2_8cpp.html" title="Реализация парсера для фрейма ESC Status2." alt="" coords="1794,181,2054,236"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="1159,120,1446,142,1614,159,1782,179,1795,180,1794,186,1781,184,1614,164,1445,147,1159,125"/>
+<area shape="rect" id="Node000007" href="$EscStatus3_8cpp.html" title="Реализация парсера для фрейма ESC Status3." alt="" coords="290,181,550,236"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="895,135,564,184,551,186,550,181,563,179,894,130"/>
+<area shape="rect" id="Node000008" href="$OtherSensors_8cpp.html" title="Реализация парсера фрейма прочих датчиков." alt="" coords="575,181,850,236"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="951,140,802,184,800,179,950,135"/>
+<area shape="rect" id="Node000009" href="$VoltageRegulators_8cpp.html" title="Реализация протокола датчиков питания." alt="" coords="874,181,1180,236"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="1030,147,1030,181,1024,181,1024,147"/>
+<area shape="rect" id="Node000010" href="$SensorDataGraph_8cpp.html" title="Реализация SensorDataGraph: построение и обновление графиков." alt="" coords="1072,284,1348,339"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="895,116,656,118,381,126,253,135,143,147,62,163,36,173,20,183,11,196,8,209,11,221,20,234,33,240,61,247,155,259,443,280,783,294,1072,304,1072,309,783,300,443,285,154,264,60,252,31,245,16,238,6,224,3,209,6,194,16,179,33,168,61,158,143,142,252,130,380,121,656,112,894,111"/>
+<area shape="rect" id="Node000012" href="$SensorsFrames_8cpp.html" title="Реализация реестра фреймов сенсоров." alt="" coords="3070,189,3384,229"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="2804,133,3117,186,3116,191,2803,138"/>
+<area shape="rect" id="Node000013" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="2506,394,2743,434"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="2676,147,2631,394,2625,393,2671,146"/>
+<area shape="rect" id="Node000016" href="$SensorDataGraph_8h.html" title="Виджет отображения временных рядов сенсоров на QCustomPlot." alt="" coords="2340,181,2616,236"/>
+<area shape="poly" id="edge15_Node000011_Node000016" title=" " alt="" coords="2627,142,2536,184,2533,179,2625,137"/>
+<area shape="rect" id="Node000017" href="$DisplayingSensors_8h.html" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="2742,189,3046,229"/>
+<area shape="poly" id="edge18_Node000011_Node000017" title=" " alt="" coords="2736,136,2851,186,2849,191,2734,141"/>
+<area shape="rect" id="Node000019" href="$SensorsTableWidget_8h.html" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="2729,284,2986,339"/>
+<area shape="poly" id="edge24_Node000011_Node000019" title=" " alt="" coords="2689,146,2705,190,2717,213,2732,234,2762,261,2796,282,2793,286,2759,265,2728,238,2712,216,2700,193,2684,147"/>
+<area shape="rect" id="Node000014" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="2375,489,2612,529"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="2588,444,2522,491,2519,487,2585,440"/>
+<area shape="rect" id="Node000015" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="2636,489,2874,529"/>
+<area shape="poly" id="edge14_Node000013_Node000015" title=" " alt="" coords="2664,440,2730,487,2727,491,2661,444"/>
+<area shape="poly" id="edge17_Node000016_Node000010" title=" " alt="" coords="2326,239,2051,266,1780,286,1348,308,1348,303,1780,281,2050,261,2326,233"/>
+<area shape="poly" id="edge16_Node000016_Node000013" title=" " alt="" coords="2507,245,2613,392,2609,395,2502,249"/>
+<area shape="rect" id="Node000018" href="$DisplayingSensors_8cpp.html" title="Реализация отображения сенсоров." alt="" coords="3010,291,3329,331"/>
+<area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="2959,231,3119,289,3117,294,2957,236"/>
+<area shape="poly" id="edge20_Node000017_Node000019" title=" " alt="" coords="2885,242,2870,285,2865,283,2880,241"/>
+<area shape="poly" id="edge22_Node000019_Node000013" title=" " alt="" coords="2786,347,2669,396,2667,391,2783,342"/>
+<area shape="rect" id="Node000020" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="2767,394,3004,434"/>
+<area shape="poly" id="edge21_Node000019_Node000020" title=" " alt="" coords="2871,351,2883,393,2878,394,2866,353"/>
+<area shape="poly" id="edge23_Node000019_Node000021" title=" " alt="" coords="2983,339,3175,384,3174,389,2982,344"/>
+<area shape="poly" id="edge26_Node000022_Node000004" title=" " alt="" coords="1453,143,1389,183,1386,179,1450,138"/>
+<area shape="poly" id="edge27_Node000022_Node000005" title=" " alt="" coords="1535,138,1600,179,1597,183,1532,143"/>
+<area shape="poly" id="edge28_Node000022_Node000006" title=" " alt="" coords="1594,134,1804,179,1803,184,1592,139"/>
+<area shape="poly" id="edge29_Node000022_Node000007" title=" " alt="" coords="1360,125,936,152,721,169,563,184,551,186,550,180,563,179,720,163,936,147,1360,120"/>
+<area shape="poly" id="edge30_Node000022_Node000008" title=" " alt="" coords="1361,129,1128,152,862,184,850,186,850,180,861,179,1127,146,1360,123"/>
+<area shape="poly" id="edge31_Node000022_Node000009" title=" " alt="" coords="1386,139,1158,184,1157,179,1385,133"/>
+<area shape="rect" id="Node000023" href="$SaveToCSV_8cpp.html" title="Реализация UnifiedCsvWriter: очередь, форматирование строк, сброс на диск." alt="" coords="2078,189,2315,229"/>
+<area shape="poly" id="edge32_Node000022_Node000023" title=" " alt="" coords="1625,124,1833,147,2066,179,2108,186,2107,191,2065,184,1832,152,1625,130"/>
+</map>

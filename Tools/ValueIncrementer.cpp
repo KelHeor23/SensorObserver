@@ -1,4 +1,11 @@
+/**
+ * \file ValueIncrementer.cpp
+ * \brief Реализация ValueIncrementer: настройка QTimer, вычисление шага, инкремент.
+ * \details Запускает периодическое обновление раз в секунду, корректно обрабатывает крайние случаи (max==min, time=0).
+ */
+
 #include "ValueIncrementer.h"
+/** \brief Инициализация таймера и расчёт шага на секунду. */
 
 ValueIncrementer::ValueIncrementer(uint16_t min, uint16_t max, uint16_t timeSeconds, QObject *parent)
     : QObject(parent), m_min(min), m_max(max), m_time(timeSeconds), m_val(min)
@@ -51,5 +58,4 @@ void ValueIncrementer::updateValue()
         emit finished();
         qDebug() << "Finished at value:" << m_val;
     }
-
 }

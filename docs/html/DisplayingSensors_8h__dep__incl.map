@@ -1,0 +1,17 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/DisplayingSensors.h" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/DisplayingSensors.h">
+<area shape="rect" id="Node000001" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="169,5,473,45"/>
+<area shape="rect" id="Node000002" href="$DisplayingSensors_8cpp.html" title="Реализация отображения сенсоров." alt="" coords="5,101,324,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,55,198,103,195,98,276,50"/>
+<area shape="rect" id="Node000003" href="$SensorsTableWidget_8h.html" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="348,93,605,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="366,50,434,91,431,96,363,55"/>
+<area shape="rect" id="Node000004" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="97,203,334,243"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="397,155,265,206,263,201,395,150"/>
+<area shape="rect" id="Node000005" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="358,203,595,243"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="479,162,479,203,474,203,474,162"/>
+<area shape="rect" id="Node000008" href="$SensorsTableWidget_8cpp.html" title="Реализация таблицы датчиков и построителя панелей." alt="" coords="620,196,877,251"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="561,150,679,193,677,198,559,155"/>
+<area shape="rect" id="Node000006" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="227,299,465,339"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="440,254,374,301,371,296,437,249"/>
+<area shape="rect" id="Node000007" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="489,299,726,339"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="516,249,582,296,579,301,513,254"/>
+</map>

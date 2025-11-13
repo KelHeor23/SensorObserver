@@ -1,8 +1,21 @@
+/**
+ * \file ColorProgressBar.h
+ * \brief Простой виджет прогресс‑бара с настраиваемым цветом и диапазоном.
+ * \details Поддерживает свойства Qt (value/maximum/color), перерисовывается при изменении значения.
+ */
+
 #ifndef COLORPROGRESSBAR_H
 #define COLORPROGRESSBAR_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QWidget>
 #include <QPainter>
+#endif
+
+/**\class ColorProgressBar
+ * \brief Виджет прогресс‑бара с произвольным цветом и диапазоном.
+ * \details Имеет свойства Qt: value, maximum, color.
+ */
 
 class ColorProgressBar : public QWidget {
     Q_OBJECT
@@ -19,9 +32,13 @@ public:
     QColor color() const { return m_color; }
 
 public slots:
+    /** \brief Устанавливает текущее значение и инициирует перерисовку. */
     void setValue(double value);
+    /** \brief Устанавливает минимум шкалы. */
     void setMinimum(double minimum);
+    /** \brief Устанавливает максимум шкалы. */
     void setMaximum(double maximum);
+    /** \brief Задаёт цвет заполнения. */
     void setColor(const QColor &color);
 
 protected:

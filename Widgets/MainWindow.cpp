@@ -1,8 +1,17 @@
+/**
+ * \file MainWindow.cpp
+ * \brief Реализация главного окна: меню, подключение, открытие графиков.
+ * \details Слоты для открытия графиков и переподключения к бортовому компьютеру.
+ */
+
 #include "MainWindow.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QMenuBar>
 #include <QMenu>
 #include <QStatusBar>
+#endif
+/** \brief Конструирует главное окно, создаёт меню и виджеты, настраивает соединения сигналов/слотов. */
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent}
@@ -11,8 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     , client(new Client(this))
     , sensorsTableWdgt(new SensorsTableWidget(sensorsManager, this))
     , dataReader(new DataReader(client, sensorsTableWdgt))
-    , listOfLimitsWdgt(new ListOfLimitsWidget())    
-    , ipConnectionLbl(new QLabel("IP адрес бортового компьютера: ", this))    
+    , listOfLimitsWdgt(new ListOfLimitsWidget())
+    , ipConnectionLbl(new QLabel("IP адрес бортового компьютера: ", this))
 {
     QMenu *fileMenu = this->menuBar()->addMenu(tr("Файл"));
     QAction *closeAction = new QAction(tr("Закрыть"), this);
@@ -69,16 +78,21 @@ void MainWindow::close()
     this->close();
 }
 
+/** \brief Открывает окно настройки пределов/огрничений списка данных */
+
 void MainWindow::openListOfLimitsWdgt()
 {
     listOfLimitsWdgt->show();
 }
+
+/** \brief Открывает окно настрйоки подключения. */
 
 void MainWindow::openСonnSettingsWdgt()
 {
     connSettingsWdgt->show();
 }
 
+/** \brief Открывает окно управления двигателями */
 void MainWindow::openMotorControlWdgt()
 {
     motorControlWdgt = new MotorControl(client);
@@ -86,12 +100,15 @@ void MainWindow::openMotorControlWdgt()
     motorControlWdgt->show();
 }
 
+/** \brief Открывает окно плавного управления двигателями. */
+
 void MainWindow::openSmoothMotorControlWdgt()
 {
     smoothMotorControlWdgt = new SmoothMotorControl(client);
     smoothMotorControlWdgt->setAttribute(Qt::WA_DeleteOnClose);
     smoothMotorControlWdgt->show();
 }
+/** \brief Открывает окно графиков SensorDataGraph и передаёт менеджер данных. */
 
 void MainWindow::openDataGraphWdgt()
 {
@@ -99,6 +116,7 @@ void MainWindow::openDataGraphWdgt()
     sensorDataGraphWdgt->setAttribute(Qt::WA_DeleteOnClose);
     sensorDataGraphWdgt->show();
 }
+/** \brief Применяет новые IP/порт из настроек и обновляет подпись соединения. */
 
 void MainWindow::reconnect()
 {

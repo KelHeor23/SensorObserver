@@ -1,0 +1,7 @@
+<map id="/home/kel/MyJob/SensorObserver/Tools/ValueIncrementer.h" name="/home/kel/MyJob/SensorObserver/Tools/ValueIncrementer.h">
+<area shape="rect" id="Node000001" title="Таймер‑инкрементатор значения для тестов/демо." alt="" coords="148,5,385,45"/>
+<area shape="rect" id="Node000002" href="$ValueIncrementer_8cpp.html" title="Реализация ValueIncrementer: настройка QTimer, вычисление шага, инкремент." alt="" coords="5,93,243,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,55,157,96,154,91,222,50"/>
+<area shape="rect" id="Node000003" href="$SmoothMotorControl_8cpp.html" title="Реализация плавного управления моторами." alt="" coords="267,93,552,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="311,50,379,91,377,96,308,55"/>
+</map>

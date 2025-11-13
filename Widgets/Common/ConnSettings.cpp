@@ -1,6 +1,16 @@
+/**
+ * \file ConnSettings.cpp
+ * \brief Реализация виджета ConnSettings.
+ * \details Создаёт поля ввода IP/порта, валидирует значения, читает/пишет QSettings и эмитирует сигнал newConnSettings.
+ */
+
 #include "ConnSettings.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include "qlabel.h"
 #include <QRegularExpression>
+#endif
+/** \brief Создаёт поля ввода IP/порта, кнопки и загружает сохранённые значения. */
 
 ConnSettings::ConnSettings(QWidget *parent)
     : QWidget{parent}
@@ -56,18 +66,21 @@ bool ConnSettings::isValidIPPort(const QString &port)
     int port_t = port.toInt(&succes);
     return succes && (port_t >= 0 && port_t <= 65535);
 }
+/** \brief Убирает подсветку ошибок и восстанавливает стандартные рамки у полей ввода. */
 
 void ConnSettings::setDefaultBorders()
 {
     droneIPledt->setStyleSheet("QLineEdit { border: 0px solid black }");
     dronePortledt->setStyleSheet("QLineEdit { border: 0px solid black }");
 }
+/** \brief Записывает значения полей в QSettings ("droneIP", "dronePort"). */
 
 void ConnSettings::saveSettings()
 {
     conSettings->setValue("droneIP", droneIP);
     conSettings->setValue("dronePort", dronePort);
 }
+/** \brief Читает значения из QSettings и заполняет поля ввода. */
 
 void ConnSettings::loadSettings()
 {
@@ -77,6 +90,11 @@ void ConnSettings::loadSettings()
     droneIPledt->setText(droneIP);
     dronePortledt->setText(QString::number(dronePort));
 }
+/**
+ * \brief Обработчик кнопки Ok.
+ * \details Валидирует IP и порт (через QRegularExpression), при успехе сохраняет значения,
+ * эмитирует сигнал newConnSettings() и закрывает диалог.
+ */
 
 void ConnSettings::ok()
 {
@@ -103,11 +121,10 @@ void ConnSettings::ok()
         this->close();
     }
 }
+/** \brief Сбрасывает изменения, перезагружает сохранённые значения и возвращает стандартные рамки. */
 
 void ConnSettings::cancel()
 {
     loadSettings();
     setDefaultBorders();
 }
-
-

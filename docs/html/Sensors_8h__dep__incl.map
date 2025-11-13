@@ -1,0 +1,84 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/Sensors.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/Sensors.h">
+<area shape="rect" id="Node000001" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="3257,5,3507,45"/>
+<area shape="rect" id="Node000002" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="1786,101,2023,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3243,38,2024,115,2023,109,3242,33"/>
+<area shape="rect" id="Node000030" href="$SensorSettingsManager_8h.html" title="Сохранение/загрузка настроек сенсоров." alt="" coords="3240,93,3524,148"/>
+<area shape="poly" id="edge43_Node000001_Node000030" title=" " alt="" coords="3385,59,3385,93,3379,93,3379,59"/>
+<area shape="rect" id="Node000033" href="$DetailingLimitsWidget_8h.html" title="Детальная настройка порогов/цветов для одного сенсора." alt="" coords="3548,93,3819,148"/>
+<area shape="poly" id="edge47_Node000001_Node000033" title=" " alt="" coords="3457,47,3599,91,3598,96,3455,52"/>
+<area shape="rect" id="Node000003" href="$EngineSensors_8h.html" title="Интерфейс фрейма датчиков двигателя." alt="" coords="1763,196,2046,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1907,154,1907,196,1902,196,1902,154"/>
+<area shape="rect" id="Node000007" href="$EscStatus1_8h.html" title="Интерфейс фрейма ESC: скорость мотора и PWM." alt="" coords="1149,196,1409,251"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="1773,144,1421,199,1410,201,1409,195,1420,193,1772,139"/>
+<area shape="rect" id="Node000009" href="$EscStatus2_8h.html" title="Интерфейс фрейма ESC: питание." alt="" coords="581,196,841,251"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="1772,129,1362,151,1108,171,854,199,842,200,841,195,854,193,1108,166,1361,146,1772,124"/>
+<area shape="rect" id="Node000011" href="$EscStatus3_8h.html" title="Интерфейс фрейма ESC: температуры и ошибки." alt="" coords="865,196,1125,251"/>
+<area shape="poly" id="edge14_Node000002_Node000011" title=" " alt="" coords="1772,134,1481,159,1138,199,1126,200,1125,195,1138,193,1480,154,1772,129"/>
+<area shape="rect" id="Node000013" href="$OtherSensors_8h.html" title="Интерфейс фрейма прочих датчиков." alt="" coords="2070,196,2345,251"/>
+<area shape="poly" id="edge18_Node000002_Node000013" title=" " alt="" coords="1975,143,2129,193,2127,198,1974,148"/>
+<area shape="rect" id="Node000015" href="$SensorsFrames_8h.html" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="2417,203,2715,243"/>
+<area shape="poly" id="edge21_Node000002_Node000015" title=" " alt="" coords="2037,139,2443,201,2442,206,2037,145"/>
+<area shape="rect" id="Node000026" href="$VoltageRegulators_8h.html" title="Протокол чтения датчиков питания (регуляторы напряжения)." alt="" coords="1433,196,1739,251"/>
+<area shape="poly" id="edge36_Node000002_Node000026" title=" " alt="" coords="1833,147,1670,198,1669,193,1831,142"/>
+<area shape="rect" id="Node000028" href="$ListOfLimitsWidget_8h.html" title="Список лимитов сенсора (краткий вид)." alt="" coords="2914,196,3165,251"/>
+<area shape="poly" id="edge40_Node000002_Node000028" title=" " alt="" coords="2037,131,2914,208,2914,214,2037,136"/>
+<area shape="rect" id="Node000004" href="$EngineSensors_8cpp.html" title="Реализация парсера фрейма датчиков двигателя." alt="" coords="1787,299,2070,353"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1917,263,1925,298,1920,299,1912,265"/>
+<area shape="rect" id="Node000005" href="$SensorsFrames_8cpp.html" title="Реализация реестра фреймов сенсоров." alt="" coords="1449,306,1763,346"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="1815,258,1663,308,1661,303,1813,253"/>
+<area shape="rect" id="Node000006" href="$SaveToCSV_8cpp.html" title="Реализация UnifiedCsvWriter: очередь, форматирование строк, сброс на диск." alt="" coords="857,306,1094,346"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="1750,253,1568,270,1426,276,1285,282,1106,301,1062,309,1061,303,1106,296,1285,277,1426,270,1568,265,1750,248"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="1378,252,1545,303,1544,308,1376,257"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="1188,258,1033,308,1032,303,1186,252"/>
+<area shape="rect" id="Node000008" href="$EscStatus1_8cpp.html" title="Реализация парсера для фрейма ESC Status1." alt="" coords="573,299,833,353"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1136,253,845,301,834,303,833,298,844,296,1135,248"/>
+<area shape="poly" id="edge12_Node000009_Node000005" title=" " alt="" coords="855,248,1020,265,1148,273,1275,281,1437,296,1492,303,1491,309,1436,301,1275,286,1148,279,1019,271,854,253"/>
+<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="794,253,927,303,925,308,792,258"/>
+<area shape="rect" id="Node000010" href="$EscStatus2_8cpp.html" title="Реализация парсера для фрейма ESC Status2." alt="" coords="5,299,265,353"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="568,251,277,301,266,303,265,298,276,296,567,246"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="1139,248,1486,303,1485,309,1139,253"/>
+<area shape="poly" id="edge17_Node000011_Node000006" title=" " alt="" coords="990,265,982,306,977,305,985,264"/>
+<area shape="rect" id="Node000012" href="$EscStatus3_8cpp.html" title="Реализация парсера для фрейма ESC Status3." alt="" coords="289,299,549,353"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="852,253,561,301,550,303,549,298,560,296,851,248"/>
+<area shape="poly" id="edge20_Node000013_Node000005" title=" " alt="" coords="2057,254,1723,309,1722,303,2056,248"/>
+<area shape="rect" id="Node000014" href="$OtherSensors_8cpp.html" title="Реализация парсера фрейма прочих датчиков." alt="" coords="2094,299,2369,353"/>
+<area shape="poly" id="edge19_Node000013_Node000014" title=" " alt="" coords="2219,263,2228,298,2222,299,2214,265"/>
+<area shape="poly" id="edge22_Node000015_Node000005" title=" " alt="" coords="2409,248,2357,253,2193,268,2066,276,1939,285,1776,301,1721,309,1720,303,1775,296,1938,279,2066,271,2193,262,2356,248,2408,242"/>
+<area shape="rect" id="Node000016" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="2826,511,3063,551"/>
+<area shape="poly" id="edge23_Node000015_Node000016" title=" " alt="" coords="2729,238,2936,264,3018,280,3046,288,3062,297,3095,333,3106,352,3112,372,3114,392,3111,413,3092,457,3077,476,3059,492,3018,514,3015,509,3056,487,3074,472,3088,455,3106,412,3108,392,3107,373,3101,354,3091,336,3059,301,3044,293,3016,285,2935,269,2728,243"/>
+<area shape="rect" id="Node000019" href="$SensorDataGraph_8h.html" title="Виджет отображения временных рядов сенсоров на QCustomPlot." alt="" coords="2772,299,3048,353"/>
+<area shape="poly" id="edge26_Node000015_Node000019" title=" " alt="" coords="2644,245,2821,296,2819,301,2642,250"/>
+<area shape="rect" id="Node000021" href="$DisplayingSensors_8h.html" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="2443,306,2747,346"/>
+<area shape="poly" id="edge29_Node000015_Node000021" title=" " alt="" coords="2578,256,2592,305,2587,307,2573,257"/>
+<area shape="rect" id="Node000023" href="$SensorsTableWidget_8h.html" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="2125,401,2383,456"/>
+<area shape="poly" id="edge35_Node000015_Node000023" title=" " alt="" coords="2513,252,2473,274,2433,301,2408,328,2382,355,2346,381,2308,403,2305,399,2343,377,2379,351,2404,324,2430,297,2470,269,2510,247"/>
+<area shape="rect" id="Node000017" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="2695,607,2933,647"/>
+<area shape="poly" id="edge24_Node000016_Node000017" title=" " alt="" coords="2908,562,2842,609,2839,604,2905,557"/>
+<area shape="rect" id="Node000018" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="2957,607,3194,647"/>
+<area shape="poly" id="edge25_Node000016_Node000018" title=" " alt="" coords="2984,557,3050,604,3047,609,2981,562"/>
+<area shape="poly" id="edge27_Node000019_Node000016" title=" " alt="" coords="2832,363,2809,381,2792,403,2783,429,2785,441,2792,455,2807,473,2825,487,2867,509,2864,514,2822,492,2803,476,2788,457,2780,443,2778,429,2788,400,2806,377,2828,359"/>
+<area shape="rect" id="Node000020" href="$SensorDataGraph_8cpp.html" title="Реализация SensorDataGraph: построение и обновление графиков." alt="" coords="2801,401,3077,456"/>
+<area shape="poly" id="edge28_Node000019_Node000020" title=" " alt="" coords="2924,366,2934,400,2929,402,2919,367"/>
+<area shape="rect" id="Node000022" href="$DisplayingSensors_8cpp.html" title="Реализация отображения сенсоров." alt="" coords="2407,409,2725,449"/>
+<area shape="poly" id="edge30_Node000021_Node000022" title=" " alt="" coords="2589,360,2574,409,2569,408,2583,358"/>
+<area shape="poly" id="edge31_Node000021_Node000023" title=" " alt="" coords="2519,352,2344,404,2342,399,2518,347"/>
+<area shape="poly" id="edge33_Node000023_Node000016" title=" " alt="" coords="2397,454,2629,487,2826,513,2825,518,2629,493,2396,459"/>
+<area shape="rect" id="Node000024" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="2395,511,2633,551"/>
+<area shape="poly" id="edge32_Node000023_Node000024" title=" " alt="" coords="2336,459,2466,509,2464,514,2334,463"/>
+<area shape="rect" id="Node000025" href="$SensorsTableWidget_8cpp.html" title="Реализация таблицы датчиков и построителя панелей." alt="" coords="2113,504,2371,559"/>
+<area shape="poly" id="edge34_Node000023_Node000025" title=" " alt="" coords="2252,470,2248,504,2242,504,2247,469"/>
+<area shape="poly" id="edge37_Node000026_Node000005" title=" " alt="" coords="1596,264,1605,305,1600,306,1591,265"/>
+<area shape="poly" id="edge39_Node000026_Node000006" title=" " alt="" coords="1419,254,1261,277,1106,301,1067,309,1066,303,1106,296,1261,271,1419,248"/>
+<area shape="rect" id="Node000027" href="$VoltageRegulators_8cpp.html" title="Реализация протокола датчиков питания." alt="" coords="1118,299,1425,353"/>
+<area shape="poly" id="edge38_Node000026_Node000027" title=" " alt="" coords="1492,257,1354,301,1353,296,1491,252"/>
+<area shape="poly" id="edge41_Node000028_Node000016" title=" " alt="" coords="3102,257,3121,275,3136,297,3155,341,3163,379,3157,417,3136,457,3120,476,3100,492,3056,514,3054,509,3098,487,3116,473,3132,455,3152,415,3158,379,3150,342,3132,300,3117,279,3098,261"/>
+<area shape="rect" id="Node000029" href="$ListOfLimitsWidget_8cpp.html" title="Реализация списка лимитов." alt="" coords="3203,299,3454,353"/>
+<area shape="poly" id="edge42_Node000028_Node000029" title=" " alt="" coords="3128,253,3254,296,3252,301,3127,258"/>
+<area shape="poly" id="edge46_Node000030_Node000029" title=" " alt="" coords="3276,157,3251,174,3231,197,3224,211,3222,223,3231,249,3251,276,3277,297,3274,301,3247,280,3226,252,3217,223,3219,209,3226,195,3247,171,3273,152"/>
+<area shape="rect" id="Node000031" href="$SensorSettingsManager_8cpp.html" title="Реализация менеджера настроек сенсоров (QSettings)." alt="" coords="3240,196,3524,251"/>
+<area shape="poly" id="edge44_Node000030_Node000031" title=" " alt="" coords="3385,162,3385,196,3379,196,3379,162"/>
+<area shape="rect" id="Node000032" href="$DetailingLimitsWidget_8cpp.html" title="Реализация детальной настройки лимитов." alt="" coords="3548,196,3819,251"/>
+<area shape="poly" id="edge45_Node000030_Node000032" title=" " alt="" coords="3474,150,3606,193,3604,198,3472,155"/>
+<area shape="poly" id="edge49_Node000033_Node000029" title=" " alt="" coords="3788,152,3813,171,3834,195,3841,210,3845,224,3842,238,3833,252,3808,272,3772,288,3727,300,3675,310,3563,322,3454,327,3454,322,3562,316,3674,304,3725,295,3770,282,3806,267,3829,249,3837,236,3839,224,3836,212,3829,197,3810,175,3785,157"/>
+<area shape="poly" id="edge48_Node000033_Node000032" title=" " alt="" coords="3686,162,3686,196,3681,196,3681,162"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/SensorsTableWidget.h" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/SensorsTableWidget.h">
+<area shape="rect" id="Node000001" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="257,5,514,60"/>
+<area shape="rect" id="Node000002" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="5,115,243,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="306,67,174,118,172,113,304,62"/>
+<area shape="rect" id="Node000003" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="267,115,504,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="388,74,388,115,383,115,383,74"/>
+<area shape="rect" id="Node000006" href="$SensorsTableWidget_8cpp.html" title="Реализация таблицы датчиков и построителя панелей." alt="" coords="529,108,786,163"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="470,62,587,105,586,110,468,67"/>
+<area shape="rect" id="Node000004" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="136,211,373,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="349,166,283,213,280,208,346,161"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="397,211,635,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="425,161,491,208,488,213,422,166"/>
+</map>

@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Класс DisplayingSensors</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classDisplayingSensors.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classDisplayingSensors-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс DisplayingSensors</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Панель отображения значений сенсоров одного фрейма.  
+ <a href="classDisplayingSensors.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="DisplayingSensors_8h_source.html">DisplayingSensors.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:DisplayingSensors:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classDisplayingSensors__inherit__graph.svg" width="212" height="330"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Граф связей класса DisplayingSensors:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classDisplayingSensors__coll__graph.svg" width="212" height="330"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ad81ddc95bd1bb7955d774b734baad6f2" id="r_ad81ddc95bd1bb7955d774b734baad6f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#ad81ddc95bd1bb7955d774b734baad6f2">DisplayingSensors</a> (std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt; sensorManager_t, QWidget *parent=nullptr)</td></tr>
+<tr class="separator:ad81ddc95bd1bb7955d774b734baad6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907b93c4950e5eb709a602d59f67099d" id="r_a907b93c4950e5eb709a602d59f67099d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#a907b93c4950e5eb709a602d59f67099d">setSensorsData</a> (<a class="el" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fd">FrameTypes</a> type, std::string_view data, int16_t node_id)</td></tr>
+<tr class="separator:a907b93c4950e5eb709a602d59f67099d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6e8f3a895c451432463e704a8f8c56b" id="r_ae6e8f3a895c451432463e704a8f8c56b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#ae6e8f3a895c451432463e704a8f8c56b">addNewDataLabels</a> (std::vector&lt; <a class="el" href="CommonTypes_8h.html#a80119019834acb539f0ac38a1e57e56d">SensorName</a> &gt; &amp;list)</td></tr>
+<tr class="memdesc:ae6e8f3a895c451432463e704a8f8c56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет подписи/поля для новых сенсоров указанного фрейма.  <br /></td></tr>
+<tr class="separator:ae6e8f3a895c451432463e704a8f8c56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d477219f97c18302d3cba7e10d96119" id="r_a9d477219f97c18302d3cba7e10d96119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#a9d477219f97c18302d3cba7e10d96119">linkLimitsSensorsFrames</a> (std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt;)</td></tr>
+<tr class="memdesc:a9d477219f97c18302d3cba7e10d96119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Связывает панель с менеджером фреймов и лимитов для подсветки.  <br /></td></tr>
+<tr class="separator:a9d477219f97c18302d3cba7e10d96119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f119c7ba95be88de8579a9ed695a024" id="r_a0f119c7ba95be88de8579a9ed695a024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#a0f119c7ba95be88de8579a9ed695a024">linkFrame</a> (<a class="el" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fd">FrameTypes</a> type, std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt; target)</td></tr>
+<tr class="separator:a0f119c7ba95be88de8579a9ed695a024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27dd67e24bd81b0faaea945615145bf3" id="r_a27dd67e24bd81b0faaea945615145bf3"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#a27dd67e24bd81b0faaea945615145bf3">getSensorManager</a> () const</td></tr>
+<tr class="separator:a27dd67e24bd81b0faaea945615145bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95526446675bfb810929b3f33a47a6a7" id="r_a95526446675bfb810929b3f33a47a6a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#a95526446675bfb810929b3f33a47a6a7">addWidgets</a> (std::string_view)</td></tr>
+<tr class="separator:a95526446675bfb810929b3f33a47a6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace6cdd8b33c6f2486a0734c398e88cfd" id="r_ace6cdd8b33c6f2486a0734c398e88cfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplayingSensors.html#ace6cdd8b33c6f2486a0734c398e88cfd">checkRangeValues</a> (<a class="el" href="classColorProgressBar.html">ColorProgressBar</a> *, std::shared_ptr&lt; <a class="el" href="structSensorData.html">SensorData</a> &gt; field)</td></tr>
+<tr class="separator:ace6cdd8b33c6f2486a0734c398e88cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Панель отображения значений сенсоров одного фрейма. </p>
+<p>Содержит подписи, значения и кнопки открытия настроек; поддерживает подсветку по лимитам. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8h_source.html">DisplayingSensors.h</a> строка <a class="el" href="DisplayingSensors_8h_source.html#l00024">24</a></p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ad81ddc95bd1bb7955d774b734baad6f2" name="ad81ddc95bd1bb7955d774b734baad6f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81ddc95bd1bb7955d774b734baad6f2">&#9670;&#160;</a></span>DisplayingSensors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DisplayingSensors::DisplayingSensors </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt;&#160;</td>
+          <td class="paramname"><em>sensorManager_t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00009">9</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   10</span>    : QWidget(parent)</div>
+<div class="line"><span class="lineno">   11</span>    ,mainLayout(<span class="keyword">new</span> QGridLayout())</div>
+<div class="line"><span class="lineno">   12</span>    ,sensorManager(sensorManager_t)</div>
+<div class="line"><span class="lineno">   13</span>{</div>
+<div class="line"><span class="lineno">   14</span>    setLayout(mainLayout);</div>
+<div class="line"><span class="lineno">   15</span>    mainLayout-&gt;setColumnStretch(1, 1);  <span class="comment">// Прогресс-бары будут растягиваться</span></div>
+<div class="line"><span class="lineno">   16</span>    mainLayout-&gt;setColumnMinimumWidth(0, 150); <span class="comment">// Фиксированная ширина для меток (опционально)</span></div>
+<div class="line"><span class="lineno">   17</span>    mainLayout-&gt;setAlignment(Qt::AlignTop);</div>
+<div class="line"><span class="lineno">   18</span>    mainLayout-&gt;setColumnMinimumWidth(1, 80);</div>
+<div class="line"><span class="lineno">   19</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="ae6e8f3a895c451432463e704a8f8c56b" name="ae6e8f3a895c451432463e704a8f8c56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6e8f3a895c451432463e704a8f8c56b">&#9670;&#160;</a></span>addNewDataLabels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayingSensors::addNewDataLabels </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="CommonTypes_8h.html#a80119019834acb539f0ac38a1e57e56d">SensorName</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляет подписи/поля для новых сенсоров указанного фрейма. </p>
+<p>Создаёт и добавляет элементы UI для каждого имени сенсора. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00130">130</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  131</span>{</div>
+<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;it : list)</div>
+<div class="line"><span class="lineno">  133</span>        addWidgets(it);</div>
+<div class="line"><span class="lineno">  134</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a95526446675bfb810929b3f33a47a6a7" name="a95526446675bfb810929b3f33a47a6a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95526446675bfb810929b3f33a47a6a7">&#9670;&#160;</a></span>addWidgets()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayingSensors::addWidgets </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00021">21</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   22</span>{</div>
+<div class="line"><span class="lineno">   23</span>    QLabel *labelName = <span class="keyword">new</span> QLabel(QString::fromStdString(std::string(name)), <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_class" href="classColorProgressBar.html">ColorProgressBar</a> *pb = <span class="keyword">new</span> <a class="code hl_class" href="classColorProgressBar.html">ColorProgressBar</a>(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   26</span>    sensorsColorProgressBarDataLabels[name.data()] = pb;</div>
+<div class="line"><span class="lineno">   27</span> </div>
+<div class="line"><span class="lineno">   28</span>    <span class="comment">// Получаем текущий индекс строки</span></div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordtype">int</span> row = mainLayout-&gt;rowCount();</div>
+<div class="line"><span class="lineno">   30</span> </div>
+<div class="line"><span class="lineno">   31</span>    <span class="comment">// Добавляем элементы в сетку</span></div>
+<div class="line"><span class="lineno">   32</span>    mainLayout-&gt;addWidget(labelName, row, 0);          <span class="comment">// Столбец 0: метка</span></div>
+<div class="line"><span class="lineno">   33</span>    mainLayout-&gt;addWidget(pb, row, 1);                 <span class="comment">// Столбец 1: прогресс-бар</span></div>
+<div class="line"><span class="lineno">   34</span>    mainLayout-&gt;addItem(<span class="keyword">new</span> QSpacerItem(20, 20), row, 2); <span class="comment">// Столбец 2: отступ</span></div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    <span class="comment">// Устанавливаем растяжение для последней строки (чтобы контент был прижат к верху)</span></div>
+<div class="line"><span class="lineno">   37</span>    <span class="comment">//mainLayout-&gt;setRowStretch(row + 1, 1);</span></div>
+<div class="line"><span class="lineno">   38</span> </div>
+<div class="line"><span class="lineno">   39</span>    <span class="comment">// Для выравнивания текста меток по правому краю</span></div>
+<div class="line"><span class="lineno">   40</span>    labelName-&gt;setAlignment(Qt::AlignRight | Qt::AlignVCenter);</div>
+<div class="line"><span class="lineno">   41</span> </div>
+<div class="line"><span class="lineno">   42</span>    <span class="comment">// Для установки фиксированной высоты строк</span></div>
+<div class="line"><span class="lineno">   43</span>    mainLayout-&gt;setRowMinimumHeight(row, 20);</div>
+<div class="line"><span class="lineno">   44</span>}</div>
+<div class="ttc" id="aclassColorProgressBar_html"><div class="ttname"><a href="classColorProgressBar.html">ColorProgressBar</a></div><div class="ttdoc">Виджет прогресс‑бара с произвольным цветом и диапазоном.</div><div class="ttdef"><b>Definition</b> <a href="ColorProgressBar_8h_source.html#l00020">ColorProgressBar.h:20</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ace6cdd8b33c6f2486a0734c398e88cfd" name="ace6cdd8b33c6f2486a0734c398e88cfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace6cdd8b33c6f2486a0734c398e88cfd">&#9670;&#160;</a></span>checkRangeValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayingSensors::checkRangeValues </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classColorProgressBar.html">ColorProgressBar</a> *&#160;</td>
+          <td class="paramname"><em>pb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structSensorData.html">SensorData</a> &gt;&#160;</td>
+          <td class="paramname"><em>field</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00046">46</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>                                                                                             {</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> value = field-&gt;val;  <span class="comment">// Кэшируем значение</span></div>
+<div class="line"><span class="lineno">   48</span>    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; limits = *field-&gt;detalaizedLimits;  <span class="comment">// Ссылка на вектор</span></div>
+<div class="line"><span class="lineno">   49</span> </div>
+<div class="line"><span class="lineno">   50</span>    pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#a5e560f5bdc3546235df96cf1997aed4a">setMinimum</a>(field-&gt;limit-&gt;min);</div>
+<div class="line"><span class="lineno">   51</span>    pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#ad5d23dbbb8f5e18af3ad966013746084">setMaximum</a>(field-&gt;limit-&gt;max);</div>
+<div class="line"><span class="lineno">   52</span> </div>
+<div class="line"><span class="lineno">   53</span>    <span class="comment">// 1. Проверка детализированных лимитов (если включены)</span></div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">if</span> (field-&gt;settings-&gt;useDetalaizedLimits) {</div>
+<div class="line"><span class="lineno">   55</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : limits) {</div>
+<div class="line"><span class="lineno">   56</span>            <span class="keywordflow">if</span> (value &gt;= it.limit.min &amp;&amp; value &lt;= it.limit.max) {</div>
+<div class="line"><span class="lineno">   57</span>                pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#abc25029304a56762c76afc6227c7fea9">setColor</a>(it.color);</div>
+<div class="line"><span class="lineno">   58</span>                <span class="keywordflow">return</span>;  <span class="comment">// Выходим сразу после установки цвета</span></div>
+<div class="line"><span class="lineno">   59</span>            }</div>
+<div class="line"><span class="lineno">   60</span>        }</div>
+<div class="line"><span class="lineno">   61</span>    }</div>
+<div class="line"><span class="lineno">   62</span> </div>
+<div class="line"><span class="lineno">   63</span>    <span class="comment">// 2. Проверка основных лимитов (только если min &lt; max)</span></div>
+<div class="line"><span class="lineno">   64</span>    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; main_limit = *field-&gt;limit;</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">if</span> (main_limit.min &gt;= main_limit.max) {</div>
+<div class="line"><span class="lineno">   66</span>        pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#abc25029304a56762c76afc6227c7fea9">setColor</a>(Qt::transparent);</div>
+<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   68</span>    }</div>
+<div class="line"><span class="lineno">   69</span> </div>
+<div class="line"><span class="lineno">   70</span>    <span class="comment">// Кэшируем вычисляемые значения</span></div>
+<div class="line"><span class="lineno">   71</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> range = main_limit.max - main_limit.min;</div>
+<div class="line"><span class="lineno">   72</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> threshold = 0.15 * range;</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> low_threshold = main_limit.min + <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(threshold);</div>
+<div class="line"><span class="lineno">   74</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> high_threshold = main_limit.max - <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(threshold);</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>    <span class="comment">// Определение цвета по основным лимитам</span></div>
+<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">if</span> (value &lt; main_limit.min || value &gt; main_limit.max) {</div>
+<div class="line"><span class="lineno">   78</span>        pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#abc25029304a56762c76afc6227c7fea9">setColor</a>(Qt::red);</div>
+<div class="line"><span class="lineno">   79</span>    }</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &lt;= low_threshold || value &gt;= high_threshold) {</div>
+<div class="line"><span class="lineno">   81</span>        pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#abc25029304a56762c76afc6227c7fea9">setColor</a>(Qt::yellow);</div>
+<div class="line"><span class="lineno">   82</span>    }</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   84</span>        pb-&gt;<a class="code hl_function" href="classColorProgressBar.html#abc25029304a56762c76afc6227c7fea9">setColor</a>(Qt::green);</div>
+<div class="line"><span class="lineno">   85</span>    }</div>
+<div class="line"><span class="lineno">   86</span>}</div>
+<div class="ttc" id="aclassColorProgressBar_html_a5e560f5bdc3546235df96cf1997aed4a"><div class="ttname"><a href="classColorProgressBar.html#a5e560f5bdc3546235df96cf1997aed4a">ColorProgressBar::setMinimum</a></div><div class="ttdeci">void setMinimum(double minimum)</div><div class="ttdoc">Устанавливает минимум шкалы.</div><div class="ttdef"><b>Definition</b> <a href="ColorProgressBar_8cpp_source.html#l00017">ColorProgressBar.cpp:17</a></div></div>
+<div class="ttc" id="aclassColorProgressBar_html_abc25029304a56762c76afc6227c7fea9"><div class="ttname"><a href="classColorProgressBar.html#abc25029304a56762c76afc6227c7fea9">ColorProgressBar::setColor</a></div><div class="ttdeci">void setColor(const QColor &amp;color)</div><div class="ttdoc">Задаёт цвет заполнения.</div><div class="ttdef"><b>Definition</b> <a href="ColorProgressBar_8cpp_source.html#l00027">ColorProgressBar.cpp:27</a></div></div>
+<div class="ttc" id="aclassColorProgressBar_html_ad5d23dbbb8f5e18af3ad966013746084"><div class="ttname"><a href="classColorProgressBar.html#ad5d23dbbb8f5e18af3ad966013746084">ColorProgressBar::setMaximum</a></div><div class="ttdeci">void setMaximum(double maximum)</div><div class="ttdoc">Устанавливает максимум шкалы.</div><div class="ttdef"><b>Definition</b> <a href="ColorProgressBar_8cpp_source.html#l00022">ColorProgressBar.cpp:22</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a27dd67e24bd81b0faaea945615145bf3" name="a27dd67e24bd81b0faaea945615145bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27dd67e24bd81b0faaea945615145bf3">&#9670;&#160;</a></span>getSensorManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt; DisplayingSensors::getSensorManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00088">88</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>{</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">return</span> sensorManager;</div>
+<div class="line"><span class="lineno">   91</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0f119c7ba95be88de8579a9ed695a024" name="a0f119c7ba95be88de8579a9ed695a024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f119c7ba95be88de8579a9ed695a024">&#9670;&#160;</a></span>linkFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayingSensors::linkFrame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fd">FrameTypes</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt;&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00103">103</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  104</span>{</div>
+<div class="line"><span class="lineno">  105</span>    <span class="keyword">auto</span>&amp; srcFrame = sensorManager-&gt;getFrames()[type];</div>
+<div class="line"><span class="lineno">  106</span>    <span class="keyword">auto</span>&amp; dstFrame = target-&gt;getFrames()[type];</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>    <span class="keywordflow">if</span> (!srcFrame || !dstFrame) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  109</span> </div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [name, data] : srcFrame-&gt;getFields()) {</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = dstFrame-&gt;getFields().find(name); it != dstFrame-&gt;getFields().end()) {</div>
+<div class="line"><span class="lineno">  112</span>            data-&gt;linksSensorData(it-&gt;second);</div>
+<div class="line"><span class="lineno">  113</span>        }</div>
+<div class="line"><span class="lineno">  114</span>    }</div>
+<div class="line"><span class="lineno">  115</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9d477219f97c18302d3cba7e10d96119" name="a9d477219f97c18302d3cba7e10d96119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d477219f97c18302d3cba7e10d96119">&#9670;&#160;</a></span>linkLimitsSensorsFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayingSensors::linkLimitsSensorsFrames </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt;&#160;</td>
+          <td class="paramname"><em>sensorFrame</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Связывает панель с менеджером фреймов и лимитов для подсветки. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00094">94</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   95</span>{</div>
+<div class="line"><span class="lineno">   96</span>    linkFrame(<a class="code hl_enumvalue" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc">ENGINE</a>, sensorFrame);</div>
+<div class="line"><span class="lineno">   97</span>    linkFrame(<a class="code hl_enumvalue" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda53bba2fddc70f077345c9db90b12502b">VOLTAGE_REGULATORS</a>, sensorFrame);</div>
+<div class="line"><span class="lineno">   98</span>    linkFrame(<a class="code hl_enumvalue" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92ac1e05b851186d00b0efde53de400f">ESC_FRAME1</a>, sensorFrame);</div>
+<div class="line"><span class="lineno">   99</span>    linkFrame(<a class="code hl_enumvalue" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fdab2d8c0fa7f99768aa099a3bef75da978">ESC_FRAME2</a>, sensorFrame);</div>
+<div class="line"><span class="lineno">  100</span>    linkFrame(<a class="code hl_enumvalue" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda35e6b327083c5367c65c5c73d5d7057f">ESC_FRAME3</a>, sensorFrame);</div>
+<div class="line"><span class="lineno">  101</span>}</div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda35e6b327083c5367c65c5c73d5d7057f"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda35e6b327083c5367c65c5c73d5d7057f">ESC_FRAME3</a></div><div class="ttdeci">@ ESC_FRAME3</div><div class="ttdoc">Параметры двигателя/привода.</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00024">Frames.h:23</a></div></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda53bba2fddc70f077345c9db90b12502b"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda53bba2fddc70f077345c9db90b12502b">VOLTAGE_REGULATORS</a></div><div class="ttdeci">@ VOLTAGE_REGULATORS</div><div class="ttdoc">Прочие сенсоры</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00026">Frames.h:25</a></div></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda92ac1e05b851186d00b0efde53de400f"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92ac1e05b851186d00b0efde53de400f">ESC_FRAME1</a></div><div class="ttdeci">@ ESC_FRAME1</div><div class="ttdoc">Первая часть статуса ESC (например, базовые параметры).</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00022">Frames.h:21</a></div></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc">ENGINE</a></div><div class="ttdeci">@ ENGINE</div><div class="ttdoc">Фрейм датчиков питания (средние фазные напряжения и пр.).</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00025">Frames.h:24</a></div></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fdab2d8c0fa7f99768aa099a3bef75da978"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fdab2d8c0fa7f99768aa099a3bef75da978">ESC_FRAME2</a></div><div class="ttdeci">@ ESC_FRAME2</div><div class="ttdoc">Третья часть статуса ESC (доп.</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00023">Frames.h:22</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Перекрестные ссылки <a class="el" href="Frames_8h_source.html#l00024">ENGINE</a>, <a class="el" href="Frames_8h_source.html#l00021">ESC_FRAME1</a>, <a class="el" href="Frames_8h_source.html#l00022">ESC_FRAME2</a>, <a class="el" href="Frames_8h_source.html#l00023">ESC_FRAME3</a> и <a class="el" href="Frames_8h_source.html#l00025">VOLTAGE_REGULATORS</a>.</p>
+
+</div>
+</div>
+<a id="a907b93c4950e5eb709a602d59f67099d" name="a907b93c4950e5eb709a602d59f67099d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a907b93c4950e5eb709a602d59f67099d">&#9670;&#160;</a></span>setSensorsData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayingSensors::setSensorsData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fd">FrameTypes</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>node_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a> строка <a class="el" href="DisplayingSensors_8cpp_source.html#l00117">117</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  118</span>{</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keyword">auto</span>&amp; managerFrames = sensorManager-&gt;getFrames();</div>
+<div class="line"><span class="lineno">  120</span>    managerFrames[type]-&gt;setData(data, node_id % 32);</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keyword">auto</span> &amp;fields = managerFrames[type]-&gt;getFields();</div>
+<div class="line"><span class="lineno">  122</span> </div>
+<div class="line"><span class="lineno">  123</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;it : managerFrames[type]-&gt;orderedNames) {</div>
+<div class="line"><span class="lineno">  124</span>        sensorsColorProgressBarDataLabels[it.data()]-&gt;setValue(fields[it.data()]-&gt;val);</div>
+<div class="line"><span class="lineno">  125</span>        checkRangeValues(sensorsColorProgressBarDataLabels[it.data()], fields[it.data()]);</div>
+<div class="line"><span class="lineno">  126</span>    }</div>
+<div class="line"><span class="lineno">  127</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/<a class="el" href="DisplayingSensors_8h_source.html">DisplayingSensors.h</a></li>
+<li>/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/<a class="el" href="DisplayingSensors_8cpp_source.html">DisplayingSensors.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classDisplayingSensors.html">DisplayingSensors</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

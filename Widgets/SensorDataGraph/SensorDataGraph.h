@@ -1,12 +1,25 @@
+/**
+ * \file SensorDataGraph.h
+ * \brief Виджет отображения временных рядов сенсоров на QCustomPlot.
+ * \details Список доступных сенсоров и графиков, таймер обновления, структуры ключей выбранных данных.
+ */
+
 #ifndef SENSORDATAGRAPH_H
 #define SENSORDATAGRAPH_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QtWidgets/QWidget>
 #include <QTreeWidget>
 #include <QTimer>
+#endif
 
 #include "Data/Frames/Containers/SensorsFrames.h"
 #include "qcustomplot.h"
+/**
+ * \struct DataFullName
+ * \brief Полный ключ временного ряда: двигатель, фрейм, сенсор.
+ * \details Используется для адресации данных при построении графиков.
+ */
 
 struct DataFullName {
     size_t  engineNum;
@@ -31,6 +44,11 @@ struct hash<DataFullName> {
     }
 };
 }
+/**\class SensorDataGraph
+ * \brief Виджет построения графиков значений сенсоров.
+ * \details Отображает дерево доступных сенсоров и график.
+ * Обновляет окно по таймеру и ограничивает количество точек.
+ */
 
 class SensorDataGraph : public QWidget
 {

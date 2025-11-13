@@ -1,0 +1,5 @@
+<map id="ColorProgressBar" name="ColorProgressBar">
+<area shape="rect" id="Node000001" title="Виджет прогресс‑бара с произвольным цветом и диапазоном." alt="" coords="5,119,156,404"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="45,5,116,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,84,83,119,78,119,78,84"/>
+</map>

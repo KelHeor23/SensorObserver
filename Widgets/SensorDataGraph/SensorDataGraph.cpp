@@ -1,6 +1,13 @@
-#include "SensorDataGraph.h"
+/**
+ * \file SensorDataGraph.cpp
+ * \brief Реализация SensorDataGraph: построение и обновление графиков.
+ * \details Обновляет видимую область по времени окна, ограничивает количество точек, масштабирует ось Y.
+ */
 
+#include "SensorDataGraph.h"
 #include "Data/DataStructure.h"
+
+/** \brief Инициализирует график, дерево сенсоров и таймер обновления. */
 
 SensorDataGraph::SensorDataGraph(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}
@@ -187,6 +194,11 @@ void SensorDataGraph::addNewData()
         }
     }
 }
+/**
+ * \brief Обновляет видимую область и добавляет новые точки для выбранных сенсоров.
+ * \details Двигает окно по времени, удаляет старые точки (например, хранит ~N последних секунд),
+ * масштабирует ось Y по текущим данным и инициирует перерисовку.
+ */
 
 
 void SensorDataGraph::updateGraph()
@@ -206,3 +218,4 @@ void SensorDataGraph::updateGraph()
     m_plot->yAxis->rescale();
     m_plot->replot(QCustomPlot::rpQueuedReplot);
 }
+

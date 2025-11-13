@@ -1,0 +1,15 @@
+<map id="BaseProtocol" name="BaseProtocol">
+<area shape="rect" id="Node000001" title="Базовый интерфейс контейнера фрейма сенсоров." alt="" coords="540,5,680,171"/>
+<area shape="rect" id="Node000002" href="$classEngineSensors_1_1EngineSensors.html" title=" " alt="" coords="5,226,217,311"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="528,118,388,165,230,221,211,228,209,223,228,216,386,160,526,113"/>
+<area shape="rect" id="Node000003" href="$classEscSensors_1_1EscStatus1.html" title="Контейнер и парсер фрейма EscStatus1." alt="" coords="241,226,408,311"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="530,142,393,228,390,224,527,138"/>
+<area shape="rect" id="Node000004" href="$classEscSensors_1_1EscStatus2.html" title="Контейнер и парсер фрейма EscStatus2." alt="" coords="432,226,599,311"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="562,184,540,227,535,225,558,182"/>
+<area shape="rect" id="Node000005" href="$classEscSensors_1_1EscStatus3.html" title="Контейнер и парсер фрейма EscStatus3." alt="" coords="623,226,789,311"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="663,182,686,225,681,227,658,184"/>
+<area shape="rect" id="Node000006" href="$classOtherSensors_1_1OtherSensors.html" title=" " alt="" coords="813,226,1009,311"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="693,135,842,223,840,228,691,140"/>
+<area shape="rect" id="Node000007" href="$classVoltageRegulators_1_1VoltageRegulators.html" title=" " alt="" coords="1034,219,1191,319"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="694,108,849,153,937,183,1023,216,1035,222,1033,226,1021,221,935,188,847,158,693,113"/>
+</map>

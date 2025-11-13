@@ -1,0 +1,23 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/SensorsTableWidget.cpp" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/SensorsTableWidget.cpp">
+<area shape="rect" id="Node000001" title="Реализация таблицы датчиков и построителя панелей." alt="" coords="218,5,475,60"/>
+<area shape="rect" id="Node000002" href="$SensorsTableWidget_8h.html" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="204,108,369,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="331,62,305,98,300,95,326,59"/>
+<area shape="rect" id="Node000005" href="$Frames_8h.html" title="Определения типов и парсеров телеметрических кадров." alt="" coords="277,343,446,368"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="380,58,429,111,452,144,469,181,472,198,470,216,458,253,434,296,414,318,393,336,389,332,411,315,430,293,453,250,465,215,467,198,464,182,447,147,425,114,376,62"/>
+<area shape="rect" id="Node000003" href="$DisplayingSensors_8h.html" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="124,181,279,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="275,135,227,175,224,170,271,131"/>
+<area shape="rect" id="Node000004" href="$SensorsFrames_8h.html" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="33,255,212,295"/>
+<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="205,132,154,150,132,164,114,183,108,196,106,211,112,241,106,242,101,211,103,195,110,180,129,160,152,145,203,127"/>
+<area shape="rect" id="Node000010" href="$VibrationDirection_8h.html" title="Виджет индикации направления вибраций." alt="" coords="303,181,455,207"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="303,131,355,171,351,175,300,135"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="192,209,153,247,149,243,188,205"/>
+<area shape="rect" id="Node000009" href="$ColorProgressBar_8h.html" title="Простой виджет прогресс‑бара с настраиваемым цветом и диапазоном." alt="" coords="237,262,419,287"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="221,205,299,252,296,257,219,209"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="181,292,314,336,313,341,179,297"/>
+<area shape="rect" id="Node000006" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="89,343,156,368"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="125,295,125,329,120,329,120,295"/>
+<area shape="rect" id="Node000007" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="5,416,91,441"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="113,370,72,408,68,405,109,366"/>
+<area shape="rect" id="Node000008" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="115,416,280,441"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="136,366,177,405,173,408,133,370"/>
+</map>

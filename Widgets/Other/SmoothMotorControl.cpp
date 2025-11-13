@@ -1,10 +1,19 @@
+/**
+ * \file SmoothMotorControl.cpp
+ * \brief Реализация плавного управления моторами.
+ * \details Создание UI, поочерёдное/пакетное управление, корректное завершение — сброс PWM при закрытии.
+ */
+
 #include "SmoothMotorControl.h"
 #include "Tools/ValueIncrementer.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QLabel>
 #include <QIntValidator>
 #include <QPushButton>
 #include <QThread>
+#endif
+/** \brief Инициализирует элементы управления и подключает обработчики кнопок. */
 
 SmoothMotorControl::SmoothMotorControl(Client *client_t, QWidget *parent)
     : QWidget{parent}
@@ -126,12 +135,14 @@ void SmoothMotorControl::smoothControl(QPushButton *stopBtn, uint8_t num, uint16
 
     incrementer->start();
 }
+/** \brief Стартует плавное управление одновременно для всех моторов по заданным параметрам. */
 
 void SmoothMotorControl::sendAllMotorsControlMsg(){
     for (uint8_t i = 0; i < listOfMinMax.size(); i++) {
         smoothControl(nullptr, i, listOfMinMax[i].minPwm->text().toUInt(), listOfMinMax[i].maxPwm->text().toUInt(), listOfMinMax[i].timer->text().toUInt());
     }
 }
+/** \brief На закрытие окна отправляет PWM=900 всем моторам и принимает событие. */
 
 void SmoothMotorControl::closeEvent(QCloseEvent *event) {
 

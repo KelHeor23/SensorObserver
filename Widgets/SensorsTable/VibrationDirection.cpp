@@ -1,5 +1,15 @@
+/**
+ * \file VibrationDirection.cpp
+ * \brief Реализация виджета направления вибраций.
+ * \details Рисует стрелку/маркер направления и масштабирует длину по амплитуде; обновляет подписи и цвета зон.
+ */
+
 #include "VibrationDirection.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <cmath>
+#endif
+/** \brief Инициализирует виджет и связывает сигналы обновления данных. */
 
 VibrationDirection::VibrationDirection(QWidget *parent)
     : QGraphicsView(parent),
@@ -39,4 +49,3 @@ void VibrationDirection::update(int len, int degree)
 
     scene->addItem(circle);
 }
-

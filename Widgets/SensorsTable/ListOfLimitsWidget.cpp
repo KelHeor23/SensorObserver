@@ -1,13 +1,22 @@
+/**
+ * \file ListOfLimitsWidget.cpp
+ * \brief Реализация списка лимитов.
+ * \details Строит список, открывает диалог детализации и применяет изменения к данным сенсора.
+ */
+
 #include "ListOfLimitsWidget.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QLineEdit>
 #include <QCheckBox>
 #include "qpushbutton.h"
 #include <QIntValidator>
+#endif
 
 #include "Tools/CollapsibleGroupBox.h"
 #include "Data/Frames/Containers/SensorSettingsManager.h"
 #include "DetailingLimitsWidget.h"
+/** \brief Создаёт список лимитов и кнопки управления (редактирование/удаление). */
 
 
 ListOfLimitsWidget::ListOfLimitsWidget(QWidget *parent)

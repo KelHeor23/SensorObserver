@@ -1,12 +1,24 @@
+/**
+ * \file DetailingLimitsWidget.h
+ * \brief Детальная настройка порогов/цветов для одного сенсора.
+ * \details Добавление/удаление точек порогов, выбор цвета и сохранение изменений через SensorSettingsManager.
+ */
+
 #ifndef DETAILINGLIMITSWIDGET_H
 #define DETAILINGLIMITSWIDGET_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QtWidgets/QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#endif
 
 #include "Data/Frames/Containers/Sensors.h"
+/**\class DetailingLimitsWidget
+ * \brief Детальная настройка порогов: точки (value+color), добавление/удаление.
+ * \details Сохраняет через SensorSettingsManager при закрытии.
+ */
 
 class DetailingLimitsWidget : public QWidget
 {

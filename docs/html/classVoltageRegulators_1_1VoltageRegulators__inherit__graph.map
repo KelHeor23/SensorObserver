@@ -1,0 +1,5 @@
+<map id="VoltageRegulators::VoltageRegulators" name="VoltageRegulators::VoltageRegulators">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,219,163,319"/>
+<area shape="rect" id="Node000002" href="$classBaseProtocol.html" title="Базовый интерфейс контейнера фрейма сенсоров." alt="" coords="14,5,154,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,184,87,219,81,219,81,184"/>
+</map>

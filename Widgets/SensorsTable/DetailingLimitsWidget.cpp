@@ -1,12 +1,19 @@
-#include "DetailingLimitsWidget.h"
+/**
+ * \file DetailingLimitsWidget.cpp
+ * \brief Реализация детальной настройки лимитов.
+ * \details Создаёт строки точек (порог, цвет), применяет, сохраняет при закрытии.
+ */
 
+#include "DetailingLimitsWidget.h"
+#include "Tools/ColorButton.h"
+#include "Data/Frames/Containers/SensorSettingsManager.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QLabel>
 #include <QLineEdit>
 #include <QDoubleValidator>  // Изменено на DoubleValidator
 #include <QRandomGenerator>
-
-#include "Tools/ColorButton.h"
-#include "Data/Frames/Containers/SensorSettingsManager.h"
+#endif
 
 DetailingLimitsWidget::DetailingLimitsWidget(std::shared_ptr<SensorData> data, QString name, QWidget *parent)
     : QWidget(parent)
@@ -110,6 +117,7 @@ void DetailingLimitsWidget::addNewMinMax(size_t index)
 
     fieldsLt->addLayout(tmpLt);
 }
+/** \brief Добавляет строку порога (значение, цвет, удаление) в список. */
 
 void DetailingLimitsWidget::addNewPoint(size_t index)
 {
@@ -160,6 +168,7 @@ void DetailingLimitsWidget::addNewPoint(size_t index)
 
     fieldsLt->addLayout(tmpLt);
 }
+/** \brief При закрытии сохраняет настройки сенсора и затем закрывает виджет. */
 
 void DetailingLimitsWidget::closeEvent(QCloseEvent *event)
 {

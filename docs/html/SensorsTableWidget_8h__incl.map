@@ -1,0 +1,20 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/SensorsTableWidget.h" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/SensorsTableWidget.h">
+<area shape="rect" id="Node000001" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="147,5,404,60"/>
+<area shape="rect" id="Node000002" href="$DisplayingSensors_8h.html" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="198,108,353,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="278,60,278,94,273,94,273,60"/>
+<area shape="rect" id="Node000003" href="$SensorsFrames_8h.html" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="71,181,250,221"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="235,62,210,84,188,109,175,139,167,168,162,167,170,137,184,107,206,80,232,58"/>
+<area shape="rect" id="Node000009" href="$VibrationDirection_8h.html" title="Виджет индикации направления вибраций." alt="" coords="377,108,529,133"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="331,58,418,100,415,104,328,62"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="260,136,201,176,198,171,257,131"/>
+<area shape="rect" id="Node000008" href="$ColorProgressBar_8h.html" title="Простой виджет прогресс‑бара с настраиваемым цветом и диапазоном." alt="" coords="275,189,457,214"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="290,131,344,178,341,182,287,136"/>
+<area shape="rect" id="Node000004" href="$Frames_8h.html" title="Определения типов и парсеров телеметрических кадров." alt="" coords="5,269,175,295"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,223,112,261,108,257,142,220"/>
+<area shape="rect" id="Node000005" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="199,269,266,295"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="180,220,215,257,211,261,176,223"/>
+<area shape="rect" id="Node000006" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="115,343,201,368"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="223,297,182,335,178,331,219,293"/>
+<area shape="rect" id="Node000007" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="225,343,390,368"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="246,293,287,331,283,335,243,297"/>
+</map>

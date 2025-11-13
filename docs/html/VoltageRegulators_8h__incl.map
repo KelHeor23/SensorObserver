@@ -1,0 +1,9 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h">
+<area shape="rect" id="Node000001" title="Протокол чтения датчиков питания (регуляторы напряжения)." alt="" coords="5,5,312,60"/>
+<area shape="rect" id="Node000002" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="69,108,248,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,60,161,94,156,94,156,60"/>
+<area shape="rect" id="Node000003" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="41,196,127,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="143,150,107,188,103,184,139,146"/>
+<area shape="rect" id="Node000004" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="151,196,316,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="179,146,215,184,211,188,175,150"/>
+</map>

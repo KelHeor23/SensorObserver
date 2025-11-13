@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Класс SensorDataGraph</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classSensorDataGraph.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classSensorDataGraph-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс SensorDataGraph</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Виджет построения графиков значений сенсоров.  
+ <a href="classSensorDataGraph.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="SensorDataGraph_8h_source.html">SensorDataGraph.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:SensorDataGraph:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classSensorDataGraph__inherit__graph.svg" width="164" height="250"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Граф связей класса SensorDataGraph:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classSensorDataGraph__coll__graph.svg" width="164" height="250"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a8e6cc8be73d1b0c587412c278f781ed2" id="r_a8e6cc8be73d1b0c587412c278f781ed2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensorDataGraph.html#a8e6cc8be73d1b0c587412c278f781ed2">SensorDataGraph</a> (std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt; sensorsManager_t, QWidget *parent=nullptr)</td></tr>
+<tr class="memdesc:a8e6cc8be73d1b0c587412c278f781ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует график, дерево сенсоров и таймер обновления.  <br /></td></tr>
+<tr class="separator:a8e6cc8be73d1b0c587412c278f781ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1531223f54e0a2088f9a7f1502f5075e" id="r_a1531223f54e0a2088f9a7f1502f5075e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensorDataGraph.html#a1531223f54e0a2088f9a7f1502f5075e">onItemChanged</a> (QTreeWidgetItem *item, int column)</td></tr>
+<tr class="separator:a1531223f54e0a2088f9a7f1502f5075e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad4c87a5f98ae37cb44d4cc37b497aa" id="r_a4ad4c87a5f98ae37cb44d4cc37b497aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensorDataGraph.html#a4ad4c87a5f98ae37cb44d4cc37b497aa">addNewData</a> ()</td></tr>
+<tr class="separator:a4ad4c87a5f98ae37cb44d4cc37b497aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14c3958f64a598833f7734944b1cb4fe" id="r_a14c3958f64a598833f7734944b1cb4fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensorDataGraph.html#a14c3958f64a598833f7734944b1cb4fe">updateGraph</a> ()</td></tr>
+<tr class="memdesc:a14c3958f64a598833f7734944b1cb4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обновляет видимую область и добавляет новые точки для выбранных сенсоров.  <br /></td></tr>
+<tr class="separator:a14c3958f64a598833f7734944b1cb4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Виджет построения графиков значений сенсоров. </p>
+<p>Отображает дерево доступных сенсоров и график. Обновляет окно по таймеру и ограничивает количество точек. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="SensorDataGraph_8h_source.html">SensorDataGraph.h</a> строка <a class="el" href="SensorDataGraph_8h_source.html#l00053">53</a></p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a8e6cc8be73d1b0c587412c278f781ed2" name="a8e6cc8be73d1b0c587412c278f781ed2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e6cc8be73d1b0c587412c278f781ed2">&#9670;&#160;</a></span>SensorDataGraph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SensorDataGraph::SensorDataGraph </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSensorsFrames.html">SensorsFrames</a> &gt;&#160;</td>
+          <td class="paramname"><em>sensorsManager_t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Инициализирует график, дерево сенсоров и таймер обновления. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="SensorDataGraph_8cpp_source.html">SensorDataGraph.cpp</a> строка <a class="el" href="SensorDataGraph_8cpp_source.html#l00012">12</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   13</span>    : QWidget{parent}</div>
+<div class="line"><span class="lineno">   14</span>    , mainLt(<span class="keyword">new</span> QVBoxLayout)</div>
+<div class="line"><span class="lineno">   15</span>    , m_plot(<span class="keyword">new</span> QCustomPlot(<span class="keyword">this</span>))</div>
+<div class="line"><span class="lineno">   16</span>    , sensorsListTreeWdgt(<span class="keyword">new</span> QTreeWidget)</div>
+<div class="line"><span class="lineno">   17</span>    , sensorsManager(sensorsManager_t)</div>
+<div class="line"><span class="lineno">   18</span>    , m_timer(<span class="keyword">new</span> QTimer(<span class="keyword">this</span>))</div>
+<div class="line"><span class="lineno">   19</span>{</div>
+<div class="line"><span class="lineno">   20</span>    setWindowTitle(<span class="stringliteral">&quot;График данных&quot;</span>);</div>
+<div class="line"><span class="lineno">   21</span> </div>
+<div class="line"><span class="lineno">   22</span>    setLayout(mainLt);</div>
+<div class="line"><span class="lineno">   23</span> </div>
+<div class="line"><span class="lineno">   24</span>    QHBoxLayout *hboxLt = <span class="keyword">new</span> QHBoxLayout;</div>
+<div class="line"><span class="lineno">   25</span>    hboxLt-&gt;addWidget(m_plot);</div>
+<div class="line"><span class="lineno">   26</span>    hboxLt-&gt;addWidget(sensorsListTreeWdgt);</div>
+<div class="line"><span class="lineno">   27</span>    mainLt-&gt;addLayout(hboxLt);</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>    fillSensorsList();</div>
+<div class="line"><span class="lineno">   30</span>    settingPlot();</div>
+<div class="line"><span class="lineno">   31</span> </div>
+<div class="line"><span class="lineno">   32</span>    connect(m_timer, &amp;QTimer::timeout, <span class="keyword">this</span>, &amp;SensorDataGraph::addNewData);</div>
+<div class="line"><span class="lineno">   33</span>    m_timer-&gt;start(100);  <span class="comment">// мс интервал</span></div>
+<div class="line"><span class="lineno">   34</span> </div>
+<div class="line"><span class="lineno">   35</span>    QTimer *timer = <span class="keyword">new</span> QTimer(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   36</span>    connect(timer, &amp;QTimer::timeout, <span class="keyword">this</span>, &amp;<a class="code hl_function" href="classSensorDataGraph.html#a14c3958f64a598833f7734944b1cb4fe">SensorDataGraph::updateGraph</a>); <span class="comment">// updateGraph — ваш слот для обновления данных и графика</span></div>
+<div class="line"><span class="lineno">   37</span>    timer-&gt;start(100); <span class="comment">// интервалы 200 мс</span></div>
+<div class="line"><span class="lineno">   38</span>}</div>
+<div class="ttc" id="aclassSensorDataGraph_html_a14c3958f64a598833f7734944b1cb4fe"><div class="ttname"><a href="classSensorDataGraph.html#a14c3958f64a598833f7734944b1cb4fe">SensorDataGraph::updateGraph</a></div><div class="ttdeci">void updateGraph()</div><div class="ttdoc">Обновляет видимую область и добавляет новые точки для выбранных сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="SensorDataGraph_8cpp_source.html#l00204">SensorDataGraph.cpp:204</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a4ad4c87a5f98ae37cb44d4cc37b497aa" name="a4ad4c87a5f98ae37cb44d4cc37b497aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ad4c87a5f98ae37cb44d4cc37b497aa">&#9670;&#160;</a></span>addNewData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SensorDataGraph::addNewData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="SensorDataGraph_8cpp_source.html">SensorDataGraph.cpp</a> строка <a class="el" href="SensorDataGraph_8cpp_source.html#l00181">181</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  182</span>{</div>
+<div class="line"><span class="lineno">  183</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;it : dataSize) {</div>
+<div class="line"><span class="lineno">  184</span>        <span class="keyword">auto</span> &amp;data = DataStructure::Instance().engines[it.first.engineNum][it.first.frameName.toStdString()][it.first.sensorName.toStdString()];</div>
+<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">if</span> (data.size() &gt; it.second) {</div>
+<div class="line"><span class="lineno">  186</span>            <span class="keyword">auto</span> &amp;graph = graphMap[it.first.sensorName];</div>
+<div class="line"><span class="lineno">  187</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = it.second; i &lt; data.size(); i++){</div>
+<div class="line"><span class="lineno">  188</span>                <span class="keyword">auto</span> &amp;time = DataStructure::Instance().engines[0][it.first.frameName.toStdString()][<span class="stringliteral">&quot;Time&quot;</span>];</div>
+<div class="line"><span class="lineno">  189</span>                <span class="keyword">auto</span> &amp;data = DataStructure::Instance().engines[0][it.first.frameName.toStdString()][it.first.sensorName.toStdString()];</div>
+<div class="line"><span class="lineno">  190</span> </div>
+<div class="line"><span class="lineno">  191</span>                graph-&gt;setData(QVector&lt;double&gt;(time.begin(), time.end()), QVector&lt;double&gt;(data.begin(), data.end()));</div>
+<div class="line"><span class="lineno">  192</span>            }</div>
+<div class="line"><span class="lineno">  193</span>            it.second = data.size();</div>
+<div class="line"><span class="lineno">  194</span>        }</div>
+<div class="line"><span class="lineno">  195</span>    }</div>
+<div class="line"><span class="lineno">  196</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1531223f54e0a2088f9a7f1502f5075e" name="a1531223f54e0a2088f9a7f1502f5075e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1531223f54e0a2088f9a7f1502f5075e">&#9670;&#160;</a></span>onItemChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SensorDataGraph::onItemChanged </td>
+          <td>(</td>
+          <td class="paramtype">QTreeWidgetItem *&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>column</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="SensorDataGraph_8cpp_source.html">SensorDataGraph.cpp</a> строка <a class="el" href="SensorDataGraph_8cpp_source.html#l00138">138</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  139</span>{</div>
+<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">if</span> (column != 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>    QString sensorName = item-&gt;text(0);</div>
+<div class="line"><span class="lineno">  143</span>    QString groupName = item-&gt;parent()-&gt;text(0);</div>
+<div class="line"><span class="lineno">  144</span> </div>
+<div class="line"><span class="lineno">  145</span>    <a class="code hl_struct" href="structDataFullName.html">DataFullName</a> frame;</div>
+<div class="line"><span class="lineno">  146</span>    frame.engineNum = 0;</div>
+<div class="line"><span class="lineno">  147</span>    frame.frameName = groupName;</div>
+<div class="line"><span class="lineno">  148</span>    frame.sensorName = sensorName;</div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>    <span class="keywordtype">bool</span> isChecked = (item-&gt;checkState(0) == Qt::Checked);</div>
+<div class="line"><span class="lineno">  151</span> </div>
+<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">if</span> (isChecked) {</div>
+<div class="line"><span class="lineno">  153</span>        QCPGraph *graph = m_plot-&gt;addGraph();</div>
+<div class="line"><span class="lineno">  154</span>        graph-&gt;setLineStyle(QCPGraph::lsLine);</div>
+<div class="line"><span class="lineno">  155</span>        graph-&gt;setAdaptiveSampling(<span class="keyword">true</span>); <span class="comment">// Включите адаптивную выборку</span></div>
+<div class="line"><span class="lineno">  156</span>        graph-&gt;setName(sensorName);</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>        QString parentText = item-&gt;parent()-&gt;text(0);</div>
+<div class="line"><span class="lineno">  159</span>        graphMap[sensorName] = graph;</div>
+<div class="line"><span class="lineno">  160</span> </div>
+<div class="line"><span class="lineno">  161</span>        <span class="comment">// Настраиваем внешний вид</span></div>
+<div class="line"><span class="lineno">  162</span>        QColor color(getColor());</div>
+<div class="line"><span class="lineno">  163</span>        graph-&gt;setPen(QPen(color, 2));</div>
+<div class="line"><span class="lineno">  164</span>        graph-&gt;setName(sensorName);</div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span>        <span class="keyword">auto</span> &amp;time = DataStructure::Instance().engines[0][groupName.toStdString()][<span class="stringliteral">&quot;Time&quot;</span>];</div>
+<div class="line"><span class="lineno">  167</span>        <span class="keyword">auto</span> &amp;data = DataStructure::Instance().engines[0][groupName.toStdString()][sensorName.toStdString()];</div>
+<div class="line"><span class="lineno">  168</span> </div>
+<div class="line"><span class="lineno">  169</span>        graph-&gt;setData(QVector&lt;double&gt;(time.begin(), time.end()), QVector&lt;double&gt;(data.begin(), data.end()));</div>
+<div class="line"><span class="lineno">  170</span> </div>
+<div class="line"><span class="lineno">  171</span>        dataSize[frame] = DataStructure::Instance().engines[0][groupName.toStdString()][<span class="stringliteral">&quot;Time&quot;</span>].size();</div>
+<div class="line"><span class="lineno">  172</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  173</span>        <span class="keywordflow">if</span> (graphMap.contains(sensorName)) {</div>
+<div class="line"><span class="lineno">  174</span>            dataSize.erase(frame);</div>
+<div class="line"><span class="lineno">  175</span>            m_plot-&gt;removeGraph(graphMap[sensorName]);</div>
+<div class="line"><span class="lineno">  176</span>            graphMap.remove(sensorName);</div>
+<div class="line"><span class="lineno">  177</span>        }</div>
+<div class="line"><span class="lineno">  178</span>    }</div>
+<div class="line"><span class="lineno">  179</span>}</div>
+<div class="ttc" id="astructDataFullName_html"><div class="ttname"><a href="structDataFullName.html">DataFullName</a></div><div class="ttdoc">Полный ключ временного ряда: двигатель, фрейм, сенсор.</div><div class="ttdef"><b>Definition</b> <a href="SensorDataGraph_8h_source.html#l00024">SensorDataGraph.h:24</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a14c3958f64a598833f7734944b1cb4fe" name="a14c3958f64a598833f7734944b1cb4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14c3958f64a598833f7734944b1cb4fe">&#9670;&#160;</a></span>updateGraph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SensorDataGraph::updateGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Обновляет видимую область и добавляет новые точки для выбранных сенсоров. </p>
+<p>Двигает окно по времени, удаляет старые точки (например, хранит ~N последних секунд), масштабирует ось Y по текущим данным и инициирует перерисовку. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="SensorDataGraph_8cpp_source.html">SensorDataGraph.cpp</a> строка <a class="el" href="SensorDataGraph_8cpp_source.html#l00204">204</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  205</span>{</div>
+<div class="line"><span class="lineno">  206</span>    <span class="keywordtype">int</span> time = 20;</div>
+<div class="line"><span class="lineno">  207</span>    <span class="keywordtype">double</span> now = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.;</div>
+<div class="line"><span class="lineno">  208</span>    m_plot-&gt;xAxis-&gt;setRange(now - time, now);</div>
+<div class="line"><span class="lineno">  209</span> </div>
+<div class="line"><span class="lineno">  210</span>    <span class="comment">// Ограничиваем количество точек для каждого графика</span></div>
+<div class="line"><span class="lineno">  211</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = graphMap.begin(); it != graphMap.end(); ++it) {</div>
+<div class="line"><span class="lineno">  212</span>        QCPGraph* graph = it.value();</div>
+<div class="line"><span class="lineno">  213</span>        <span class="keywordflow">if</span> (graph-&gt;data()-&gt;size() &gt; 5000) { <span class="comment">// Максимум 5000 точек на график</span></div>
+<div class="line"><span class="lineno">  214</span>            graph-&gt;data()-&gt;removeBefore(now - time); <span class="comment">// Удаляем старые данные</span></div>
+<div class="line"><span class="lineno">  215</span>        }</div>
+<div class="line"><span class="lineno">  216</span>    }</div>
+<div class="line"><span class="lineno">  217</span>    <span class="comment">// Масштабируем только ось Y по данным</span></div>
+<div class="line"><span class="lineno">  218</span>    m_plot-&gt;yAxis-&gt;rescale();</div>
+<div class="line"><span class="lineno">  219</span>    m_plot-&gt;replot(QCustomPlot::rpQueuedReplot);</div>
+<div class="line"><span class="lineno">  220</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>/home/kel/MyJob/SensorObserver/Widgets/SensorDataGraph/<a class="el" href="SensorDataGraph_8h_source.html">SensorDataGraph.h</a></li>
+<li>/home/kel/MyJob/SensorObserver/Widgets/SensorDataGraph/<a class="el" href="SensorDataGraph_8cpp_source.html">SensorDataGraph.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classSensorDataGraph.html">SensorDataGraph</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

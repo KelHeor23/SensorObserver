@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Исходный файл /home/kel/MyJob/SensorObserver/Data/Frames/Containers/EngineSensors/EngineSensors.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('EngineSensors_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">EngineSensors.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="EngineSensors_8cpp.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment"> * \file EngineSensors.cpp</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment"> * \brief Реализация парсера фрейма датчиков двигателя.</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment"> * \details Извлекает runoutAngle/runoutAmplitude, обновляет поля и публикует.</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="EngineSensors_8h.html" title="Интерфейс фрейма датчиков двигателя.">&quot;EngineSensors.h&quot;</a></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Tools/SaveToCSV.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Data/DataStructure.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespaceEngineSensors.html">   12</a></span><span class="keyword">namespace</span> <a class="code hl_namespace" href="namespaceEngineSensors.html">EngineSensors</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/** \brief Инициализация: имя фрейма, порядок полей и создание записей в fields. */</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classEngineSensors_1_1EngineSensors.html#adc8800afa00a6e68d9a21f172432779a">   15</a></span><a class="code hl_class" href="classEngineSensors_1_1EngineSensors.html">EngineSensors</a>::<a class="code hl_function" href="classEngineSensors_1_1EngineSensors.html#adc8800afa00a6e68d9a21f172432779a">EngineSensors</a>(){</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_variable" href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">nameFrame</a> = <span class="stringliteral">&quot;Датчики двигателя&quot;</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    orderedNames = sensorNames;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;it : orderedNames){</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        fields[it] = std::make_shared&lt;SensorData&gt;();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        fields[it]-&gt;val = 0;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   25</span><span class="comment"> * \brief Разбор входного кадра и публикация значений.</span></div>
+<div class="line"><span class="lineno">   26</span><span class="comment"> * \details Вызывает соответствующий \c EscStatusInfo/OtherSensorsData/EngineSensorsData::unpack,</span></div>
+<div class="line"><span class="lineno">   27</span><span class="comment">* заполняет поля, пишет строку в CSV и прокидывает кадр в DataStructure.*/</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classEngineSensors_1_1EngineSensors.html#ac36bf18f10be0f57600caf19af803353">   29</a></span><span class="keywordtype">void</span> <a class="code hl_class" href="classEngineSensors_1_1EngineSensors.html">EngineSensors</a>::<a class="code hl_function" href="classEngineSensors_1_1EngineSensors.html#ac36bf18f10be0f57600caf19af803353">setData</a>(std::string_view data, int16_t node_id)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (data.size() &lt; <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structEngineSensorsData.html">EngineSensorsData</a>)) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Insufficient data size&quot;</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">auto</span> receivedData = std::make_shared&lt;<a class="code hl_struct" href="structEngineSensorsData.html">EngineSensorsData</a>&gt;();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    memcpy(receivedData.get(), data.data(), <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structEngineSensorsData.html">EngineSensorsData</a>));</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">/** \note Поля: «Угол биения» ← runoutAngle; «Амплитуда биения» ← runoutAmplitude. */</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    fields[<span class="stringliteral">&quot;Угол биения&quot;</span>]-&gt;val      = <span class="keyword">static_cast</span>&lt;<span class="keywordtype">int</span>&gt;(receivedData-&gt;runoutAngle);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    fields[<span class="stringliteral">&quot;Амплитуда биения&quot;</span>]-&gt;val = <span class="keyword">static_cast</span>&lt;<span class="keywordtype">int</span>&gt;(receivedData-&gt;runoutAmplitude);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a>::Instance()<a class="code hl_function" href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">.</a><a class="code hl_function" href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">addEngineData</a><a class="code hl_function" href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">(</a>receivedData<a class="code hl_function" href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">)</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classDataStructure.html">DataStructure</a>::Instance().addData(node_id, <a class="code hl_variable" href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">nameFrame</a>, <a class="code hl_enumvalue" href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc">ENGINE</a>, receivedData);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc">ENGINE</a></div><div class="ttdeci">@ ENGINE</div><div class="ttdoc">Фрейм датчиков питания (средние фазные напряжения и пр.).</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00025">Frames.h:24</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a6ba3d70b9f90b68ccc6edef133dd624f"><div class="ttname"><a href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">BaseProtocol::nameFrame</a></div><div class="ttdeci">FrameName nameFrame</div><div class="ttdoc">Имя фрейма для UI/логов.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00035">Base.h:35</a></div></div>
+<div class="ttc" id="aclassDataStructure_html"><div class="ttname"><a href="classDataStructure.html">DataStructure</a></div><div class="ttdoc">Централизованное хранилище временных рядов телеметрии.</div><div class="ttdef"><b>Definition</b> <a href="DataStructure_8h_source.html#l00028">DataStructure.h:29</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html">EngineSensors::EngineSensors</a></div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8h_source.html#l00025">EngineSensors.h:26</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html_ac36bf18f10be0f57600caf19af803353"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html#ac36bf18f10be0f57600caf19af803353">EngineSensors::EngineSensors::setData</a></div><div class="ttdeci">void setData(std::string_view data, int16_t node_id) override</div><div class="ttdoc">Разбирает входные байты и обновляет поля/хранилище.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00029">EngineSensors.cpp:29</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html_adc8800afa00a6e68d9a21f172432779a"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html#adc8800afa00a6e68d9a21f172432779a">EngineSensors::EngineSensors::EngineSensors</a></div><div class="ttdeci">EngineSensors()</div><div class="ttdoc">Конструктор: задаёт имя фрейма и инициализирует поля значением 0.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00015">EngineSensors.cpp:15</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html"><div class="ttname"><a href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a></div><div class="ttdoc">Потокобезопасная запись телеметрии в CSV с объединением по устройствам.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8h_source.html#l00040">SaveToCSV.h:40</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_a51c5da8597c240de774a196932e4b633"><div class="ttname"><a href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">UnifiedCsvWriter::addEngineData</a></div><div class="ttdeci">void addEngineData(std::shared_ptr&lt; EngineSensorsData &gt; data)</div><div class="ttdoc">Добавляет данные датчиков двигателя.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00059">SaveToCSV.cpp:59</a></div></div>
+<div class="ttc" id="anamespaceEngineSensors_html"><div class="ttname"><a href="namespaceEngineSensors.html">EngineSensors</a></div><div class="ttdoc">Контейнеры датчиков двигателя.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00012">EngineSensors.cpp:12</a></div></div>
+<div class="ttc" id="astructEngineSensorsData_html"><div class="ttname"><a href="structEngineSensorsData.html">EngineSensorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00047">Frames.h:47</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_e3d743d0ec9b4013b28b5d69101bc7fb.html">Data</a></li><li class="navelem"><a class="el" href="dir_635013340570d8c2e9d8409dba8d7105.html">Frames</a></li><li class="navelem"><a class="el" href="dir_2e8b8d595152932d8fdb2606b458ffa1.html">Containers</a></li><li class="navelem"><a class="el" href="dir_b023beedd61f0962e25dd785dd729977.html">EngineSensors</a></li><li class="navelem"><a class="el" href="EngineSensors_8cpp.html">EngineSensors.cpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

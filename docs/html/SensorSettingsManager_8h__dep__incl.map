@@ -1,0 +1,9 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/SensorSettingsManager.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/SensorSettingsManager.h">
+<area shape="rect" id="Node000001" title="Сохранение/загрузка настроек сенсоров." alt="" coords="307,5,591,60"/>
+<area shape="rect" id="Node000002" href="$SensorSettingsManager_8cpp.html" title="Реализация менеджера настроек сенсоров (QSettings)." alt="" coords="5,108,289,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,67,227,110,225,105,357,62"/>
+<area shape="rect" id="Node000003" href="$DetailingLimitsWidget_8cpp.html" title="Реализация детальной настройки лимитов." alt="" coords="313,108,584,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="451,74,451,108,446,108,446,74"/>
+<area shape="rect" id="Node000004" href="$ListOfLimitsWidget_8cpp.html" title="Реализация списка лимитов." alt="" coords="609,108,859,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="536,62,661,105,659,110,535,67"/>
+</map>

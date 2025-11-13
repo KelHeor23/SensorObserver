@@ -1,3 +1,9 @@
+/**
+ * \file ColorProgressBar.cpp
+ * \brief Реализация отрисовки ColorProgressBar.
+ * \details Рисует фон и заливку с закруглёнными краями, отображает значение по центру.
+ */
+
 #include "ColorProgressBar.h"
 
 ColorProgressBar::ColorProgressBar(QWidget *parent)
@@ -22,6 +28,7 @@ void ColorProgressBar::setColor(const QColor &color) {
     m_color = color;
     update();
 }
+/** \brief Отрисовывает фон, заливку по прогрессу и текстовое значение. */
 
 void ColorProgressBar::paintEvent(QPaintEvent *) {
     QPainter painter(this);
@@ -43,3 +50,4 @@ void ColorProgressBar::paintEvent(QPaintEvent *) {
     painter.setPen(Qt::black);
     painter.drawText(QRect(0, 0, width(), height()), Qt::AlignCenter, QString::number(m_value, 'f', 1));
 }
+

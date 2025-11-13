@@ -1,7 +1,17 @@
+/**
+ * \file SensorsTableWidget.cpp
+ * \brief Реализация таблицы датчиков и построителя панелей.
+ * \details Создаёт группы, добавляет метки сенсоров, связывает лимиты, строит секцию «Датчики двигателя».
+ */
+
 #include "SensorsTableWidget.h"
 #include "Data/Frames/Frames.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <iostream>
 #include <ostream>
+#endif
+/** \brief Собирает интерфейс: создаёт группы фреймов и наполняет их сенсорами. */
 
 SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsManager_t, QWidget *parent)
     : QWidget{parent}
@@ -29,6 +39,7 @@ SensorsTableWidget::SensorsTableWidget(std::shared_ptr<SensorsFrames> sensorsMan
     // Формирование визуализации датчиков двигателей
     engineSensorsVisual();
 }
+/** \brief Строит визуализацию секции «Датчики двигателя». */
 
 void SensorsTableWidget::engineSensorsVisual()
 {

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Исходный файл /home/kel/MyJob/SensorObserver/Data/Frames/Containers/Base.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('Base_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Base.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="Base_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment"> * \file Base.h</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment"> * \brief Базовый интерфейс протокола фрейма.</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment"> * \details Определяет общие поля (имя фрейма, упорядоченные имена сенсоров, словарь полей) и виртуальный метод setData().</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">BASE_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">BASE_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные.">&quot;Sensors.h&quot;</a></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Data/CommonTypes.h&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   14</span><span class="comment"> * \class BaseProtocol</span></div>
+<div class="line"><span class="lineno">   15</span><span class="comment"> * \brief Базовый интерфейс контейнера фрейма сенсоров.</span></div>
+<div class="line"><span class="lineno">   16</span><span class="comment"> * \details Содержит имя фрейма, упорядоченный список имён сенсоров и словарь полей.</span></div>
+<div class="line"><span class="lineno">   17</span><span class="comment"> * Реализации должны переопределить setData() для разбора входного пакета.</span></div>
+<div class="line"><span class="lineno">   18</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classBaseProtocol.html">   20</a></span><span class="keyword">class</span> <a class="code hl_class" href="classBaseProtocol.html">BaseProtocol</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">/** Возвращает константную ссылку на словарь полей (SensorName → SensorData). */</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#a6114eafa2a3ef34b9714baa8fd94df55">   24</a></span>    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classBaseProtocol.html#a6114eafa2a3ef34b9714baa8fd94df55">getFields</a>() <span class="keyword">const</span>   { <span class="keywordflow">return</span> fields; }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">/** Возвращает ссылку на словарь полей (SensorName → SensorData) для модификации. */</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#a887f090be79325eb4f078825ab2a7a4c">   26</a></span>    <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classBaseProtocol.html#a887f090be79325eb4f078825ab2a7a4c">getFields</a>()               { <span class="keywordflow">return</span> fields; }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">/** \brief Разобрать сырые байты сообщения и обновить поля.</span></div>
+<div class="line"><span class="lineno">   29</span><span class="comment"> *  \param[in] data Последовательность байтов.</span></div>
+<div class="line"><span class="lineno">   30</span><span class="comment"> *  \param[in] node_id Идентификатор источника (двигатель/узел).</span></div>
+<div class="line"><span class="lineno">   31</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#acb250f6ef9a2d7fda7f79b9d78d7d270">   32</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classBaseProtocol.html#acb250f6ef9a2d7fda7f79b9d78d7d270">setData</a>(std::string_view data, int16_t node_id) = 0;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">/** Имя фрейма для UI/логов. */</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">   35</a></span>    FrameName <a class="code hl_variable" href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">nameFrame</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">/** Упорядоченный список имён сенсоров (определяет порядок в UI/CSV). */</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">   37</a></span>    <a class="code hl_variable" href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">std</a>::<a class="code hl_variable" href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">vector</a>&lt;<a class="code hl_variable" href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">SensorName</a>&gt; <a class="code hl_variable" href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">orderedNames</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">/** Словарь полей фрейма: имя сенсора → данные и настройки. */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">   39</a></span>    <a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">std</a>::<a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">unordered_map</a>&lt;<a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">SensorName</a>, <a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">std</a>::<a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">shared_ptr</a>&lt;<a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">SensorData</a>&gt;&gt; <a class="code hl_variable" href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">fields</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    FrameName <a class="code hl_function" href="classBaseProtocol.html#a347aded8abb2913af9985f292628e63b">getNameFrame</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/** \return Имя фрейма, ассоциированное с контейнером. */</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classBaseProtocol.html#a347aded8abb2913af9985f292628e63b">   45</a></span><span class="keyword">inline</span> FrameName <a class="code hl_class" href="classBaseProtocol.html">BaseProtocol</a>::<a class="code hl_function" href="classBaseProtocol.html#a347aded8abb2913af9985f292628e63b">getNameFrame</a>() <span class="keyword">const</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">nameFrame</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">// BASE_H</span></div>
+<div class="ttc" id="aFrames_8h_html_a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc"><div class="ttname"><a href="Frames_8h.html#a15adfd049ddfba39d5286280f0bc13fda92c3c18ecdc80cdb068c54b0a44009dc">ENGINE</a></div><div class="ttdeci">@ ENGINE</div><div class="ttdoc">Фрейм датчиков питания (средние фазные напряжения и пр.).</div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00025">Frames.h:24</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html"><div class="ttname"><a href="classBaseProtocol.html">BaseProtocol</a></div><div class="ttdoc">Базовый интерфейс контейнера фрейма сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00020">Base.h:20</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a347aded8abb2913af9985f292628e63b"><div class="ttname"><a href="classBaseProtocol.html#a347aded8abb2913af9985f292628e63b">BaseProtocol::getNameFrame</a></div><div class="ttdeci">FrameName getNameFrame() const</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00045">Base.h:45</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a41ef58ef1ded53d669df6f2ec0367fab"><div class="ttname"><a href="classBaseProtocol.html#a41ef58ef1ded53d669df6f2ec0367fab">BaseProtocol::fields</a></div><div class="ttdeci">std::unordered_map&lt; SensorName, std::shared_ptr&lt; SensorData &gt; &gt; fields</div><div class="ttdoc">Словарь полей фрейма: имя сенсора → данные и настройки.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00039">Base.h:39</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a6114eafa2a3ef34b9714baa8fd94df55"><div class="ttname"><a href="classBaseProtocol.html#a6114eafa2a3ef34b9714baa8fd94df55">BaseProtocol::getFields</a></div><div class="ttdeci">const auto &amp; getFields() const</div><div class="ttdoc">Возвращает константную ссылку на словарь полей (SensorName → SensorData).</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00024">Base.h:24</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a65980788152b6dd1f68a7b07cea4e24f"><div class="ttname"><a href="classBaseProtocol.html#a65980788152b6dd1f68a7b07cea4e24f">BaseProtocol::orderedNames</a></div><div class="ttdeci">std::vector&lt; SensorName &gt; orderedNames</div><div class="ttdoc">Упорядоченный список имён сенсоров (определяет порядок в UI/CSV).</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00037">Base.h:37</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a6ba3d70b9f90b68ccc6edef133dd624f"><div class="ttname"><a href="classBaseProtocol.html#a6ba3d70b9f90b68ccc6edef133dd624f">BaseProtocol::nameFrame</a></div><div class="ttdeci">FrameName nameFrame</div><div class="ttdoc">Имя фрейма для UI/логов.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00035">Base.h:35</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_a887f090be79325eb4f078825ab2a7a4c"><div class="ttname"><a href="classBaseProtocol.html#a887f090be79325eb4f078825ab2a7a4c">BaseProtocol::getFields</a></div><div class="ttdeci">auto &amp; getFields()</div><div class="ttdoc">Возвращает ссылку на словарь полей (SensorName → SensorData) для модификации.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00026">Base.h:26</a></div></div>
+<div class="ttc" id="aclassBaseProtocol_html_acb250f6ef9a2d7fda7f79b9d78d7d270"><div class="ttname"><a href="classBaseProtocol.html#acb250f6ef9a2d7fda7f79b9d78d7d270">BaseProtocol::setData</a></div><div class="ttdeci">virtual void setData(std::string_view data, int16_t node_id)=0</div><div class="ttdoc">Разобрать сырые байты сообщения и обновить поля.</div></div>
+<div class="ttc" id="aclassDataStructure_html"><div class="ttname"><a href="classDataStructure.html">DataStructure</a></div><div class="ttdoc">Централизованное хранилище временных рядов телеметрии.</div><div class="ttdef"><b>Definition</b> <a href="DataStructure_8h_source.html#l00028">DataStructure.h:29</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html">EngineSensors::EngineSensors</a></div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8h_source.html#l00025">EngineSensors.h:26</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html_ac36bf18f10be0f57600caf19af803353"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html#ac36bf18f10be0f57600caf19af803353">EngineSensors::EngineSensors::setData</a></div><div class="ttdeci">void setData(std::string_view data, int16_t node_id) override</div><div class="ttdoc">Разбирает входные байты и обновляет поля/хранилище.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00029">EngineSensors.cpp:29</a></div></div>
+<div class="ttc" id="aclassEngineSensors_1_1EngineSensors_html_adc8800afa00a6e68d9a21f172432779a"><div class="ttname"><a href="classEngineSensors_1_1EngineSensors.html#adc8800afa00a6e68d9a21f172432779a">EngineSensors::EngineSensors::EngineSensors</a></div><div class="ttdeci">EngineSensors()</div><div class="ttdoc">Конструктор: задаёт имя фрейма и инициализирует поля значением 0.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00015">EngineSensors.cpp:15</a></div></div>
+<div class="ttc" id="aclassEngineSensors_html_afa0724c86e329a2eedcab1f6c9057c79"><div class="ttname"><a href="classEngineSensors.html#afa0724c86e329a2eedcab1f6c9057c79">EngineSensors::sensorNames</a></div><div class="ttdeci">static std::vector&lt; SensorName &gt; sensorNames</div><div class="ttdoc">Упорядоченный список имён сенсоров для отображения в UI/CSV.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8h_source.html#l00019">EngineSensors.h:19</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html"><div class="ttname"><a href="classUnifiedCsvWriter.html">UnifiedCsvWriter</a></div><div class="ttdoc">Потокобезопасная запись телеметрии в CSV с объединением по устройствам.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8h_source.html#l00040">SaveToCSV.h:40</a></div></div>
+<div class="ttc" id="aclassUnifiedCsvWriter_html_a51c5da8597c240de774a196932e4b633"><div class="ttname"><a href="classUnifiedCsvWriter.html#a51c5da8597c240de774a196932e4b633">UnifiedCsvWriter::addEngineData</a></div><div class="ttdeci">void addEngineData(std::shared_ptr&lt; EngineSensorsData &gt; data)</div><div class="ttdoc">Добавляет данные датчиков двигателя.</div><div class="ttdef"><b>Definition</b> <a href="SaveToCSV_8cpp_source.html#l00059">SaveToCSV.cpp:59</a></div></div>
+<div class="ttc" id="anamespaceEngineSensors_html"><div class="ttname"><a href="namespaceEngineSensors.html">EngineSensors</a></div><div class="ttdoc">Контейнеры датчиков двигателя.</div><div class="ttdef"><b>Definition</b> <a href="EngineSensors_8cpp_source.html#l00012">EngineSensors.cpp:12</a></div></div>
+<div class="ttc" id="astructEngineSensorsData_html"><div class="ttname"><a href="structEngineSensorsData.html">EngineSensorsData</a></div><div class="ttdef"><b>Definition</b> <a href="Frames_8h_source.html#l00047">Frames.h:47</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_e3d743d0ec9b4013b28b5d69101bc7fb.html">Data</a></li><li class="navelem"><a class="el" href="dir_635013340570d8c2e9d8409dba8d7105.html">Frames</a></li><li class="navelem"><a class="el" href="dir_2e8b8d595152932d8fdb2606b458ffa1.html">Containers</a></li><li class="navelem"><a class="el" href="Base_8h.html">Base.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$classBaseProtocol.html" title="Базовый интерфейс контейнера фрейма сенсоров." alt="" coords="5,129,112,155"/>
+<area shape="rect" id="Node000001" href="$classEngineSensors_1_1EngineSensors.html" title=" " alt="" coords="160,5,380,31"/>
+<area shape="poly" id="edge7_Node000000_Node000001" title=" " alt="" coords="75,117,110,77,133,57,159,40,186,28,188,33,161,44,137,61,114,80,79,120"/>
+<area shape="rect" id="Node000002" href="$classEscSensors_1_1EscStatus1.html" title="Контейнер и парсер фрейма EscStatus1." alt="" coords="183,55,357,80"/>
+<area shape="poly" id="edge8_Node000000_Node000002" title=" " alt="" coords="92,120,159,89,198,77,200,83,161,94,94,125"/>
+<area shape="rect" id="Node000003" href="$classEscSensors_1_1EscStatus2.html" title="Контейнер и парсер фрейма EscStatus2." alt="" coords="183,104,357,129"/>
+<area shape="poly" id="edge9_Node000000_Node000003" title=" " alt="" coords="125,131,182,124,183,130,126,137"/>
+<area shape="rect" id="Node000004" href="$classEscSensors_1_1EscStatus3.html" title="Контейнер и парсер фрейма EscStatus3." alt="" coords="183,153,357,179"/>
+<area shape="poly" id="edge10_Node000000_Node000004" title=" " alt="" coords="126,147,183,153,182,159,125,152"/>
+<area shape="rect" id="Node000005" href="$classOtherSensors_1_1OtherSensors.html" title=" " alt="" coords="168,203,372,228"/>
+<area shape="poly" id="edge11_Node000000_Node000005" title=" " alt="" coords="96,159,161,187,204,200,203,205,159,193,94,164"/>
+<area shape="rect" id="Node000006" href="$classVoltageRegulators_1_1VoltageRegulators.html" title=" " alt="" coords="195,253,345,293"/>
+<area shape="poly" id="edge12_Node000000_Node000006" title=" " alt="" coords="80,163,115,201,161,237,196,253,194,258,159,242,112,205,76,167"/>
+</map>

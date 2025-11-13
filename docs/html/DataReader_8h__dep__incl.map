@@ -1,0 +1,11 @@
+<map id="/home/kel/MyJob/SensorObserver/Exchange/DataReader.h" name="/home/kel/MyJob/SensorObserver/Exchange/DataReader.h">
+<area shape="rect" id="Node000001" title="Чтение и разбор входящих сообщений телеметрии." alt="" coords="136,5,373,45"/>
+<area shape="rect" id="Node000002" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="5,93,243,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,55,154,95,151,91,213,51"/>
+<area shape="rect" id="Node000003" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="267,93,504,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,51,358,91,355,95,293,55"/>
+<area shape="rect" id="Node000004" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="136,181,373,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="347,143,285,183,282,179,344,139"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="397,181,635,221"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="427,139,489,179,486,183,424,143"/>
+</map>

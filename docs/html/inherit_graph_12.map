@@ -1,0 +1,23 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,228,84,253"/>
+<area shape="rect" id="Node000001" href="$classCollapsibleGroupBox.html" title="Группа с заголовком, которую можно сворачивать/разворачивать." alt="" coords="136,5,295,31"/>
+<area shape="poly" id="edge19_Node000000_Node000001" title=" " alt="" coords="48,213,56,175,72,128,96,81,130,40,148,29,151,33,134,44,101,84,77,130,62,176,53,215"/>
+<area shape="rect" id="Node000002" href="$classColorProgressBar.html" title="Виджет прогресс‑бара с произвольным цветом и диапазоном." alt="" coords="148,55,283,80"/>
+<area shape="poly" id="edge20_Node000000_Node000002" title=" " alt="" coords="52,214,80,151,102,118,130,89,150,78,153,82,134,93,106,121,84,154,56,216"/>
+<area shape="rect" id="Node000003" href="$classConnSettings.html" title="Диалог настроек подключения к бортовому модулю." alt="" coords="161,104,269,129"/>
+<area shape="poly" id="edge21_Node000000_Node000003" title=" " alt="" coords="59,215,89,176,108,156,131,138,160,125,162,130,133,143,112,160,93,179,63,218"/>
+<area shape="rect" id="Node000004" href="$classDetailingLimitsWidget.html" title="Детальная настройка порогов: точки (value+color), добавление/удаление." alt="" coords="132,153,299,179"/>
+<area shape="poly" id="edge22_Node000000_Node000004" title=" " alt="" coords="75,218,131,188,162,176,164,181,133,192,77,223"/>
+<area shape="rect" id="Node000005" href="$classDisplayingSensors.html" title="Панель отображения значений сенсоров одного фрейма." alt="" coords="144,203,287,228"/>
+<area shape="poly" id="edge23_Node000000_Node000005" title=" " alt="" coords="97,230,144,223,144,229,98,236"/>
+<area shape="rect" id="Node000006" href="$classListOfLimitsWidget.html" title="Краткий список порогов/лимитов для сенсора." alt="" coords="142,252,289,277"/>
+<area shape="poly" id="edge24_Node000000_Node000006" title=" " alt="" coords="98,245,142,252,142,257,97,251"/>
+<area shape="rect" id="Node000007" href="$classMotorControl.html" title="Панель ручного управления PWM отдельных моторов." alt="" coords="162,301,269,327"/>
+<area shape="poly" id="edge25_Node000000_Node000007" title=" " alt="" coords="79,258,133,286,168,299,166,304,131,291,76,263"/>
+<area shape="rect" id="Node000008" href="$classSensorDataGraph.html" title="Виджет построения графиков значений сенсоров." alt="" coords="147,351,283,376"/>
+<area shape="poly" id="edge26_Node000000_Node000008" title=" " alt="" coords="63,263,93,300,133,336,159,348,157,353,131,340,89,304,59,266"/>
+<area shape="rect" id="Node000009" href="$classSensorsTableWidget.html" title="Контейнер визуализации сенсоров и управляющих панелей." alt="" coords="139,400,292,425"/>
+<area shape="poly" id="edge27_Node000000_Node000009" title=" " alt="" coords="57,265,85,326,107,358,134,385,155,398,153,402,130,389,102,361,80,328,52,267"/>
+<area shape="rect" id="Node000010" href="$classSmoothMotorControl.html" title="Плавное управление моторами (min→max за заданное время)." alt="" coords="137,449,294,475"/>
+<area shape="poly" id="edge28_Node000000_Node000010" title=" " alt="" coords="53,267,62,304,78,350,101,395,134,435,153,447,150,451,130,439,97,398,73,352,57,306,48,268"/>
+</map>

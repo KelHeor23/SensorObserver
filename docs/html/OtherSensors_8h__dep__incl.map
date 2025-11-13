@@ -1,0 +1,7 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/OtherSensors/OtherSensors.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/OtherSensors/OtherSensors.h">
+<area shape="rect" id="Node000001" title="Интерфейс фрейма прочих датчиков." alt="" coords="164,5,439,60"/>
+<area shape="rect" id="Node000002" href="$OtherSensors_8cpp.html" title="Реализация парсера фрейма прочих датчиков." alt="" coords="5,108,280,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,69,186,110,183,106,247,65"/>
+<area shape="rect" id="Node000003" href="$SensorsFrames_8cpp.html" title="Реализация реестра фреймов сенсоров." alt="" coords="305,115,618,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="356,65,432,113,430,117,353,69"/>
+</map>

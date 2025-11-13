@@ -1,0 +1,22 @@
+<map id="/home/kel/MyJob/SensorObserver/Exchange/Client.h" name="/home/kel/MyJob/SensorObserver/Exchange/Client.h">
+<area shape="rect" id="Node000001" title="Интерфейс TCP‑клиента для связи с дроном." alt="" coords="397,5,635,45"/>
+<area shape="rect" id="Node000002" href="$Client_8cpp.html" title="Реализация TCP‑клиента: подключение, ретраи, отправка/приём." alt="" coords="5,93,243,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="417,51,210,96,209,91,416,46"/>
+<area shape="rect" id="Node000003" href="$DataReader_8cpp.html" title="Реализация парсинга входящих сообщений телеметрии." alt="" coords="267,93,504,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="477,55,416,95,413,91,474,51"/>
+<area shape="rect" id="Node000004" href="$MotorControl_8h.html" title="Ручное управление PWM моторов по отдельности." alt="" coords="528,93,765,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="558,51,619,91,616,95,555,55"/>
+<area shape="rect" id="Node000009" href="$SmoothMotorControl_8h.html" title="Виджет плавного управления моторами." alt="" coords="789,93,1059,133"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="620,46,835,91,834,96,618,51"/>
+<area shape="rect" id="Node000005" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="659,181,896,221"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="688,139,750,179,747,183,685,143"/>
+<area shape="rect" id="Node000008" href="$MotorControl_8cpp.html" title="Реализация ручного управления моторами." alt="" coords="397,181,635,221"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="608,143,546,183,543,179,605,139"/>
+<area shape="rect" id="Node000006" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="528,269,765,309"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="739,231,677,271,674,267,736,227"/>
+<area shape="rect" id="Node000007" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="789,269,1027,309"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="819,227,881,267,878,271,816,231"/>
+<area shape="poly" id="edge9_Node000009_Node000005" title=" " alt="" coords="881,143,811,184,808,179,878,138"/>
+<area shape="rect" id="Node000010" href="$SmoothMotorControl_8cpp.html" title="Реализация плавного управления моторами." alt="" coords="920,181,1205,221"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="967,138,1034,179,1031,184,964,143"/>
+</map>

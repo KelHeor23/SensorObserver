@@ -1,0 +1,9 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/EscSensors/EscStatus3.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/EscSensors/EscStatus3.h">
+<area shape="rect" id="Node000001" title="Интерфейс фрейма ESC: температуры и ошибки." alt="" coords="5,5,265,60"/>
+<area shape="rect" id="Node000002" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="46,108,225,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,60,138,94,133,94,133,60"/>
+<area shape="rect" id="Node000003" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="18,196,103,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="119,150,83,188,79,184,115,146"/>
+<area shape="rect" id="Node000004" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="127,196,293,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="155,146,191,184,187,188,151,150"/>
+</map>

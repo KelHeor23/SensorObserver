@@ -1,8 +1,16 @@
+/**
+ * \file MainWindow.h
+ * \brief Главное окно приложения телеметрии.
+ * \details Создаёт/связывает менеджер фреймов, таблицу сенсоров, графики, виджеты управления и подключение к дрону.
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QtWidgets/QMainWindow>
 #include <QHBoxLayout>
+#endif
 
 #include "Data/Frames/Containers/SensorsFrames.h"
 #include "Exchange/DataReader.h"
@@ -12,6 +20,11 @@
 #include "Other/MotorControl.h"
 #include "Other/SmoothMotorControl.h"
 #include "Widgets/SensorDataGraph/SensorDataGraph.h"
+
+/**\class MainWindow
+ * \brief Главное окно интерфейса оператора.
+ * \details Создаёт подключение, таблицы сенсоров, графики и панели управления двигателями.
+ */
 
 class MainWindow : public QMainWindow
 {
@@ -38,7 +51,7 @@ private:
     DataReader          *dataReader;
     ListOfLimitsWidget  *listOfLimitsWdgt;
     SensorDataGraph     *sensorDataGraphWdgt;
-    QLabel              *ipConnectionLbl;    
+    QLabel              *ipConnectionLbl;
 };
 
 #endif // MAINWINDOW_H

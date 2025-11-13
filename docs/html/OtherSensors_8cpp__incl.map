@@ -1,0 +1,21 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/OtherSensors/OtherSensors.cpp" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/OtherSensors/OtherSensors.cpp">
+<area shape="rect" id="Node000001" title="Реализация парсера фрейма прочих датчиков." alt="" coords="191,5,466,60"/>
+<area shape="rect" id="Node000002" href="$OtherSensors_8h.html" title="Интерфейс фрейма прочих датчиков." alt="" coords="112,108,233,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="282,62,207,104,204,99,280,58"/>
+<area shape="rect" id="Node000007" href="$SaveToCSV_8h.html" title="Единый потокобезопасный писатель CSV для телеметрии." alt="" coords="258,108,399,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="331,60,331,94,326,94,326,60"/>
+<area shape="rect" id="Node000009" href="$DataStructure_8h.html" title="Хранилище временных рядов телеметрии по двигателям/кадрам/сенсорам." alt="" coords="424,108,583,133"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="383,58,469,100,467,104,381,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,189,68,214"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="154,136,70,184,67,179,151,131"/>
+<area shape="rect" id="Node000004" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="93,181,271,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="177,133,181,167,175,168,171,134"/>
+<area shape="rect" id="Node000005" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="139,269,225,295"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="185,222,185,255,179,255,179,222"/>
+<area shape="rect" id="Node000006" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="334,269,499,295"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="239,219,370,263,369,268,237,224"/>
+<area shape="rect" id="Node000008" href="$Frames_8h.html" title="Определения типов и парсеров телеметрических кадров." alt="" coords="296,189,465,214"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="339,132,368,176,363,178,334,135"/>
+<area shape="poly" id="edge9_Node000009_Node000006" title=" " alt="" coords="505,134,497,175,479,223,463,244,444,262,441,259,459,241,474,220,492,173,500,133"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="487,136,412,183,409,179,484,131"/>
+</map>

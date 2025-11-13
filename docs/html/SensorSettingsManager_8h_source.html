@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Исходный файл /home/kel/MyJob/SensorObserver/Data/Frames/Containers/SensorSettingsManager.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('SensorSettingsManager_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SensorSettingsManager.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SensorSettingsManager_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment"> * \file SensorSettingsManager.h</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment"> * \brief Сохранение/загрузка настроек сенсоров.</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment"> * \details Работает с QSettings (INI) для набора сенсоров и для отдельных сенсоров. Путь к конфигу формируется в каталоге приложения.</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">SENSORSETTINGSMANAGER_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">SENSORSETTINGSMANAGER_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">DOXYGEN_SHOULD_SKIP_THIS</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QSettings</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QHash</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QString</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные.">&quot;Sensors.h&quot;</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   18</span><span class="comment"> * \class SensorSettingsManager</span></div>
+<div class="line"><span class="lineno">   19</span><span class="comment"> * \brief Сохранение и загрузка настроек сенсоров через QSettings.</span></div>
+<div class="line"><span class="lineno">   20</span><span class="comment"> * \details Формирует путь к INI в каталоге приложения и предоставляет</span></div>
+<div class="line"><span class="lineno">   21</span><span class="comment"> * операции сохранения/загрузки всех сенсоров и отдельных элементов.</span></div>
+<div class="line"><span class="lineno">   22</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classSensorSettingsManager.html">   24</a></span><span class="keyword">class</span> <a class="code hl_class" href="classSensorSettingsManager.html">SensorSettingsManager</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">using</span> SensorPtr = std::shared_ptr&lt;<a class="code hl_struct" href="structSensorData.html">SensorData</a>&gt;;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">using</span> <a class="code hl_class" href="classSensorSettingsManager.html">SensorHashTable</a> = <a class="code hl_class" href="classSensorSettingsManager.html">std</a>::<a class="code hl_class" href="classSensorSettingsManager.html">unordered_map</a>&lt;<a class="code hl_class" href="classSensorSettingsManager.html">QString</a>, <a class="code hl_class" href="classSensorSettingsManager.html">SensorPtr</a>&gt;;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">/** \return Полный путь к INI-файлу (config/sensors.ini) в каталоге приложения. */</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> <a class="code hl_function" href="classSensorSettingsManager.html#a4ade314793864713701ab9d4c517e2ed">QString</a> <a class="code hl_function" href="classSensorSettingsManager.html#a4ade314793864713701ab9d4c517e2ed">getConfigPath</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// Сохранить всю таблицу</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classSensorSettingsManager.html#aea0c20b1da96358c3c12e101a7752990">saveAll</a>(<span class="keyword">const</span> SensorHashTable&amp; data);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// Загрузить всю таблицу</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classSensorSettingsManager.html#a1f1c8d9850911993eda2fa53871d88a9">loadAll</a>(SensorHashTable&amp; outData);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="comment">// Сохранить отдельный сенсор</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classSensorSettingsManager.html#a9760b5517a09592b14f8f27727876722">saveSensor</a>(<span class="keyword">const</span> QString&amp; sensorName, SensorPtr data);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// Загрузить отдельный сенсор</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classSensorSettingsManager.html#afd79c519827e75d208fce410f6bd6318">loadSensor</a>(<span class="keyword">const</span> QString&amp; sensorName, SensorPtr outData);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">// Удалить отдельный сенсор</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classSensorSettingsManager.html#a65f3fc60d277b12c0a27bdbd981e3e61">removeSensor</a>(<span class="keyword">const</span> QString&amp; sensorName);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">const</span> QString organization = <span class="stringliteral">&quot;Breez&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">const</span> QString appName = <span class="stringliteral">&quot;SensorApp&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">// SENSORSETTINGSMANAGER_H</span></div>
+<div class="ttc" id="aclassSensorSettingsManager_html"><div class="ttname"><a href="classSensorSettingsManager.html">SensorSettingsManager</a></div><div class="ttdoc">Сохранение и загрузка настроек сенсоров через QSettings.</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8h_source.html#l00024">SensorSettingsManager.h:24</a></div></div>
+<div class="ttc" id="aclassSensorSettingsManager_html_a1f1c8d9850911993eda2fa53871d88a9"><div class="ttname"><a href="classSensorSettingsManager.html#a1f1c8d9850911993eda2fa53871d88a9">SensorSettingsManager::loadAll</a></div><div class="ttdeci">static bool loadAll(SensorHashTable &amp;outData)</div><div class="ttdoc">Загружает все сенсоры из INI (группа &quot;Sensors&quot;).</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8cpp_source.html#l00066">SensorSettingsManager.cpp:66</a></div></div>
+<div class="ttc" id="aclassSensorSettingsManager_html_a4ade314793864713701ab9d4c517e2ed"><div class="ttname"><a href="classSensorSettingsManager.html#a4ade314793864713701ab9d4c517e2ed">SensorSettingsManager::getConfigPath</a></div><div class="ttdeci">static QString getConfigPath()</div><div class="ttdoc">Возвращает путь к файлу настроек сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8cpp_source.html#l00020">SensorSettingsManager.cpp:20</a></div></div>
+<div class="ttc" id="aclassSensorSettingsManager_html_a65f3fc60d277b12c0a27bdbd981e3e61"><div class="ttname"><a href="classSensorSettingsManager.html#a65f3fc60d277b12c0a27bdbd981e3e61">SensorSettingsManager::removeSensor</a></div><div class="ttdeci">static bool removeSensor(const QString &amp;sensorName)</div><div class="ttdoc">Удаляет запись сенсора из INI, возвращает успех операции.</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8cpp_source.html#l00183">SensorSettingsManager.cpp:183</a></div></div>
+<div class="ttc" id="aclassSensorSettingsManager_html_a9760b5517a09592b14f8f27727876722"><div class="ttname"><a href="classSensorSettingsManager.html#a9760b5517a09592b14f8f27727876722">SensorSettingsManager::saveSensor</a></div><div class="ttdeci">static bool saveSensor(const QString &amp;sensorName, SensorPtr data)</div><div class="ttdoc">Сохраняет один сенсор под своим ключом в группе &quot;Sensors&quot;.</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8cpp_source.html#l00113">SensorSettingsManager.cpp:113</a></div></div>
+<div class="ttc" id="aclassSensorSettingsManager_html_aea0c20b1da96358c3c12e101a7752990"><div class="ttname"><a href="classSensorSettingsManager.html#aea0c20b1da96358c3c12e101a7752990">SensorSettingsManager::saveAll</a></div><div class="ttdeci">static bool saveAll(const SensorHashTable &amp;data)</div><div class="ttdoc">Сохраняет все сенсоры в INI (группа &quot;Sensors&quot;).</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8cpp_source.html#l00031">SensorSettingsManager.cpp:31</a></div></div>
+<div class="ttc" id="aclassSensorSettingsManager_html_afd79c519827e75d208fce410f6bd6318"><div class="ttname"><a href="classSensorSettingsManager.html#afd79c519827e75d208fce410f6bd6318">SensorSettingsManager::loadSensor</a></div><div class="ttdeci">static bool loadSensor(const QString &amp;sensorName, SensorPtr outData)</div><div class="ttdoc">Загружает один сенсор по имени из группы &quot;Sensors&quot;.</div><div class="ttdef"><b>Definition</b> <a href="SensorSettingsManager_8cpp_source.html#l00142">SensorSettingsManager.cpp:142</a></div></div>
+<div class="ttc" id="astructSensorData_html"><div class="ttname"><a href="structSensorData.html">SensorData</a></div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00039">Sensors.h:39</a></div></div>
+<div class="ttc" id="astructSensorLimitsColored_html"><div class="ttname"><a href="structSensorLimitsColored.html">SensorLimitsColored</a></div><div class="ttdoc">Пределы с привязкой цвета для подсветки зон в UI.</div><div class="ttdef"><b>Definition</b> <a href="Sensors_8h_source.html#l00030">Sensors.h:30</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_e3d743d0ec9b4013b28b5d69101bc7fb.html">Data</a></li><li class="navelem"><a class="el" href="dir_635013340570d8c2e9d8409dba8d7105.html">Frames</a></li><li class="navelem"><a class="el" href="dir_2e8b8d595152932d8fdb2606b458ffa1.html">Containers</a></li><li class="navelem"><a class="el" href="SensorSettingsManager_8h.html">SensorSettingsManager.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

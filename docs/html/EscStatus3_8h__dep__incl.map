@@ -1,0 +1,9 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/EscSensors/EscStatus3.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/EscSensors/EscStatus3.h">
+<area shape="rect" id="Node000001" title="Интерфейс фрейма ESC: температуры и ошибки." alt="" coords="316,5,576,60"/>
+<area shape="rect" id="Node000002" href="$EscStatus3_8cpp.html" title="Реализация парсера для фрейма ESC Status3." alt="" coords="5,108,265,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,67,217,110,215,105,351,62"/>
+<area shape="rect" id="Node000003" href="$SensorsFrames_8cpp.html" title="Реализация реестра фреймов сенсоров." alt="" coords="289,115,603,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="449,74,449,115,443,115,443,74"/>
+<area shape="rect" id="Node000004" href="$SaveToCSV_8cpp.html" title="Реализация UnifiedCsvWriter: очередь, форматирование строк, сброс на диск." alt="" coords="627,115,865,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="538,62,691,113,689,118,536,67"/>
+</map>

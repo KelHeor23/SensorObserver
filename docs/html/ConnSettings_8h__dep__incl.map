@@ -1,0 +1,11 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/Common/ConnSettings.h" name="/home/kel/MyJob/SensorObserver/Widgets/Common/ConnSettings.h">
+<area shape="rect" id="Node000001" title="Виджет настроек подключения (IP/порт)." alt="" coords="149,5,393,45"/>
+<area shape="rect" id="Node000002" href="$ConnSettings_8cpp.html" title="Реализация виджета ConnSettings." alt="" coords="5,93,264,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,55,166,96,163,91,228,51"/>
+<area shape="rect" id="Node000003" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="288,93,525,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="314,51,378,91,375,96,311,55"/>
+<area shape="rect" id="Node000004" href="$MainWindow_8cpp.html" title="Реализация главного окна: меню, подключение, открытие графиков." alt="" coords="157,181,395,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="368,143,306,183,303,179,365,139"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="419,181,656,221"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="448,139,510,179,507,183,445,143"/>
+</map>

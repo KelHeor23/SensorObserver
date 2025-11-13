@@ -1,0 +1,15 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/DisplayingSensors.h" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/DisplayingSensors.h">
+<area shape="rect" id="Node000001" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="111,5,415,45"/>
+<area shape="rect" id="Node000002" href="$SensorsFrames_8h.html" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="71,93,250,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,48,196,86,192,82,239,44"/>
+<area shape="rect" id="Node000007" href="$ColorProgressBar_8h.html" title="Простой виджет прогресс‑бара с настраиваемым цветом и диапазоном." alt="" coords="275,101,457,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="288,44,343,89,339,93,284,48"/>
+<area shape="rect" id="Node000003" href="$Frames_8h.html" title="Определения типов и парсеров телеметрических кадров." alt="" coords="5,181,175,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="146,135,112,173,108,169,142,132"/>
+<area shape="rect" id="Node000004" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="199,181,266,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="180,132,215,169,211,173,176,135"/>
+<area shape="rect" id="Node000005" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="115,255,201,280"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="223,209,182,247,178,243,219,205"/>
+<area shape="rect" id="Node000006" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="225,255,390,280"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="246,205,287,243,283,247,243,209"/>
+</map>

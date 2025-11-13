@@ -1,0 +1,9 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,55,80,80"/>
+<area shape="rect" id="Node000001" href="$classClient.html" title=" " alt="" coords="167,5,227,31"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="92,49,166,25,167,30,94,54"/>
+<area shape="rect" id="Node000002" href="$classDataReader.html" title="Получает бинарные сообщения от Client и транслирует их в виджеты." alt="" coords="147,55,246,80"/>
+<area shape="poly" id="edge16_Node000000_Node000002" title=" " alt="" coords="94,65,147,65,147,70,94,70"/>
+<area shape="rect" id="Node000003" href="$classValueIncrementer.html" title="Плавно увеличивает значение от m_min до m_max за заданное время." alt="" coords="128,104,265,129"/>
+<area shape="poly" id="edge17_Node000000_Node000003" title=" " alt="" coords="94,81,157,101,155,106,92,86"/>
+</map>

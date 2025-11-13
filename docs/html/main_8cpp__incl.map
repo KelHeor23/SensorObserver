@@ -1,0 +1,44 @@
+<map id="/home/kel/MyJob/SensorObserver/main.cpp" name="/home/kel/MyJob/SensorObserver/main.cpp">
+<area shape="rect" id="Node000001" title="Точка входа в приложение Qt (SensorObserver)." alt="" coords="651,5,889,45"/>
+<area shape="rect" id="Node000002" href="$MainWindow_8h.html" title="Главное окно приложения телеметрии." alt="" coords="683,93,857,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="773,46,773,79,767,79,767,46"/>
+<area shape="rect" id="Node000003" href="$SensorsFrames_8h.html" title="Реестр и индексы доступных фреймов сенсоров." alt="" coords="349,328,527,368"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="683,116,619,123,555,134,500,149,479,158,465,169,453,184,444,202,435,241,432,280,435,314,430,315,427,280,429,240,439,200,449,181,461,165,477,153,498,144,554,128,618,117,682,110"/>
+<area shape="rect" id="Node000008" href="$DataReader_8h.html" title="Чтение и разбор входящих сообщений телеметрии." alt="" coords="745,174,923,199"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="782,117,818,162,814,165,777,121"/>
+<area shape="rect" id="Node000009" href="$SensorsTableWidget_8h.html" title="Главный виджет таблицы датчиков и панелей настроек." alt="" coords="191,167,387,207"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="700,121,400,170,400,165,700,116"/>
+<area shape="rect" id="Node000013" href="$ListOfLimitsWidget_8h.html" title="Список лимитов сенсора (краткий вид)." alt="" coords="582,328,771,368"/>
+<area shape="poly" id="edge14_Node000002_Node000013" title=" " alt="" coords="764,120,735,168,706,246,687,315,681,314,701,245,730,166,759,118"/>
+<area shape="rect" id="Node000014" href="$ConnSettings_8h.html" title="Виджет настроек подключения (IP/порт)." alt="" coords="947,174,1129,199"/>
+<area shape="poly" id="edge16_Node000002_Node000014" title=" " alt="" coords="810,116,987,168,985,173,808,121"/>
+<area shape="rect" id="Node000015" href="$MotorControl_8h.html" title="Ручное управление PWM моторов по отдельности." alt="" coords="1153,174,1312,199"/>
+<area shape="poly" id="edge17_Node000002_Node000015" title=" " alt="" coords="847,116,1141,164,1165,169,1164,174,1140,169,846,121"/>
+<area shape="rect" id="Node000017" href="$SmoothMotorControl_8h.html" title="Виджет плавного управления моторами." alt="" coords="1336,174,1545,199"/>
+<area shape="poly" id="edge19_Node000002_Node000017" title=" " alt="" coords="858,113,1070,134,1324,164,1360,169,1359,175,1323,169,1069,139,857,118"/>
+<area shape="rect" id="Node000018" href="$SensorDataGraph_8h.html" title="Виджет отображения временных рядов сенсоров на QCustomPlot." alt="" coords="476,167,669,207"/>
+<area shape="poly" id="edge21_Node000002_Node000018" title=" " alt="" coords="742,121,634,164,632,159,740,116"/>
+<area shape="rect" id="Node000004" href="$Frames_8h.html" title="Определения типов и парсеров телеметрических кадров." alt="" coords="353,416,523,441"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="441,368,441,402,435,402,435,368"/>
+<area shape="rect" id="Node000005" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="595,416,662,441"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="485,366,589,408,587,413,483,370"/>
+<area shape="rect" id="Node000006" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="511,489,597,515"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="619,443,578,482,574,478,615,439"/>
+<area shape="rect" id="Node000007" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="621,489,786,515"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="642,439,683,478,679,482,639,443"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="313,205,364,253,417,315,413,319,360,257,309,209"/>
+<area shape="rect" id="Node000010" href="$DisplayingSensors_8h.html" title="Виджет отображения набора сенсоров для одного фрейма." alt="" coords="19,255,174,280"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="244,209,138,252,136,247,242,204"/>
+<area shape="rect" id="Node000012" href="$VibrationDirection_8h.html" title="Виджет индикации направления вибраций." alt="" coords="198,255,350,280"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="288,207,281,242,276,241,282,206"/>
+<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="147,277,343,322,342,327,146,283"/>
+<area shape="rect" id="Node000011" href="$ColorProgressBar_8h.html" title="Простой виджет прогресс‑бара с настраиваемым цветом и диапазоном." alt="" coords="5,335,188,361"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="99,280,99,321,94,321,94,280"/>
+<area shape="poly" id="edge15_Node000013_Node000005" title=" " alt="" coords="667,370,645,405,641,403,663,367"/>
+<area shape="rect" id="Node000016" href="$Client_8h.html" title="Интерфейс TCP‑клиента для связи с дроном." alt="" coords="1267,255,1406,280"/>
+<area shape="poly" id="edge18_Node000015_Node000016" title=" " alt="" coords="1250,197,1312,244,1309,249,1246,202"/>
+<area shape="poly" id="edge20_Node000017_Node000016" title=" " alt="" coords="1427,202,1364,249,1361,244,1424,197"/>
+<area shape="poly" id="edge22_Node000018_Node000003" title=" " alt="" coords="558,209,516,256,464,319,460,316,512,253,554,205"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="526,255,641,280"/>
+<area shape="poly" id="edge23_Node000018_Node000019" title=" " alt="" coords="578,207,583,240,577,241,573,207"/>
+</map>

@@ -1,9 +1,16 @@
-#include "ColorButton.h"
+/**
+ * \file ColorButton.cpp
+ * \brief Реализация ColorButton: диалог выбора цвета и отрисовка.
+ * \details Слот chooseColor вызывает QColorDialog, paintEvent рисует текущий цвет.
+ */
 
 #include "ColorButton.h"
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QColorDialog>
 #include <QPainter>
 #include <QStyleOption>
+#endif
 
 ColorButton::ColorButton(QWidget* parent)
     : QPushButton(parent)
@@ -40,6 +47,7 @@ void ColorButton::paintEvent(QPaintEvent* event) {
     painter.setPen(m_color.darker());
     painter.drawRect(colorRect);
 }
+/** \brief Обработчик клика: показывает QColorDialog и применяет выбранный цвет. */
 
 void ColorButton::chooseColor() {
     QColor newColor = QColorDialog::getColor(

@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SensorObserver: Исходный файл /home/kel/MyJob/SensorObserver/Widgets/SensorDataGraph/SensorDataGraph.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SensorObserver<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('SensorDataGraph_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SensorDataGraph.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SensorDataGraph_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment"> * \file SensorDataGraph.h</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment"> * \brief Виджет отображения временных рядов сенсоров на QCustomPlot.</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment"> * \details Список доступных сенсоров и графиков, таймер обновления, структуры ключей выбранных данных.</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">SENSORDATAGRAPH_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">SENSORDATAGRAPH_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">DOXYGEN_SHOULD_SKIP_THIS</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QtWidgets</span><span class="preprocessor">/</span><span class="preprocessor">QWidget</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QTreeWidget</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">QTimer</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Data/Frames/Containers/SensorsFrames.h&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;qcustomplot.h&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/**</span></div>
+<div class="line"><span class="lineno">   19</span><span class="comment"> * \struct DataFullName</span></div>
+<div class="line"><span class="lineno">   20</span><span class="comment"> * \brief Полный ключ временного ряда: двигатель, фрейм, сенсор.</span></div>
+<div class="line"><span class="lineno">   21</span><span class="comment"> * \details Используется для адресации данных при построении графиков.</span></div>
+<div class="line"><span class="lineno">   22</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structDataFullName.html">   24</a></span><span class="keyword">struct</span> <a class="code hl_struct" href="structDataFullName.html">DataFullName</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    size_t  engineNum;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    QString frameName;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    QString sensorName;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code hl_struct" href="structDataFullName.html">DataFullName</a>&amp; other) <span class="keyword">const</span> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">return</span> engineNum == other.engineNum &amp;&amp;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>               frameName == other.frameName &amp;&amp;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>               sensorName == other.sensorName;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace</span> std {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01DataFullName_01_4.html">   38</a></span><span class="keyword">struct</span> hash&lt;<a class="code hl_struct" href="structDataFullName.html">DataFullName</a>&gt; {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    size_t operator()(<span class="keyword">const</span> <a class="code hl_struct" href="structDataFullName.html">DataFullName</a>&amp; key) <span class="keyword">const</span> {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        size_t h1 = qHash(key.frameName);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        size_t h2 = qHash(key.sensorName);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        size_t h3 = hash&lt;size_t&gt;()(key.engineNum);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> h1 ^ (h2 &lt;&lt; 1) ^ (h3 &lt;&lt; 2);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">/**\class SensorDataGraph</span></div>
+<div class="line"><span class="lineno">   48</span><span class="comment"> * \brief Виджет построения графиков значений сенсоров.</span></div>
+<div class="line"><span class="lineno">   49</span><span class="comment"> * \details Отображает дерево доступных сенсоров и график.</span></div>
+<div class="line"><span class="lineno">   50</span><span class="comment"> * Обновляет окно по таймеру и ограничивает количество точек.</span></div>
+<div class="line"><span class="lineno">   51</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classSensorDataGraph.html">   53</a></span><span class="keyword">class</span> <a class="code hl_class" href="classSensorDataGraph.html">SensorDataGraph</a> : <span class="keyword">public</span> <a class="code hl_class" href="classSensorDataGraph.html">QWidget</a></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="classSensorDataGraph.html">Q_OBJECT</a></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classSensorDataGraph.html">SensorDataGraph</a>(<a class="code hl_class" href="classSensorDataGraph.html">std</a>::<a class="code hl_class" href="classSensorDataGraph.html">shared_ptr</a>&lt;<a class="code hl_class" href="classSensorDataGraph.html">SensorsFrames</a>&gt; <a class="code hl_class" href="classSensorDataGraph.html">sensorsManager_t</a>, <a class="code hl_class" href="classSensorDataGraph.html">QWidget</a> *<a class="code hl_class" href="classSensorDataGraph.html">parent</a> = <span class="keywordtype">nullptr</span>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> settingPlot();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> setDarkstyle();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> fillSensorsList();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    QColor getColor();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">private</span> <a class="code hl_class" href="classSensorDataGraph.html">slots</a>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_class" href="classSensorDataGraph.html">onItemChanged</a>(<a class="code hl_class" href="classSensorDataGraph.html">QTreeWidgetItem</a> *<a class="code hl_class" href="classSensorDataGraph.html">item</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classSensorDataGraph.html">column</a>);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> addNewData();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSensorDataGraph.html#a14c3958f64a598833f7734944b1cb4fe">updateGraph</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><a class="code hl_class" href="classSensorDataGraph.html">signals</a>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_class" href="classSensorDataGraph.html">QVBoxLayout</a> *<a class="code hl_class" href="classSensorDataGraph.html">mainLt</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    QCustomPlot *m_plot;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    QTreeWidget *sensorsListTreeWdgt;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    QTimer      *m_timer;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    std::shared_ptr&lt;<a class="code hl_class" href="classSensorsFrames.html">SensorsFrames</a>&gt; sensorsManager;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    QMap&lt;QString, QCPGraph*&gt; graphMap;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    std::unordered_map&lt;DataFullName, size_t&gt; dataSize;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">// SENSORDATAGRAPH_H</span></div>
+<div class="ttc" id="aclassBaseProtocol_html"><div class="ttname"><a href="classBaseProtocol.html">BaseProtocol</a></div><div class="ttdoc">Базовый интерфейс контейнера фрейма сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="Base_8h_source.html#l00020">Base.h:20</a></div></div>
+<div class="ttc" id="aclassClient_html"><div class="ttname"><a href="classClient.html">Client</a></div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00032">Client.h:33</a></div></div>
+<div class="ttc" id="aclassConnSettings_html"><div class="ttname"><a href="classConnSettings.html">ConnSettings</a></div><div class="ttdoc">Диалог настроек подключения к бортовому модулю.</div><div class="ttdef"><b>Definition</b> <a href="ConnSettings_8h_source.html#l00022">ConnSettings.h:23</a></div></div>
+<div class="ttc" id="aclassConnSettings_html_a2e3d3fafe844ae8b807f644250a78b71"><div class="ttname"><a href="classConnSettings.html#a2e3d3fafe844ae8b807f644250a78b71">ConnSettings::cancel</a></div><div class="ttdeci">void cancel()</div><div class="ttdoc">Отменяет изменения: перезагружает сохранённые настройки и закрывает диалог.</div><div class="ttdef"><b>Definition</b> <a href="ConnSettings_8cpp_source.html#l00126">ConnSettings.cpp:126</a></div></div>
+<div class="ttc" id="aclassConnSettings_html_a633b94a6240c5bb9b56b759762c8a53e"><div class="ttname"><a href="classConnSettings.html#a633b94a6240c5bb9b56b759762c8a53e">ConnSettings::getDroneIP</a></div><div class="ttdeci">QString getDroneIP() const</div><div class="ttdef"><b>Definition</b> <a href="ConnSettings_8cpp_source.html#l00047">ConnSettings.cpp:47</a></div></div>
+<div class="ttc" id="aclassConnSettings_html_af2371b384d8537eb1222e05cc0546b9a"><div class="ttname"><a href="classConnSettings.html#af2371b384d8537eb1222e05cc0546b9a">ConnSettings::getDronePort</a></div><div class="ttdeci">quint16 getDronePort() const</div><div class="ttdef"><b>Definition</b> <a href="ConnSettings_8cpp_source.html#l00052">ConnSettings.cpp:52</a></div></div>
+<div class="ttc" id="aclassDataReader_html"><div class="ttname"><a href="classDataReader.html">DataReader</a></div><div class="ttdoc">Получает бинарные сообщения от Client и транслирует их в виджеты.</div><div class="ttdef"><b>Definition</b> <a href="DataReader_8h_source.html#l00028">DataReader.h:29</a></div></div>
+<div class="ttc" id="aclassListOfLimitsWidget_html"><div class="ttname"><a href="classListOfLimitsWidget.html">ListOfLimitsWidget</a></div><div class="ttdoc">Краткий список порогов/лимитов для сенсора.</div><div class="ttdef"><b>Definition</b> <a href="ListOfLimitsWidget_8h_source.html#l00021">ListOfLimitsWidget.h:22</a></div></div>
+<div class="ttc" id="aclassMainWindow_html"><div class="ttname"><a href="classMainWindow.html">MainWindow</a></div><div class="ttdoc">Главное окно интерфейса оператора.</div><div class="ttdef"><b>Definition</b> <a href="MainWindow_8h_source.html#l00029">MainWindow.h:30</a></div></div>
+<div class="ttc" id="aclassMotorControl_html"><div class="ttname"><a href="classMotorControl.html">MotorControl</a></div><div class="ttdoc">Панель ручного управления PWM отдельных моторов.</div><div class="ttdef"><b>Definition</b> <a href="MotorControl_8h_source.html#l00022">MotorControl.h:23</a></div></div>
+<div class="ttc" id="aclassMotorControl_html_a60524cfa5461e828ed38b4d4fef71c9e"><div class="ttname"><a href="classMotorControl.html#a60524cfa5461e828ed38b4d4fef71c9e">MotorControl::closeEvent</a></div><div class="ttdeci">void closeEvent(QCloseEvent *event) override</div><div class="ttdoc">При закрытии окна сбрасывает PWM всех моторов на безопасное значение и разрешает закрытие.</div><div class="ttdef"><b>Definition</b> <a href="MotorControl_8cpp_source.html#l00081">MotorControl.cpp:81</a></div></div>
+<div class="ttc" id="aclassSensorDataGraph_html"><div class="ttname"><a href="classSensorDataGraph.html">SensorDataGraph</a></div><div class="ttdoc">Виджет построения графиков значений сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="SensorDataGraph_8h_source.html#l00053">SensorDataGraph.h:54</a></div></div>
+<div class="ttc" id="aclassSensorDataGraph_html_a14c3958f64a598833f7734944b1cb4fe"><div class="ttname"><a href="classSensorDataGraph.html#a14c3958f64a598833f7734944b1cb4fe">SensorDataGraph::updateGraph</a></div><div class="ttdeci">void updateGraph()</div><div class="ttdoc">Обновляет видимую область и добавляет новые точки для выбранных сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="SensorDataGraph_8cpp_source.html#l00204">SensorDataGraph.cpp:204</a></div></div>
+<div class="ttc" id="aclassSensorsFrames_html"><div class="ttname"><a href="classSensorsFrames.html">SensorsFrames</a></div><div class="ttdoc">Реестр реализованных фреймов и индекс по именам сенсоров.</div><div class="ttdef"><b>Definition</b> <a href="SensorsFrames_8h_source.html#l00023">SensorsFrames.h:24</a></div></div>
+<div class="ttc" id="aclassSensorsTableWidget_html"><div class="ttname"><a href="classSensorsTableWidget.html">SensorsTableWidget</a></div><div class="ttdoc">Контейнер визуализации сенсоров и управляющих панелей.</div><div class="ttdef"><b>Definition</b> <a href="SensorsTableWidget_8h_source.html#l00023">SensorsTableWidget.h:24</a></div></div>
+<div class="ttc" id="aclassSmoothMotorControl_html"><div class="ttname"><a href="classSmoothMotorControl.html">SmoothMotorControl</a></div><div class="ttdoc">Плавное управление моторами (min→max за заданное время).</div><div class="ttdef"><b>Definition</b> <a href="SmoothMotorControl_8h_source.html#l00024">SmoothMotorControl.h:25</a></div></div>
+<div class="ttc" id="aclassSmoothMotorControl_html_aa259fe083bab08d57f60c44bf4d6db9f"><div class="ttname"><a href="classSmoothMotorControl.html#aa259fe083bab08d57f60c44bf4d6db9f">SmoothMotorControl::closeEvent</a></div><div class="ttdeci">void closeEvent(QCloseEvent *event) override</div><div class="ttdoc">При закрытии окна отправляет безопасный PWM всем моторам и разрешает закрытие.</div><div class="ttdef"><b>Definition</b> <a href="SmoothMotorControl_8cpp_source.html#l00147">SmoothMotorControl.cpp:147</a></div></div>
+<div class="ttc" id="aclassSmoothMotorControl_html_addc7f1a40237524737ba793e7a1d3988"><div class="ttname"><a href="classSmoothMotorControl.html#addc7f1a40237524737ba793e7a1d3988">SmoothMotorControl::SmoothMotorControl</a></div><div class="ttdeci">SmoothMotorControl(Client *client_t, QWidget *parent=nullptr)</div><div class="ttdoc">Инициализирует элементы управления и подключает обработчики кнопок.</div><div class="ttdef"><b>Definition</b> <a href="SmoothMotorControl_8cpp_source.html#l00018">SmoothMotorControl.cpp:18</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Точка входа Qt-приложения.</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00021">main.cpp:21</a></div></div>
+<div class="ttc" id="astructDataFullName_html"><div class="ttname"><a href="structDataFullName.html">DataFullName</a></div><div class="ttdoc">Полный ключ временного ряда: двигатель, фрейм, сенсор.</div><div class="ttdef"><b>Definition</b> <a href="SensorDataGraph_8h_source.html#l00024">SensorDataGraph.h:24</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_9cc7dab42d10c04902c95d2c14820089.html">Widgets</a></li><li class="navelem"><a class="el" href="dir_c00d1d108618aa7df788afa1b9f3da96.html">SensorDataGraph</a></li><li class="navelem"><a class="el" href="SensorDataGraph_8h.html">SensorDataGraph.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="OtherSensors::OtherSensors" name="OtherSensors::OtherSensors">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,219,201,304"/>
+<area shape="rect" id="Node000002" href="$classBaseProtocol.html" title="Базовый интерфейс контейнера фрейма сенсоров." alt="" coords="33,5,173,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,184,106,218,101,218,101,184"/>
+</map>

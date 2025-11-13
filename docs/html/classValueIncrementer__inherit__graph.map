@@ -1,0 +1,5 @@
+<map id="ValueIncrementer" name="ValueIncrementer">
+<area shape="rect" id="Node000001" title="Плавно увеличивает значение от m_min до m_max за заданное время." alt="" coords="5,119,159,304"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="49,5,115,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,85,85,119,79,119,79,85"/>
+</map>

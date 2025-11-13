@@ -1,9 +1,18 @@
+/**
+ * \file MotorControl.cpp
+ * \brief Реализация ручного управления моторами.
+ * \details Формирует и отправляет кадр MOTOR_CONTROL; при закрытии сбрасывает PWM всех моторов.
+ */
+
 #include "MotorControl.h"
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #include <QLabel>
 #include <QLineEdit>
 #include <QIntValidator>
 #include <QPushButton>
+#endif
+/** \brief Создаёт UI для управления 8 моторами и подключает обработчики. */
 
 MotorControl::MotorControl(Client *client_t, QWidget *parent)
     : QWidget{parent}
@@ -52,6 +61,11 @@ void MotorControl::addNewMotor(uint8_t num)
 
     mainLt->addLayout(dataLt);
 }
+/**
+ * \brief Формирует пакет Msg::MotorControlMsg и отправляет через Client.
+ * \param[in] num Индекс мотора (0..7).
+ * \param[in] pwm Значение PWM (мкс).
+ */
 
 void MotorControl::sendMotorControlMsg(uint8_t num, uint16_t pwm)
 {
@@ -62,6 +76,7 @@ void MotorControl::sendMotorControlMsg(uint8_t num, uint16_t pwm)
     QByteArray byteArray(reinterpret_cast<const char*>(&msg), sizeof( Msg::MotorControlMsg));
     client->sendMsg(byteArray);
 }
+/** \brief На закрытие окна отправляет всем моторам PWM=900 (стоп), затем принимает событие. */
 
 void MotorControl::closeEvent(QCloseEvent *event) {
 

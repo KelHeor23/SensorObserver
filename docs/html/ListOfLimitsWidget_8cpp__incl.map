@@ -1,0 +1,19 @@
+<map id="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/ListOfLimitsWidget.cpp" name="/home/kel/MyJob/SensorObserver/Widgets/SensorsTable/ListOfLimitsWidget.cpp">
+<area shape="rect" id="Node000001" title="Реализация списка лимитов." alt="" coords="247,5,497,60"/>
+<area shape="rect" id="Node000002" href="$ListOfLimitsWidget_8h.html" title="Список лимитов сенсора (краткий вид)." alt="" coords="15,108,174,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="288,63,145,107,144,102,286,58"/>
+<area shape="rect" id="Node000006" href="$CollapsibleGroupBox_8h.html" title="Сворачиваемая группа (header + содержимое)." alt="" coords="198,108,405,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="352,62,322,99,318,96,348,58"/>
+<area shape="rect" id="Node000007" href="$SensorSettingsManager_8h.html" title="Сохранение/загрузка настроек сенсоров." alt="" coords="209,181,399,221"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="400,59,412,76,422,95,425,115,420,135,399,159,373,177,370,173,396,155,415,132,420,115,416,96,408,78,396,62"/>
+<area shape="rect" id="Node000008" href="$DetailingLimitsWidget_8h.html" title="Детальная настройка порогов/цветов для одного сенсора." alt="" coords="424,189,603,214"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="398,58,439,106,498,176,494,180,435,110,393,62"/>
+<area shape="rect" id="Node000003" href="$Base_8h.html" title="Базовый интерфейс протокола фрейма." alt="" coords="5,181,184,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,134,97,168,92,168,92,134"/>
+<area shape="rect" id="Node000004" href="$Sensors_8h.html" title="Структуры описания сенсора: пределы, раскраска, настройки и данные." alt="" coords="261,269,347,295"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,219,261,262,259,267,144,224"/>
+<area shape="rect" id="Node000005" href="$CommonTypes_8h.html" title="Общие типы&#45;алиасы имён сенсоров и кадров." alt="" coords="12,269,177,295"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="97,222,97,255,92,255,92,222"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="307,222,307,255,301,255,301,222"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="484,217,348,267,346,262,482,212"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h" name="/home/kel/MyJob/SensorObserver/Data/Frames/Containers/VoltageRegulators/VoltageRegulators.h">
+<area shape="rect" id="Node000001" title="Протокол чтения датчиков питания (регуляторы напряжения)." alt="" coords="343,5,650,60"/>
+<area shape="rect" id="Node000002" href="$SensorsFrames_8cpp.html" title="Реализация реестра фреймов сенсоров." alt="" coords="5,115,319,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="398,66,226,118,224,113,396,61"/>
+<area shape="rect" id="Node000003" href="$VoltageRegulators_8cpp.html" title="Реализация протокола датчиков питания." alt="" coords="343,108,650,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="499,74,499,108,494,108,494,74"/>
+<area shape="rect" id="Node000004" href="$SaveToCSV_8cpp.html" title="Реализация UnifiedCsvWriter: очередь, форматирование строк, сброс на диск." alt="" coords="674,115,911,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="587,62,738,113,736,118,586,67"/>
+</map>

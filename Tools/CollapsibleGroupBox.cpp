@@ -1,3 +1,9 @@
+/**
+ * \file CollapsibleGroupBox.cpp
+ * \brief Реализация CollapsibleGroupBox.
+ * \details Создаёт заголовок и контент, переключает видимость, обновляет геометрию.
+ */
+
 #include "CollapsibleGroupBox.h"
 
 CollapsibleGroupBox::CollapsibleGroupBox(QWidget *parent)
@@ -61,6 +67,7 @@ void CollapsibleGroupBox::setExpanded(bool expanded) {
 bool CollapsibleGroupBox::expanded() const {
     return isExpanded;
 }
+/** \brief Меняет \c isExpanded, показывает/скрывает контент, обновляет геометрию. */
 
 void CollapsibleGroupBox::toggle() {
     isExpanded = !isExpanded;

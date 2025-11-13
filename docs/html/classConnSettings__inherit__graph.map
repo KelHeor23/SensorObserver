@@ -1,0 +1,5 @@
+<map id="ConnSettings" name="ConnSettings">
+<area shape="rect" id="Node000001" title="Диалог настроек подключения к бортовому модулю." alt="" coords="5,119,157,284"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="46,5,117,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,84,84,118,79,118,79,84"/>
+</map>

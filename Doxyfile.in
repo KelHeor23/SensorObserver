@@ -1,7 +1,7 @@
 ﻿# ----------------------- Project -----------------------
 PROJECT_NAME           = "SensorObserver"
 PROJECT_NUMBER         = "@PROJECT_VERSION@"
-OUTPUT_DIRECTORY       = "@CMAKE_BINARY_DIR@/docs"
+OUTPUT_DIRECTORY       = "@DOCS_DIR@"
 OUTPUT_LANGUAGE        = Russian
 
 # ------------------------ Input ------------------------

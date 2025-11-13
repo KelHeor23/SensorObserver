@@ -10,17 +10,42 @@ if(NOT PROJECT_VERSION)
   set(PROJECT_VERSION "0.1.0")
 endif()
 
+find_package(Doxygen REQUIRED)
+
+# куда класть готовую документацию (в корень проекта, рядом с CMakeLists.txt)
+set(DOCS_DIR "${CMAKE_SOURCE_DIR}/docs")
+
 set(DOXYGEN_IN  "${CMAKE_SOURCE_DIR}/Doxyfile.in")
 set(DOXYGEN_OUT "${CMAKE_BINARY_DIR}/Doxyfile")
 
+# чуть диагностик (увидишь в конфигурации куда целим docs)
+message(STATUS "Docs output dir: ${DOCS_DIR}")
+
 configure_file("${DOXYGEN_IN}" "${DOXYGEN_OUT}" @ONLY)
 
-add_custom_target(docs
-  COMMAND ${DOXYGEN_EXECUTABLE} "${DOXYGEN_OUT}"
+# файловый набор, который триггерит пересборку документации
+file(GLOB_RECURSE DOXYGEN_INPUT CONFIGURE_DEPENDS
+  "${CMAKE_SOURCE_DIR}/**/*.h"
+  "${CMAKE_SOURCE_DIR}/**/*.hpp"
+  "${CMAKE_SOURCE_DIR}/**/*.c"
+  "${CMAKE_SOURCE_DIR}/**/*.cpp"
+  "${CMAKE_SOURCE_DIR}/README.*"
+)
+
+set(DOC_INDEX_HTML "${DOCS_DIR}/html/index.html")
+
+add_custom_command(
+  OUTPUT  "${DOC_INDEX_HTML}"
+  COMMAND "${CMAKE_COMMAND}" -E make_directory "${DOCS_DIR}"
+  COMMAND "${DOXYGEN_EXECUTABLE}" "${DOXYGEN_OUT}"
+  DEPENDS "${DOXYGEN_OUT}" ${DOXYGEN_INPUT}
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-  COMMENT "Generating API documentation with Doxygen → ${CMAKE_BINARY_DIR}/docs/html/index.html"
+  COMMENT "Generating API documentation with Doxygen → ${DOC_INDEX_HTML}"
   VERBATIM
 )
+
+# Делаем так, чтобы документация собиралась "вместе со всем" (make/ninja без явного вызова 'docs')
+add_custom_target(docs ALL DEPENDS "${DOC_INDEX_HTML}")
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
